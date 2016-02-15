@@ -1,0 +1,23 @@
+#!/bin/bash
+# sgf2dot+ord - creates both a dot and ord file from an mlcm file
+# Uses mlcm2sgf.py, sgf2dot.awk, and sgf2ord.awk
+#
+# $Id: mlcm2dot+ord 84 2014-08-09 20:32:38Z mfms $
+
+if [ $# != 1 ]; then
+    echo "Usage $0 filename"
+    echo "  converts filename to basename.dot and basename.ord,"
+    echo "  where basename is filename without the mlcm extension;"
+    echo "  produces basename.sgf as a byproduct"
+    exit 1
+fi
+
+script_directory=${0%/*}
+filename=$1
+basename=`basename $filename .mlcm`
+echo "creating $basename.dot and $basename.ord"
+$script_directory/mlcm2sgf.py $filename > $basename.sgf
+awk -f $script_directory/sgf2dot.awk $basename.sgf > $basename.dot
+awk -f $script_directory/sgf2ord.awk $basename.sgf > $basename.ord
+
+#  [Last modified: 2014 08 09 at 20:09:14 GMT]

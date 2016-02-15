@@ -1,0 +1,108 @@
+#! /bin/bash
+## randomizeClass - a script that creates a single isomorph (scrambled
+#                   version) of every instance of a given class
+# IMPORTS:
+#   - randomize_dot: to randomly reorder the edges in a dot file
+#   - randomize_ord: to create each random ordering
+#
+# @author Matt Stallmann
+# @date 2008/09/16
+# $Id: randomizeClass 19 2011-06-23 01:46:27Z mfms $
+
+bin_directory=instance-generation
+
+if [ $# != 2 ]; then
+    echo "Usage: randomizeClass"\
+          "CLASS_DIRECTORY SEED"
+    echo " where CLASS_DIRECTORY is the path to the class to be randomized"
+    echo " SEED is three integers in the range [0,65535] separated by commas"
+    echo "The randomized class directory is parallel to the CLASS_DIRECTORY"
+    echo " and has a name followed by -scr (for scrambled)"
+    echo "Each .dot/.ord file is named original_name-scr, where"\
+         " original_name is the name before the scrambling."
+    exit 1
+fi
+
+# root_directory has scripts, $bin_directory as the subdirectory containing
+# executables. The following code allows the tree to be portable and scripts
+# and programs to run if accessed from anywhere
+script_directory=${0%/*}
+
+source_class_directory=${1%/}   # need to remove trailing / is any
+shift
+seed=$1
+
+# !!! don't use pushd and popd here; screws up if executed from script
+# directory and class directory is relative using ..
+current_directory=$PWD
+cd $script_directory
+cd ..
+exec_root_directory=$PWD
+cd $current_directory
+
+echo "BEFORE creation"
+echo "current = $PWD"
+echo "source = $source_class_directory"
+
+if [ ! -d $source_class_directory ]; then
+    echo "Directory $source_class_directory does not exist."
+    echo "Cannot proceed with script $0"
+    exit 1
+fi
+target_class_directory=$source_class_directory-scr
+if [ -d $target_class_directory ]; then
+    echo "$target_class_directory already exists."
+    echo -n "Replace it (y/n) [n]? "
+    read answer
+    if [ $answer != "y" ]; then
+        echo "Not replacing directory;"
+        echo "script $0 is terminating."
+        exit 1
+    else
+        rm -rf $target_class_directory
+    fi
+elif [ -f $target_class_directory ]; then
+    echo "$target_class_directory is a regular file;"
+    echo "will not replace it with a directory."
+    exit 1
+fi
+
+echo "AFTER creation"
+echo "current = $PWD"
+echo "source = $source_class_directory"
+
+ord_scrambler=$exec_root_directory/$bin_directory/randomize_ord
+dot_scrambler=$exec_root_directory/$bin_directory/randomize_dot
+
+# get here only if $target_root_directory exists and $target_class_directory doesn't.
+mkdir $target_class_directory
+echo "scrambled class from $source_class_directory"
+echo " in $target_class_directory"
+
+# copy the original instances into a temporary directory for easy access
+tmp_dir=/tmp/$$
+echo "current = $PWD, source = $source_class_directory"
+mkdir $tmp_dir
+cp $source_class_directory/* $tmp_dir
+
+pushd $target_class_directory
+# scramble .dot files first
+echo "Creating .dot files"
+for file in $tmp_dir/*.dot; do
+    base_name=`basename $file .dot`
+    scrambled_instance_name=$base_name-scr.dot
+    echo "  creating instance $scrambled_instance_name with seed $seed."
+    seed=`$dot_scrambler $file $scrambled_instance_name $seed`
+done
+# then the .ord files
+echo "Creating .ord files"
+for file in $tmp_dir/*.ord; do
+    base_name=`basename $file .ord`
+    scrambled_instance_name=$base_name-scr.ord
+    echo "  creating instance $scrambled_instance_name with seed $seed."
+    seed=`$ord_scrambler $file $scrambled_instance_name $seed`
+done
+popd &> /dev/null
+rm -rf $tmp_dir
+
+#  [Last modified: 2011 06 23 at 01:39:54 GMT]

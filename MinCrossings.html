@@ -1,0 +1,65 @@
+<html> <head>
+<title>Crossing Miniminzation Software</title>
+</head>
+
+<body>
+<h2>Crossing Miniminzation Software</h2>
+
+
+<ul>
+<li><a href="INSTALLATION.txt">INSTALLATION.txt</a>
+- Instructions for installation</li>
+<li><a href="LICENSE.txt">LICENSE.txt</a>
+- Licensing (GPL)</li>
+<li>
+  <a href="instance-generation/html/index.html">instance-generation</a>
+  - programs that generate random dag instances
+  <ul>
+    <li> <strong>random_geometric_tree</strong> - creates a minimum spanning tree of randomly<br>
+      chosen points in a rectangle; the tree is layered by choosing a root and<br>
+      extending each root-leaf path from layer 1 to layer <em>l</em> and back again<br>
+      as many times as needed</li>
+    <li> <strong>randomize_ord</strong> - takes an ord file and randomly permutes the nodes on<br>
+      each layer</li>
+    <li> <strong>randomize_dot</strong> - randomly permutes the edges of a dot file </li>
+  </ul>
+</li>
+<li><a href="java-utilities/index.html">java-utilities</a>
+  - jave programs that produce layering for graphs and display a specific configuration
+  <ul>
+    <li> <strong>DagDisplay</strong> - given a .dot and .ord file, creates a drawing using the<br>
+      given configuration; the file 00_dag_display_process.txt explains how to<br>
+      create a decent-looking pdf file from the output</li>
+    <li> <strong>LayerAssignment</strong> - takes a .dot file representing a directed graph and<br>
+      assigns layers to the nodes, adding dummy nodes as needed</li>
+  </ul>
+</li>
+<li><a href="scripts/scripts.html">scripts</a>
+  - a variety of scripts for converting formats, running experiments, etc. (for a list follow the link)</li>
+<li>
+  <a href="src/html/index.html">src</a>
+  - source code for heuristics
+  <ul>
+    <li> <strong>min_crossings</strong> - implements all the heuristics; has lots of options that<br>
+      control which preprocessor/heuristic is run, stopping criteria, etc.</li>
+    <li> <strong>create_random_dag</strong> - creates a connected dag; command-line arguments<br>
+      specify the number of nodes, edges, and layers, and the skew factor
+      <br>
+      <em>A script for creating a uniform dag is in the <code>scripts</code> directory: it's called <code>createDag</code></em></li>
+    <li> <strong>add_edges</strong> - adds a given number of randomly chosen edges to a layered<br>
+      dag</li>
+  </ul>
+</li>
+</ul>
+
+<hr>
+<address>
+<a href="http://people.engr.ncsu.edu/mfms/">
+Matthias F. (Matt) Stallmann
+</a>
+
+Created: 
+Thu Jan 5 21:18:38 EST 2012
+</address>
+</body> </html>
+

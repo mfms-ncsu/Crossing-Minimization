@@ -1,0 +1,152 @@
+#! /bin/bash
+
+## createMSTClass - a script for creating a class of random dags which are
+# derived from one of the types used in MST experiments). Number of
+# nodes can vary widely within a class, but density and number of layers
+# appear to be roughly the same.
+#
+# IMPORTS:
+#   - nextgen in MST-Experiments/src-generate, creates a .gph file; it *must*
+#     be in PATH
+#   - gph2dot+ord in this directory
+#   - gph2dot in this directory to convert the gph file into an unlayered dag
+#   - LayerAssignment in ../java-utilities (and classes used by it); it
+#     *must* be in the CLASSPATH
+#   - randomizeClass in this directory [not using this yet; no reason to
+#                                       suspect bias]
+#   - scramble_dot and scramble_ord in ../instance-generation
+#
+# @author Matt Stallmann
+# @date 2011/06/05
+# $Id: createMSTClass 107 2015-04-20 19:00:18Z mfms $
+
+size=32
+
+if [ $# != 5 ]; then
+    echo "Usage: createMSTClass"\
+          "TARGET_ROOT_DIRECTORY BASE_NAME TYPE NODES EDGES"
+    echo " TARGET_ROOT_DIRECTORY is the parent directory for"\
+          " the random class directory"
+    echo "BASE_NAME is used to name the directory and the files within it."
+    echo " The directory name will be BASE_NAME_layered"
+    echo " and each new .dot/.ord pair has prefix BASE_NAME_layered-xxx,"
+    echo " where xxx is a three-digit sequence number (the seed)."
+    echo "TYPE is one of random, geometric, geo_bound, or delauney"
+    echo " random graphs are completely random"
+    echo " geometric are based on connecting random points within a distance of each other"
+    echo "  based on desired number of nodes and edges; with wraparound in the unit square"
+    echo " geo_bound is without wraparound"
+    echo " delauney are based on Delauney triangulations of random sets of points"
+    echo "All geometry-based graphs have edges directed from left/up to right/down"
+    echo "NODES and EDGES are those used to generate the original geometric graph."
+    echo " However, longest-path layering introduces lots of dummy nodes"
+    echo " and correspondingly more edges."
+    echo " The number of edges is ignored for Delauney triangulations" 
+    echo "Note: creates a file called BASE_NAME-stats.out in the class directory"
+    echo " and a z_creation_stats.out file with output produced during generation."
+    echo "Also leaves a .gph file for each dot/ord pair in the class directory."
+    exit 1
+fi
+
+script_directory=${0%/*}
+to_dot_script=$script_directory/gph2dot
+layering_program="java LayerAssignment"
+
+target_root_directory=$1
+# ensure that target root directory name is fully expanded
+pushd $target_root_directory &> /dev/null
+target_root_directory=$PWD
+popd &> /dev/null
+
+shift
+base_name=$1
+shift
+graph_type=$1
+shift
+nodes=$1
+shift
+edges=$1
+
+if [ $graph_type = "delauney" ]; then
+    creation_program=delauney-triangulation
+    edges=""
+    graph_type=""
+else
+    creation_program=nextgen
+fi
+
+echo "type, nodes, edges = $graph_type, $nodes, $edges"
+echo -n "continue [y/n]? "
+read answer
+if [ $answer != "y" ]; then
+    echo "script $0 is terminating."
+    exit 1
+fi
+
+if [ ! -d $target_root_directory ]; then
+    if [ ! -f $target_root_directory ]; then
+        mkdir $target_root_directory
+    else
+        echo "Output directory $target_root_directory exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+layered_name=${base_name}_layered
+class_dir=$target_root_directory/$layered_name
+if [ -d $class_dir ]; then
+    echo "$class_dir already exists."
+    echo -n "Replace it (y/n) [n]? "
+    read answer
+    if [ $answer != "y" ]; then
+        echo "Not replacing directory;"
+        echo "script $0 is terminating."
+        exit 1
+    else
+        rm -rf $class_dir
+    fi
+elif [ -f $class_dir ]; then
+    echo "$class_dir is a regular file;"
+    echo "will not replace it with a directory."
+    exit 1
+fi
+
+
+# get here only if $target_root_directory exists and $class_dir doesn't.
+mkdir $class_dir
+echo "Creating a class in directory $class_dir"
+pushd $class_dir &> /dev/null
+stat_file=z_creation_stats.out
+index=1
+while [[ $index -le $size ]]; do
+    instance_suffix=`echo $index | awk '{printf "%03d",$1;}'`
+    base_instance_name=${base_name}_$instance_suffix
+    layered_base=${base_name}_layered_$instance_suffix
+    seed=$index
+    echo "instance=$layered_base nodes=$nodes edges=$edges"
+    echo "----------------- $layered_base ----------------" >> $stat_file
+
+    ($creation_program $graph_type $nodes $edges $seed $base_instance_name.gph) >> $stat_file 2>&1
+    unlayered_dot_file=$base_instance_name.dot
+    $to_dot_script $base_instance_name.gph
+    $layering_program $unlayered_dot_file $layered_base >> $stat_file 2>&1
+    rm $unlayered_dot_file
+
+    echo "_________________________________________________" >> $stat_file
+    echo "" >> $stat_file
+    index=$(( $index + 1 ))
+done
+
+# create a stat file based on running min_crossings in verbose mode
+external_stat_file=$base_name-stats.out
+stat_program="$script_directory/../src/min_crossings -v -p dfs"
+for dot_file in *.dot; do
+    ord_file=`basename $dot_file .dot`.ord
+    echo "$stat_program $dot_file $ord_file" >> $external_stat_file
+    $stat_program $dot_file $ord_file >> $external_stat_file
+    echo "_____________________________" >> $external_stat_file
+    echo "" >> $external_stat_file
+done
+popd &> /dev/null
+
+#  [Last modified: 2014 07 24 at 17:03:39 GMT]

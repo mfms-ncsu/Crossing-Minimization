@@ -1,0 +1,42 @@
+#!/bin/bash
+# dot+ord2layered_graphml - creates a graphml file from a dot and an ord file
+# Uses dot_and_ord_to_sgf in ../src
+#
+# $Id: dot+ord2layered_graphml 109 2015-05-27 14:34:33Z mfms $
+
+if [ $# != 2 ]; then
+    echo "Usage $0 DOT_FILE_NAME ORD_FILE_NAME"
+    echo "  converts the dot and ord file to a graphml file;"
+    echo "  the graphml file has a basename based on the ord file"
+    echo "  and will be in the current directory"
+    exit 1
+fi
+
+dot_file_name=$1
+ord_file_name=$2
+basename=`basename $ord_file_name .ord`
+
+script_directory=${0%/*}
+executable=$script_directory/../src/dot_and_ord_to_sgf
+to_graphml_script="$script_directory/sgf2layered_graphml.py"
+
+# transfer comments directly from dot file
+# @todo take these from the ord file (doesn't make sense now because ord
+# files created by heuristics don't have much useful information)
+comment_file=/tmp/$basename-comments
+fgrep '*' $dot_file_name | sed 's/* /c /' | sed '/\//d' > $comment_file
+temp_sgf_file=/tmp/$basename-sgf 
+$executable $dot_file_name $ord_file_name > $temp_sgf_file
+# sort node lines by node number (current version of Galant makes this
+# necessary)
+node_file=/tmp/$basename-nodes
+grep '^n' $temp_sgf_file | sort -n -k 2 > $node_file
+
+edge_file=/tmp/$basename-edges
+grep '^e' $temp_sgf_file > $edge_file
+
+grep '^t' $temp_sgf_file | cat $comment_file - $node_file $edge_file | $to_graphml_script > $basename.graphml
+
+echo "$basename.graphml has been created"
+
+#  [Last modified: 2015 05 27 at 14:22:52 GMT]

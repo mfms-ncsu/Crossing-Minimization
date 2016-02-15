@@ -1,0 +1,252 @@
+#! /bin/bash
+
+## randomizeHeuristics - run one heuristic followed by another heuristic on a
+# single instance of a problem; do this in four ways:
+#  (i) randomize neither
+#  (ii) randomize the first but not the second
+#  (iii) randomize the second but not the first
+#  (iv) randomize both
+
+# In each case, there will be NUMBER_OF_RUNS runs done, each with different
+# random seeds. The results will be stored in four files called
+# instance-h1+h2-xy, where instance is the name of the problem instance, h1
+# and h2 are the two heuristics, x is whether or not the first heuristic is
+# randomized - indicated by _ or R, and y the same for the second.
+
+# $Id: randomizeHeuristics 136 2016-01-14 20:43:49Z mfms $
+
+NUMBER_OF_RUNS=2
+#FIRST_HEURISTIC_OPTIONS="-p dfs -z -i 40000"
+FIRST_HEURISTIC_OPTIONS="-z -i 40000"
+SECOND_HEURISTIC_OPTIONS="-z -i 40000"
+
+if [ $# -ne 4 ]; then
+    echo "Usage: $0 instance_base result_directory first_heuristic second_heuristic"
+    echo " runs first_heuristic on instance_base.dot and instance_base.ord"
+    echo " and then runs the second_heuristic on the result"
+    echo " does this $NUMBER_OF_RUNS times with each of the variations:"
+    echo "  - randomizing neither heuristic,"
+    echo "  - randomize the first but not the second,"
+    echo "  - randomize the second but not the first,"
+    echo "  - randomize both"
+    echo " "
+    exit 1
+fi
+
+# The min_crossings executable is assumed to be in the src directory parallel
+# to the script directory
+script_directory=${0%/*}
+pushd $script_directory > /dev/null
+script_directory=$PWD
+popd > /dev/null
+executable_directory=$script_directory/../src
+executable=$executable_directory/min_crossings
+
+instance=$1
+shift
+result_dir=$1
+shift
+heuristic_1=$1
+shift
+heuristic_2=$1
+
+if [ ! -d $result_dir ]; then
+    if [ ! -f $result_dir ]; then
+        mkdir $result_dir
+    else
+        echo "Output directory $result_dir exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+
+# need an absolute path
+result_dir=$PWD/$result_dir
+output_prefix=$result_dir/$instance-$heuristic_1+$heuristic_2
+
+# put header information in each of the four output files
+for suffix in __ R_ _R RR; do
+    output_file=$output_prefix-$suffix
+    echo "@command randomizeHeuristics $instance $result_dir $heuristic_1 $heuristic_2" >> $output_file
+    echo "@first_heuristic_options  -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS" >> $output_file
+    echo "@second_heuristic_options -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS" >> $output_file
+    echo "@executable $executable" >> $output_file
+    echo >> $output_file
+
+# put system info at the top of the output file
+    echo "Host    = $HOSTNAME" >> $output_file
+    echo "Machine = $MACHTYPE" >> $output_file
+    echo >> $output_file
+done
+
+temp_dir=/tmp/$$_working_dir
+mkdir $temp_dir
+cp $instance.dot $instance.ord $temp_dir
+pushd $temp_dir
+
+# +++++++++++ __ and _R +++++++++++++++
+
+# run heuristic_1 deterministically and save best permutation
+# put appropriate messages in two files where deterministic run is done first
+dot_file=$instance.dot
+ord_file=$instance.ord
+output_file_1=$output_prefix-__
+output_file_2=$output_prefix-_R
+echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -o _ $instance.dot $instance.ord"
+echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -o _ $instance.dot $instance.ord" >> $output_file_1
+echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -o _ $instance.dot $instance.ord" >> $output_file_2
+echo " ==> `date -u +'%F %T'` <=="
+echo " ==> `date -u +'%F %T'` <==" >> $output_file_1
+echo " ==> `date -u +'%F %T'` <==" >> $output_file_2
+$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -o _ $instance.dot $instance.ord >> $$_temp_output-_ 2>&1
+cat $$_temp_output-_ >> $output_file_1
+cat $$_temp_output-_ >> $output_file_2
+echo "+++ `basename $instance`"
+echo "+++ `basename $instance`" >> $output_file_1 
+echo "+++ `basename $instance`" >> $output_file_2 
+echo ""
+echo "" >> $output_file_1
+echo "" >> $output_file_2
+# +++++++++++ __ and _R +++++++++++++++
+
+
+# +++++++++++ R_ and RR +++++++++++++++
+
+# run heuristic_1 randomly for the specified number of iterations and save
+# the best permutation each time, tagged with a name based on the run number
+output_file_1=$output_prefix-R_
+output_file_2=$output_prefix-RR
+index=1
+while [[ $index -le $NUMBER_OF_RUNS ]]; do
+    seed=`rand_seq 1`
+    output_permutation_base=$instance-`echo $index | awk '{printf "%04d",$1;}'`
+    echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -R $seed -o $output_permutation_base $dot_file $ord_file"
+    echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -R $seed -o $output_permutation_base $dot_file $ord_file" >> $output_file_1
+    echo "$executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -R $seed -o $output_permutation_base $dot_file $ord_file " >> $output_file_2
+    echo " ==> `date -u +'%F %T'` <=="
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file_1
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file_2
+    $executable -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -R $seed -o $output_permutation_base $dot_file $ord_file >> $$temp_output-R 2>&1
+    cat $$temp_output-R >> $output_file_1
+    cat $$temp_output-R >> $output_file_2
+    echo "+++ `basename $instance`"
+    echo "+++ `basename $instance`" >> $output_file_1 
+    echo "+++ `basename $instance`" >> $output_file_2 
+    echo ""
+    echo "" >> $output_file_1
+    echo "" >> $output_file_2
+    index=$(( $index + 1 ))
+done
+# +++++++++++ R_ and RR +++++++++++++++
+
+
+# ****** __ **********
+
+# run heuristic_2 deterministically based on deterministic run of heuristic_1
+# put appropriate messages in the __ file
+output_file=$output_prefix-__
+echo ""
+echo "" >> $output_file
+echo "****** Starting deterministic second run based on deterministic first run (__)"
+echo "****** Starting deterministic second run based on deterministic first run (__)" >> $output_file
+ord_file=$instance-$heuristic_1.ord
+echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -o _ $dot_file $ord_file"
+echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -o _ $dot_file $ord_file" >> $output_file
+echo " ==> `date -u +'%F %T'` <=="
+echo " ==> `date -u +'%F %T'` <==" >> $output_file
+$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -o _ $dot_file $instance-$heuristic_1.ord >> $output_file 2>&1
+echo "+++ `basename $instance-$heuristic_1`"
+echo "+++ `basename $instance`" >> $output_file 
+echo ""
+echo "" >> $output_file
+# ****** __ **********
+
+
+# ****** _R **********
+
+# run heuristic_2 randomly based on the deterministic run of heuristic_1
+# put appropriate messages in the _R file
+output_file=$output_prefix-_R
+echo ""
+echo "" >> $output_file
+echo "****** Starting random second run based on deterministic first run (_R)"
+echo "****** Starting random second run based on deterministic first run (_R)" >> $output_file
+input_permutation_base=$instance-$heuristic_1
+ord_file=$input_permutation_base.ord
+index=1
+while [[ $index -le $NUMBER_OF_RUNS ]]; do
+    seed=`rand_seq 1`
+    input_permutation_base=$instance-$heuristic_1
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file"
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file" >> $output_file
+    echo " ==> `date -u +'%F %T'` <=="
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file
+    $executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file >> $output_file 2>&1
+    echo "+++ `basename $instance`"
+    echo "+++ `basename $instance`" >> $output_file 
+    echo ""
+    echo "" >> $output_file
+    index=$(( $index + 1 ))
+done
+# ****** _R **********
+
+
+# ****** RR **********
+
+# run heuristic_2 randomly based on each random run of heuristic_1
+# put appropriate messages in the RR file
+# Each random run of the second run is matched with the corresponding one of
+# the first heuristic, but these will be independent since the random numbers
+# are
+output_file=$output_prefix-RR
+echo ""
+echo "" >> $output_file
+echo "****** Starting random second run based on random first run (RR)"
+echo "****** Starting random second run based on random first run (RR)" >> $output_file
+index=1
+while [[ $index -le $NUMBER_OF_RUNS ]]; do
+    seed=`rand_seq 1`
+    input_permutation_base=$instance-`echo $index | awk '{printf "%04d",$1;}'`-$heuristic_1
+    ord_file=$input_permutation_base.ord
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file"
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file" >> $output_file
+    echo " ==> `date -u +'%F %T'` <=="
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file
+    $executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file >> $output_file 2>&1
+    echo "+++ `basename $instance`"
+    echo "+++ `basename $instance`" >> $output_file 
+    echo ""
+    echo "" >> $output_file
+    index=$(( $index + 1 ))
+done
+# ****** RR **********
+
+
+# ****** R_ **********
+
+# run heuristic_2 deterministically for each random run of heuristic_1
+output_file=$output_prefix-R_
+echo ""
+echo "" >> $output_file
+echo "****** Starting deterministic second run based on random first run (R_)"
+echo "****** Starting deterministic second run based on random first run (R_)" >> $output_file
+index=1
+while [[ $index -le $NUMBER_OF_RUNS ]]; do
+    input_permutation_base=$instance-`echo $index | awk '{printf "%04d",$1;}'`-$heuristic_1
+    ord_file=$input_permutation_base.ord
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS $dot_file $ord_file"
+    echo "$executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS $dot_file $ord_file" >> $output_file
+    echo " ==> `date -u +'%F %T'` <=="
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file
+    $executable -h $heuristic_2 $SECOND_HEURISTIC_OPTIONS -R $seed $dot_file $ord_file >> $output_file 2>&1
+    echo "+++ `basename $instance`"
+    echo "+++ `basename $instance`" >> $output_file 
+    echo ""
+    echo "" >> $output_file
+    index=$(( $index + 1 ))
+done
+# ****** R_ **********
+
+popd
+
+#  [Last modified: 2016 01 14 at 20:26:20 GMT]

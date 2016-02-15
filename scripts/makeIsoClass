@@ -1,0 +1,99 @@
+#! /bin/bash
+## makeIsoClass - a simple script for creating a class of orderings,
+#                 the original order plus 32 random permutations, of each layer
+#                 from a given .ord file 
+#
+# IMPORTS:
+#   - randomize_dot: to create each random order of the egdes in the dot file
+#   - randomize_ord: to create each random permutation of nodes on each layer
+#                   in the ord file
+#
+# @todo - this is currently hardwired to run randomize_ord from ../instance-generation.
+#
+# @author Matt Stallmann
+# @date 2008/09/16
+# $Id: makeIsoClass 140 2016-02-15 16:13:56Z mfms $
+
+size=32
+# where the executables are relative to the parent of the script directory
+executable_location=instance-generation
+script_directory_parent=${0%/*}
+pushd $script_directory_parent > /dev/null
+cd ..
+bin_directory=$PWD/$executable_location
+popd > /dev/null
+
+if [ $# != 3 ]; then
+    echo "Usage: makeIsoClass"\
+          "BASE_NAME TARGET_ROOT_DIRECTORY SEED"
+    echo " where BASE_NAME is the base name for both a .dot file"
+    echo "       and a .ord file for the same layered graph"
+    echo " TARGET_ROOT_DIRECTORY is the parent directory for"\
+          " the iso class directory"
+    echo " SEED is three integers in the range [0,65535] separated by commas"
+    echo "The name of the iso class directory is the base name"\
+         " followed by -iso"
+    echo "and each .dot/.ord file is named base_name-iso-xx, where xx is a"\
+         " two-digit sequence number."
+    exit 1
+fi
+base_name=$1
+shift
+target_root_directory=$1
+shift
+seed=$1
+
+dot_ref=$base_name.dot
+ord_ref=$base_name.ord
+
+if [ ! -d $target_root_directory ]; then
+    if [ ! -f $target_root_directory ]; then
+        mkdir $target_root_directory
+    else
+        echo "Output directory $target_root_directory exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+class_dir=$target_root_directory/$base_name-iso
+if [ -d $class_dir ]; then
+    echo "$class_dir already exists."
+    echo -n "Replace it (y/n) [n]? "
+    read answer
+    if [ $answer != "y" ]; then
+        echo "Not replacing directory;"
+        echo "script $0 is terminating."
+        exit 1
+    else
+        rm -rf $class_dir
+    fi
+elif [ -f $class_dir ]; then
+    echo "$class_dir is a regular file;"
+    echo "will not replace it with a directory."
+    exit 1
+fi
+
+ord_scrambler=$bin_directory/randomize_ord
+dot_scrambler=$bin_directory/randomize_dot
+
+# get here only if $target_root_directory exists and $class_dir doesn't.
+mkdir $class_dir
+echo "Creating a class in directory $class_dir"
+dot_ref_copy=$base_name-iso-00.dot
+ord_ref_copy=$base_name-iso-00.ord
+cp $dot_ref $class_dir/$dot_ref_copy
+cp $ord_ref $class_dir/$ord_ref_copy
+pushd $class_dir
+index=1
+while [[ $index -le $size ]]; do
+    instance_base=$base_name-iso-`echo $index | awk '{printf "%02d",$1;}'`
+    dot_instance=$instance_base.dot
+    ord_instance=$instance_base.ord
+    echo "Creating instance $instance_base with seed $seed."
+    seed=`$dot_scrambler $dot_ref_copy $dot_instance $seed`
+    seed=`$ord_scrambler $ord_ref_copy $ord_instance $seed`
+    index=$(( $index + 1 ))
+done
+popd
+
+#  [Last modified: 2016 01 20 at 15:32:48 GMT]

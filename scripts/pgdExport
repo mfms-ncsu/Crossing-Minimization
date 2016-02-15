@@ -1,0 +1,41 @@
+#! /bin/bash
+
+## pgdExport - Export the pgd repository with a given revision number; current
+# revision is the default and call the resulting directory pgd-rev, where rev
+# is the revision number
+#
+# @author Matt Stallmann @date 2011/05/24
+# $Id: pgdExport 107 2015-04-20 19:00:18Z mfms $
+
+if [ $# -lt 1 ] || [ $# -gt 2 ]; then
+    echo "Usage: pgdExport DIRECTORY [ REVISION ]"
+    echo " where DIRECTORY is the directory where the version of the repository will be stored" 
+    exit 1
+fi
+
+target_directory=$1
+if [ $# -eq 2 ]; then
+    revision=$2
+else
+    revision=""
+fi
+
+pushd $target_directory
+
+if [ -n "$revision" ]; then     # yes, there is a revision number
+    rev_string=`svn export -r $revision svn+ssh://leda@pirx.uni-trier.de/LEDA/SVN/pgd | tail -1`
+else
+    rev_string=`svn export svn+ssh://leda@pirx.uni-trier.de/LEDA/SVN/pgd | tail -1`
+fi
+
+# Get string xx from "Exported revision xx."
+
+rev_number_with_period=`echo $rev_string | cut -f 3 -d' '` # third word
+rev_number=${rev_number_with_period%\.}
+
+mv pgd pgd-$rev_number
+popd
+
+echo "revision = $rev_number"
+
+#  [Last modified: 2012 01 06 at 01:56:28 GMT]

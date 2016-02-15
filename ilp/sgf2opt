@@ -1,0 +1,83 @@
+#! /bin/bash
+# sgf2opt - starts with an sgf file and creates an sgf file for the optimum
+# solution, either minimum total crossings or minimum bottleneck crossings
+
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 [-t | -b] [[-e | -x] INTEGER] FILE.sgf"
+    echo " produces FILE_optimum_TAG.sgf, which has the optimum order"
+    echo " also produces FILE_TAG.lp (ILP for the problem)"
+    echo " and FILE_TAG.out (the cplex output)"
+    echo " in the same directory as the input"
+    echo "-t is for total crossings, -b for bottleneck"
+    echo "-e INTEGER gives an INTEGER upper bound on edge (bottleneck) crossings"
+    echo "-x INTEGER gives an INTEGER upper bound on total crossings"
+    echo "TAG is one of:"
+    echo "  b (bottleneck), t (total),"
+    echo "  bx (bottleneck with bound on total), te (total with bound on bottleneck)"
+    echo "  Note: be or tx are also possible but pointless"
+    exit 1
+fi
+
+# assumes script is in same directory as executables (for now), and that
+# everything has been compiled:
+#    g++ -std=c++0x Graph_to_LP_ch.cpp -o Graph_to_LP_ch
+#    g++ -std=c++0x Sol_to_Graph_ch.cpp -o Sol_to_Graph_ch
+executable_dir=${0%/*}
+
+objective=$1
+# objective includes the '-'
+tag=${objective#-}
+shift
+constraint_type=$1
+if [ "$constraint_type" = "-e" ] || [ "$constraint_type" = "-x" ]; then
+    # -e or -x followed by an integer exists;
+    # add e or x to the tag
+    tag=$tag${constraint_type#-}
+    shift
+    constraint=$1
+    shift
+    input_sgf_file=$1
+else
+    # otherwise the current argument was a file
+    input_sgf_file=$constraint_type
+    constraint_type=
+    constraint=
+fi
+
+input_base=${input_sgf_file%.sgf}
+cplex_input_file=$input_base.lp
+cplex_output_file=$input_base-out.txt
+
+if [ "$objective" = "-t" ]; then
+    echo -n "creating ILP for optimizing total crossings"
+    if [ -n $constraint ]; then
+        echo " given $constraint bottleneck crossings."
+    else
+        echo
+    fi
+else
+    echo -n "creating ILP for optimizing bottleneck crossings"
+    if [ -n $constraint ]; then
+        echo " given $constraint total crossings."
+    else
+        echo
+    fi
+fi
+
+$executable_dir/Graph_to_LP $objective $constraint_type $constraint $input_sgf_file
+
+# assumes cplex_ilp is included in the current path
+echo "Solving the ILP using CPLEX."
+cplex_ilp -verify $cplex_input_file > $cplex_output_file
+
+echo "Converting solution to a graph"
+$executable_dir/Sol_to_Graph $objective $input_sgf_file $cplex_input_file $cplex_output_file
+
+mv $cplex_input_file ${input_base}_$tag.lp
+echo "ilp is in ${input_base}_$tag.lp"
+mv $cplex_output_file ${input_base}_$tag.out
+echo "cplex output is in ${input_base}_$tag.out"
+mv ${input_base}_o.sgf ${input_base}_optimum_$tag.sgf
+echo "sgf file for optimum permutations is in ${input_base}_optimum_$tag.sgf"
+
+#  [Last modified: 2016 01 08 at 16:23:38 GMT]

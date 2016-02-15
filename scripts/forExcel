@@ -1,0 +1,69 @@
+#! /bin/bash
+
+## forExcel - a script that creates a csv file based on results of
+# experiments on a specified collection of heuristics (as identified by
+# suffixes). The script can be edited to include more columns, but currently
+# there is a column called Name, which lists the names of graphs on which the
+# heuristics have been run and a column for each heuristic, giving the
+# minimum number of crossings achieved.
+#
+# @author Matt Stallmann
+# @date 2011/07/06
+# $Id: forExcel 107 2015-04-20 19:00:18Z mfms $
+
+if [ $# -lt 2 ]; then
+    echo "Usage: forExcel CLASS_NAME HEURISTIC [HEURISTIC ...]"
+    echo " An output file with name CLASS_NAME-HEURISTIC.out"
+    echo " must be in current directory for each heuristic on the list"
+    exit 1
+fi
+
+class=$1
+shift
+first_heuristic=$1
+heuristics=$@
+
+echo "-- output will be in $class.csv and \
+${class}_edge.csv --"
+
+temp_dir=/tmp/$$.for_excel
+mkdir $temp_dir
+
+fgrep GraphName $class-$first_heuristic.out | cut -f 2 -d, > $temp_dir/names.out
+
+for heuristic in $heuristics; do
+    fgrep HeuristicC $class-$heuristic.out | cut -f 2 -d, > $temp_dir/$heuristic.out
+#    fgrep HeuristicE $class-$heuristic.out | cut -f 2 -d, > $temp_dir/${heuristic}_edge.out
+done
+
+# paste together the columns, one for the graph names, one for each
+# heuristic; also do this for edge crossings
+cat $temp_dir/names.out > $temp_dir/columns.out
+#cat $temp_dir/names.out > $temp_dir/columns_edge.out
+previous=$temp_dir/columns.out
+#previous_edge=$temp_dir/columns_edge.out
+for heuristic in $heuristics; do
+    paste -d, $previous $temp_dir/$heuristic.out > $temp_dir/columns-$heuristic.out
+#    paste -d, $previous_edge $temp_dir/${heuristic}_edge.out > $temp_dir/columns-${heuristic}_edge.out
+    previous=$temp_dir/columns-$heuristic.out
+#    previous_edge=$temp_dir/columns-${heuristic}_edge.out
+done
+# at this point previous and previous_edge contain all the columns
+
+# create a header row for each output file
+echo -n "Name" > $class.csv
+#echo -n "Name" > ${class}_edge.csv
+for heuristic in $heuristics; do
+    echo -n ",$heuristic" >> $class.csv
+#    echo -n ",$heuristic" >> ${class}_edge.csv
+done
+echo >> $class.csv
+#echo >> ${class}_edge.csv
+
+# add the data columns
+cat $previous >> $class.csv
+#cat $previous_edge >> ${class}_edge.csv
+
+echo "** output is in $class.csv" # " and ${class}_edge.csv **"
+
+#  [Last modified: 2014 07 28 at 15:50:47 GMT]

@@ -1,3 +1,10 @@
+# temporary test files
+*.dot
+*.ord
+*.sgf
+*.graphml
+
+## standard C ignores
 # Object files
 *.o
 *.ko

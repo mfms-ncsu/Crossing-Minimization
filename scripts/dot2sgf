@@ -1,0 +1,50 @@
+#! /bin/bash
+#
+# $Id: dot2sgf 107 2015-04-20 19:00:18Z mfms $
+
+## dot2sgf - convert from dot format to a truncated version of
+# (s)imple (g)raph (f)ormat described below.
+#  Usage: dot2sgf base_name
+#   converts base_name.dot to base_name.sgf
+#
+# Requires extract-dot-graph.awk and sgfDirect.awk
+#
+# @author Matt Stallmann, 2011/06/16
+
+# The output will have the following format (blank lines are ignored):
+#    c comment line 1
+#    ...
+#    c comment line k
+#
+#    t graph_name
+# [the following lines, beginning with 'n' are omitted]
+#    n id_1 layer_1 position_1
+#    n id_2 layer_2 position_2
+#    ...
+#    n id_n layer_n position_n
+# [truncated version continues here]
+#    e source_1 target_1
+#    ...
+#    e source_m target_m
+#
+# edges are directed so that the nodes appearing earlier in the input are
+# sources and will form a dag 
+
+if [ $# != 1 ]; then
+    echo "Usage: dot2sgf basename"
+    echo " produces a file named basename.sgf from basename.dot"
+    exit 1
+fi
+
+script_directory=${0%/*}
+base_name=$1
+input_file=$base_name.dot
+output_file=$base_name.sgf
+touch $output_file
+echo "c dot2sgf $input_file (`date`)" >> $output_file
+echo "t $base_name"  >> $output_file
+
+awk -f $script_directory/extract-dot-graph.awk $input_file\
+ | awk -f $script_directory/sgfDirect.awk >> $output_file
+
+#  [Last modified: 2011 06 16 at 19:24:14 GMT]

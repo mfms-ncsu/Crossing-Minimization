@@ -1,0 +1,44 @@
+#! /bin/bash
+# gph2dot - converts a gph file (from the src-generate for the MST
+# experiments) into a dot file for a generic directed acyclic graph;
+# gph format is as follows:
+#
+# a sequence of comment lines beginning with 'c'
+# (usually there is just one such line describing how the graph was generated) 
+#
+# a line of the form 'g NODES EDGES', where NODES/EDGES represent the number
+# of nodes and edges, respectively. In case of geometric graphs, the number
+# of edges is a target value; the actual number is likely to be greater.
+#
+# a sequence of lines of the form 'e NODE_1 NODE_2 WEIGHT'
+#
+# It is assumed that, if an edge is interpreted as being directed from NODE_1
+# to NODE_2, the resulting graph is a dag.
+#
+# $Id: gph2dot 75 2014-07-18 22:00:49Z mfms $
+
+if [ $# != 1 ]; then
+    echo "Usage $0 file.gph"
+    echo "  converts file.gph to file.dot"
+    exit 1
+fi
+
+gphfile=$1
+base=`basename $gphfile .gph`
+dotfile=$base.dot
+edge_file=/tmp/$base-edges
+comment_file=/tmp/$base-comments
+
+grep '^e ' $gphfile | awk '{print $2,$3}' > $edge_file
+num_edges=`wc $edge_file | awk '{print $1}'`
+grep '^c ' $gphfile | sed 's/^c / * /' > $comment_file
+echo '/*' > $dotfile
+echo " * from $gphfile using gph2dot, `date -u`" >> $dotfile
+cat $comment_file >> $dotfile
+echo " * actual number of edges = $num_edges" >> $dotfile
+echo " */" >> $dotfile
+echo "digraph $base {" >> $dotfile
+awk '{printf " n_%d -> n_%d;\n", $1, $2}' $edge_file >> $dotfile
+echo "}" >> $dotfile
+
+#  [Last modified: 2014 07 18 at 14:41:04 GMT]

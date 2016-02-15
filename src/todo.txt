@@ -1,0 +1,20 @@
+Needed -- a way to save state while the algorithm is running.
+Idea -- identify each node internally with an integer id instead of a name.
+
+Data structures:
+
+1. An array of node pointers indexed by their internal identifiers (a node
+   struct will also store the internal id).
+
+2. An ord_struct holding an array of node id's for each layer. And,
+   obviously, the number of layers and the size of each layer.
+
+Functions:
+
+save_order() - to create a new ord_struct and fill in the information based
+on the current graph
+    OrdPtr - pointer to the struct storing the information
+The struct should be previously allocated.
+
+restore_order() - to rearrange each layer using a given ord_struct
+    OrdPtr - pointer to the struct holding the desired order

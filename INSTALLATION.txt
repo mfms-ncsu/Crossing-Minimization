@@ -1,0 +1,101 @@
+Steps to take after downloading the MinCrossings software
+
+Note: all programs and scripts are self-documenting in the sense that they
+will print a usage message if run with no command-line arguments.
+
+To install the crossing minimization software, do the following:
+
+Move this directory to a location of your choice, say, mc_path.
+
+Compile everything that needs compilation:
+
+$ cd instance-generation
+$ make -f makefile-instance-generation
+gcc -c -Wall -g -std=c99  random_geometric_tree.c
+gcc -c -Wall -g -std=c99  LayeredGraph.c
+gcc -c -Wall -g -std=c99  randomNumbers.c
+gcc -c -Wall -g -std=c99  IO.c
+gcc random_geometric_tree.o LayeredGraph.o randomNumbers.o IO.o -o random_geometric_tree
+gcc -c -Wall -g -std=c99  randomize_ord.c
+gcc -c -Wall -g -std=c99  ord-instance-generation.c
+gcc randomize_ord.o randomNumbers.o ord-instance-generation.o -o randomize_ord
+gcc -c -Wall -g -std=c99  randomize_dot.c
+gcc randomize_dot.o randomNumbers.o -o randomize_dot
+
+PROGRAMS CREATED:
+     random_geometric_tree - creates a minimum spanning tree of randomly
+     chosen points in a rectangle; the tree is layered by choosing a root and
+     extending each root-leaf path from layer 1 to layer ell and back again
+     as many times as needed
+
+     randomize_ord - takes an ord file and randomly permutes the nodes on
+     each layer
+
+     randomize_dot - randomly permutes the edges of a dot file 
+
+$ cd ../java-utilities/
+$ javac *.java
+
+PROGRAMS CREATED:
+     DagDisplay - given a .dot and .ord file, creates a drawing using the
+     given configuration; the file 00_dag_display_process.txt explains how to
+     create a decent-looking pdf file from the output
+
+     LayerAssignment - takes a .dot file representing a directed graph and
+     assigns layers to the nodes, adding dummy nodes as needed
+
+$ cd ../src
+$ make
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  min_crossings.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  sifting.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  dfs.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  sorting.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  heuristics.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  barycenter.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  crossings.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  crossing_utilities.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  graph_io.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  dot.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  ord.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  hash.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  Statistics.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  stats.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  order.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  priority_edges.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  swap.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  median.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  timing.c
+gcc  min_crossings.o sifting.o dfs.o sorting.o heuristics.o barycenter.o crossings.o crossing_utilities.o graph_io.o dot.o ord.o hash.o Statistics.o stats.o order.o priority_edges.o swap.o median.o timing.o -lm -o min_crossings
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  create_random_dag.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  check_edge_duplication.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  random_dag.c
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  random_tree.c
+gcc -O3 create_random_dag.o check_edge_duplication.o random_dag.o random_tree.o graph_io.o Statistics.o dot.o ord.o hash.o -lm -o create_random_dag
+gcc -c -Wall -g -std=c99 -DMAX_EDGE  -O3  add_edges.c
+gcc -O3 add_edges.o check_edge_duplication.o random_dag.o random_tree.o graph_io.o Statistics.o dot.o ord.o hash.o -lm -o add_edges
+
+PROGRAMS CREATED:
+     min_crossings - implements all the heuristics; has lots of options that
+     control which preprocessor/heuristic is run, stopping criteria, etc.
+
+     create_random_dag - creates a connected dag; command-line arguments
+     specify the number of nodes, edges, and layers, and the skew factor
+     A script for creating a uniform dag is in the scripts directory: it's
+     called createDag
+
+     add_edges - adds a given number of randomly chosen edges to a layered
+     dag 
+
+Add the following paths to the PATH environment variable:
+
+mc_path/instance-generation
+mc_path/scripts
+mc_path/src
+
+and to the CLASSPATH, add
+
+mc_path/java-utilities
+
+Note: it is important (for now) that the executables be in their source
+directories; many of the scripts use these executables and expect them to be
+there.

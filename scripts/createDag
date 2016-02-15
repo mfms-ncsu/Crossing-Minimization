@@ -1,0 +1,44 @@
+#!/bin/bash
+
+## createDag - creates a dag randomly using the scheme devised for the
+#  InfoVis poster paper. Uses layeredDag.awk and layeredDagOrd.awk
+#
+# @author Matt Stallmann
+# @date 2009/05/08
+# $Id: createDag 107 2015-04-20 19:00:18Z mfms $
+#
+# @todo Construct the basename from the other arguments
+
+if [ $# != 6 ]; then
+    echo "Usage: $0 basename layers nodes_per_layer edge_prob bias seed"
+    exit 1
+fi
+
+script_directory=${0%/*}
+basename=$1
+shift
+layers=$1
+shift
+nodes_per_layer=$1
+shift
+edge_prob=$1
+shift
+bias=$1
+shift
+seed=$1
+
+output_base=$PWD/$basename      # make sure path to output is absolute
+
+temp_file=/tmp/dag-$$.inp
+echo "$basename $edge_prob $bias $seed" >> $temp_file
+
+index=0
+while [[ $index -lt $layers ]]; do
+    echo $nodes_per_layer >> $temp_file
+    index=$(( $index + 1 ))
+done
+
+awk -f $script_directory/layeredDag.awk $temp_file > $output_base.dot
+awk -f $script_directory/layeredDagOrd.awk $temp_file > $output_base.ord
+
+#  [Last modified: 2009 05 27 at 17:55:28 GMT]

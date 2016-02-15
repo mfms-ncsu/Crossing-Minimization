@@ -1,0 +1,48 @@
+##: makefile-instance-generation - for programs related to generation of instances for k-layer
+# crossing minimization.
+# @author Matt Stallmann, 2008/07/22
+# $Id: makefile-instance-generation 19 2011-06-23 01:46:27Z mfms $
+
+CC=gcc
+DFLAGS =								 
+CFLAGS=-c -Wall -g -std=c99 $(DFLAGS)
+
+# all programs that can be created
+PROGRAMS = random_geometric_tree randomize_ord randomize_dot
+
+# object files used by random tree program
+TREE_OBJECTS = LayeredGraph.o randomNumbers.o IO.o
+
+# object files used by random order program
+ORDER_OBJECTS = randomNumbers.o ord-instance-generation.o
+
+# header files used in compiling the main program(s)
+HEADERS = LayeredGraph.h randomNumbers.h IO.h
+
+.SUFFIXES: .c
+.c.o: ; $(CC) $(CFLAGS) $*.c
+
+all: $(PROGRAMS)
+
+random_geometric_tree: random_geometric_tree.o $(TREE_OBJECTS) \
+; $(CC) random_geometric_tree.o $(TREE_OBJECTS) -o random_geometric_tree
+
+randomize_ord: randomize_ord.o $(ORDER_OBJECTS) \
+; $(CC) randomize_ord.o $(ORDER_OBJECTS) -o randomize_ord
+
+randomize_dot: randomize_dot.o randomNumbers.o \
+; $(CC) randomize_dot.o randomNumbers.o -o randomize_dot
+
+# source dependencies
+LayeredGraph.o: LayeredGraph.c LayeredGraph.h makefile-instance-generation
+
+randomNumbers.o: randomNumbers.c randomNumbers.h makefile-instance-generation
+
+ord-instance-generation.o: ord-instance-generation.c ord-instance-generation.h makefile-instance-generation
+
+random_geometric_tree.o: random_geometric_tree.c LayeredGraph.h randomNumbers.h IO.h makefile-instance-generation
+
+randomize_ord.o: randomize_ord.c randomNumbers.h ord-instance-generation.h makefile-instance-generation
+
+# special targets
+clean: ; rm -f *.o *~ $(PROGRAMS)

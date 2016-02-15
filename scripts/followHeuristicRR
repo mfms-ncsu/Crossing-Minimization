@@ -1,0 +1,100 @@
+#! /bin/bash
+
+## followHeuristic - run one heuristic followed by one or more other
+# heuristics (separately); arguments to min_crossings are hard-wired for
+# specific experiments and can be changed by editing the first few lines of
+# the script
+
+FIRST_HEURISTIC_OPTIONS="-p dfs -z"
+FIRST_HEURISTIC_ITERATIONS=40000
+PREFIX="dfs+"
+FIRST_HEURISTIC_SUFFIX=R
+SECOND_HEURISTIC_OPTIONS="-z"
+SECOND_HEURISTIC_ITERATIONS=40000
+SECOND_HEURISTIC_SUFFIX=R
+
+if [ $# -lt 4 ]; then
+    echo "Usage: $0 class result_dir first_heuristic second_heuristic_1 [second_heuristic_2 ...]"
+    echo " runs first_heuristic on the given class"
+    echo " and then runs each of the second_heuristic(s) as a follow-on"
+    echo " options for first heuristic: $FIRST_HEURISTIC_OPTIONS -i $FIRST_HEURISTIC_ITERATIONS"
+    echo " options for second heuristic(s): $SECOND_HEURISTIC_OPTIONS -i $SECOND_HEURISTIC_ITERATIONS"
+
+    exit 1
+fi
+
+# The runHeuristic script is in this directory, but this path needs to be
+# absolute to ensure portability of the script (can be run from anywhere)
+script_directory=${0%/*}
+pushd $script_directory > /dev/null
+script_directory=$PWD
+popd > /dev/null
+
+class=$1
+shift
+result_dir=$1
+shift
+heuristic_1=$1
+shift
+other_heuristics="$@"
+
+# need an absolute paths
+result_dir=$PWD/$result_dir
+class=$PWD/$class
+
+# need to strip off the / first
+new_class=${class%/}-$PREFIX$heuristic_1$FIRST_HEURISTIC_SUFFIX$SECOND_HEURISTIC_SUFFIX
+
+# create a class for storing the outputs of the first heuristic and run the
+# heuristic with the output option set to use the basename of the dot files
+
+if [ ! -d $new_class ]; then
+    if [ ! -f $new_class ]; then
+        mkdir $new_class
+    else
+        echo "Output directory $new_class exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+
+# need to run stuff in new class; that's where output files from -o option end up
+pushd $new_class
+
+# start with a clean slate
+rm -f *.dot *.ord
+
+$script_directory/runHeuristicR $class $result_dir $PREFIX$heuristic_1$FIRST_HEURISTIC_SUFFIX -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -i $FIRST_HEURISTIC_ITERATIONS -z -o _
+
+echo "contents of directory $new_class ="
+ls
+
+# create dot files to go with the -post ord files and run the second
+# heuristic on the -post output of the first
+cp $class/*.dot .
+$script_directory/mvsed -s "s/\.dot/-$PREFIX${heuristic_1}-post\.dot/" *.dot
+
+for heuristic in $other_heuristics; do
+    $script_directory/runHeuristicR $new_class $result_dir $heuristic$SECOND_HEURISTIC_SUFFIX -h $heuristic $SECOND_HEURISTIC_OPTIONS -i $SECOND_HEURISTIC_ITERATIONS
+done
+
+# Now rerun using best bottleneck solution from first heuristic
+
+# get rid of the previous .dot files since they determine runHeuristicR's
+# scope;
+rm -f $new_class/*.dot
+
+# create dot files to go with the _edge ord files and run the second
+# heuristic on the _edge output of the first;
+cp $class/*.dot .
+$script_directory/mvsed -s "s/\.dot/-$PREFIX${heuristic_1}_edge\.dot/" *.dot
+
+for heuristic in $other_heuristics; do
+    $script_directory/runHeuristicR $new_class $result_dir $heuristic${SECOND_HEURISTIC_SUFFIX}_edge -h $heuristic $SECOND_HEURISTIC_OPTIONS -i $SECOND_HEURISTIC_ITERATIONS
+done
+
+popd
+
+rm -rf $new_class
+
+#  [Last modified: 2016 01 15 at 13:02:00 GMT]

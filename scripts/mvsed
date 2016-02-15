@@ -1,0 +1,52 @@
+#!/bin/sh
+##: mvsed -- rename files according to a pattern substitution (not clear
+##           where this originated)
+
+help()
+{
+cmd=`basename $0`
+cat << EndOfHelp
+  USAGE: $cmd [-s script] filelist [target]
+
+    Each file specified in filelist is moved to a new name, the new
+    name being generated from old name using script of -s option.
+    The script of -s is an edit command for sed.
+
+    If -s option is not specified, then it is a regular move and it
+    is necessary to specify a target.
+
+  Example:
+	$cmd -s s/ALU-PN/ALU_PN/ *.blif
+
+EndOfHelp
+}
+
+while [ $# != "0" ] ;
+do
+  case $1 in
+   -help)  help; exit 2;;
+   -s)  subst=$2; shift 2; break;;
+   *) break;;
+  esac
+done
+
+if [ -z "$subst" ] ; then
+ echo mv $*
+else
+ for i in $* ;
+ do
+     # quotes are needed in case file names have blanks
+     # to avoid problems with embedded blanks in files on the command line,
+     # you have to do, e.g.,
+     #    mvsed -s 's/ /-/' "*\ *"
+     # which, oddly, also attempts to do mv *\ *\
+     original_file="$i"
+     subst_no_blanks="$subst"
+     new_file=`echo "$i" | sed "$subst_no_blanks"`
+     new_file_no_blanks="$new_file"
+     echo mv $original_file $new_file_no_blanks
+     mv "$original_file" "$new_file_no_blanks"
+ done
+fi
+
+#  [Last modified: 2008 12 10 at 14:48:13 GMT]

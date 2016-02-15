@@ -1,0 +1,64 @@
+#! /bin/bash
+#
+# $Id: graphml2sgf 71 2014-07-15 14:45:53Z mfms $
+
+## graphml2sgf - convert from standard graphml
+#             to the (s)imple (g)raph (f)ormat described below.
+#
+# Imports extract-graphml-graph.awk and sgfDirect.awk
+#
+# @author Matt Stallmann, 2011/05/25
+
+# The graphml input is as follows
+# First some boilerplate stuff.
+# Then a sequence of nodes of the form (for example):
+#     <node id="n0"/>
+# This is followed by a sequence of edges, each looking like (for example):
+#     <edge id="e0" source="n0" target="n2"/>
+#
+# CAUTION: Many graphml files do not have this format!
+
+# The output will have the following format (blank lines are ignored):
+#    c comment line 1
+#    ...
+#    c comment line k
+#
+#    t graph_name
+#
+#    n id_1 layer_1 position_1
+#    n id_2 layer_2 position_2
+#    ...
+#    n id_n layer_n position_n
+#
+#    e source_1 target_1
+#    ...
+#    e source_m target_m
+#
+# edges are directed so that the nodes appearing earlier in the input are
+# sources 
+
+if [ $# != 1 ]; then
+    echo "Usage: graphml2sgf basename.graphml"
+    echo " produces a file named basename.sgf"
+    exit 1
+fi
+
+script_directory=${0%/*}
+input_file=$1
+# @todo the intent of the statement below is to remove all extensions, i.e.,
+# the maximum suffix that begins with a . Unfortunately, the result is an
+# empty string if the input file is something like ../other_directory/file.ext
+without_extensions=${input_file%%.*}
+graph_name=`basename $without_extensions`
+output_file=$graph_name.sgf
+if [ -e $output_file ]; then
+    rm -i $output_file
+fi
+touch $output_file
+echo "c graphml2sgf $input_file (`date`)" >> $output_file
+echo "t $graph_name"  >> $output_file
+# @todo - see extract-graphml-graph.awk
+awk -f $script_directory/extract-graphml-graph.awk $input_file\
+ >> $output_file
+
+#  [Last modified: 2014 06 12 at 19:48:45 GMT]

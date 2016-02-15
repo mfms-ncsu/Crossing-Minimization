@@ -1,0 +1,18 @@
+#!/bin/bash
+# sgf2dot+ord - creates both a dot and ord file from an sgf file
+# Uses sgf2dot.awk and sgf2ord.awk
+#
+# $Id: sgf2dot+ord 70 2014-04-10 14:41:00Z mfms $
+
+if [ $# != 1 ]; then
+    echo "Usage $0 basename"
+    echo "  converts basename.sgf to basename.dot and basename.ord"
+    exit 1
+fi
+
+script_directory=${0%/*}
+basename=$1
+awk -f $script_directory/sgf2dot.awk $basename.sgf > $basename.dot
+awk -f $script_directory/sgf2ord.awk $basename.sgf > $basename.ord
+
+#  [Last modified: 2014 04 09 at 19:57:44 GMT]

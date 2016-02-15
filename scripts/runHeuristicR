@@ -1,0 +1,113 @@
+#! /bin/bash
+## runHeuristic - run the min_crossings program with specific command-line
+# arguments on a directory containing .dot and .ord files; this version runs
+# the heuristics in random mode using a different seed for each instance.
+# Caution: the rand_seq program must be in the current path. 
+#
+# @author Matt Stallmann
+# @date 2014/09/11
+# $Id: runHeuristicR 137 2016-01-14 22:06:33Z mfms $
+
+# location of executable relative to the parent directory of the script directory
+executable_location=src
+if [ $# -lt 2 ]; then
+    echo "Usage: $0 CLASS_DIR OUTPUT_DIR [SUFFIX] [OPTIONS]"
+    echo " where CLASS_DIR is the directory containing the graphs (in .dot and .ord format)"
+    echo "       OUTPUT_DIR is a directory in which the output file should be stored"
+    echo "       SUFFIX is a suffix appended to the output file name"
+    echo "         (usually some indication of the heuristic being run)"
+    echo "       OPTIONS is a list of command-line options for min_crossings."
+    exit 1
+fi
+
+# The path to executables needs to be absolute to ensure portability of the
+# script (can be run from anywhere)
+script_directory_parent=${0%/*}
+pushd $script_directory_parent > /dev/null
+cd ..
+executable=$PWD/$executable_location/min_crossings
+rand_seq=$PWD/$executable_location/rand_seq
+popd > /dev/null
+
+class_dir=$1
+shift
+output_dir=$1
+shift
+suffix=$1
+shift
+options="$@"
+
+# if there is a suffix, it might be an option instead if it starts with '-'
+# throw in a _ only if there is a real suffix; if not, use an empty string
+if [ -n "$suffix" ]; then
+    first_symbol=${suffix:0:1}
+    if [ "$first_symbol" != "-" ]; then
+        real_suffix="-$suffix"
+        shift
+    else
+        options="$suffix $options"
+        real_suffix=
+    fi
+fi
+
+if [ ! -d $output_dir ]; then
+    if [ ! -f $output_dir ]; then
+        mkdir $output_dir
+    else
+        echo "Output directory $output_dir exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+
+class_base=`basename $class_dir`
+output_file=$output_dir/${class_base}${real_suffix}.out
+if [ -e $output_file ]; then
+    echo "$output_file already exists."
+    output_file=$output_dir/`basename $output_file .out`_$$.out
+    echo -n " use $output_file instead (y/n) [n]? "
+    read answer
+    if [ $answer != "y" ]; then
+        echo "Not using $output_file."
+        echo "script is terminating."
+        exit 1
+    fi
+fi
+
+# put run info at the top of the output file and to standard output
+echo "@command runHeuristic $class_dir $output_dir $suffix" >> $output_file
+echo "@options $options" >> $output_file
+echo "@executable $executable" >> $output_file
+echo ">>>>> output_file = $output_file >>>>>" >> $output_file
+echo "**************** Starting **************" >> $output_file
+echo >> $output_file
+
+echo "@command runHeuristic $class_dir $output_dir $suffix"
+echo "@options $options"
+echo "@executable $executable"
+echo ">>>>> output_file = $output_file >>>>>"
+echo "**************** Starting **************"
+echo
+
+# put system info at the top of the output file
+echo "Host    = $HOSTNAME" >> $output_file
+echo "Machine = $MACHTYPE" >> $output_file
+echo >> $output_file
+
+for file in $class_dir/*.dot; do
+    base=${file%.dot}
+    ord_file=$base.ord;
+    seed=`rand_seq 1`
+    r_options="$options -R $seed"
+    echo "--- `basename $executable` $r_options $file $ord_file" >> $output_file
+    echo "--- `basename $executable` $r_options $file $ord_file"
+    echo " ==> `date -u +'%F %T'` <==" >> $output_file
+    echo " ==> `date -u +'%F %T'` <=="
+    $executable $r_options $file $ord_file >> $output_file 2>&1
+    echo "+++ `basename $file .dot`" >> $output_file
+    echo "" >> $output_file
+    echo "+++ `basename $file .dot`"
+    echo ""
+done
+
+#  [Last modified: 2016 01 14 at 21:54:35 GMT]

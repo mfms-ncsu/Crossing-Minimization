@@ -1,0 +1,109 @@
+#! /bin/bash
+##
+## createUniformDagClass - a script for creating a class of random dags based
+##                       on a profile that specifies the number of nodes on
+##                       each layer and on the probability of an edge.
+##                       A settable number (size) of dot/ord file pairs are
+##                       generated. 
+##
+## IMPORTS:
+##   - createDag: simplifies the use of the awk scripts below
+##   - layeredDag.awk: to create a .dot file for each random dag
+##   - layeredDagOrd.awk: to create a .ord file for each dag (these will be
+##      identical for each dag in the class since nodes are named by their
+##      layer and the order within their layer 
+##
+## @todo Uses single integer seeds 1, ..., 32 for rand()
+## @todo Only works if the full path name of the profile is given
+##
+## @author Matt Stallmann
+## @date 2008/09/22
+## $Id: createUniformDagClass 107 2015-04-20 19:00:18Z mfms $
+
+size=32
+
+echo "# of args = $#"
+
+if [ $# != 6 ]; then
+    echo "Usage: createUniformDagClass"\
+          "TARGET_ROOT_DIRECTORY BASE_NAME LAYERS NODES/LAYER EDGE_PROB BIAS"
+    echo " TARGET_ROOT_DIRECTORY is the parent directory for"\
+          " the random class directory"
+    echo "BASE_NAME is used to name the directory and the files within it"
+    echo "The directory is called BASE_NAME-rnd"
+    echo " and each new .dot/.ord pair has prefix BASE_NAME-rnd-xxx,"
+    echo " where xxx is a three-digit sequence number."
+    echo "LAYERS and NODES/LAYER are self-explanatory"
+    echo "EDGE_PROB is the probability of an edge"
+    echo "BIAS is expected degree of nodes used as sources to guarantee connection"
+    exit 1
+fi
+
+script_directory=${0%/*}
+current_directory=$PWD
+cd $script_directory
+script_directory=$PWD
+cd $current_directory
+
+target_root_directory=$1
+shift
+base_name=$1
+shift
+layers=$1
+shift
+nodes_per_layer=$1
+shift
+edge_prob=$1
+shift
+bias=$1
+
+echo "root_dir = $target_root_directory base_name=$base_name"
+
+tag=rnd
+
+if [ ! -d $target_root_directory ]; then
+    if [ ! -f $target_root_directory ]; then
+        mkdir $target_root_directory
+    else
+        echo "Output directory $target_root_directory exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+class_dir=$target_root_directory/$base_name-$tag
+if [ -d $class_dir ]; then
+    echo "$class_dir already exists."
+    echo -n "Replace it (y/n) [n]? "
+    read answer
+    if [ $answer != "y" ]; then
+        echo "Not replacing directory;"
+        echo "script $0 is terminating."
+        exit 1
+    else
+        rm -rf $class_dir
+    fi
+elif [ -f $class_dir ]; then
+    echo "$class_dir is a regular file;"
+    echo "will not replace it with a directory."
+    exit 1
+fi
+
+creation_script=$script_directory/createDag
+
+# get here only if $target_root_directory exists and $class_dir doesn't.
+mkdir $class_dir
+echo "Creating a class in directory $class_dir"
+pushd $class_dir &> /dev/null
+index=1
+while [[ $index -le $size ]]; do
+    instance_base=$base_name-$tag-`echo $index | awk '{printf "%03d",$1;}'`
+    seed=$index
+    echo "instance=$instance_base layers=$layers nodes/layer=$nodes_per_layer"\
+         " prob=$edge_prob bias=$bias seed=$seed."
+    $creation_script $instance_base $layers $nodes_per_layer $edge_prob $bias\
+         $seed
+    index=$(( $index + 1 ))
+done
+popd
+
+#  [Last modified: 2011 06 27 at 14:26:46 GMT]

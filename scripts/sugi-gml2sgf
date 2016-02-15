@@ -1,0 +1,80 @@
+#! /bin/bash
+# $Id: sugi-gml2sgf 107 2015-04-20 19:00:18Z mfms $
+
+## ogml2sgf - convert from graphml used for output of Rome graphs
+#             to the (s)imple (g)raph (f)ormat described below.
+#  Usage: ogml2sgf input.gml > output.sgf
+#
+# Requires extract-ogml-graph.awk and extract-layers.awk  
+
+# The graphml input is that for files provided by
+#      Hoi-Ming Wong (Hoi-Ming.Wong@TU-Dortmund.de)
+# It assumed to have a sequence of nodes, in the format
+#             given by the example below:
+#
+# node [
+# id 11
+# label "11"
+# graphics [
+# x 300.0000000
+# y -80.00000000
+# w 20.00000000
+# h 20.00000000
+# fill ""
+# line ""
+# type "rectangle"
+# width 1.0
+# ]
+# ]
+#
+# This is followed by a sequence of edges, each looking like:
+#
+# edge [
+# source 7
+# target 1
+# label "1"
+# graphics [
+# type "line"
+# arrow "last"
+# ]
+# ]
+#
+# Most of this information is ignored.
+
+# The output will have the following format (blank lines are ignored):
+#    c comment line 1
+#    ...
+#    c comment line k
+#
+#    t graph_name
+#
+#    n id_1 layer_1 position_1
+#    n id_2 layer_2 position_2
+#    ...
+#    n id_n layer_n position_n
+#
+#    e source_1 target_1
+#    ...
+#    e source_m target_m
+#
+# edges are directed so that the nodes appearing earlier in the input are
+# sources 
+
+if [ $# != 1 ]; then
+    echo "Usage: ogml2sgf input.gml > output.sgf"
+    exit 1
+fi
+
+script_directory=${0%/*}
+input_file=$1
+without_extensions=${input_file%%.*}
+echo $without_extensions
+graph_name=`basename $without_extensions`
+echo "c ogml2sgf $input_file (`date`)"
+echo "t $graph_name"
+awk -f $script_directory/extract-ogml-graph.awk $1\
+ | sort -ns -k 1 -k 4 -k 3\
+ | awk -f $script_directory/extract-layers.awk\
+ | awk -f $script_directory/sgfDirect.awk
+
+#  [Last modified: 2011 05 25 at 19:31:11 GMT]

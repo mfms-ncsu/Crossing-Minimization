@@ -1,0 +1,97 @@
+#! /bin/bash
+# twoHeuristics - run one heuristic after another; arguments to min_crossings
+# are hard-wired for specific experiments
+#
+# Since followHeuristic has become the default script for running heuristics
+# that optimize total crossings, this one is specialized to bottleneck
+# crossings.
+
+DEFAULT_ITERATIONS=40000
+PREPROCESSOR=dfs
+
+if [ $# -ne 4 ] && [ $# -ne 5 ]; then
+    echo "Usage: twoHeuristics class result_dir_prefix heuristic_1 heuristic_2 [iterations]"
+    echo " runs heuristic_1 followed by heuristic_2 on the given class"
+    echo " results will be in directories named result_dir_prefix-heuristic_1"
+    echo "  and result_dir_prefix-heuristic_1+heuristic_2"
+    echo " the optional iterations argument is the number of iterations allocated to each of the heuristics"
+    exit 1
+fi
+
+# The runHeuristic script is in this directory, but this path needs to be
+# absolute to ensure portability of the script (can be run from anywhere)
+script_directory=${0%/*}
+pushd $script_directory
+script_directory=$PWD
+popd
+
+class=$1
+result_dir=$2
+heuristic_1=$3
+heuristic_2=$4
+if [ $# -eq 5 ]; then
+    iterations=$5
+else
+    iterations=$DEFAULT_ITERATIONS
+fi
+
+# need absolute paths (result_dir may not exist nor does it need to; it's
+# only a prefix for the names of the result dirs)
+result_dir_parent=$result_dir/..
+pushd $result_dir_parent
+result_dir=$PWD/$result_dir
+popd
+pushd $class
+class=$PWD
+popd
+
+if [ -n $PREPROCESSOR ]; then
+    prefix=$PREPROCESSOR+
+fi
+
+# need to strip off the / first
+new_class=${class%/}-$heuristic_1
+result_dir_for_first_heuristic=${result_dir%/}-$prefix$heuristic_1
+result_dir_for_total_crossings=${result_dir%/}-$prefix$heuristic_1+$heuristic_2
+result_dir_for_edge_crossings=${result_dir%/}-$prefix$heuristic_1+${heuristic_2}_edge
+
+echo "result_dir_for_first_heuristic = $result_dir_for_first_heuristic"
+echo "result_dir_for_total_crossings = $result_dir_for_total_crossings"
+echo "result_dir_for_edge_crossings = $result_dir_for_edge_crossings"
+
+# create a class for storing the outputs of the first heuristic and run the
+# heuristic with the output option set to use the basename of the dot files
+
+if [ ! -d $new_class ]; then
+    if [ ! -f $new_class ]; then
+        mkdir $new_class
+    else
+        echo "Output directory $new_class exists as a file."
+        echo "Cannot proceed with script $0"
+        exit 1
+    fi
+fi
+
+pushd $new_class
+# start with a clean slate and run first heuristic
+rm -f *.out *.dot *.ord
+if [ -n $PREPROCESSOR ]; then
+    preprocess_option="-p $PREPROCESSOR"
+fi
+$script_directory/runHeuristicR $class $result_dir_for_first_heuristic $preprocess_option -h $heuristic_1 -i $iterations -o _ 
+
+# heuristic on the -post output of the first
+cp $class/*.dot .
+mvsed -s "s/\.dot/-$prefix${heuristic_1}\.dot/" *.dot
+$script_directory/runHeuristicR $new_class $result_dir_for_total_crossings -h $heuristic_2 -z -i $iterations
+
+# create .dot files to match the .ord files to get the best edge crossings;
+# need to remove the ones created for total crossings first
+rm -f *.dot
+cp $class/*.dot .
+mvsed -s "s/\.dot/-$prefix${heuristic_1}_edge\.dot/" *.dot
+$script_directory/runHeuristicR $new_class $result_dir_for_edge_crossings -h $heuristic_2 -i $iterations
+
+popd
+
+#  [Last modified: 2016 01 12 at 20:50:17 GMT]

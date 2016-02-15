@@ -1,0 +1,33 @@
+#!/bin/bash
+# gph2dot+ord - converts a gph file (from the MST experiments) to dot and ord
+# files for use with crossing minimization programs. 
+# Scripts and programs that are used as intermediaries are:
+# gph2dot (to get a simple dot file with edges directed from lower to higher
+# numbered nodes), java LayerAssignment to assign layers and create a dot and
+# ord file with dummy nodes (this must be in the current CLASSPATH!).
+#
+# Note: this is the same as gph2graphml, but with the last step missing.
+#
+# $Id: gph2dot+ord 74 2014-07-17 21:13:38Z mfms $
+
+if [ $# != 1 ]; then
+    echo "Usage $0 file.gph"
+    echo "  converts file.gph to file_layered.dot and file_layered.ord"
+    exit 1
+fi
+
+script_directory=${0%/*}
+java_directory=$script_directory/../java-utilities
+
+gphfile=$1
+base=`basename $gphfile .gph`
+unlayered_dot_file=$base.dot
+dot_and_ord_base=${base}_layered
+dotfile=$dot_and_ord_base.dot
+ordfile=$dot_and_ord_base.ord
+
+$script_directory/gph2dot $gphfile
+java LayerAssignment $unlayered_dot_file $dot_and_ord_base
+rm $unlayered_dot_file
+
+#  [Last modified: 2014 07 17 at 20:54:54 GMT]
