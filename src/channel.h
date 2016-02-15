@@ -27,6 +27,11 @@ typedef struct channel_struct {
 } * Channelptr;
 
 /**
+ * initializes data structures relevant to channels
+ */
+void initChannels(void);
+
+/**
  * channels[i] is information about edges between
  * layers i - 1 and i; the entry for i = 0 is not used
  */
@@ -43,4 +48,4 @@ double totalChannelStretch(int i);
  */
 double totalStretch();
 
-/*  [Last modified: 2016 02 15 at 17:48:50 GMT] */
+/*  [Last modified: 2016 02 15 at 18:51:41 GMT] */

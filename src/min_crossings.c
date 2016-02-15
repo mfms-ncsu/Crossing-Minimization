@@ -27,6 +27,7 @@
 #include"graph_io.h"
 #include"graph.h"
 #include"crossings.h"
+#include"channel.h"
 #include"min_crossings.h"
 #include"order.h"
 #include"priority_edges.h"
@@ -63,6 +64,7 @@ int trace_freq = -1;
 // definition of order saving structures
 Orderptr best_crossings_order = NULL;
 Orderptr best_edge_crossings_order = NULL;
+Orderptr best_total_stretch_order = NULL;
 Orderptr best_favored_crossings_order = NULL;
 
 /** buffer to be used for all output file names */
@@ -415,6 +417,7 @@ int main( int argc, char * argv[] )
   print_graph_statistics( stdout );
 
   initCrossings();
+  initChannels();
   init_crossing_stats();
   updateAllCrossings();
   capture_beginning_stats();
@@ -427,6 +430,10 @@ int main( int argc, char * argv[] )
   best_edge_crossings_order
     = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
   init_order( best_edge_crossings_order );
+
+  best_total_stretch_order
+    = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
+  init_order( best_total_stretch_order );
 
   best_favored_crossings_order
     = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
@@ -484,14 +491,22 @@ int main( int argc, char * argv[] )
 
 #ifdef MAX_EDGE
   // write file with best order for edge crossings
-      if ( produce_output )
-        {
-          // write file with best max edge order after overall
-          restore_order( best_edge_crossings_order );
-          createOrdFileName( output_file_name, "_edge" );
-          writeOrd( output_file_name );
-        }
+  if ( produce_output )
+    {
+      // write file with best max edge order after overall
+      restore_order( best_edge_crossings_order );
+      createOrdFileName( output_file_name, "_edge" );
+      writeOrd( output_file_name );
+    }
 #endif
+
+  if ( produce_output )
+    {
+      // write file with best stretch order overall
+      restore_order( best_total_stretch_order );
+      createOrdFileName( output_file_name, "_stretch" );
+      writeOrd( output_file_name );
+    }
 
 #ifdef FAVORED
   // write file with best order for favored edge crossings
@@ -520,7 +535,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2014 10 16 at 11:50:12 GMT] */
+/*  [Last modified: 2016 02 15 at 19:36:14 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */

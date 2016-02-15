@@ -21,7 +21,7 @@ PROGRAMS = min_crossings create_random_dag add_edges dot_and_ord_to_sgf rand_seq
 # object files common to all heuristics
 OBJECTS = sifting.o dfs.o sorting.o heuristics.o barycenter.o crossings.o\
 	crossing_utilities.o graph_io.o dot.o ord.o hash.o Statistics.o stats.o\
-	order.o priority_edges.o swap.o median.o timing.o random.o
+	order.o priority_edges.o swap.o median.o channel.o stretch.o timing.o random.o
 
 # object files used by programs that generate random instances
 CREATION_OBJECTS = check_edge_duplication.o random_dag.o random_tree.o graph_io.o Statistics.o dot.o ord.o hash.o
@@ -31,7 +31,7 @@ CREATION_OBJECTS = check_edge_duplication.o random_dag.o random_tree.o graph_io.
 HEADERS = makefile defs.h crossings.h graph.h graph_io.h dot.h ord.h\
 	crossing_utilities.h heuristics.h barycenter.h sorting.h dfs.h sifting.h\
 	Statistics.h stats.h order.h priority_edges.h swap.h median.h timing.h\
-	random.h makefile
+	random.h channel.h stretch.h makefile
 
 # headers used by programs that generate random instances
 CREATION_HEADERS = check_edge_duplication.h graph.h graph_io.h random_tree.h random_dag.h hash.h defs.h dot.h ord.h Statistics.h
@@ -102,6 +102,10 @@ sifting.o: sifting.c $(HEADERS)
 graph_io.o: graph_io.c $(HEADERS)
 
 order.o: order.c $(HEADERS)
+
+channel.o: channel.c $(HEADERS)
+
+stretch.o: stretch.c $(HEADERS)
 
 create_random_dag.o: create_random_dag.c $(CREATION_HEADERS)
 

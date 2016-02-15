@@ -8,6 +8,9 @@
 *.sgf
 *.graphml
 
+# java class files
+*.class
+
 ## standard C ignores
 # Object files
 *.o

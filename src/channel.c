@@ -5,28 +5,43 @@
  * since they serve more general purposes.
  */
 
+#include <stdlib.h>
 #include "graph.h"
 #include "channel.h"
+#include "stretch.h"
 
 Channelptr * channels;
+
+/**
+ * @return the number of edges between layers i-1 and i
+ */
+static int count_down_edges(int i)
+{
+  Layerptr layer = layers[i];
+  int count = 0;
+  for( int j = 0; j < layer->number_of_nodes; j++ ) {
+    count += layer->nodes[j]->down_degree; 
+  }
+  return count;
+}
 
 /**
  * @return a pointer to the list of edges for channel i and fills in
  * appropriate data: number of edges and the actual edges; note: channel i is
  * between layers i-1 and i
  */
-static void initChannel(int i) {
+static Channelptr initChannel(int i) {
   Channelptr new_channel
     = (Channelptr) calloc(1, sizeof(struct channel_struct));
   new_channel->number_of_edges = count_down_edges(i);
-  new_interlayer->edges
+  new_channel->edges
     = (Edgeptr *) calloc(new_channel->number_of_edges,
                          sizeof(Edgeptr));
-  int edge_position ep = 0;
-  for (int j = 0; j < layer[i]->number_of_nodes; j++) {
-    Node * current_node = layer[i]->nodes[j];
+  int edge_position = 0;
+  for (int j = 0; j < layers[i]->number_of_nodes; j++) {
+    Nodeptr current_node = layers[i]->nodes[j];
     for (int k = 0; k < current_node->down_degree; k++) {
-      new_layer->edges[ep++] = current_node->down_edges[k];
+      new_channel->edges[edge_position++] = current_node->down_edges[k];
     }
   }
   return new_channel;
@@ -38,7 +53,7 @@ static void initChannel(int i) {
 void initChannels(void) {
   channels
     = (Channelptr *) calloc( number_of_layers, sizeof(Channelptr) );
-  for( i = 1; i < number_of_layers; i++ ) {
+  for( int i = 1; i < number_of_layers; i++ ) {
     channels[i] = initChannel(i);
   }
 }
@@ -59,11 +74,11 @@ double totalChannelStretch(int i) {
  * @return the total strech of all edges
  */
 double totalStretch() {
-  double totat_sretch = 0.0;
+  double total_stretch = 0.0;
   for ( int i = 1; i < number_of_layers; i++ ) {
     total_stretch += totalChannelStretch(i);
   }
   return total_stretch;
 }
 
-/*  [Last modified: 2016 02 15 at 18:36:03 GMT] */
+/*  [Last modified: 2016 02 15 at 19:07:35 GMT] */

@@ -32,14 +32,6 @@ extern int post_processing_crossings;
  */
 extern int post_processing_iteration;
 
-/** structure to save layer orderings for minimum crossings so far */
-extern Orderptr best_crossings_order;
-/** structure to save layer orderings for minimum edge crossings so far */
-extern Orderptr best_edge_crossings_order;
-/** structure to save layer orderings for minimum crossings involving favored
-    edges so far */
-extern Orderptr best_favored_crossings_order;
-
 /**
  * Creates an ord file name from the graph name, preprocessor and heuristic.
  * @param output_file_name a buffer for the file name to be created, assumed
@@ -191,4 +183,4 @@ void swapping( void );
 
 #endif
 
-/*  [Last modified: 2015 05 19 at 15:58:07 GMT] */
+/*  [Last modified: 2016 02 15 at 19:43:23 GMT] */

@@ -3,6 +3,8 @@
  * @brief Implementation of functions that print statistics
  * @author Matt Stallmann
  * @date 2009/05/19
+ *
+ * @todo To keep things simple, total stretch is rounded to an integer value
  * $Id: stats.c 131 2016-01-12 01:07:39Z mfms $
  */
 
@@ -10,6 +12,7 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include<limits.h>
+#include<math.h>
 
 #include"stats.h"
 #include"defs.h"
@@ -17,6 +20,7 @@
 #include"graph.h"
 #include"min_crossings.h"
 #include"crossings.h"
+#include"channel.h"
 #include"priority_edges.h"
 #include"Statistics.h"
 #include"timing.h"
@@ -105,7 +109,12 @@ static PARETO_LIST pareto_insert( int bottleneck, int total, PARETO_LIST list ) 
 CROSSING_STATS total_crossings;
 CROSSING_STATS max_edge_crossings;
 CROSSING_STATS favored_edge_crossings;
+CROSSING_STATS total_stretch;
 Statistics overall_degree;
+
+static int total_stretch_as_integer() {
+  return (int) round(totalStretch());
+}
 
 static void init_specific_crossing_stats( CROSSING_STATS * stats,
                                           const char * name )
@@ -127,6 +136,7 @@ void init_crossing_stats( void )
 #ifdef MAX_EDGE
   init_specific_crossing_stats( & max_edge_crossings, "EdgeCrossings" );
 #endif
+  init_specific_crossing_stats( & total_stretch, "Stretch" );
 #ifdef FAVORED
   init_specific_crossing_stats( & favored_edge_crossings, "FavoredCrossings" );
 #endif
@@ -141,6 +151,7 @@ void capture_beginning_stats( void )
 #ifdef MAX_EDGE
   max_edge_crossings.at_beginning = maxEdgeCrossings();
 #endif
+  total_stretch.at_beginning = total_stretch_as_integer();
 #ifdef FAVORED
   favored_edge_crossings.at_beginning = priorityEdgeCrossings();
 #endif
@@ -152,6 +163,7 @@ void capture_preprocessing_stats( void )
 #ifdef MAX_EDGE
   max_edge_crossings.after_preprocessing = maxEdgeCrossings();
 #endif
+  total_stretch.after_preprocessing = total_stretch_as_integer();
 #ifdef FAVORED
   favored_edge_crossings.after_preprocessing = priorityEdgeCrossings();
 #endif
@@ -163,6 +175,7 @@ void capture_heuristic_stats( void )
 #ifdef MAX_EDGE
   max_edge_crossings.after_heuristic = max_edge_crossings.best;
 #endif
+  total_stretch.after_heuristic = total_stretch.best;
 #ifdef FAVORED
   favored_edge_crossings.after_heuristic = priority_edge_crossings.best;
 #endif
@@ -170,26 +183,29 @@ void capture_heuristic_stats( void )
 
 void capture_post_processing_stats( void )
 {
+  // the post processing iterations are merely counted since the total number
+  // of crossings improves after each one by definition; not so with
+  // bottleneck crossings or stretch
   total_crossings.after_post_processing = total_crossings.best;
   total_crossings.post_processing_iteration = post_processing_iteration;
 #ifdef MAX_EDGE
-  // post processing is not designed to improve edge crossings, though it
-  // could be with a different post_processing heuristic
   max_edge_crossings.after_post_processing =
     max_edge_crossings.best;
-  max_edge_crossings.post_processing_iteration = 0;
 #endif
+  total_stretch.after_post_processing = total_stretch.best;
 #ifdef FAVORED
   // ditto for favored edge crossings
   favored_edge_crossings.after_post_processing =
     favored_edge_crossings.after_heuristic;
-  favored_edge_crossings.post_processing_iteration = 0;
 #endif
 }
 
 void update_best( CROSSING_STATS * stats, Orderptr order,
                   int (* crossing_retrieval_function) (void) )
 {
+#ifdef DEBUG
+  printf("-> update_best, %s, %d\n", stats->name, stats->best);
+#endif  
   int current_value = crossing_retrieval_function();
   if( current_value < stats->best )
     {
@@ -197,6 +213,9 @@ void update_best( CROSSING_STATS * stats, Orderptr order,
       stats->best_heuristic_iteration = iteration;
       save_order( order );
     }
+#ifdef DEBUG
+  printf("<- update_best, %s, %d\n", stats->name, stats->best);
+#endif  
 }
 
 void update_best_all( void )
@@ -205,6 +224,7 @@ void update_best_all( void )
 #ifdef MAX_EDGE
   update_best( & max_edge_crossings, best_edge_crossings_order, maxEdgeCrossings );
 #endif
+  update_best( & total_stretch, best_total_stretch_order, total_stretch_as_integer );
 #ifdef FAVORED
   update_best( & favored_edge_crossings, best_favored_crossings_order, priorityEdgeCrossings );
 #endif
@@ -419,6 +439,7 @@ void print_run_statistics( FILE * output_stream )
 #ifdef MAX_EDGE
   print_crossing_stats( output_stream, max_edge_crossings );
 #endif
+  print_crossing_stats( output_stream, total_stretch );
 #ifdef FAVORED
   print_crossing_stats( output_stream, favored_edge_crossings );
 #endif
@@ -429,4 +450,4 @@ void print_run_statistics( FILE * output_stream )
 #endif
 }
 
-/*  [Last modified: 2016 01 12 at 00:32:15 GMT] */
+/*  [Last modified: 2016 02 15 at 20:05:59 GMT] */

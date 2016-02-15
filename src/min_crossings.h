@@ -75,6 +75,24 @@ extern char * heuristic;
 extern char * preprocessor;
 
 /**
+ * structure to save layer orderings for minimum crossings so far
+ */
+extern Orderptr best_crossings_order;
+/**
+ * structure to save layer orderings for minimum edge crossings so far
+ */
+extern Orderptr best_edge_crossings_order;
+/**
+ * structure to save layer orderings for minimum total edge stretch so far
+ */
+extern Orderptr best_total_stretch_order;
+/**
+ * structure to save layer orderings for minimum crossings involving favored
+ * edges so far
+ */
+extern Orderptr best_favored_crossings_order;
+
+/**
  * True if the edge list (node list) is to be randomized after each pass of
  * mce (sifting)
  */
@@ -153,4 +171,4 @@ extern int trace_freq;
 
 #endif
 
-/*  [Last modified: 2014 07 28 at 20:58:00 GMT] */
+/*  [Last modified: 2016 02 15 at 19:45:26 GMT] */
