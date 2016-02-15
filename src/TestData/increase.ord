@@ -1,0 +1,21 @@
+# Ordering for the graph 'increase'
+# Case where barycenter increases crossings after 1 iteration
+# b3 and b4 are swapped even though they make fewer crossings in their
+# original order.
+#
+# After one sweep, sorting both sides, the number of crossings is reduced to 1
+# (from 13 or 14). 
+#
+# tree_100 is a larger example where the higher number of crossings is
+# maintained in subsequent iterations. 
+
+# Order for layer 0
+0 {
+ a0 a1 a2 a3 a4 a5 a6 a7
+} # end of layer 0
+
+# Order for layer 1
+1 {
+ b0 b1 b2 b3 b4
+} # end of layer 1
+

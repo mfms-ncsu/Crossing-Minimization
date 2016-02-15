@@ -30,6 +30,7 @@ typedef struct crossing_stats {
 extern CROSSING_STATS total_crossings;
 extern CROSSING_STATS max_edge_crossings;
 extern CROSSING_STATS favored_edge_crossings;
+extern CROSSING_STATS total_stretch;
 
 /**
  * Initializes crossing stats structures
@@ -96,4 +97,4 @@ void print_run_statistics( FILE * output_stream );
 
 #endif
 
-/*  [Last modified: 2011 06 17 at 19:25:04 GMT] */
+/*  [Last modified: 2016 02 15 at 18:16:26 GMT] */

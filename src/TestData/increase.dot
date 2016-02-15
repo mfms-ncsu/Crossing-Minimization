@@ -1,0 +1,27 @@
+/**
+ * Case where barycenter increases crossings after 1 iteration
+ * b3 and b4 are swapped even though they make fewer crossings in their
+ * original order.
+ *
+ * After one sweep, sorting both sides, the number of crossings is reduced to 1
+ * (from 13 or 14).
+ *
+ * tree_100 is a larger example where the higher number of crossings is
+ * maintained in subsequent iterations. 
+ */
+
+digraph increase
+{
+  a0 -> b0;
+  a0 -> b1;
+  a0 -> b2;
+  a1 -> b3;
+  a2 -> b3;
+  a3 -> b4;
+  a4 -> b0;
+  a5 -> b1;
+  a6 -> b2;
+  a7 -> b3;
+}
+
+/*  [Last modified: 2008 12 30 at 21:48:59 GMT] */

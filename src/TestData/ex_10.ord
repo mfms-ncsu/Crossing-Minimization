@@ -1,0 +1,14 @@
+# Natural ordering for layered dag ex_10
+# Created by layeredDagOrd, edge_probability = 0.500000, seed = 1
+
+# Ordering for layer 0
+0 {
+ n_0_0 n_0_1 n_0_2 n_0_3 n_0_4
+} # end of layer 0
+
+# Ordering for layer 1
+1 {
+ n_1_0 n_1_1 n_1_2 n_1_3 n_1_4
+} # end of layer 1
+
+# end of ordering for layered dag ex_10

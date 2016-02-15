@@ -1,0 +1,3 @@
+# want the .dot and .ord files in TestData to be included
+!*.dot
+!*.ord

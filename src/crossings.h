@@ -49,7 +49,7 @@ int numberOfCrossingsNode( Nodeptr node );
 void updateAllCrossings( void );
 
 /**
- * Updates crossings after the given layer has been permuted The position
+ * Updates crossings after the given layer has been permuted. The position
  * pointers for all nodes on the layer are made consistent as well, using
  * updateNodePositions() in the sorting module
  */
@@ -97,4 +97,4 @@ void printCrossings( void );
 
 #endif
 
-/*  [Last modified: 2011 05 24 at 13:54:24 GMT] */
+/*  [Last modified: 2016 02 15 at 17:12:00 GMT] */
