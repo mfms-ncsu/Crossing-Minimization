@@ -122,6 +122,11 @@ extern enum sift_option_enum { LAYER, DEGREE, RANDOM } sift_option;
  * mce design, on (local) maximum number of crossings for an edge. These two
  * options are denoted by TOTAL and MAX, respectively. DEFAULT means use
  * TOTAL for sifting and mcn, MAX for mce.
+ *
+ * @todo The introduction of mce_s as a separate heuristic makes this enum
+ * superfluous for now, but maybe it should be revived for the sake of
+ * symmetry and completeness -- so that the sifting heuristic can be used
+ * with bottleneck minimization
  */
 extern enum sifting_style_enum { DEFAULT, TOTAL, MAX } sifting_style;
 
@@ -138,6 +143,18 @@ extern enum sifting_style_enum { DEFAULT, TOTAL, MAX } sifting_style;
  * well.
  */
 extern enum mce_option_enum { NODES, EDGES, EARLY, ONE_NODE } mce_option;
+
+/**
+ * For Pareto optimization we can choose a variety of different objectives;
+ * for now we consider two at a time. This option currently affects only what
+ * gets updated and reported, not the behavior of any heuristic.
+ *  NO_PARETO = no Pareto optimization, i.e., don't report Pareto points
+ *  BOTTLENECK_TOTAL = maxEdgeCrossings(),numberOfCrossings()
+ *  STRETCH_TOTAL = totalStretch(),numberOfCrossings()
+ *  BOTTLENECK_STRETCH = maxEdgeCrossings(),totalStretch()
+ */
+extern enum pareto_objective_enum
+ { NO_PARETO, BOTTLENECK_TOTAL, STRETCH_TOTAL, BOTTLENECK_STRETCH } pareto_objective; 
 
 /**
  * Save the order at the end of the given iteration in a file called
@@ -171,4 +188,4 @@ extern int trace_freq;
 
 #endif
 
-/*  [Last modified: 2016 02 15 at 19:45:26 GMT] */
+/*  [Last modified: 2016 02 16 at 19:51:28 GMT] */

@@ -48,6 +48,7 @@ enum adjust_weights_enum adjust_weights = LEFT;
 enum sift_option_enum sift_option = DEGREE;
 enum mce_option_enum mce_option = NODES;
 enum sifting_style_enum sifting_style = DEFAULT;
+enum pareto_objective_enum pareto_objective = NO_PARETO;
 int capture_iteration = INT_MIN; /* because -1 is a possible iteration */
 bool favored_edges = false;
 bool randomize_order = false;
@@ -83,8 +84,6 @@ static void printUsage( void )
   printf( "Usage: min_crossings [opts] file.dot file.ord\n" );
   printf( " where opts is one or more of the following\n" );
   printf(
-         "  -k NUMBER_OF_PROCESSORS (for simulation); currently supports 0 or 1\n"
-         "      [0 means unlimited and is default for parallel barycenter versions]\n"
          "  -h (median | bary | mod_bary | mcn | sifting | mce | mce_s\n"
          "     | static_bary | alt_bary | up_down_bary | rotate_bary | slab_bary {parallel barycenter versions})\n"
          "     [main heuristic - default none]\n"
@@ -96,6 +95,10 @@ static void printUsage( void )
          "     to break ties differently when sorting; SEED is an integer seed\n"
          "  -r SECONDS = maximum runtime [stop if no improvement]\n"
          "  -c ITERATION [capture the order after this iteration in a file]\n"
+         "  -P PARETO_OBJECTIVES (b_t | s_t | b_s) pair of objectives for Pareto optima\n"
+         "      b = bottleneck, t = total, s = stretch (default = none)\n"
+         "  -o BASE produce file(s) with name(s) BASE-h.ord, where h is the heuristic used\n"
+         "     -o _ (underscore) means use the base name of the dot file\n"
          "  -w (none | avg | left) [adjust weights in barycenter, default left, but avg in parallel versions]\n"
          "  -b average the averages of the two neighboring layers when computing barycenter weights\n"
          "     [this is the default for parallel versions]\n"
@@ -104,12 +107,12 @@ static void printUsage( void )
          "     [mce variation - default is nodes: pass ends when all nodes are marked]\n"
          "  -g (total | max) [what sifting is based on] [default: total for sifting, mcn; max for mce]\n"
          "      [not implemented yet]\n"
-         "  -o BASE produce file(s) with name(s) BASE-h.ord, where h is the heuristic used\n"
-         "     -o _ (underscore) means use the base name of the dot file\n"
          "  -v to get verbose information about the graph\n"
          "  -t trace_freq, if trace printout is desired, 0 means only at the end of a pass, > 0 sets frequency\n"
-         "  -m number of OpenMP threads [default: 1]\n"
          "  -f create a special .dot file of 'favored' edges; used for visualizing\n"
+         "  -k NUMBER_OF_PROCESSORS (for simulation); currently supports 0 or 1\n"
+         "      [0 means unlimited and is default for parallel barycenter versions]\n"
+         "  -m number of OpenMP threads [default: 1]\n"
          );
 }
 
@@ -234,7 +237,7 @@ int main( int argc, char * argv[] )
 
   // process command-line options; these must come before the file arguments
   // note: options that have an arg are followed by : but others are not
-  while ( (ch = getopt(argc, argv, "bc:e:fgh:i:k:o:p:R:r:s:t:vw:zm:")) != -1)
+  while ( (ch = getopt(argc, argv, "bc:e:fgh:i:k:o:p:P:R:r:s:t:vw:zm:")) != -1)
     {
       switch(ch)
         {
@@ -264,6 +267,17 @@ int main( int argc, char * argv[] )
         case 'r':
           max_runtime = atof( optarg );
           standard_termination = false;
+          break;
+
+        case 'P':
+          if ( strcmp( optarg, "b_t" ) == 0 ) pareto_objective = BOTTLENECK_TOTAL;
+          else if ( strcmp( optarg, "s_t" ) == 0 ) pareto_objective = STRETCH_TOTAL; 
+          else if ( strcmp( optarg, "b_s" ) == 0 ) pareto_objective = BOTTLENECK_STRETCH; 
+          else {
+            printf( "Bad value '%s' for option -P\n", optarg );
+            printUsage();
+            exit( EXIT_FAILURE );
+          }
           break;
 
         case 'c':
@@ -535,7 +549,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2016 02 15 at 19:36:14 GMT] */
+/*  [Last modified: 2016 02 16 at 19:52:25 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */

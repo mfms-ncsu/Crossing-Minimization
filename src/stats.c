@@ -25,10 +25,9 @@
 #include"Statistics.h"
 #include"timing.h"
 
-#ifdef PARETO
 typedef struct pareto_item {
-  int bottleneck;
-  int total;
+  int objective_one;
+  int objective_two;
   struct pareto_item * rest;
 } * PARETO_LIST;
 
@@ -38,61 +37,67 @@ static void init_pareto_list( void ) { pareto_list = NULL; }
 
 static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
   while ( list != NULL ) {
-    fprintf(output_stream, "%d/%d", list->bottleneck, list->total);
+    fprintf(output_stream, "%d^%d", list->objective_one, list->objective_two);
     list = list->rest;
     if ( list != NULL ) fprintf(output_stream, ";");
   }
 } 
 
 /**
- * Inserts, if appropriate, an item with the given number of bottleneck and
- * total crossings into the list representing a Pareto frontier. The frontier
- * is maintained in increasing bottleneck, decreasing total crossings order.
+ * Inserts, if appropriate, an item with the given values of objective_one and
+ * and objective_two into the list representing a Pareto frontier. The frontier
+ * is maintained in increasing objective_one, decreasing objective_two order.
  */
-static PARETO_LIST pareto_insert( int bottleneck, int total, PARETO_LIST list ) {
+static PARETO_LIST pareto_insert(int objective_one,
+                                 int objective_two,
+                                 PARETO_LIST list) {
 #ifdef DEBUG
-  printf("-> pareto_insert: %d, %d, ", bottleneck, total);
+  printf("-> pareto_insert: %d, %d, ", objective_one, objective_two);
   print_pareto_list(list, stdout);
   printf("\n");
 #endif
   PARETO_LIST new_list = NULL;
   if ( list == NULL ) {
     new_list = (PARETO_LIST) calloc(1, sizeof(struct pareto_item));
-    new_list->bottleneck = bottleneck;
-    new_list->total = total;
+    new_list->objective_one = objective_one;
+    new_list->objective_two = objective_two;
     new_list->rest = NULL;
   }
   else {
-    int first_bottleneck = list->bottleneck;
-    int first_total = list->total;
-    if ( bottleneck < first_bottleneck && total > first_total ) {
+    int first_objective_one = list->objective_one;
+    int first_objective_two = list->objective_two;
+    if ( objective_one < first_objective_one
+         && objective_two > first_objective_two ) {
       // new pareto point
       new_list = (PARETO_LIST) calloc(1, sizeof(struct pareto_item));
-      new_list->bottleneck = bottleneck;
-      new_list->total = total;
+      new_list->objective_one = objective_one;
+      new_list->objective_two = objective_two;
       new_list->rest = list;
     }
-    else if ( bottleneck < first_bottleneck && total == first_total ) {
-      // replace first point, found one with better bottleneck crossings
-      list->bottleneck = bottleneck;
+    else if ( objective_one < first_objective_one
+              && objective_two == first_objective_two ) {
+      // replace first point, found one with smaller objective_one value
+      list->objective_one = objective_one;
       new_list = list;
     }
-    else if ( bottleneck <= first_bottleneck && total < first_total ) {
+    else if ( objective_one <= first_objective_one
+              && objective_two < first_objective_two ) {
       // replace first point with better one; since the new point also has
-      // better total crossings, it may replace others down the line; in this
+      // smaller objective_two, it may replace others down the line; in this
       // case, we need to actually delete the existing first point
-      new_list = pareto_insert(bottleneck, total, list->rest);
+      new_list = pareto_insert(objective_one, objective_two, list->rest);
       free(list);
     }
-    else if ( bottleneck > first_bottleneck && total < first_total ) {
-      // need to keep looking; point with greater or equal bottleneck not
+    else if ( objective_one > first_objective_one
+              && objective_two < first_objective_two ) {
+      // need to keep looking; point with greater or equal objective_one not
       // found
-      list->rest = pareto_insert(bottleneck, total, list->rest);
+      list->rest = pareto_insert(objective_one, objective_two, list->rest);
       new_list = list;
     }
     else {
-      // otherwise, no need to continue: bottleneck >= first_bottleneck and
-      // total >= first_total
+      // otherwise, no need to continue: objective_one >= first_objective_one and
+      // objective_two >= first_objective_two
       new_list = list;
     }
   }
@@ -103,8 +108,6 @@ static PARETO_LIST pareto_insert( int bottleneck, int total, PARETO_LIST list ) 
 #endif
   return new_list;
 }
-
-#endif
 
 CROSSING_STATS total_crossings;
 CROSSING_STATS max_edge_crossings;
@@ -140,9 +143,8 @@ void init_crossing_stats( void )
 #ifdef FAVORED
   init_specific_crossing_stats( & favored_edge_crossings, "FavoredCrossings" );
 #endif
-#ifdef PARETO
-  init_pareto_list();
-#endif
+  if ( pareto_objective != NO_PARETO )
+    init_pareto_list();
 }
 
 void capture_beginning_stats( void )
@@ -228,9 +230,18 @@ void update_best_all( void )
 #ifdef FAVORED
   update_best( & favored_edge_crossings, best_favored_crossings_order, priorityEdgeCrossings );
 #endif
-#ifdef PARETO
-  pareto_list = pareto_insert( maxEdgeCrossings(), numberOfCrossings(), pareto_list );
-#endif
+  if ( pareto_objective == BOTTLENECK_TOTAL )
+    pareto_list = pareto_insert( maxEdgeCrossings(),
+                                 numberOfCrossings(),
+                                 pareto_list );
+  else if ( pareto_objective == STRETCH_TOTAL )
+    pareto_list = pareto_insert( total_stretch_as_integer(),
+                                 numberOfCrossings(),
+                                 pareto_list );
+  else if ( pareto_objective == BOTTLENECK_STRETCH )
+    pareto_list = pareto_insert( maxEdgeCrossings(),
+                                 total_stretch_as_integer(),
+                                 pareto_list );
 }
 
 bool has_improved( CROSSING_STATS * stats )
@@ -443,11 +454,11 @@ void print_run_statistics( FILE * output_stream )
 #ifdef FAVORED
   print_crossing_stats( output_stream, favored_edge_crossings );
 #endif
-#ifdef PARETO
-  fprintf( output_stream, "Pareto,");
-  print_pareto_list( pareto_list, output_stream );
-  fprintf( output_stream, "\n" );
-#endif
+  if ( pareto_objective != NO_PARETO ) {
+    fprintf( output_stream, "Pareto,");
+    print_pareto_list( pareto_list, output_stream );
+    fprintf( output_stream, "\n" );
+  }
 }
 
-/*  [Last modified: 2016 02 15 at 20:05:59 GMT] */
+/*  [Last modified: 2016 02 16 at 19:55:32 GMT] */
