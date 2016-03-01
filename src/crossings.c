@@ -276,12 +276,17 @@ Edgeptr maxCrossingsEdge( void ) {
   return max_crossings_edge;
 }
 
+/**
+ * @return an edge with the maximum number of crossings; does not change any
+ * state information; this is used only when computing bottleneck crossings
+ *
+ * @todo eventually this will go away when a lot of the content here is moved
+ * to channel.[ch] and the maximum bottleneck and total crossings can be
+ * maintained on a per channel basis
+ */
 Edgeptr maxCrossingsEdgeStatic( void ) {
   Edgeptr max_crossings_edge = NULL;
   int max_crossings = -1;
-  if ( randomize_order ) {
-    genrand_permute( master_edge_list, number_of_edges, sizeof(Edgeptr) );
-  }
   for ( int i = 0; i < number_of_edges; i++ ) {
     Edgeptr edge = master_edge_list[i];
     if( edge->crossings > max_crossings ) { 
@@ -428,4 +433,4 @@ int main( int argc, char * argv[] )
 
 #endif
 
-/*  [Last modified: 2014 10 22 at 16:05:26 GMT] */
+/*  [Last modified: 2016 03 01 at 01:32:37 GMT] */

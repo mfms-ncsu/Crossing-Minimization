@@ -5,8 +5,10 @@
  * since they serve more general purposes.
  */
 
+#include<stdio.h>
 #include <stdlib.h>
 #include "graph.h"
+#include "heuristics.h"
 #include "channel.h"
 #include "stretch.h"
 
@@ -74,11 +76,17 @@ double totalChannelStretch(int i) {
  * @return the total strech of all edges
  */
 double totalStretch() {
+#ifdef DEBUG
+  printf("-> totalStretch, iteration = %d\n", iteration);
+#endif
   double total_stretch = 0.0;
   for ( int i = 1; i < number_of_layers; i++ ) {
     total_stretch += totalChannelStretch(i);
   }
+#ifdef DEBUG
+  printf("<- totalStretch, total_stretch = %7.2f\n", total_stretch);
+#endif
   return total_stretch;
 }
 
-/*  [Last modified: 2016 02 15 at 19:07:35 GMT] */
+/*  [Last modified: 2016 02 29 at 21:26:28 GMT] */

@@ -1,0 +1,7 @@
+# want sgf files as test cases
+!*.sgf
+# don't want executables
+Graph_to_LP
+Sol_to_Graph
+# don't want .lp files generated from .sgf files
+*.lp

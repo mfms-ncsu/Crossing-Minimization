@@ -28,6 +28,7 @@
 typedef struct pareto_item {
   int objective_one;
   int objective_two;
+  int iteration;
   struct pareto_item * rest;
 } * PARETO_LIST;
 
@@ -36,10 +37,20 @@ static PARETO_LIST pareto_list = NULL;
 static void init_pareto_list( void ) { pareto_list = NULL; }
 
 static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
-  while ( list != NULL ) {
-    fprintf(output_stream, "%d^%d", list->objective_one, list->objective_two);
-    list = list->rest;
-    if ( list != NULL ) fprintf(output_stream, ";");
+  PARETO_LIST local_list = list;
+  while ( local_list != NULL ) {
+    fprintf(output_stream, "%d^%d",
+            local_list->objective_one,
+            local_list->objective_two);
+    local_list = local_list->rest;
+    if ( local_list != NULL ) fprintf(output_stream, ";");
+  }
+  local_list = list;
+  printf(",");
+  while ( local_list != NULL ) {
+    fprintf(output_stream, "%d", local_list->iteration);
+    local_list = local_list->rest;
+    if ( local_list != NULL ) fprintf(output_stream, ";");
   }
 } 
 
@@ -50,9 +61,11 @@ static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
  */
 static PARETO_LIST pareto_insert(int objective_one,
                                  int objective_two,
+                                 int iteration,
                                  PARETO_LIST list) {
 #ifdef DEBUG
-  printf("-> pareto_insert: %d, %d, ", objective_one, objective_two);
+  printf("-> pareto_insert: %d, %d, ",
+         objective_one, objective_two, iteration);
   print_pareto_list(list, stdout);
   printf("\n");
 #endif
@@ -61,6 +74,7 @@ static PARETO_LIST pareto_insert(int objective_one,
     new_list = (PARETO_LIST) calloc(1, sizeof(struct pareto_item));
     new_list->objective_one = objective_one;
     new_list->objective_two = objective_two;
+    new_list->iteration = iteration;
     new_list->rest = NULL;
   }
   else {
@@ -72,12 +86,14 @@ static PARETO_LIST pareto_insert(int objective_one,
       new_list = (PARETO_LIST) calloc(1, sizeof(struct pareto_item));
       new_list->objective_one = objective_one;
       new_list->objective_two = objective_two;
+      new_list->iteration = iteration;
       new_list->rest = list;
     }
     else if ( objective_one < first_objective_one
               && objective_two == first_objective_two ) {
       // replace first point, found one with smaller objective_one value
       list->objective_one = objective_one;
+      list->iteration = iteration;
       new_list = list;
     }
     else if ( objective_one <= first_objective_one
@@ -85,14 +101,20 @@ static PARETO_LIST pareto_insert(int objective_one,
       // replace first point with better one; since the new point also has
       // smaller objective_two, it may replace others down the line; in this
       // case, we need to actually delete the existing first point
-      new_list = pareto_insert(objective_one, objective_two, list->rest);
+      new_list = pareto_insert(objective_one,
+                               objective_two,
+                               iteration,
+                               list->rest);
       free(list);
     }
     else if ( objective_one > first_objective_one
               && objective_two < first_objective_two ) {
       // need to keep looking; point with greater or equal objective_one not
       // found
-      list->rest = pareto_insert(objective_one, objective_two, list->rest);
+      list->rest = pareto_insert(objective_one,
+                                 objective_two,
+                                 iteration,                                 
+                                 list->rest);
       new_list = list;
     }
     else {
@@ -233,14 +255,17 @@ void update_best_all( void )
   if ( pareto_objective == BOTTLENECK_TOTAL )
     pareto_list = pareto_insert( maxEdgeCrossings(),
                                  numberOfCrossings(),
+                                 iteration,
                                  pareto_list );
   else if ( pareto_objective == STRETCH_TOTAL )
     pareto_list = pareto_insert( total_stretch_as_integer(),
                                  numberOfCrossings(),
+                                 iteration,
                                  pareto_list );
   else if ( pareto_objective == BOTTLENECK_STRETCH )
     pareto_list = pareto_insert( maxEdgeCrossings(),
                                  total_stretch_as_integer(),
+                                 iteration,
                                  pareto_list );
 }
 
@@ -461,4 +486,4 @@ void print_run_statistics( FILE * output_stream )
   }
 }
 
-/*  [Last modified: 2016 02 16 at 19:55:32 GMT] */
+/*  [Last modified: 2016 02 29 at 17:41:53 GMT] */

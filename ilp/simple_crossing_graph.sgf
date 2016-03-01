@@ -1,0 +1,11 @@
+c graphml2sgf /Users/mfms/Desktop/Git/galant/Example_Graphs/simple_crossing_graph.graphml (Thu Feb 11 14:00:19 EST 2016)
+t simple_crossing_graph
+n 0 0 2
+n 1 0 1
+n 2 0 0
+n 3 1 0
+n 4 1 1
+e 0 3
+e 2 4
+e 1 4
+e 1 3

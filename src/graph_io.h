@@ -1,7 +1,6 @@
 /**
- * @file graph.h
- * @brief Definition of data structures and access functions for a layered
- * graph.
+ * @file graph_io.h
+ * @brief Definition of functions for reading and writing graphs.
  * @author Matt Stallmann, based on Saurabh Gupta's crossing heuristics
  * implementation.
  * @date 2008/12/19
@@ -60,4 +59,4 @@ void renumberNodesUsingDotFile( const char * dot_file );
 
 #endif
 
-/*  [Last modified: 2014 08 13 at 19:19:40 GMT] */
+/*  [Last modified: 2016 02 16 at 20:06:09 GMT] */

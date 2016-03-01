@@ -28,6 +28,7 @@
 #include"median.h"
 #include"dfs.h"
 #include"crossings.h"
+#include"channel.h"
 #include"sorting.h"
 #include"graph_io.h"
 #include"sifting.h"
@@ -104,17 +105,17 @@ void createDotFileName( char * output_file_name, const char * appendix )
 static void trace_printer( int layer, const char * message )
 {
   updateAllCrossings();
+  int number_of_crossings = numberOfCrossings();
+  int bottleneck_crossings = maxEdgeCrossings();
+  double current_total_stretch = totalStretch();
   char * tag = layer < 0 ? "+" : "";
   printf( "%siteration %6d | layer %2d | crossings %5d | best %5d"
-#ifdef MAX_EDGE
-          " | edge_crossings %3d | best %3d"
-#endif
+          " | bottleneck %3d | best %3d | stretch %7.2f | best %5d"
           " | time %5.2f"
           " | %s\n",
-          tag, iteration, layer, numberOfCrossings(), total_crossings.best,
-#ifdef MAX_EDGE
-          maxEdgeCrossings(), max_edge_crossings.best,
-#endif
+          tag, iteration, layer, number_of_crossings, total_crossings.best,
+          bottleneck_crossings, max_edge_crossings.best,
+          current_total_stretch, total_stretch.best,
           RUNTIME, message );
 }
 
@@ -1198,4 +1199,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 01 25 at 00:09:50 GMT] */
+/*  [Last modified: 2016 02 29 at 21:14:05 GMT] */
