@@ -46,7 +46,7 @@ static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
     if ( local_list != NULL ) fprintf(output_stream, ";");
   }
   local_list = list;
-  printf(",");
+  printf(", ");
   while ( local_list != NULL ) {
     fprintf(output_stream, "%d", local_list->iteration);
     local_list = local_list->rest;
@@ -486,4 +486,4 @@ void print_run_statistics( FILE * output_stream )
   }
 }
 
-/*  [Last modified: 2016 02 29 at 17:41:53 GMT] */
+/*  [Last modified: 2016 03 01 at 13:46:46 GMT] */
