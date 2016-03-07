@@ -5,6 +5,8 @@
 
 import sys
 
+MAX_TOKENS_IN_LINE = 100
+
 def usage( program_name ):
     print "Usage:", program_name, " < INPUT_FILE > OUTPUT_FILE"
     print "Takes an sgf file from standard input and converts to lp."
@@ -115,17 +117,36 @@ def main():
     node_list, edge_list = read_sgf( sys.stdin )
     constraint, b_n, b_e, general = constraints(node_list, edge_list)
     output =  "Min\n obj:"
-    for item in  b_e:
+    tokens_in_line = 0
+    for item in b_e:
         output += " +" + item
+        tokens_in_line = tokens_in_line + 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0
     output += "\n" + constraint
     output += "Binary\n"
+    tokens_in_line = 0
     for item in b_e:
         output += " " + item
+        tokens_in_line = tokens_in_line + 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0 
     for item in b_n:
         output += " " + item
+        tokens_in_line = tokens_in_line + 1 
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0 
     output += "\nGeneral\n"
+    tokens_in_line = 0
     for item in general:
         output += " " + item
+        tokens_in_line = tokens_in_line + 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0
     output += "\nEnd"
     print output
     
