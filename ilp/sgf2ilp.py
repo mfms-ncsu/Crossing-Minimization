@@ -27,14 +27,14 @@ def read_sgf( input ):
             # otherwise error (ignore for now)
         line = read_nonblank( input )
     # sort node_list by id
-    node_list = sorted(node_list)
+    node_list = sorted(node_list,key=lambda x: x[0])
     return (node_list, edge_list)	
 
 def process_node( line ):
     line_fields = line.split()
     id = int(line_fields[1])
-    layer = int(line_fields[2])
-    position_in_layer = int(line_fields[3])
+    layer = line_fields[2]
+    position_in_layer = line_fields[3]
     return (id, layer, position_in_layer)
 
 def process_edge( line ):
@@ -63,8 +63,8 @@ def constraints(node_list, edge_list):
     for idx_i, i in enumerate(node_list):
         for idx_j, j in enumerate(node_list):
             if idx_i < idx_j and i[1] == j[1]: #two nodes on the same layer
-                x_i_j = "x_" + i[0] + "_" + j[0]
-                x_j_i = "x_" + j[0] + "_" + i[0]
+                x_i_j = "x_" + str(i[0]) + "_" + str(j[0])
+                x_j_i = "x_" + str(j[0]) + "_" + str(i[0])
                 constraint += " c" + str(count) + ": +" + x_i_j + " +" + x_j_i + " = 1\n" 
                 b_n.append(x_i_j)
                 b_n.append(x_j_i)
@@ -74,14 +74,13 @@ def constraints(node_list, edge_list):
         for idx_j, j in enumerate(node_list):
             for idx_k, k in enumerate(node_list):
                 if idx_i < idx_j and idx_j < idx_k and i[1] == j[1] == k[1]:
-                    constraint += " c" + str(count) + ": -x_" + i[0] + "_" + j[0] + " -x_" + j[0] + "_" + k[0] + " +x_" + i[0] + "_" + k[0] + " >= -1\n"
+                    constraint += " c" + str(count) + ": -x_" + str(i[0]) + "_" + str(j[0]) + " -x_" + str(j[0]) + "_" + str(k[0]) + " +x_" + str(i[0]) + "_" + str(k[0]) + " >= -1\n"
                     count += 1
     # edge crosses if wrong order on the first or second layer
     for idx_i, i in enumerate(edge_list):
         a = int(i[0])
         b = int(i[1])
         channel_i = max(node_list[a][1],node_list[b][1])
-        print "channel of %d,%d is %d" % (a, b, channel_i)
         for idx_j, j in enumerate(edge_list):
             c = int(j[0])
             d = int(j[1])
@@ -99,11 +98,11 @@ def constraints(node_list, edge_list):
                 
     # p_i represets the position of node i in its layer 
     for i in node_list:
-        p = "p_" + i[0] + "_" + i[1]
+        p = "p_" + str(i[0]) + "_" + i[1]
         p_i = " -" + p + " = 0\n"
         for j in node_list:
-            if i[1] == j[1] and i[0] != j[0]: # distinguish node in same layer
-                p_i = " +x_" + j[0] + "_" + i[0] + p_i
+            if i[1] == j[1] and str(i[0]) != str(j[0]): # distinguish node in same layer
+                p_i = " +x_" + str(j[0]) + "_" + str(i[0]) + p_i
         constraint += " c" + str(count) + ":" + p_i
         general.append(p)
         count += 1
@@ -131,5 +130,3 @@ def main():
     print output
     
 main()
-
-#  [Last modified: 2016 03 04 at 16:34:55 GMT]
