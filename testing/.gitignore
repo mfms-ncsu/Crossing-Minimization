@@ -1,0 +1,2 @@
+# want the .out files in TestOutputs to be included
+!*.out

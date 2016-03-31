@@ -1,0 +1,33 @@
+# Ordering for graph information
+#  randomly permuted using seed 39022,6175,7996
+
+# Random order for layer 0
+0 {
+n_0 n_1 n_2
+} # end of layer 0
+
+# Random order for layer 1
+1 {
+n_3 n_4 n_13 n_7 n_5 n_10 n_6 n_12 n_14 n_11 n_8 n_9
+} # end of layer 1
+
+# Random order for layer 2
+2 {
+n_17 n_16 n_19 n_15 n_18 n_20 n_21
+} # end of layer 2
+
+# Random order for layer 3
+3 {
+n_23 n_25 n_22 n_27 n_26 n_24 n_29 n_28
+} # end of layer 3
+
+# Random order for layer 4
+4 {
+n_35 n_34 n_31 n_30 n_32 n_36 n_37 n_33
+} # end of layer 4
+
+# Random order for layer 5
+5 {
+n_40 n_39 n_41 n_38
+} # end of layer 5
+
