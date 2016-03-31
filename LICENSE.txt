@@ -1,5 +1,5 @@
-Copyright (C) 2008, 2011 Matthias Stallmann, Saurabh Gupta.
-Contact: matt_stallmann@ncsu.edu
+Copyright (C) 2008, 2011, 2016: Matthias Stallmann, Saurabh Gupta, Uday Sonthy, Weijia Li.
+Contact: mfms@ncsu.edu
 
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
