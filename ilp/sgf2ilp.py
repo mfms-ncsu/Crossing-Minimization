@@ -56,9 +56,10 @@ def read_nonblank( input ):
         line = input.readline()
     return line
 
-# minimize different variabe as sepicified by type
-# maintain a list of constraints
-# prepare output
+# @return an ilp (a string in lp format) that minimizes the appropriate
+# objective function (bottleneck crossings, total crossings or total stretch)
+# and includes all constraints, even those relevant only to the objectives
+# not minimized.
 def minimize(node_list, edge_list, type):
     min = ""
     count = 1
@@ -260,8 +261,10 @@ def stretch_constraints(node_list, edge_list):
         p_j = "p_" + j + "_" + str(j_layer)
         L_i = nodes_in_layer[i_layer]
         L_j = nodes_in_layer[j_layer]
-        if L_i < 1 or L_j < 1:
-            sys.exit("Error: check number of nodes in layer")
+        if L_i < 1:
+            sys.exit("Error: layer " + i_layer + " has no nodes")
+        if L_j < 1:
+            sys.exit("Error: layer " + j_layer + " has no nodes")
         deno_i = L_i - 1
         deno_j = L_j - 1
         if L_i == 1:
@@ -270,8 +273,8 @@ def stretch_constraints(node_list, edge_list):
             deno_j = 2
         dec_i = 1.0/deno_i
         dec_j = 1.0/deno_j
-        stretch_constraints.append(s_i_j + " +" + str(dec_i) + " " + p_i + " -" + str(dec_i) + " " + p_j + " >= 0" )
-        stretch_constraints.append(s_i_j + " -" + str(dec_j) + " " + p_i + " +" + str(dec_j) + " " + p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " +" + str(dec_i) + " " + p_i + " -" + str(dec_j) + " " + p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " -" + str(dec_i) + " " + p_i + " +" + str(dec_j) + " " + p_j + " >= 0" )
     
     # total stretch
     tokens_in_line = 0
@@ -361,3 +364,5 @@ def main():
     print output
     
 main()
+
+#  [Last modified: 2016 04 01 at 19:30:42 GMT]
