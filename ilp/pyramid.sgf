@@ -1,0 +1,29 @@
+c a four-layer pyramid, designed to test stretching
+t pyramid 9 17
+n 0 0 0
+n 1 0 1
+n 2 0 2
+n 3 0 3
+n 4 1 0
+n 5 1 1
+n 6 1 2
+n 7 2 0
+n 8 2 1
+n 9 3 0
+e 0 4
+e 0 5
+e 1 4
+e 1 5
+e 1 6
+e 2 4
+e 2 5
+e 2 6
+e 3 5
+e 3 6
+e 4 7
+e 5 7
+e 5 8
+e 6 7
+e 6 8
+e 7 9
+e 8 9

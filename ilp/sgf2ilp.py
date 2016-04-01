@@ -12,7 +12,7 @@ bottleneck_constraint = 0
 stretch_constraint = 0
 
 def usage( program_name ):
-    print "Usage:", program_name, " [Total] [Bottleneck] [Strecth] < INPUT_FILE > OUTPUT_FILE"
+    print "Usage:", program_name, " [Total] [Bottleneck] [Stretch] < INPUT_FILE > OUTPUT_FILE"
     print "Takes an sgf file from standard input and converts to lp."
     
 # @return a tuple of the form (node_list, edge_list)
@@ -113,7 +113,7 @@ def minimize(node_list, edge_list, type):
         if tokens_in_line > MAX_TOKENS_IN_LINE:
             output += "\n"
             tokens_in_line = 0
-    output += "\nSEMI-CONTINUOUS\n"
+    output += "\nSemi\n"
     tokens_in_line = 0
     for item in semi:
         output += " " + item
@@ -270,8 +270,8 @@ def stretch_constraints(node_list, edge_list):
             deno_j = 2
         dec_i = 1.0/deno_i
         dec_j = 1.0/deno_j
-        stretch_constraints.append(s_i_j + " +" + str(dec_i) + p_i + " -" + str(dec_i) + p_j + " >= 0" )
-        stretch_constraints.append(s_i_j + " -" + str(dec_j) + p_i + " +" + str(dec_j) +  p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " +" + str(dec_i) + " " + p_i + " -" + str(dec_i) + " " + p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " -" + str(dec_j) + " " + p_i + " +" + str(dec_j) + " " + p_j + " >= 0" )
     
     # total stretch
     tokens_in_line = 0
@@ -356,7 +356,7 @@ def main():
     elif bottleneck_constraint == 0:
         output = minimize(node_list, edge_list, "bottleneck")
     elif stretch_constraint == 0:
-        output = minimize(node_list, edge_list, "strecth")
+        output = minimize(node_list, edge_list, "stretch")
         
     print output
     
