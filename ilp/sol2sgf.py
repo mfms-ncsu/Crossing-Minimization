@@ -5,11 +5,15 @@
 
 import sys
 
+filename = ""
+
 def usage( program_name ):
     print "Usage:", program_name, " < INPUT_FILE > OUTPUT_FILE"
     print "Takes an cplex solution from standard input and converts to graph in sgf."
   
 def read_sol( input ):
+    global filename
+    filename = input.readline().split()[1][:-3]
     solution = strip_comments( input )
     node_list = []
     edge_list = []
@@ -68,7 +72,8 @@ def main():
         sys.exit()
     
     node_list, edge_list = read_sol(sys.stdin)
-    
+        
+    print 't ', filename 
     for n in node_list:
         print 'n ', n[0], n[1], n[2]
     for e in edge_list:

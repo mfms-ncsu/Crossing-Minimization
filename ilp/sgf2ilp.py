@@ -39,7 +39,7 @@ def read_sgf( input ):
 def process_node( line ):
     line_fields = line.split()
     id = int(line_fields[1])
-    layer = line_fields[2]
+    layer = int(line_fields[2])
     position_in_layer = line_fields[3]
     return (id, layer, position_in_layer)
 
@@ -68,27 +68,28 @@ def minimize(node_list, edge_list, type):
     constraints.extend(position_constraints(node_list, edge_list))
     constraints.extend(bottleneck_constraints(node_list, edge_list))
     constraints.append(total_constraints(node_list, edge_list))
-    #constraints.extend(stretch_constraints(node_list, edge_list))
+    constraints.extend(stretch_constraints(node_list, edge_list))
     
     if type == "total":
         min = "t"
         if bottleneck_constraint > 0:
             constraints.append("b <= " + str(bottleneck_constraint))
-        #if stretch_constraint > 0:
+        if stretch_constraint > 0:
+            constraints.append("s <= " + str(stretch_constraint))
     elif type == "bottleneck":
         min = "b"
         if total_constraint > 0:
             constraints.append("t <= " + str(total_constraint))
-        #if stretch_constraint > 0:
+        if stretch_constraint > 0:
+            constraints.append("s <= " + str(stretch_constraint))
     elif type == "stretch":
         min = "s"
-        sys.exit("TODO: Stretch constraint")
-      #  if total_constraint > 0:
-      #     constraints.append("b <= " + str(total_constraint))
-      #  if bottleneck_constraint > 0:
-      #     constraints.append("b <= " + str(bottleneck_constraint))
+        if total_constraint > 0:
+            constraints.append("t <= " + str(total_constraint))
+        if bottleneck_constraint > 0:
+            constraints.append("b <= " + str(bottleneck_constraint))
     
-    binary, general = variable(node_list, edge_list)
+    binary, general, semi = variable(node_list, edge_list)
     
     # prepare output
     output = "Min\n obj: "  + min
@@ -112,6 +113,14 @@ def minimize(node_list, edge_list, type):
         if tokens_in_line > MAX_TOKENS_IN_LINE:
             output += "\n"
             tokens_in_line = 0
+    output += "\nSEMI-CONTINUOUS\n"
+    tokens_in_line = 0
+    for item in semi:
+        output += " " + item
+        tokens_in_line += 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0    
     output += "\nEnd"
     return output
     
@@ -130,7 +139,12 @@ def triangle_constraints(node_list, edge_list):
         for idx_j, j in enumerate(node_list):
             for idx_k, k in enumerate(node_list):
                 if idx_i < idx_j and idx_j < idx_k and i[1] == j[1] == k[1]:
+                    triangle_constraints.append("-x_" + str(i[0]) + "_" + str(k[0]) + " -x_" + str(k[0]) + "_" + str(j[0]) + " +x_" + str(i[0]) + "_" + str(j[0]) + " >= -1")
+                    triangle_constraints.append("-x_" + str(j[0]) + "_" + str(k[0]) + " -x_" + str(k[0]) + "_" + str(i[0]) + " +x_" + str(j[0]) + "_" + str(i[0]) + " >= -1")
                     triangle_constraints.append("-x_" + str(i[0]) + "_" + str(j[0]) + " -x_" + str(j[0]) + "_" + str(k[0]) + " +x_" + str(i[0]) + "_" + str(k[0]) + " >= -1")
+                    triangle_constraints.append("-x_" + str(k[0]) + "_" + str(j[0]) + " -x_" + str(j[0]) + "_" + str(i[0]) + " +x_" + str(k[0]) + "_" + str(i[0]) + " >= -1")
+                    triangle_constraints.append("-x_" + str(j[0]) + "_" + str(i[0]) + " -x_" + str(i[0]) + "_" + str(k[0]) + " +x_" + str(j[0]) + "_" + str(k[0]) + " >= -1")
+                    triangle_constraints.append("-x_" + str(k[0]) + "_" + str(i[0]) + " -x_" + str(i[0]) + "_" + str(j[0]) + " +x_" + str(k[0]) + "_" + str(j[0]) + " >= -1")
     return triangle_constraints
     
 # @return a list of crossing constraints given node list and edge list
@@ -138,7 +152,7 @@ def crossing_constraints(node_list, edge_list):
     crossing_constraints = []
     # edge crosses if wrong order on the first or second layer
     for idx_i, i in enumerate(edge_list):
-        constraint_generated = 0;
+        constraint_generated = 0
         a = int(i[0])
         b = int(i[1])
         channel_i = max(node_list[a][1],node_list[b][1])
@@ -163,7 +177,7 @@ def position_constraints(node_list, edge_list):
     position_constraints = []
     # p_i represets the position of node i in its layer 
     for i in node_list:
-        p = "p_" + str(i[0]) + "_" + i[1]
+        p = "p_" + str(i[0]) + "_" + str(i[1])
         p_i = " -" + p + " = 0"
         for j in node_list:
             if i[1] == j[1] and str(i[0]) != str(j[0]): # distinguish node in same layer
@@ -225,12 +239,60 @@ def total_constraints(node_list, edge_list):
     
 # @retun a list of stretch constraints given node list and edge list
 def stretch_constraints(node_list, edge_list):
-    sys.exit("TODO: Stretch Constraints")
+    stretch_constraints = []
+
+    # create a list for number of nodes in layers
+    # the size is based on the number of layers
+    num_layer = 1 + max(node_list,key=lambda item:item[1])[1]
+    nodes_in_layer = [0] * num_layer
+    # record number of nodes in that layer
+    for node in node_list:
+        nodes_in_layer[node[1]] += 1
  
+    # generate stretch constraint
+    for edge in edge_list:
+        i = edge[0]
+        j = edge[1]
+        s_i_j = "s_" + i + "_" + j
+        i_layer = node_list[int(i)][1]
+        j_layer = node_list[int(j)][1]
+        p_i = "p_" + i + "_" + str(i_layer)
+        p_j = "p_" + j + "_" + str(j_layer)
+        L_i = nodes_in_layer[i_layer]
+        L_j = nodes_in_layer[j_layer]
+        if L_i < 1 or L_j < 1:
+            sys.exit("Error: check number of nodes in layer")
+        deno_i = str(L_i - 1)
+        deno_j = str(L_j - 1)
+        if L_i == 1:
+            deno_i = "2"
+        if L_j == 1:
+            deno_j = "2"
+        stretch_constraints.append(s_i_j + " + 1 / " + deno_i + " * " + p_i + " - 1 / " + deno_j + " * " + p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " - 1 / " + deno_i + " * " + p_i + " + 1 / " + deno_j + " * " + p_j + " >= 0" )
+    
+    # total stretch
+    tokens_in_line = 0
+    total_stretch = ""
+    for edge in edge_list:
+        i = edge[0]
+        j = edge[1]
+        s_i_j = "s_" + i + "_" + j
+        total_stretch += " +" + s_i_j
+        tokens_in_line += 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            total_stretch += "\n"
+            tokens_in_line = 0
+    total_stretch += " -s <= 0"
+    stretch_constraints.append(total_stretch)
+    
+    return stretch_constraints
+    
 # @return a list of binary variables and a list of general variable 
 def variable(node_list,edge_list):
     binary = []
     general = []
+    semi = []
     # binary node order variables
     for idx_i, i in enumerate(node_list):
         for idx_j, j in enumerate(node_list):
@@ -254,12 +316,17 @@ def variable(node_list,edge_list):
                 binary.append(d_i_j)
     # general variables
     for i in node_list:
-        p = "p_" + str(i[0]) + "_" + i[1]
+        p = "p_" + str(i[0]) + "_" + str(i[1])
         general.append(p)
     general.append("t")
     general.append("b")
-    #general.append("s")
-    return binary, general
+    
+    # semi- continus variables
+    for i in edge_list:
+        s = "s_" + i[0] + "_" + i[1]
+        semi.append(s)
+    semi.append("s")
+    return binary, general,semi
 
 def main():
     if len( sys.argv ) != 4:
@@ -292,5 +359,3 @@ def main():
     print output
     
 main()
-
-#  [Last modified: 2016 03 28 at 18:29:53 GMT]
