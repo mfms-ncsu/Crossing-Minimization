@@ -262,14 +262,16 @@ def stretch_constraints(node_list, edge_list):
         L_j = nodes_in_layer[j_layer]
         if L_i < 1 or L_j < 1:
             sys.exit("Error: check number of nodes in layer")
-        deno_i = str(L_i - 1)
-        deno_j = str(L_j - 1)
+        deno_i = L_i - 1
+        deno_j = L_j - 1
         if L_i == 1:
-            deno_i = "2"
+            deno_i = 2
         if L_j == 1:
-            deno_j = "2"
-        stretch_constraints.append(s_i_j + " + 1 / " + deno_i + " * " + p_i + " - 1 / " + deno_j + " * " + p_j + " >= 0" )
-        stretch_constraints.append(s_i_j + " - 1 / " + deno_i + " * " + p_i + " + 1 / " + deno_j + " * " + p_j + " >= 0" )
+            deno_j = 2
+        dec_i = 1.0/deno_i
+        dec_j = 1.0/deno_j
+        stretch_constraints.append(s_i_j + " +" + str(dec_i) + p_i + " -" + str(dec_i) + p_j + " >= 0" )
+        stretch_constraints.append(s_i_j + " -" + str(dec_j) + p_i + " +" + str(dec_j) +  p_j + " >= 0" )
     
     # total stretch
     tokens_in_line = 0
