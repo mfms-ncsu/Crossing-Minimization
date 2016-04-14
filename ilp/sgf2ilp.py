@@ -342,7 +342,7 @@ def main():
     global stretch_constraint
     total_constraint = int(sys.argv[1])
     bottleneck_constraint = int(sys.argv[2])
-    stretch_constraint = int(sys.argv[3])
+    stretch_constraint = float(sys.argv[3])
     
     # constraint can not less than -1
     if total_constraint < -1 or bottleneck_constraint < -1 or stretch_constraint < -1:
@@ -358,7 +358,7 @@ def main():
         output = minimize(node_list, edge_list, "total")
     elif bottleneck_constraint == 0:
         output = minimize(node_list, edge_list, "bottleneck")
-    elif stretch_constraint == 0:
+    elif stretch_constraint == 0.0:
         output = minimize(node_list, edge_list, "stretch")
         
     print output
