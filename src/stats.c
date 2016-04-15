@@ -26,8 +26,8 @@
 #include"timing.h"
 
 typedef struct pareto_item {
-  int objective_one;
-  int objective_two;
+  double objective_one;
+  double objective_two;
   int iteration;
   struct pareto_item * rest;
 } * PARETO_LIST;
@@ -39,9 +39,21 @@ static void init_pareto_list( void ) { pareto_list = NULL; }
 static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
   PARETO_LIST local_list = list;
   while ( local_list != NULL ) {
-    fprintf(output_stream, "%d^%d",
-            local_list->objective_one,
-            local_list->objective_two);
+    if ( pareto_objective == BOTTLENECK_TOTAL ) {
+      fprintf(output_stream, "%d^%d",
+              (int) local_list->objective_one,
+              (int) local_list->objective_two);
+    }
+    else if ( pareto_objective == STRETCH_TOTAL ) {
+      fprintf(output_stream, "%f^%d",
+              local_list->objective_one,
+              (int) local_list->objective_two);
+    }
+    else { //  pareto_objective == BOTTLENECK_STRETCH
+      fprintf(output_stream, "%d^%f",
+              (int) local_list->objective_one,
+              local_list->objective_two);
+    }
     local_list = local_list->rest;
     if ( local_list != NULL ) fprintf(output_stream, ";");
   }
@@ -59,8 +71,8 @@ static void print_pareto_list( PARETO_LIST list, FILE * output_stream ) {
  * and objective_two into the list representing a Pareto frontier. The frontier
  * is maintained in increasing objective_one, decreasing objective_two order.
  */
-static PARETO_LIST pareto_insert(int objective_one,
-                                 int objective_two,
+static PARETO_LIST pareto_insert(double objective_one,
+                                 double objective_two,
                                  int iteration,
                                  PARETO_LIST list) {
 #ifdef DEBUG
@@ -78,8 +90,8 @@ static PARETO_LIST pareto_insert(int objective_one,
     new_list->rest = NULL;
   }
   else {
-    int first_objective_one = list->objective_one;
-    int first_objective_two = list->objective_two;
+    double first_objective_one = list->objective_one;
+    double first_objective_two = list->objective_two;
     if ( objective_one < first_objective_one
          && objective_two > first_objective_two ) {
       // new pareto point
@@ -258,13 +270,13 @@ void update_best_all( void )
                                  iteration,
                                  pareto_list );
   else if ( pareto_objective == STRETCH_TOTAL )
-    pareto_list = pareto_insert( total_stretch_as_integer(),
+    pareto_list = pareto_insert( totalStretch(),
                                  numberOfCrossings(),
                                  iteration,
                                  pareto_list );
   else if ( pareto_objective == BOTTLENECK_STRETCH )
     pareto_list = pareto_insert( maxEdgeCrossings(),
-                                 total_stretch_as_integer(),
+                                 totalStretch(),
                                  iteration,
                                  pareto_list );
 }
@@ -486,4 +498,4 @@ void print_run_statistics( FILE * output_stream )
   }
 }
 
-/*  [Last modified: 2016 03 01 at 13:46:46 GMT] */
+/*  [Last modified: 2016 04 15 at 13:57:23 GMT] */

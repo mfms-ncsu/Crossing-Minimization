@@ -229,8 +229,8 @@ static void runHeuristic( void )
  */
 int main( int argc, char * argv[] )
 {
-  printf("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n");
-  printf("%%%%%%%%%%% min_crossings, release 1.0, 2016/03/31 %%%%%%%%%%%%%\n");
+  printf("################################################################\n");
+  printf("########### min_crossings, release 1.0, 2016/03/31 #############\n");
 
   int seed = 0;
   int ch = -1;
@@ -550,7 +550,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2016 03 31 at 20:07:08 GMT] */
+/*  [Last modified: 2016 04 15 at 13:44:17 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */
