@@ -73,21 +73,21 @@ def minimize(node_list, edge_list, type):
     
     if type == "total":
         min = "t"
-        if bottleneck_constraint > 0:
+        if bottleneck_constraint >= 0:
             constraints.append("b <= " + str(bottleneck_constraint))
-        if stretch_constraint > 0:
+        if stretch_constraint >= 0:
             constraints.append("s <= " + str(stretch_constraint))
     elif type == "bottleneck":
         min = "b"
-        if total_constraint > 0:
+        if total_constraint >= 0:
             constraints.append("t <= " + str(total_constraint))
-        if stretch_constraint > 0:
+        if stretch_constraint >= 0:
             constraints.append("s <= " + str(stretch_constraint))
     elif type == "stretch":
         min = "s"
-        if total_constraint > 0:
+        if total_constraint >= 0:
             constraints.append("t <= " + str(total_constraint))
-        if bottleneck_constraint > 0:
+        if bottleneck_constraint >= 0:
             constraints.append("b <= " + str(bottleneck_constraint))
     
     binary, general, semi = variable(node_list, edge_list)
@@ -344,25 +344,30 @@ def main():
     bottleneck_constraint = int(sys.argv[2])
     stretch_constraint = float(sys.argv[3])
     
-    # constraint can not less than -1
-    if total_constraint < -1 or bottleneck_constraint < -1 or stretch_constraint < -1:
-        sys.exit("Invalid input: constraint can not less than -1")
-    # minimize exact one parameter
-    if sum([total_constraint == 0,bottleneck_constraint == 0,stretch_constraint == 0]) != 1:
-        sys.exit("Invalid input: excatly one constraint should be 0")
+    # constraints are interpreted as follows:
+    #  anything >= 0 is an actual constraint on the given objective
+    #  a -1 means the objective is unconstrained
+    #  a -2 means the objective should be optimized (minimized)
+    #  so sgf2ilp -1 -1 -2 < in > out means minimize stretch uncoditionally
+    #     sgf2ilp 10 -1 -2 < in > out means minimize stretch subject to 10 total crossings
+    if total_constraint < -2 or bottleneck_constraint < -2 or stretch_constraint < -2:
+        sys.exit("Invalid input: constraint can not less than -2")
+    # minimize exactly one objective
+    if sum([total_constraint == -2,bottleneck_constraint == -2,stretch_constraint == -2]) != 1:
+        sys.exit("Invalid input: excatly one objective should be minimized (set to -2)")
         
     node_list, edge_list = read_sgf( sys.stdin )
     
     # use function minimize do actual work
-    if total_constraint == 0:
+    if total_constraint == -2:
         output = minimize(node_list, edge_list, "total")
-    elif bottleneck_constraint == 0:
+    elif bottleneck_constraint == -2:
         output = minimize(node_list, edge_list, "bottleneck")
-    elif stretch_constraint == 0.0:
+    elif stretch_constraint == -2.0:
         output = minimize(node_list, edge_list, "stretch")
         
     print output
     
 main()
 
-#  [Last modified: 2016 04 01 at 19:30:42 GMT]
+#  [Last modified: 2016 04 16 at 21:26:22 GMT]
