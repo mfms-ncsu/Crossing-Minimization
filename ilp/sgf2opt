@@ -36,6 +36,7 @@ input_base=${input_sgf_file%.sgf}
 cplex_input_file=${input_base}-$first_obj.lp
 cplex_output_file=${input_base}-$first_obj.out
 sgf_output_file=${input_base}-$first_obj.sgf
+echo "--------------------------------------------------------------------"
 echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
 if [ "$first_obj" = "t" ]; then
     $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
@@ -127,5 +128,7 @@ echo "mininum value for $second_obj given $first_obj = $min_first_obj is $condit
 if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
     echo "*+*+* $input_base: objectives differ *+*+*"
 fi
+echo "--------------------------------------------------------------------"
+echo
 
-#  [Last modified: 2016 04 28 at 18:42:03 GMT]
+#  [Last modified: 2016 04 28 at 18:56:52 GMT]
