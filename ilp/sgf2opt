@@ -1,83 +1,133 @@
 #! /bin/bash
-# sgf2opt - starts with an sgf file and creates an sgf file for the optimum
-# solution, either minimum total crossings or minimum bottleneck crossings
 
-if [ $# -lt 2 ]; then
-    echo "Usage: $0 [-t | -b] [[-e | -x] INTEGER] FILE.sgf"
-    echo " produces FILE_optimum_TAG.sgf, which has the optimum order"
-    echo " also produces FILE_TAG.lp (ILP for the problem)"
-    echo " and FILE_TAG.out (the cplex output)"
-    echo " in the same directory as the input"
-    echo "-t is for total crossings, -b for bottleneck"
-    echo "-e INTEGER gives an INTEGER upper bound on edge (bottleneck) crossings"
-    echo "-x INTEGER gives an INTEGER upper bound on total crossings"
-    echo "TAG is one of:"
-    echo "  b (bottleneck), t (total),"
-    echo "  bx (bottleneck with bound on total), te (total with bound on bottleneck)"
-    echo "  Note: be or tx are also possible but pointless"
+# sgf2opt - starts with an sgf file and finds orderings that minimize two
+# distinct objectives; three different optimizations are done: first
+# objective alone, second objective alone, and second given the optimum value
+# of first as a constraint.
+
+# assumes sgf2ilp.py and sol2sgf.py are in this directory
+
+if [ $# -ne 2 ]; then
+    echo "Usage: $0 (-tb | -ts | -bt | -bs | -st | -sb ) FILE.sgf"
+    echo " produces files of the form, in the same directory as the input"
+    echo "  FILE_TAG.lp (ILP for the appropriate problem)"
+    echo "  FILE_TAG.out (the cplex output when the ILP is solved)"
+    echo "  FILE_opt_TAG.sgf, (the sgf file with the optimum order)"
+    echo " -xy means minimize x then y and then y given the minimum x"
+    echo " TAG is one of t, b, s, tkb, tks, bkt, bks, skt or skb"
+    echo "  x (t,b,s) means x is minimized with no constraints"
+    echo "  xky means y is minimized given that the x has (minimum) value k"
     exit 1
 fi
 
-# assumes script is in same directory as executables (for now), and that
-# everything has been compiled:
-#    g++ -std=c++0x Graph_to_LP_ch.cpp -o Graph_to_LP_ch
-#    g++ -std=c++0x Sol_to_Graph_ch.cpp -o Sol_to_Graph_ch
-executable_dir=${0%/*}
+# python scripts are in same directory as this one
+script_dir=${0%/*}
 
 objective=$1
-# objective includes the '-'
-tag=${objective#-}
+# peel off the -
+objective=${objective#-}
+first_obj=${objective:0:1}
+second_obj=${objective:1:1}
 shift
-constraint_type=$1
-if [ "$constraint_type" = "-e" ] || [ "$constraint_type" = "-x" ]; then
-    # -e or -x followed by an integer exists;
-    # add e or x to the tag
-    tag=$tag${constraint_type#-}
-    shift
-    constraint=$1
-    shift
-    input_sgf_file=$1
-else
-    # otherwise the current argument was a file
-    input_sgf_file=$constraint_type
-    constraint_type=
-    constraint=
-fi
-
+input_sgf_file=$1
 input_base=${input_sgf_file%.sgf}
-cplex_input_file=$input_base.lp
-cplex_output_file=$input_base-out.txt
 
-if [ "$objective" = "-t" ]; then
-    echo -n "creating ILP for optimizing total crossings"
-    if [ -n $constraint ]; then
-        echo " given $constraint bottleneck crossings."
-    else
-        echo
-    fi
+# minimize the first objective
+cplex_input_file=${input_base}_$first_obj.lp
+cplex_output_file=${input_base}_$first_obj.out
+sgf_output_file=${input_base}_$first_obj.sgf
+echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
+if [ "$first_obj" = "t" ]; then
+    $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
+elif [ "$first_obj" = "b" ]; then
+    $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
+elif [ "$first_obj" = "s" ]; then
+    $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
 else
-    echo -n "creating ILP for optimizing bottleneck crossings"
-    if [ -n $constraint ]; then
-        echo " given $constraint total crossings."
-    else
-        echo
-    fi
+    echo "bad first objective: $first_obj"
+    exit
+fi
+echo "solving the ILP using CPLEX"
+date -u
+cplex_ilp -solution $cplex_input_file > $cplex_output_file
+echo "done solving $cplex_input_file"
+date -u
+echo "converting solution to sgf for optimal order"
+$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+
+# get the minimum value for the first objective
+min_first_obj=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "mininum value for $first_obj is $min_first_obj"
+
+# minimize the second objective
+cplex_input_file=${input_base}_$second_obj.lp
+cplex_output_file=${input_base}_$second_obj.out
+sgf_output_file=${input_base}_$second_obj.sgf
+echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
+if [ "$second_obj" = "t" ]; then
+    $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
+elif [ "$second_obj" = "b" ]; then
+    $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
+elif [ "$second_obj" = "s" ]; then
+    $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+else
+    echo "bad second objective: $second_obj"
+    exit
+fi
+echo "solving the ILP using CPLEX"
+date -u
+cplex_ilp -solution $cplex_input_file > $cplex_output_file
+echo "done solving $cplex_input_file"
+date -u
+echo "converting solution to sgf for optimal order"
+$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+# get the minimum value for the second objective (for comparison purposes)
+min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "mininum value for $second_obj is $min_second_obj"
+
+# minimize second objective given minimum first objective as a constraint
+cplex_input_file=${input_base}_${first_obj}${min_first_obj}$second_obj.lp
+cplex_output_file=${input_base}_${first_obj}${min_first_obj}$second_obj.out
+sgf_output_file=${input_base}_${first_obj}${min_first_obj}$second_obj.sgf
+echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
+echo "use min value of first objective $first_obj = $min_first_obj as constraint"
+# give default values to the three command-line args
+arg1=-1
+arg2=-1
+arg3=-1
+if [ "$first_obj" = "t" ]; then
+    arg1=$min_first_obj
+elif [ "$first_obj" = "b" ]; then
+    arg2=$min_first_obj
+elif [ "$second_obj" = "s" ]; then
+    arg3=$min_first_obj
+if [ "$second_obj" = "t" ]; then
+    arg1=-2
+elif [ "$second_obj" = "b" ]; then
+    arg2=-2
+elif [ "$second_obj" = "s" ]; then
+    arg3=-2
+else
+    echo "bad second objective: $second_obj"
+    exit
+fi
+echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
+$script_dir/sgf2ilp.py $arg1 $arg2 $arg3 < $input_sgf_file > $cplex_input_file
+echo "solving the ILP using CPLEX"
+date -u
+cplex_ilp -solution $cplex_input_file > $cplex_output_file
+echo "done solving $cplex_input_file"
+date -u
+echo "converting solution to sgf for optimal order"
+$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+# get the minimum value for the conditional second objective (for comparison
+# purposes)
+conditional_min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "mininum value for $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj"
+
+# compare these as strings because bash does not handle floats
+if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
+    echo "*+*+* $input_base: objectives differ *+*+*"
 fi
 
-$executable_dir/Graph_to_LP $objective $constraint_type $constraint $input_sgf_file
-
-# assumes cplex_ilp is included in the current path
-echo "Solving the ILP using CPLEX."
-cplex_ilp -verify $cplex_input_file > $cplex_output_file
-
-echo "Converting solution to a graph"
-$executable_dir/Sol_to_Graph $objective $input_sgf_file $cplex_input_file $cplex_output_file
-
-mv $cplex_input_file ${input_base}_$tag.lp
-echo "ilp is in ${input_base}_$tag.lp"
-mv $cplex_output_file ${input_base}_$tag.out
-echo "cplex output is in ${input_base}_$tag.out"
-mv ${input_base}_o.sgf ${input_base}_optimum_$tag.sgf
-echo "sgf file for optimum permutations is in ${input_base}_optimum_$tag.sgf"
-
-#  [Last modified: 2016 01 08 at 16:23:38 GMT]
+#  [Last modified: 2016 04 28 at 14:30:34 GMT]
