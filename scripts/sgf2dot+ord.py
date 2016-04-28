@@ -133,7 +133,7 @@ def write_ord_comments(stream, base_name, name):
 
 def write_layer_information(stream, layers):
     for i in range(len(layers)):
-        stream.write('\n# Order for layer %d based on sgf file.\n{' % i)
+        stream.write('\n# Order for layer %d based on sgf file.\n %d { ' % (i,i))
         write_layer(stream, layers[i])
         stream.write('} # end of layer %d\n' % i)
 
@@ -144,7 +144,7 @@ def write_layer(stream, layer):
     # sort the layer using position, the first item in each tuple, as key
     layer.sort(key=get_key)
     for i in range(len(layer)):
-        stream.write(' n_%s' % layer[i][1])
+        stream.write('n_%s ' % layer[i][1])
         if i < len(layer) - 1 and (i+1) % MAX_NODES_PER_LINE == 0:
             stream.write('\n')
 
