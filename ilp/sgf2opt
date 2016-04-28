@@ -10,13 +10,13 @@
 if [ $# -ne 2 ]; then
     echo "Usage: $0 (-tb | -ts | -bt | -bs | -st | -sb ) FILE.sgf"
     echo " produces files of the form, in the same directory as the input"
-    echo "  FILE_TAG.lp (ILP for the appropriate problem)"
-    echo "  FILE_TAG.out (the cplex output when the ILP is solved)"
-    echo "  FILE_opt_TAG.sgf, (the sgf file with the optimum order)"
+    echo "  FILE-TAG.lp (ILP for the appropriate problem)"
+    echo "  FILE-TAG.out (the cplex output when the ILP is solved)"
+    echo "  FILE-opt_TAG.sgf, (the sgf file with the optimum order)"
     echo " -xy means minimize x then y and then y given the minimum x"
-    echo " TAG is one of t, b, s, tkb, tks, bkt, bks, skt or skb"
+    echo " TAG is one of t, b, s, tk_b, tk_s, bk_t, bk_s, sk_t or sk_b"
     echo "  x (t,b,s) means x is minimized with no constraints"
-    echo "  xky means y is minimized given that the x has (minimum) value k"
+    echo "  xk_y means y is minimized given that the x has (minimum) value k"
     exit 1
 fi
 
@@ -33,9 +33,9 @@ input_sgf_file=$1
 input_base=${input_sgf_file%.sgf}
 
 # minimize the first objective
-cplex_input_file=${input_base}_$first_obj.lp
-cplex_output_file=${input_base}_$first_obj.out
-sgf_output_file=${input_base}_$first_obj.sgf
+cplex_input_file=${input_base}-$first_obj.lp
+cplex_output_file=${input_base}-$first_obj.out
+sgf_output_file=${input_base}-$first_obj.sgf
 echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
 if [ "$first_obj" = "t" ]; then
     $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
@@ -60,9 +60,9 @@ min_first_obj=`fgrep Objective $cplex_output_file | cut -f 2`
 echo "mininum value for $first_obj is $min_first_obj"
 
 # minimize the second objective
-cplex_input_file=${input_base}_$second_obj.lp
-cplex_output_file=${input_base}_$second_obj.out
-sgf_output_file=${input_base}_$second_obj.sgf
+cplex_input_file=${input_base}-$second_obj.lp
+cplex_output_file=${input_base}-$second_obj.out
+sgf_output_file=${input_base}-$second_obj.sgf
 echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
 if [ "$second_obj" = "t" ]; then
     $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
@@ -86,9 +86,9 @@ min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
 echo "mininum value for $second_obj is $min_second_obj"
 
 # minimize second objective given minimum first objective as a constraint
-cplex_input_file=${input_base}_${first_obj}${min_first_obj}$second_obj.lp
-cplex_output_file=${input_base}_${first_obj}${min_first_obj}$second_obj.out
-sgf_output_file=${input_base}_${first_obj}${min_first_obj}$second_obj.sgf
+cplex_input_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.lp
+cplex_output_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.out
+sgf_output_file=${input_base}-${first_obj}${min_first_obj}_$second_obj.sgf
 echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
 echo "use min value of first objective $first_obj = $min_first_obj as constraint"
 # give default values to the three command-line args
@@ -101,15 +101,13 @@ elif [ "$first_obj" = "b" ]; then
     arg2=$min_first_obj
 elif [ "$second_obj" = "s" ]; then
     arg3=$min_first_obj
+fi
 if [ "$second_obj" = "t" ]; then
     arg1=-2
 elif [ "$second_obj" = "b" ]; then
     arg2=-2
 elif [ "$second_obj" = "s" ]; then
     arg3=-2
-else
-    echo "bad second objective: $second_obj"
-    exit
 fi
 echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
 $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 < $input_sgf_file > $cplex_input_file
@@ -130,4 +128,4 @@ if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
     echo "*+*+* $input_base: objectives differ *+*+*"
 fi
 
-#  [Last modified: 2016 04 28 at 14:30:34 GMT]
+#  [Last modified: 2016 04 28 at 18:42:03 GMT]
