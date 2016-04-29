@@ -55,11 +55,12 @@ fi
 if [ -e $cplex_output_file ]; then
     echo "__ already run CPLEX on $cplex_input_file, not repeating"
 else
-    echo -n "solving the ILP using CPLEX, "
+    echo -n "solving $cplex_input_file,      "
     date -u
     cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
+fi
 if [ -e $sgf_output_file ]; then
     echo "__ $sgf_output_file already exists, not creating"
 else
@@ -93,15 +94,11 @@ fi
 if [ -e $cplex_output_file ]; then
     echo "__ already run CPLEX on $cplex_input_file, not repeating"
 else
-    echo -n "solving the ILP using CPLEX, "
+    echo -n "solving $cplex_input_file,      "
     date -u
     cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
-fi
-if [ -e $sgf_output_file ]; then
-    echo "__ $sgf_output_file already exists, not creating"
-else
     echo "converting solution to sgf for optimal order"
     $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 fi
@@ -141,15 +138,11 @@ fi
 if [ -e $cplex_output_file ]; then
     echo "__ already run CPLEX on $cplex_input_file, not repeating"
 else
-    echo -n "solving the ILP using CPLEX, "
+    echo -n "solving $cplex_input_file,      "
     date -u
     cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
-fi
-if [ -e $sgf_output_file ]; then
-    echo "__ $sgf_output_file already exists, not creating"
-else
     echo "converting solution to sgf for optimal order"
     $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 fi
@@ -165,4 +158,4 @@ fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 04 29 at 14:13:07 GMT]
+#  [Last modified: 2016 04 29 at 14:52:23 GMT]
