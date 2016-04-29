@@ -36,25 +36,36 @@ input_base=${input_sgf_file%.sgf}
 cplex_input_file=${input_base}-$first_obj.lp
 cplex_output_file=${input_base}-$first_obj.out
 sgf_output_file=${input_base}-$first_obj.sgf
-echo "--------------------------------------------------------------------"
-echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
-if [ "$first_obj" = "t" ]; then
-    $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
-elif [ "$first_obj" = "b" ]; then
-    $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
-elif [ "$first_obj" = "s" ]; then
-    $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
+if [ -e $cplex_input_file ]; then
+    echo "__ $cplex_input_file already exists, not creating"
 else
-    echo "bad first objective: $first_obj"
-    exit
+    echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
+    if [ "$first_obj" = "t" ]; then
+        $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$first_obj" = "b" ]; then
+        $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$first_obj" = "s" ]; then
+        $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+    else
+        echo "bad first objective: $first_obj"
+        exit
+    fi
 fi
-echo "solving the ILP using CPLEX"
-date -u
-cplex_ilp -solution $cplex_input_file > $cplex_output_file
-echo "done solving $cplex_input_file"
-date -u
-echo "converting solution to sgf for optimal order"
-$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+if [ -e $cplex_output_file ]; then
+    echo "__ already run CPLEX on $cplex_input_file, not repeating"
+else
+    echo -n "solving the ILP using CPLEX, "
+    date -u
+    cplex_ilp -solution $cplex_input_file > $cplex_output_file
+    echo -n "done solving $cplex_input_file, "
+    date -u
+if [ -e $sgf_output_file ]; then
+    echo "__ $sgf_output_file already exists, not creating"
+else
+    echo "converting solution to sgf for optimal order"
+    $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+fi
 
 # get the minimum value for the first objective
 min_first_obj=`fgrep Objective $cplex_output_file | cut -f 2`
@@ -64,24 +75,36 @@ echo "minimum value for $first_obj is $min_first_obj"
 cplex_input_file=${input_base}-$second_obj.lp
 cplex_output_file=${input_base}-$second_obj.out
 sgf_output_file=${input_base}-$second_obj.sgf
-echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
-if [ "$second_obj" = "t" ]; then
-    $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
-elif [ "$second_obj" = "b" ]; then
-    $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
-elif [ "$second_obj" = "s" ]; then
-    $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+if [ -e $cplex_input_file ]; then
+    echo "__ $cplex_input_file already exists, not creating"
 else
-    echo "bad second objective: $second_obj"
-    exit
+    echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
+    if [ "$second_obj" = "t" ]; then
+        $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$second_obj" = "b" ]; then
+        $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$second_obj" = "s" ]; then
+        $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+    else
+        echo "bad second objective: $second_obj"
+        exit
+    fi
 fi
-echo "solving the ILP using CPLEX"
-date -u
-cplex_ilp -solution $cplex_input_file > $cplex_output_file
-echo "done solving $cplex_input_file"
-date -u
-echo "converting solution to sgf for optimal order"
-$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+if [ -e $cplex_output_file ]; then
+    echo "__ already run CPLEX on $cplex_input_file, not repeating"
+else
+    echo -n "solving the ILP using CPLEX, "
+    date -u
+    cplex_ilp -solution $cplex_input_file > $cplex_output_file
+    echo -n "done solving $cplex_input_file, "
+    date -u
+fi
+if [ -e $sgf_output_file ]; then
+    echo "__ $sgf_output_file already exists, not creating"
+else
+    echo "converting solution to sgf for optimal order"
+    $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+fi
 # get the minimum value for the second objective (for comparison purposes)
 min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
 echo "minimum value for $second_obj is $min_second_obj"
@@ -90,35 +113,46 @@ echo "minimum value for $second_obj is $min_second_obj"
 cplex_input_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.lp
 cplex_output_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.out
 sgf_output_file=${input_base}-${first_obj}${min_first_obj}_$second_obj.sgf
-echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
-echo "use min value of first objective $first_obj = $min_first_obj as constraint"
+if [ -e $cplex_input_file ]; then
+    echo "__ $cplex_input_file already exists, not creating"
+else
+    echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
 # give default values to the three command-line args
-arg1=-1
-arg2=-1
-arg3=-1
-if [ "$first_obj" = "t" ]; then
-    arg1=$min_first_obj
-elif [ "$first_obj" = "b" ]; then
-    arg2=$min_first_obj
-elif [ "$second_obj" = "s" ]; then
-    arg3=$min_first_obj
+    arg1=-1
+    arg2=-1
+    arg3=-1
+    if [ "$first_obj" = "t" ]; then
+        arg1=$min_first_obj
+    elif [ "$first_obj" = "b" ]; then
+        arg2=$min_first_obj
+    elif [ "$second_obj" = "s" ]; then
+        arg3=$min_first_obj
+    fi
+    if [ "$second_obj" = "t" ]; then
+        arg1=-2
+    elif [ "$second_obj" = "b" ]; then
+        arg2=-2
+    elif [ "$second_obj" = "s" ]; then
+        arg3=-2
+    fi
+    echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
+    $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 < $input_sgf_file > $cplex_input_file
 fi
-if [ "$second_obj" = "t" ]; then
-    arg1=-2
-elif [ "$second_obj" = "b" ]; then
-    arg2=-2
-elif [ "$second_obj" = "s" ]; then
-    arg3=-2
+if [ -e $cplex_output_file ]; then
+    echo "__ already run CPLEX on $cplex_input_file, not repeating"
+else
+    echo -n "solving the ILP using CPLEX, "
+    date -u
+    cplex_ilp -solution $cplex_input_file > $cplex_output_file
+    echo -n "done solving $cplex_input_file, "
+    date -u
 fi
-echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
-$script_dir/sgf2ilp.py $arg1 $arg2 $arg3 < $input_sgf_file > $cplex_input_file
-echo "solving the ILP using CPLEX"
-date -u
-cplex_ilp -solution $cplex_input_file > $cplex_output_file
-echo "done solving $cplex_input_file"
-date -u
-echo "converting solution to sgf for optimal order"
-$script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+if [ -e $sgf_output_file ]; then
+    echo "__ $sgf_output_file already exists, not creating"
+else
+    echo "converting solution to sgf for optimal order"
+    $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
+fi
 # get the minimum value for the conditional second objective (for comparison
 # purposes)
 conditional_min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
@@ -128,7 +162,7 @@ echo "minimum value for $second_obj given $first_obj = $min_first_obj is $condit
 if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
     echo "*+*+* $input_base: objectives differ: $second_obj is $min_second_obj, $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj *+*+*"
 fi
-echo "--------------------------------------------------------------------"
+echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 04 29 at 12:54:26 GMT]
+#  [Last modified: 2016 04 29 at 13:56:08 GMT]
