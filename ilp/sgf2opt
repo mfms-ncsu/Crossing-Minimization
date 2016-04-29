@@ -58,7 +58,7 @@ $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 
 # get the minimum value for the first objective
 min_first_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "mininum value for $first_obj is $min_first_obj"
+echo "minimum value for $first_obj is $min_first_obj"
 
 # minimize the second objective
 cplex_input_file=${input_base}-$second_obj.lp
@@ -84,7 +84,7 @@ echo "converting solution to sgf for optimal order"
 $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 # get the minimum value for the second objective (for comparison purposes)
 min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "mininum value for $second_obj is $min_second_obj"
+echo "minimum value for $second_obj is $min_second_obj"
 
 # minimize second objective given minimum first objective as a constraint
 cplex_input_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.lp
@@ -122,13 +122,13 @@ $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 # get the minimum value for the conditional second objective (for comparison
 # purposes)
 conditional_min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "mininum value for $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj"
+echo "minimum value for $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj"
 
 # compare these as strings because bash does not handle floats
 if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
-    echo "*+*+* $input_base: objectives differ *+*+*"
+    echo "*+*+* $input_base: objectives differ: $second_obj is $min_second_obj, $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj *+*+*"
 fi
 echo "--------------------------------------------------------------------"
 echo
 
-#  [Last modified: 2016 04 28 at 18:56:52 GMT]
+#  [Last modified: 2016 04 29 at 12:54:26 GMT]
