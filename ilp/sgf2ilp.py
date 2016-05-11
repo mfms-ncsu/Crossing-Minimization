@@ -5,8 +5,10 @@
 
 import sys
 import argparse
+import math
+from sets import Set
 
-MAX_TOKENS_IN_LINE = 100
+MAX_TERMS_IN_LINE = 100
 
 parser = argparse.ArgumentParser('Creates an ILP to minimize some quantity based on an sgf representation of a layered graph')
 parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_stretch'},
@@ -78,43 +80,15 @@ def read_nonblank( input ):
 #       and right is a string representing a number.
 # each string in left is a + or - followed by a variable name.
 
-    
-    # prepare output
-    output = "Min\n obj: "  + min
-    output += "\nst\n"
-    for item in constraints:
-        output += " c" + str(count) + ": " + item + "\n"
-        count += 1
-    output += "Binary\n"
-    tokens_in_line = 0 
-    for item in binary:
-        output += " " + item
-        tokens_in_line += 1 
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0 
-    output += "\nGeneral\n"
-    tokens_in_line = 0
-    for item in general:
-        output += " " + item
-        tokens_in_line += 1
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0
-    output += "\nSemi\n"
-    tokens_in_line = 0
-    for item in semi:
-        output += " " + item
-        tokens_in_line += 1
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0    
-    output += "\nEnd"
-    return output
-    
+# variables are added to these sets when they arise in constraints
+global _binary_variables = Set([])
+global _integer_variables = Set([])
+global _continuous_variables = Set([])
+
 # @return a list of constraints on relative position variables x_i_j, where
 # x_i_j is 1 if node i precedes node j on their common layer, 0 otherwise
 def triangle_constraints():
+    global _binary_variables
     triangle_constraints = []
     # anti-symmetry constraints
     for idx_i, i in enumerate(_node_list):
@@ -124,6 +98,9 @@ def triangle_constraints():
                 x_j_i = "x_" + str(j[0]) + "_" + str(i[0])
                 current_constraint = (["+" + x_i_j, "+" + x_j_i], '=', '1')
                 triangle_constraints.append(current_constraint)
+                _binary_variables.add(x_i_j)
+                _binary_variables.add(x_j_i)
+
     # transitivity constraints
     # x_i_j and x_j_k implies x_i_k
     # or x_i_k - x_i_j - x_j_k >= -1
@@ -143,33 +120,90 @@ def triangle_constraints():
                     left.append("-x_" + str(i[0]) + "_" + str(k[0]))
                     left.append("-x_" + str(k[0]) + "_" + str(j[0]))
                     triangle_constraints.append((left, relop, right))
-                    # not clear how many we need
-                    
-                    triangle_constraints.append("-x_" + str(i[0]) + "_" + str(k[0]) + " -x_" + str(k[0]) + "_" + str(j[0]) + " +x_" + str(i[0]) + "_" + str(j[0]) + " >= -1")
-                    triangle_constraints.append("-x_" + str(j[0]) + "_" + str(k[0]) + " -x_" + str(k[0]) + "_" + str(i[0]) + " +x_" + str(j[0]) + "_" + str(i[0]) + " >= -1")
-                    triangle_constraints.append("-x_" + str(i[0]) + "_" + str(j[0]) + " -x_" + str(j[0]) + "_" + str(k[0]) + " +x_" + str(i[0]) + "_" + str(k[0]) + " >= -1")
-                    triangle_constraints.append("-x_" + str(k[0]) + "_" + str(j[0]) + " -x_" + str(j[0]) + "_" + str(i[0]) + " +x_" + str(k[0]) + "_" + str(i[0]) + " >= -1")
-                    triangle_constraints.append("-x_" + str(j[0]) + "_" + str(i[0]) + " -x_" + str(i[0]) + "_" + str(k[0]) + " +x_" + str(j[0]) + "_" + str(k[0]) + " >= -1")
-                    triangle_constraints.append("-x_" + str(k[0]) + "_" + str(i[0]) + " -x_" + str(i[0]) + "_" + str(j[0]) + " +x_" + str(k[0]) + "_" + str(j[0]) + " >= -1")
+
+    # the above two variants suffice
+    #  x_i_k - x_i_j - x_j_k = (1 - x_k_i) - x_i_j - (1 - x_k_j)
+    #                        = x_k_j - x_k_i - x_i_j
+    #                        = (1 - x_j_k) - x_k_i - (1 - x_j_i)
+    #                        = x_j_i - x_j_k - x_k_i
     return triangle_constraints
     
-# @return a list of crossing constraints given node list and edge list
-def crossing_constraints(node_list, _edge_list):
+# @return a list of position constraints given the node list and edge list
+# the position of a node = the number of nodes before it
+def position_constraints():
+    global _integer_variables
+    position_constraints = []
+    # p_i_j represents the position of node i in layer j
+    relop = '='
+    right = '0'
+    for node in _node_list:
+        left = []
+        id = str(node[0])
+        layer = str(node[1])
+        position_variable = "p_" + id + "_" + layer
+        _integer_variables.add(position_variable)
+        left.append("+" + position_variable)
+        for other_node in _node_list:
+            other_id = str(other_node[0])
+            other_layer = str(other_node[1])
+            if layer == other_layer and id != other_id:
+                left.append("-x_" + other_id + "_" id)
+        position_constraints.append((left, relop, right))
+
+    return position_constraints
+
+# @return a list of trivial constraints of the form "d_i_j_i_j = 0", one for
+# each edge ij, so that each edge is guaranteed to be included when the
+# solution is parsed by sol2sgf.py
+def edges_for_output():
+    global _binary_variables
+    edges = []
+    for edge in _edge_list:
+        source = edge[0]
+        target = edge[1]
+        edge_variable = "d_" + source + "_" + target + "_"  + source + "_" + target
+        edges.append((["+" + edge_variable], "=", "0"))
+        _binary_variables.add(edge_variable)
+    return edges
+    
+# @return a list of crossing constraints given node list and edge list the
+# variable d_i_j_k_l = 1 iff edge ij crosses edge kl, where i,k are on one
+# layer and j,l are on the next layer; a crossing occurs if
+#      i precedes k and l precedes j
+#   or k precedes i and j precedes l
+def crossing_constraints():
+    global _binary_variables
     crossing_constraints = []
-    # edge crosses if wrong order on the first or second layer
-    for idx_i, i in enumerate(_edge_list):
-        constraint_generated = False
-        a = int(i[0])
-        b = int(i[1])
-        channel_i = max(_node_list[a][1],_node_list[b][1])
-        for idx_j, j in enumerate(_edge_list):
-            c = int(j[0])
-            d = int(j[1])
+    relop = '>='
+    right = '-1'
+    # for every pair of edges edge_1 and edge_2, where the two edges are in
+    # the same channel and do not have any common endpoints, generate the two
+    # relevant crossing constraints
+    for index_1, edge_1 in enumerate(_edge_list):
+        source_1 = edge_1[0]
+        target_1 = edge_1[1]
+        # actually, it should not be necessary to consider the max of two
+        # numbers here; the channel should be the layer number of the target
+        channel_1 = max(_node_list[source_1][1],_node_list[target_1][1])
+        for index_2, edge_2 in enumerate(_edge_list):
+            source_2 = edge_2[0]
+            target_2 = edge_2[1]
             # check if two edges in the same channel without common node
-            channel_j = max(_node_list[c][1],_node_list[d][1])
-            if channel_i == channel_j and idx_i < idx_j and a != c and a != d and b != c and b != d:
-                d_i_j = "d_" + str(a) + "_" + str(b) + "_" + str(c) + "_" + str(d)
+            channel_2 = max(_node_list[source_2][1],_node_list[target_2][1])
+            # being paranoid about layers, sources and targets agaon
+            if channel_1 == channel_2 \
+                    and index_1 < index_2 \
+                    and source_1 != source_2 and target_1 != target_2 \
+                    and source_1 != target_2 and target_1 != source_2:
+                crossing_variable = "d_" + source_1 + "_" + target_1 \
+                    + "_" + source_2 + "_" + target_2
+                _binary_variables.add(crossing_variable)
+
+                left = ["+" + crossing_variable]
                 # wrong order in the first layer
+                left.append("-x_" + str(source_2) + "_" + str(source_1))
+                # but correct on second
+                left.append("-x_" + str(target_1) + "_" + str(target_2))
                 crossing_constraints.append("-x_" + str(c) + "_" + str(a) + " -x_" + str(b) + "_" + str(d) + " +" + d_i_j + " >= -1")
                 # wrong order in the second layer
                 crossing_constraints.append("-x_" + str(a) + "_" + str(c) + " -x_" + str(d) + "_" + str(b) + " +" + d_i_j + " >= -1")
@@ -177,20 +211,6 @@ def crossing_constraints(node_list, _edge_list):
         if not constraint_generated:
             crossing_constraints.append("d_" + str(a) + "_" + str(b) + "_" + str(a) + "_" + str(b) + " >= 0")
     return crossing_constraints
-    
-# @return a list of position constraints given node list and edge list
-def position_constraints(_node_list, _edge_list):
-    position_constraints = []
-    # p_i represets the position of node i in its layer 
-    for i in _node_list:
-        p = "p_" + str(i[0]) + "_" + str(i[1])
-        p_i = " -" + p + " = 0"
-        for j in _node_list:
-            if i[1] == j[1] and str(i[0]) != str(j[0]): # distinguish node in same layer
-                p_i = " +x_" + str(j[0]) + "_" + str(i[0]) + p_i
-        position_constraints.append( p_i )
-
-    return position_constraints
     
 # @return a list of bottleneck constraints given node list and edge list
 def bottleneck_constraints(_node_list, _edge_list):
@@ -339,6 +359,18 @@ def variables():
     semi.append("s")
     return binary, general,semi
 
+# @return a string consisting of the elements of L separated by blanks and
+# with a line break inserted between sublists of length max_length
+def split_list(L, max_length):
+    number_of_segments = int(math.ceil(len(L) / float(max_list_length)))
+    output = ""
+    for i in range(number_of_segments):
+    segment = L[i * max_list_length:(i + 1) * max_list_length]
+    output += ' '.join(segment)
+    if i < number_of_segments - 1:
+        output += '\n'
+    return output
+
 def main():
     read_sgf( sys.stdin )
     constraints = triangle_constraints()
@@ -376,6 +408,41 @@ def main():
     print_constraints(constraints)
     print_variables(variables())
 
+
+    
+    # prepare output
+    output = "Min\n obj: "  + min
+    output += "\nst\n"
+    for item in constraints:
+        output += " c" + str(count) + ": " + item + "\n"
+        count += 1
+    output += "Binary\n"
+    tokens_in_line = 0 
+    for item in binary:
+        output += " " + item
+        tokens_in_line += 1 
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0 
+    output += "\nGeneral\n"
+    tokens_in_line = 0
+    for item in general:
+        output += " " + item
+        tokens_in_line += 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0
+    output += "\nSemi\n"
+    tokens_in_line = 0
+    for item in semi:
+        output += " " + item
+        tokens_in_line += 1
+        if tokens_in_line > MAX_TOKENS_IN_LINE:
+            output += "\n"
+            tokens_in_line = 0    
+    output += "\nEnd"
+    return output
+    
 main()
 
-#  [Last modified: 2016 05 11 at 00:14:50 GMT]
+#  [Last modified: 2016 05 11 at 20:24:39 GMT]
