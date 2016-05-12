@@ -78,7 +78,8 @@ def read_nonblank( input ):
 # where left is a list of strings,
 #       relational_operator is one of '>=', '<=', '=', etc.
 #       and right is a string representing a number.
-# each string in left is a + or - followed by a variable name.
+# each string in left is a +, -, a +c or -c (where c is a constant)
+# followed by a variable name.
 
 # variables are added to these sets when they arise in constraints
 global _binary_variables = Set([])
@@ -173,6 +174,7 @@ def edges_for_output():
 #   or k precedes i and j precedes l
 def crossing_constraints():
     global _binary_variables
+    global _crossing_variables = []
     crossing_constraints = []
     relop = '>='
     right = '-1'
@@ -182,89 +184,87 @@ def crossing_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        # actually, it should not be necessary to consider the max of two
-        # numbers here; the channel should be the layer number of the target
-        channel_1 = max(_node_list[source_1][1],_node_list[target_1][1])
+        channel_1 = _node_list[target_1][1]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
+            channel_2 = node_list[target_2][1]
             # check if two edges in the same channel without common node
-            channel_2 = max(_node_list[source_2][1],_node_list[target_2][1])
-            # being paranoid about layers, sources and targets agaon
             if channel_1 == channel_2 \
                     and index_1 < index_2 \
                     and source_1 != source_2 and target_1 != target_2 \
-                    and source_1 != target_2 and target_1 != source_2:
-                crossing_variable = "d_" + source_1 + "_" + target_1 \
+                 crossing_variable = "d_" + source_1 + "_" + target_1 \
                     + "_" + source_2 + "_" + target_2
                 _binary_variables.add(crossing_variable)
+                _crossing_variables.append(crossing_variable)
 
                 left = ["+" + crossing_variable]
                 # wrong order in the first layer
                 left.append("-x_" + str(source_2) + "_" + str(source_1))
                 # but correct on second
                 left.append("-x_" + str(target_1) + "_" + str(target_2))
-                crossing_constraints.append("-x_" + str(c) + "_" + str(a) + " -x_" + str(b) + "_" + str(d) + " +" + d_i_j + " >= -1")
+                crossing_constraints.append((left, relop, right))
+
+                left = ["+" + crossing_variable]
                 # wrong order in the second layer
-                crossing_constraints.append("-x_" + str(a) + "_" + str(c) + " -x_" + str(d) + "_" + str(b) + " +" + d_i_j + " >= -1")
-                constraint_generated = True
-        if not constraint_generated:
-            crossing_constraints.append("d_" + str(a) + "_" + str(b) + "_" + str(a) + "_" + str(b) + " >= 0")
+                left.append("-x_" + str(target_2) + "_" + str(target_1))
+                # but correct on first
+                left.append("-x_" + str(source_1) + "_" + str(source_2))
+                crossing_constraints.append((left, relop, right))
+
     return crossing_constraints
     
-# @return a list of bottleneck constraints given node list and edge list
+
+# @return a list of bottleneck crossing constraints
+# a bottleneck constraint has the form
+#    bottleneck - sum of all crossing variables for a particular edge >= 0
 def bottleneck_constraints(_node_list, _edge_list):
+    global _integer_variables
+    _integer_variables.add("bottleneck")
+    relop = '>='
+    right = '0'
     bottleneck_constraints = []
-    for idx_i, i in enumerate(_edge_list):
-        a = int(i[0])
-        b = int(i[1])
-        channel_i = max(_node_list[a][1],_node_list[b][1])
-        single_edge_crossing = ""
-        for idx_j, j in enumerate(_edge_list):
-            c = int(j[0])
-            d = int(j[1])
+    for index_1, edge_1 in enumerate(_edge_list):
+        source_1 = edge_1[0]
+        target_1 = edge_1[1]
+        channel_1 = _node_list[target_1][1]
+        # compile the left hand side for edges crossing this one
+        left = ["+bottleneck"]
+        for index_2, edge_2 in enumerate(_edge_list):
+            source_2 = edge_2[0]
+            target_2 = edge_2[1]
+            channel_2 = node_list[target_2][1]
             # check if two edges in the same channel without common node
-            channel_j = max(_node_list[c][1],_node_list[d][1])
-            if channel_i == channel_j and a != c and a != d and b != c and b != d:
-                if idx_i < idx_j:
-                    d_i_j = "d_" + str(a) + "_" + str(b) + "_" + str(c) + "_" + str(d)
+            if channel_1 == channel_2 \
+                    and source_1 != source_2 and target_1 != target_2:
+                if index_1 < index_2:
+                    crossing_variable = "d_" + str(source_1) + "_" + str(target_1) \
+                        + "_" + str(source_2) + "_" + str(target_2)
                 else:
-                    d_i_j = "d_" + str(c) + "_" + str(d) + "_" + str(a) + "_" + str(b)
-                # sum of crossing for each edge
-                single_edge_crossing += " +" + d_i_j
-        # bottleneck constraint
-        single_edge_crossing += " -b <= 0"
-        # ignore standalone edges
-        if single_edge_crossing != " -b <= 0":
-            bottleneck_constraints.append(single_edge_crossing)
-        single_edge_crossing = ""
+                    crossing_variable = "d_" + str(source_2) + "_" + str(target_2) \
+                        + "_" + str(source_1) + "_" + str(target_1)
+                left.append("-" + crossing_variable)
+        # add bottleneck constraint if it there's at least one potentially
+        # crossing edge in the channel
+        if len(left) > 1:
+            bottleneck_constraints.append((left, relop, right))
+
     return bottleneck_constraints
     
-# @return total constraints given node list and edge list
-def total_constraints(_node_list, _edge_list):
-    tokens_in_line = 0
-    total_constraints = ""
-    for idx_i, i in enumerate(_edge_list):
-        a = int(i[0])
-        b = int(i[1])
-        channel_i = max(_node_list[a][1],_node_list[b][1])
-        for idx_j, j in enumerate(_edge_list):
-            c = int(j[0])
-            d = int(j[1])
-            # check if two edges in the same channel without common node
-            channel_j = max(_node_list[c][1],_node_list[d][1])
-            if channel_i == channel_j and idx_i < idx_j and a != c and a != d and b != c and b != d:
-                d_i_j = "d_" + str(a) + "_" + str(b) + "_" + str(c) + "_" + str(d)
-                total_constraints += " +" + d_i_j
-                tokens_in_line += 1
-                if tokens_in_line > MAX_TOKENS_IN_LINE:
-                    total_constraints += "\n"
-                    tokens_in_line = 0
-    total_constraints += " -t <= 0"
-    return total_constraints
+# @return a single constraint that captures the fact that the total >= the
+# sum of all crossing variables
+def total_constraint():
+    relop = '>='
+    right = '0'
+    left = ["+total"]
+    for crossing_variable in _crossing_variables:
+        left.append("-" + crossing_variable)
+    return (left, relop, right)
     
-# @retun a list of stretch constraints given node list and edge list
-def stretch_constraints(_node_list, _edge_list):
+# @return a list of stretch constraints
+def stretch_constraints():
+    global _continuous_variables
+    global _stretch_variables = []
     stretch_constraints = []
 
     # create a list for number of nodes in layers
@@ -275,90 +275,66 @@ def stretch_constraints(_node_list, _edge_list):
     for node in _node_list:
         nodes_in_layer[node[1]] += 1
  
-    # generate stretch constraint
+    # generate stretch constraints
+    relop = '>='
+    right = '0'
     for edge in _edge_list:
-        i = edge[0]
-        j = edge[1]
-        s_i_j = "s_" + i + "_" + j
-        i_layer = _node_list[int(i)][1]
-        j_layer = _node_list[int(j)][1]
-        p_i = "p_" + i + "_" + str(i_layer)
-        p_j = "p_" + j + "_" + str(j_layer)
-        L_i = nodes_in_layer[i_layer]
-        L_j = nodes_in_layer[j_layer]
-        if L_i < 1:
-            sys.exit("Error: layer " + i_layer + " has no nodes")
-        if L_j < 1:
-            sys.exit("Error: layer " + j_layer + " has no nodes")
-        deno_i = L_i - 1
-        deno_j = L_j - 1
-        if L_i == 1:
-            deno_i = 2
-        if L_j == 1:
-            deno_j = 2
-        dec_i = 1.0/deno_i
-        dec_j = 1.0/deno_j
-        stretch_constraints.append(s_i_j + " +" + str(dec_i) + " " + p_i + " -" + str(dec_j) + " " + p_j + " >= 0" )
-        stretch_constraints.append(s_i_j + " -" + str(dec_i) + " " + p_i + " +" + str(dec_j) + " " + p_j + " >= 0" )
-    
-    # total stretch
-    tokens_in_line = 0
-    total_stretch = ""
-    for edge in _edge_list:
-        i = edge[0]
-        j = edge[1]
-        s_i_j = "s_" + i + "_" + j
-        total_stretch += " +" + s_i_j
-        tokens_in_line += 1
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            total_stretch += "\n"
-            tokens_in_line = 0
-    total_stretch += " -s <= 0"
-    stretch_constraints.append(total_stretch)
-    
+        source = edge[0]
+        target = edge[1]
+        stretch_variable = "s_" + source + "_" + target
+        _continuous_variables.add(stretch_variable)
+        _stretch_variables.append(stretch_variable)
+        source_layer = _node_list[int(source)][1]
+        target_layer = _node_list[int(target)][1]
+        source_position_variable = "p_" + source + "_" + str(source_layer)
+        target_position_variable = "p_" + target + "_" + str(target_layer)
+        source_layer_size = nodes_in_layer[source_layer]
+        target_layer_size = nodes_in_layer[target_layer]
+        if source_layer_size < 1:
+            sys.exit("Error: layer " + source_layer + " has no nodes")
+        if target_layer_size < 1:
+            sys.exit("Error: layer " + target_layer + " has no nodes")
+        source_denominator = max(source_layer_size - 1, 2)
+        target_denominator = max(target_layer_size - 1, 2)
+
+        left = ["+" + stretch_variable]
+        left.append("+" + str(1.0 / source_denominator)
+                    + " " + source_position_variable)
+        left.append("-" + str(1.0 / target_denominator)
+                    + " " + target_position_variable)
+        stretch_constraints.append((left, relop, right))
+
+        left = ["+" + stretch_variable]
+        left.append("-" + str(1.0 / source_denominator)
+                    + " " + source_position_variable)
+        left.append("+" + str(1.0 / target_denominator)
+                    + " " + target_position_variable)
+        stretch_constraints.append((left, relop, right))
+
     return stretch_constraints
     
-# @return a list of binary variables, a list of general variables and a list
-# of semi-continuous variables
-def variables():
-    binary = []
-    general = []
-    semi = []
-    # binary node order variables
-    for idx_i, i in enumerate(_node_list):
-        for idx_j, j in enumerate(_node_list):
-            if idx_i < idx_j and i[1] == j[1]: #two nodes on the same layer
-                x_i_j = "x_" + str(i[0]) + "_" + str(j[0])
-                x_j_i = "x_" + str(j[0]) + "_" + str(i[0])
-                binary.append(x_i_j)
-                binary.append(x_j_i)
-    # binary edge crossing variables
-    for idx_i, i in enumerate(_edge_list):
-        a = int(i[0])
-        b = int(i[1])
-        channel_i = max(_node_list[a][1],_node_list[b][1])
-        for idx_j, j in enumerate(_edge_list):
-            c = int(j[0])
-            d = int(j[1])
-            # check if two edges in the same channel without common node
-            channel_j = max(_node_list[c][1],_node_list[d][1])
-            if channel_i == channel_j and idx_i < idx_j and a != c and a != d and b != c and b != d:
-                d_i_j = "d_" + str(a) + "_" + str(b) + "_" + str(c) + "_" + str(d)
-                binary.append(d_i_j)
-    # general variables
-    for i in _node_list:
-        p = "p_" + str(i[0]) + "_" + str(i[1])
-        general.append(p)
-    general.append("t")
-    general.append("b")
-    
-    # semi- continus variables
-    for i in _edge_list:
-        s = "s_" + i[0] + "_" + i[1]
-        semi.append(s)
-    semi.append("s")
-    return binary, general,semi
+# @return a single constraint for total stretch, i.e., stretch >= sum of
+# stretch variables
+def total_stretch_constraint():
+    relop = '>='
+    right = '0'
+    left = ["+stretch"]
+    for stretch_variable in _stretch_variables:
+        left.append("-" + stretch_variable)
+    return (left, relop, right)
 
+# @return a list of bottleneck stretch constraints, i.e., bn_stretch is >=
+# each stretch variable.
+def bottleneck_stretch_constraints():
+    global _continuous_variables
+    relop - '>='
+    right = '0'
+    _continuous_variables.add("bn_stretch")
+    bottleneck_stretch_constraints = []
+    for stretch_variable in _stretch_variables:
+        left = ["+bn_stretch", "-" + stretch_variable]
+        bottleneck_stretch_constraints.append((left, relop, right))
+    
 # @return a string consisting of the elements of L separated by blanks and
 # with a line break inserted between sublists of length max_length
 def split_list(L, max_length):
@@ -372,7 +348,7 @@ def split_list(L, max_length):
     return output
 
 def main():
-    read_sgf( sys.stdin )
+    read_sgf(sys.stdin)
     constraints = triangle_constraints()
     # always need to print values of position variables to allow translation
     # back to an sgf file that captures the optimum order
@@ -445,4 +421,4 @@ def main():
     
 main()
 
-#  [Last modified: 2016 05 11 at 20:24:39 GMT]
+#  [Last modified: 2016 05 12 at 01:32:15 GMT]
