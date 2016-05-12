@@ -286,8 +286,12 @@ def stretch_constraints():
             sys.exit("Error: layer " + source_layer + " has no nodes")
         if target_layer_size < 1:
             sys.exit("Error: layer " + target_layer + " has no nodes")
-        source_denominator = max(source_layer_size - 1, 2)
-        target_denominator = max(target_layer_size - 1, 2)
+        source_denominator = source_layer_size - 1
+        target_denominator = target_layer_size - 1
+        # layers with only a single node should put that node in the center
+        if source_denominator == 0:
+            source_denominator = 2
+        if target_denominator == 0:                                                           target_denominator = 2                                                
 
         left = ["+" + stretch_variable]
         left.append("+" + str(1.0 / source_denominator)
