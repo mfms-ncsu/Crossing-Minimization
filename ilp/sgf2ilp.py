@@ -8,7 +8,6 @@ import os
 #import argparse
 import math
 import random
-from sets import Set
 
 MAX_TERMS_IN_LINE = 100
 INDENT = "  "
@@ -73,9 +72,9 @@ def read_nonblank( input ):
 # followed by a variable name.
 
 # variables are added to these sets when they arise in constraints
-_binary_variables = Set([])
-_integer_variables = Set([])
-_continuous_variables = Set([])
+_binary_variables = []
+_integer_variables = []
+_continuous_variables = []
 
 # @return a list of constraints on relative position variables x_i_j, where
 # x_i_j is 1 if node i precedes node j on their common layer, 0 otherwise
@@ -90,8 +89,8 @@ def triangle_constraints():
                 x_j_i = "x_" + str(j[0]) + "_" + str(i[0])
                 current_constraint = (["+" + x_i_j, "+" + x_j_i], '=', '1')
                 triangle_constraints.append(current_constraint)
-                _binary_variables.add(x_i_j)
-                _binary_variables.add(x_j_i)
+                _binary_variables.append(x_i_j)
+                _binary_variables.append(x_j_i)
 
     # transitivity constraints
     # x_i_j and x_j_k implies x_i_k
@@ -133,7 +132,7 @@ def position_constraints():
         id = str(node[0])
         layer = str(node[1])
         position_variable = "p_" + id + "_" + layer
-        _integer_variables.add(position_variable)
+        _integer_variables.append(position_variable)
         left.append("+" + position_variable)
         for other_node in _node_list:
             other_id = str(other_node[0])
@@ -155,7 +154,7 @@ def edges_for_output():
         target = edge[1]
         edge_variable = "d_" + source + "_" + target + "_"  + source + "_" + target
         edges.append((["+" + edge_variable], "=", "0"))
-        _binary_variables.add(edge_variable)
+        _binary_variables.append(edge_variable)
     return edges
     
 # @return a list of crossing constraints given node list and edge list the
@@ -187,7 +186,7 @@ def crossing_constraints():
                     and source_1 != source_2 and target_1 != target_2:
                  crossing_variable = "d_" + source_1 + "_" + target_1 \
                      + "_" + source_2 + "_" + target_2
-                 _binary_variables.add(crossing_variable)
+                 _binary_variables.append(crossing_variable)
                  _crossing_variables.append(crossing_variable)
 
                  left = ["+" + crossing_variable]
@@ -212,7 +211,7 @@ def crossing_constraints():
 #    bottleneck - sum of all crossing variables for a particular edge >= 0
 def bottleneck_constraints():
     global _integer_variables
-    _integer_variables.add("bottleneck")
+    _integer_variables.append("bottleneck")
     relop = '>='
     right = '0'
     bottleneck_constraints = []
@@ -275,7 +274,7 @@ def stretch_constraints():
         source = edge[0]
         target = edge[1]
         stretch_variable = "s_" + source + "_" + target
-        _continuous_variables.add(stretch_variable)
+        _continuous_variables.append(stretch_variable)
         _stretch_variables.append(stretch_variable)
         source_layer = _node_list[int(source)][1]
         target_layer = _node_list[int(target)][1]
@@ -311,7 +310,7 @@ def stretch_constraints():
 def total_stretch_constraint():
     relop = '>='
     right = '0'
-    _continuous_variables.add("stretch")
+    _continuous_variables.append("stretch")
     left = ["+stretch"]
     for stretch_variable in _stretch_variables:
         left.append("-" + stretch_variable)
@@ -323,7 +322,7 @@ def bottleneck_stretch_constraints():
     global _continuous_variables
     relop = '>='
     right = '0'
-    _continuous_variables.add("bn_stretch")
+    _continuous_variables.append("bn_stretch")
     bottleneck_stretch_constraints = []
     for stretch_variable in _stretch_variables:
         left = ["+bn_stretch", "-" + stretch_variable]
@@ -375,7 +374,7 @@ def print_variables():
     print INDENT + split_list(list(_binary_variables), MAX_TERMS_IN_LINE)
     print "General"
     print INDENT + split_list(list(_integer_variables), MAX_TERMS_IN_LINE)
-    if _continuous_variables != Set([]):
+    if _continuous_variables != []:
         print "Semi"
         print INDENT + split_list(list(_continuous_variables), MAX_TERMS_IN_LINE)
 
@@ -474,6 +473,7 @@ def main():
     print "st"
     print_constraints(constraints)
     print_variables()
+    print "End"
 
 main()
 
