@@ -219,13 +219,13 @@ def bottleneck_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_list[target_1][1]
+        channel_1 = _node_list[int(target_1)][1]
         # compile the left hand side for edges crossing this one
         left = ["+bottleneck"]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = node_list[target_2][1]
+            channel_2 = node_list[int(target_2)][1]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and source_1 != source_2 and target_1 != target_2:
@@ -321,14 +321,15 @@ def total_stretch_constraint():
 # each stretch variable.
 def bottleneck_stretch_constraints():
     global _continuous_variables
-    relop - '>='
+    relop = '>='
     right = '0'
     _continuous_variables.add("bn_stretch")
     bottleneck_stretch_constraints = []
     for stretch_variable in _stretch_variables:
         left = ["+bn_stretch", "-" + stretch_variable]
         bottleneck_stretch_constraints.append((left, relop, right))
-    
+    return bottleneck_stretch_constraints
+
 # permutes the left hand side of each constraint as well as the order of the
 # constraints in the list
 def permute_constraints(constraints):
@@ -382,13 +383,13 @@ def main():
     if len(sys.argv) < 5 or len(sys.argv) > 6:
         usage(sys.argv[0])
         exit(1)
-    total_constraint_arg = sys.argv[1]
-    bottleneck_constraint_arg = sys.argv[2]
-    stretch_constraint_arg = sys.argv[3]
-    bottleneck_stretch_constraint_arg = sys.argv[4]
+    total_constraint_arg = int(sys.argv[1])
+    bottleneck_constraint_arg = int(sys.argv[2])
+    stretch_constraint_arg = float(sys.argv[3])
+    bottleneck_stretch_constraint_arg = float(sys.argv[4])
     seed = None
     if len(sys.argv) == 6:
-        seed = sys.argv[5]
+        seed = int(sys.argv[5])
 
     # figure out which constraint corresponds to the objective to be
     # minimized (-2) and which constraints are unbounded (-1)
@@ -405,33 +406,38 @@ def main():
             sys.stderr.write("Only one objective can be optimized:\n")
             sys.stderr.write(" you're trying to optimize both total"
                              + " and bottleneck crossings (two -2's)\n")
-            usage(argv[0])
+            usage(sys.argv[0])
             exit(1)
     elif bottleneck_constraint_arg >= 0:
         bottleneck = bottleneck_constraint_arg
-    if stretch_constraint_arg == -2:
+    if stretch_constraint_arg == -2.0:
         if objective == None:
             objective = 'stretch'
         else:
             sys.stderr.write("Only one objective can be optimized:\n")
             sys.stderr.write(" you're trying to optimize stretch"
                              + " and something else (two -2's)\n")
-            usage(argv[0])
+            usage(sys.argv[0])
             exit(1)
     elif stretch_constraint_arg >= 0:
         stretch = stretch_constraint_arg
-    if bottleneck_stretch_constraint_arg == -2:
+    if bottleneck_stretch_constraint_arg == -2.0:
         if objective == None:
             objective = 'bn_stretch'
         else:
             sys.stderr.write("Only one objective can be optimized:\n")
             sys.stderr.write(" you're trying to optimize bottleneck stretch"
                              + " and something else (two -2's)\n")
-            usage(argv[0])
+            usage(sys.argv[0])
             exit(1)
     elif bottleneck_stretch_constraint_arg >= 0:
         bn_stretch = bottleneck_stretch_constraint_arg
 
+    if objective == None:
+        sys.stderr.write("No objective specified (need at least one -2)\n")
+        usage(sys.argv[0])
+        exit(1)
+              
     read_sgf(sys.stdin)
     constraints = triangle_constraints()
     # always need to print values of position variables to allow translation
@@ -471,4 +477,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 14:22:22 GMT]
+#  [Last modified: 2016 05 12 at 15:43:46 GMT]
