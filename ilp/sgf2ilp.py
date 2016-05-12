@@ -7,6 +7,7 @@ import sys
 import os
 import argparse
 import math
+import random
 from sets import Set
 
 MAX_TERMS_IN_LINE = 100
@@ -323,6 +324,7 @@ def stretch_constraints():
 def total_stretch_constraint():
     relop = '>='
     right = '0'
+    _continuous_variables.add("stretch")
     left = ["+stretch"]
     for stretch_variable in _stretch_variables:
         left.append("-" + stretch_variable)
@@ -416,7 +418,7 @@ def main():
 
     if args.seed != None:
         random.seed(args.seed)
-        constraints = permute_constraints(constraints)
+        permute_constraints(constraints)
 
     print_header()
     print_comments()
@@ -429,4 +431,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 12:26:10 GMT]
+#  [Last modified: 2016 05 12 at 12:32:20 GMT]
