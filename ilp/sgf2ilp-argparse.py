@@ -14,7 +14,7 @@ MAX_TERMS_IN_LINE = 100
 INDENT = "  "
 
 parser = argparse.ArgumentParser('Creates an ILP to minimize some quantity based on an sgf representation of a layered graph')
-parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_stretch'},
+parser.add_argument('--objective', choices=['total','bottleneck','stretch','bn_stretch'],
                     default='total',
                     required=True,
                     help='minimize ...'
