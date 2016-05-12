@@ -5,6 +5,7 @@
 
 import sys
 import os
+import argparse
 import math
 import random
 from sets import Set
@@ -12,12 +13,26 @@ from sets import Set
 MAX_TERMS_IN_LINE = 100
 INDENT = "  "
 
-def usage(prog_name):
-    sys.stderr.write("Usage: " + prog_name + " TOTAL BOTTLENECK STRETCH BOTTLENECK_STRETCH [SEED]\n")
-    sys.stderr.write(" the first four arguments specify bounds on each objective\n")
-    sys.stderr.write(" a -1 indicates that there is no bound\n")
-    sys.stderr.write(" a -2 indicates that the given objective is to be minimized\n")
-    sys.stderr.write(" if present, SEED is used to randomize the order of the constraints\n")
+parser = argparse.ArgumentParser(description='Creates an ILP to minimize some quantity based on an sgf representation of a layered graph',
+                                 epilog='reads sgf from standard input, prints lp file on standard output')
+parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_stretch'},
+                    default='total',
+                    required=True,
+                    help='minimize ...'
+                    + ' total/bottleneck (total/bottleneck crossings)'
+                    + ' stretch/bn_stretch (total/bottleneck edge length)')
+parser.add_argument('--total', type=int,
+                    help='constraint on the total number of crossings (default: none)')
+parser.add_argument('--bottleneck', type=int,
+                    help='constraint on the maximum number of crossings of any edge (default: none)')
+parser.add_argument('--stretch', type=int,
+                    help='constraint on the total edge length (default: none)')
+parser.add_argument('--bn_stretch', type=int,
+                    help='constraint on the maximum length of any edge (default: none)')
+parser.add_argument('--seed', type=int,
+                    help='a random seed if ILP constraints are to be permuted (default: none)')
+
+args = parser.parse_args()
 
 # creates two global lists that describe the graph
 # _node_list: each item is a tuple of the form:
@@ -224,7 +239,7 @@ def bottleneck_constraints():
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = _node_list[int(target_2)][1]
+            channel_2 = node_list[int(target_2)][1]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and source_1 != source_2 and target_1 != target_2:
@@ -379,64 +394,6 @@ def print_variables():
         print INDENT + split_list(list(_continuous_variables), MAX_TERMS_IN_LINE)
 
 def main():
-    if len(sys.argv) < 5 or len(sys.argv) > 6:
-        usage(sys.argv[0])
-        exit(1)
-    total_constraint_arg = int(sys.argv[1])
-    bottleneck_constraint_arg = int(sys.argv[2])
-    stretch_constraint_arg = float(sys.argv[3])
-    bottleneck_stretch_constraint_arg = float(sys.argv[4])
-    seed = None
-    if len(sys.argv) == 6:
-        random_seed = int(sys.argv[5])
-
-    # figure out which constraint corresponds to the objective to be
-    # minimized (-2) and which constraints are unbounded (-1)
-    total = bottleneck = stretch = bn_stretch = None
-    objective = None
-    if total_constraint_arg == -2:
-        objective = 'total'
-    elif total_constraint_arg >= 0:
-        total = total_constraint_arg
-    if bottleneck_constraint_arg == -2:
-        if objective == None:
-            objective = 'bottleneck'
-        else:
-            sys.stderr.write("Only one objective can be optimized:\n")
-            sys.stderr.write(" you're trying to optimize both total"
-                             + " and bottleneck crossings (two -2's)\n")
-            usage(sys.argv[0])
-            exit(1)
-    elif bottleneck_constraint_arg >= 0:
-        bottleneck = bottleneck_constraint_arg
-    if stretch_constraint_arg == -2.0:
-        if objective == None:
-            objective = 'stretch'
-        else:
-            sys.stderr.write("Only one objective can be optimized:\n")
-            sys.stderr.write(" you're trying to optimize stretch"
-                             + " and something else (two -2's)\n")
-            usage(sys.argv[0])
-            exit(1)
-    elif stretch_constraint_arg >= 0:
-        stretch = stretch_constraint_arg
-    if bottleneck_stretch_constraint_arg == -2.0:
-        if objective == None:
-            objective = 'bn_stretch'
-        else:
-            sys.stderr.write("Only one objective can be optimized:\n")
-            sys.stderr.write(" you're trying to optimize bottleneck stretch"
-                             + " and something else (two -2's)\n")
-            usage(sys.argv[0])
-            exit(1)
-    elif bottleneck_stretch_constraint_arg >= 0:
-        bn_stretch = bottleneck_stretch_constraint_arg
-
-    if objective == None:
-        sys.stderr.write("No objective specified (need at least one -2)\n")
-        usage(sys.argv[0])
-        exit(1)
-              
     read_sgf(sys.stdin)
     constraints = triangle_constraints()
     # always need to print values of position variables to allow translation
@@ -446,34 +403,34 @@ def main():
     # sgf file gets the edges right; in this case it's a silly constraint
     # that looks like an edge crossing itself - that's what sol2sgf.py expects
     constraints.extend(edges_for_output())
-    if objective == 'total' or objective == 'bottleneck' \
-            or total != None or bottleneck != None:
+    if args.objective == 'total' or args.objective == 'bottleneck' \
+            or args.total != None or args.bottleneck != None:
         constraints.extend(crossing_constraints())
-    if objective == 'stretch' or objective == 'bn_stretch' \
-            or stretch != None or bn_stretch != None:
+    if args.objective == 'stretch' or args.objective == 'bn_stretch' \
+            or args.stretch != None or args.bn_stretch != None:
         constraints.extend(stretch_constraints())
-    if objective == 'total' or total != None:
+    if args.objective == 'total' or args.total != None:
         constraints.append(total_constraint())
-    if objective == 'bottleneck' or bottleneck != None:
+    if args.objective == 'bottleneck' or args.bottleneck != None:
         constraints.extend(bottleneck_constraints())
-    if objective == 'stretch' or stretch != None:
+    if args.objective == 'stretch' or args.stretch != None:
         constraints.append(total_stretch_constraint())
-    if objective == 'bn_stretch' or bn_stretch != None:
+    if args.objective == 'bn_stretch' or args.bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
 
-    if random_seed != None:
-        random.seed(random_seed)
+    if args.seed != None:
+        random.seed(args.seed)
         permute_constraints(constraints)
 
     print_header()
     print_comments()
 
     print "Min"
-    print INDENT + objective
+    print INDENT + args.objective
     print "st"
     print_constraints(constraints)
     print_variables()
 
 main()
 
-#  [Last modified: 2016 05 12 at 15:21:21 GMT]
+#  [Last modified: 2016 05 12 at 15:14:38 GMT]
