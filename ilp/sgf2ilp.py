@@ -225,7 +225,7 @@ def bottleneck_constraints():
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = node_list[int(target_2)][1]
+            channel_2 = _node_list[int(target_2)][1]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and source_1 != source_2 and target_1 != target_2:
@@ -477,4 +477,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 15:43:46 GMT]
+#  [Last modified: 2016 05 12 at 15:47:33 GMT]
