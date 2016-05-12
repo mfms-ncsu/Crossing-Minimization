@@ -4,11 +4,13 @@
 # This program translate from standard input to standard output.
 
 import sys
+import os
 import argparse
 import math
 from sets import Set
 
 MAX_TERMS_IN_LINE = 100
+INDENT = "  "
 
 parser = argparse.ArgumentParser('Creates an ILP to minimize some quantity based on an sgf representation of a layered graph')
 parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_stretch'},
@@ -41,6 +43,7 @@ def read_sgf( input ):
     global _comments
     _node_list = []
     _edge_list = []
+    _comments = []
     line = read_nonblank( input )
     while ( line ):
         type = line.split()[0]
@@ -82,9 +85,9 @@ def read_nonblank( input ):
 # followed by a variable name.
 
 # variables are added to these sets when they arise in constraints
-global _binary_variables = Set([])
-global _integer_variables = Set([])
-global _continuous_variables = Set([])
+_binary_variables = Set([])
+_integer_variables = Set([])
+_continuous_variables = Set([])
 
 # @return a list of constraints on relative position variables x_i_j, where
 # x_i_j is 1 if node i precedes node j on their common layer, 0 otherwise
@@ -148,7 +151,7 @@ def position_constraints():
             other_id = str(other_node[0])
             other_layer = str(other_node[1])
             if layer == other_layer and id != other_id:
-                left.append("-x_" + other_id + "_" id)
+                left.append("-x_" + other_id + "_" + id)
         position_constraints.append((left, relop, right))
 
     return position_constraints
@@ -174,7 +177,8 @@ def edges_for_output():
 #   or k precedes i and j precedes l
 def crossing_constraints():
     global _binary_variables
-    global _crossing_variables = []
+    global _crossing_variables
+    _crossing_variables = []
     crossing_constraints = []
     relop = '>='
     right = '-1'
@@ -184,33 +188,33 @@ def crossing_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_list[target_1][1]
+        channel_1 = _node_list[int(target_1)][1]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = node_list[target_2][1]
+            channel_2 = _node_list[int(target_2)][1]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and index_1 < index_2 \
-                    and source_1 != source_2 and target_1 != target_2 \
+                    and source_1 != source_2 and target_1 != target_2:
                  crossing_variable = "d_" + source_1 + "_" + target_1 \
-                    + "_" + source_2 + "_" + target_2
-                _binary_variables.add(crossing_variable)
-                _crossing_variables.append(crossing_variable)
+                     + "_" + source_2 + "_" + target_2
+                 _binary_variables.add(crossing_variable)
+                 _crossing_variables.append(crossing_variable)
 
-                left = ["+" + crossing_variable]
-                # wrong order in the first layer
-                left.append("-x_" + str(source_2) + "_" + str(source_1))
-                # but correct on second
-                left.append("-x_" + str(target_1) + "_" + str(target_2))
-                crossing_constraints.append((left, relop, right))
+                 left = ["+" + crossing_variable]
+                 # wrong order in the first layer
+                 left.append("-x_" + str(source_2) + "_" + str(source_1))
+                 # but correct on second
+                 left.append("-x_" + str(target_1) + "_" + str(target_2))
+                 crossing_constraints.append((left, relop, right))
 
-                left = ["+" + crossing_variable]
-                # wrong order in the second layer
-                left.append("-x_" + str(target_2) + "_" + str(target_1))
-                # but correct on first
-                left.append("-x_" + str(source_1) + "_" + str(source_2))
-                crossing_constraints.append((left, relop, right))
+                 left = ["+" + crossing_variable]
+                 # wrong order in the second layer
+                 left.append("-x_" + str(target_2) + "_" + str(target_1))
+                 # but correct on first
+                 left.append("-x_" + str(source_1) + "_" + str(source_2))
+                 crossing_constraints.append((left, relop, right))
 
     return crossing_constraints
     
@@ -264,7 +268,8 @@ def total_constraint():
 # @return a list of stretch constraints
 def stretch_constraints():
     global _continuous_variables
-    global _stretch_variables = []
+    global _stretch_variables
+    _stretch_variables = []
     stretch_constraints = []
 
     # create a list for number of nodes in layers
@@ -335,17 +340,54 @@ def bottleneck_stretch_constraints():
         left = ["+bn_stretch", "-" + stretch_variable]
         bottleneck_stretch_constraints.append((left, relop, right))
     
+# permutes the left hand side of each constraint as well as the order of the
+# constraints in the list
+def permute_constraints(constraints):
+    random.shuffle(constraints)
+    for constraint in constraints:
+        random.shuffle(constraint[0])
+
 # @return a string consisting of the elements of L separated by blanks and
-# with a line break inserted between sublists of length max_length
+# with a line break (and indentation) inserted between sublists of length
+# max_length
 def split_list(L, max_length):
-    number_of_segments = int(math.ceil(len(L) / float(max_list_length)))
+    number_of_segments = int(math.ceil(len(L) / float(max_length)))
     output = ""
     for i in range(number_of_segments):
-    segment = L[i * max_list_length:(i + 1) * max_list_length]
-    output += ' '.join(segment)
-    if i < number_of_segments - 1:
-        output += '\n'
+        segment = L[i * max_length:(i + 1) * max_length]
+        output += ' '.join(segment)
+        if i < number_of_segments - 1:
+            output += '\n' + INDENT + INDENT
     return output
+
+def date():
+    date_pipe = os.popen( 'date -u "+%Y/%m/%d %H:%M:%S"' )
+    return date_pipe.readlines()[0].strip()
+
+def print_header():
+    print "\\ " + ' '.join(sys.argv)
+    print "\\ " + date()
+
+def print_comments():
+    for comment in _comments:
+        print "\\ " + comment
+
+def print_constraint(constraint):
+    (left, relop, right) = constraint
+    print INDENT + split_list(left, MAX_TERMS_IN_LINE), relop, right
+
+def print_constraints(constraints):
+    for constraint in constraints:
+        print_constraint(constraint)
+
+def print_variables():
+    print "Binary"
+    print INDENT + split_list(list(_binary_variables), MAX_TERMS_IN_LINE)
+    print "General"
+    print INDENT + split_list(list(_integer_variables), MAX_TERMS_IN_LINE)
+    if _continuous_variables != Set([]):
+        print "Semi"
+        print INDENT + split_list(list(_continuous_variables), MAX_TERMS_IN_LINE)
 
 def main():
     read_sgf(sys.stdin)
@@ -373,52 +415,18 @@ def main():
         constraints.extend(bottleneck_stretch_constraints())
 
     if args.seed != None:
+        random.seed(args.seed)
         constraints = permute_constraints(constraints)
 
     print_header()
     print_comments()
 
     print "Min"
-    print "   ", args.objective
+    print INDENT + args.objective
     print "st"
     print_constraints(constraints)
-    print_variables(variables())
+    print_variables()
 
-
-    
-    # prepare output
-    output = "Min\n obj: "  + min
-    output += "\nst\n"
-    for item in constraints:
-        output += " c" + str(count) + ": " + item + "\n"
-        count += 1
-    output += "Binary\n"
-    tokens_in_line = 0 
-    for item in binary:
-        output += " " + item
-        tokens_in_line += 1 
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0 
-    output += "\nGeneral\n"
-    tokens_in_line = 0
-    for item in general:
-        output += " " + item
-        tokens_in_line += 1
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0
-    output += "\nSemi\n"
-    tokens_in_line = 0
-    for item in semi:
-        output += " " + item
-        tokens_in_line += 1
-        if tokens_in_line > MAX_TOKENS_IN_LINE:
-            output += "\n"
-            tokens_in_line = 0    
-    output += "\nEnd"
-    return output
-    
 main()
 
-#  [Last modified: 2016 05 12 at 01:32:15 GMT]
+#  [Last modified: 2016 05 12 at 12:26:10 GMT]
