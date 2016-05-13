@@ -304,7 +304,7 @@ def stretch_constraints():
         source_denominator = source_layer_size - 1
         target_denominator = target_layer_size - 1
         # layers with only a single node should put that node in the center
-        if source_denominator == 0
+        if source_denominator == 0:
             source_denominator = 2
         if target_denominator == 0:
             target_denominator = 2
@@ -438,4 +438,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 15:53:05 GMT]
+#  [Last modified: 2016 05 12 at 19:49:28 GMT]

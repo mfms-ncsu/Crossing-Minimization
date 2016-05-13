@@ -291,7 +291,8 @@ def stretch_constraints():
         # layers with only a single node should put that node in the center
         if source_denominator == 0:
             source_denominator = 2
-        if target_denominator == 0:                                                           target_denominator = 2                                                
+        if target_denominator == 0:
+            target_denominator = 2
 
         left = ["+" + stretch_variable]
         left.append("+" + str(1.0 / source_denominator)
@@ -465,6 +466,16 @@ def main():
     if objective == 'bn_stretch' or bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
 
+    # add specific constraints for each objective if appropriate
+    if total != None:
+        constraints.append((["+total"], "<=", str(total)))
+    if bottleneck != None:
+        constraints.append((["+bottleneck"], "<=", str(bottleneck)))
+    if stretch != None:
+        constraints.append((["+stretch"], "<=", str(stretch)))
+    if bn_stretch != None:
+        constraints.append((["+bn_stretch"], "<=", str(bn_stretch)))
+
     if seed != None:
         random.seed(seed)
         permute_constraints(constraints)
@@ -481,4 +492,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 15:47:33 GMT]
+#  [Last modified: 2016 05 13 at 01:50:52 GMT]
