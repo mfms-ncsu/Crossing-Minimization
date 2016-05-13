@@ -423,6 +423,16 @@ def main():
     if args.objective == 'bn_stretch' or args.bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
 
+    # add specific constraints for each objective if appropriate
+    if args.total != None:
+        constraints.append((["+total"], "<=", str(args.total)))
+    if args.bottleneck != None:
+        constraints.append((["+bottleneck"], "<=", str(args.bottleneck)))
+    if args.stretch != None:
+        constraints.append((["+stretch"], "<=", str(args.stretch)))
+    if args.bn_stretch != None:
+        constraints.append((["+bn_stretch"], "<=", str(args.bn_stretch)))
+
     if args.seed != None:
         random.seed(args.seed)
         permute_constraints(constraints)
@@ -438,4 +448,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 12 at 19:49:28 GMT]
+#  [Last modified: 2016 05 13 at 12:09:00 GMT]
