@@ -32,29 +32,29 @@ script_dir=${0%/*}
 objective=$1
 # peel off the -
 objective=${objective#-}
-first_obj=${objective:0:1}
-second_obj=${objective:1:1}
+first_objective=${objective:0:1}
+second_objective=${objective:1:1}
 shift
 input_sgf_file=$1
 input_base=${input_sgf_file%.sgf}
 
 # minimize the first objective
-cplex_input_file=${input_base}-$first_obj.lp
-cplex_output_file=${input_base}-$first_obj.out
-sgf_output_file=${input_base}-$first_obj.sgf
+cplex_input_file=${input_base}-$first_objective.lp
+cplex_output_file=${input_base}-$first_objective.out
+sgf_output_file=${input_base}-$first_objective.sgf
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 if [ -e $cplex_input_file ]; then
     echo "__ $cplex_input_file already exists, not creating"
 else
-    echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
-    if [ "$first_obj" = "t" ]; then
+    echo "creating ILP, objective is $first_objective, input file is $input_sgf_file"
+    if [ "$first_objective" = "t" ]; then
         $script_dir/sgf2ilp.py -2 -1 -1 -1 < $input_sgf_file > $cplex_input_file
-    elif [ "$first_obj" = "b" ]; then
+    elif [ "$first_objective" = "b" ]; then
         $script_dir/sgf2ilp.py -1 -2 -1 -1 < $input_sgf_file > $cplex_input_file
-    elif [ "$first_obj" = "s" ]; then
+    elif [ "$first_objective" = "s" ]; then
         $script_dir/sgf2ilp.py -1 -1 -2 -1 < $input_sgf_file > $cplex_input_file
     else
-        echo "bad first objective: $first_obj"
+        echo "bad first objective: $first_objective"
         exit
     fi
 fi
@@ -75,39 +75,40 @@ else
 fi
 
 # get the minimum value for the first objective
-min_first_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "minimum value for $first_obj is $min_first_obj"
-if [[ $min_first_obj =~ '^[0-9]+[.][0-9]+$' ]]; then
+min_first_objective=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "minimum value for $first_objective is $min_first_objective"
+if [[ $min_first_objective != ${min_first_objective%.[0-9]*} ]]; then
     # floating point number - need to round up just in case
-    after_point=${min_first_obj##*\.} # digits after decimal point
+    after_point=${min_first_objective##*\.} # digits after decimal point
     number_after_point=${#after_point}
     # create a string of number_after_point - 1 0's followed by a 1 and turn
     # it into a decimal number to be added
     number_of_zeros=$(( $number_after_point - 1 ))
-    zeros=`seq -f "0" -s '' $number_of_zeros`
+    zeros=`head -c $number_of_zeros < /dev/zero | tr '\0' '0'`
     to_be_added=0.${zeros}1
-    $min_first_obj = `echo $min_first_obj + $to_be_added | bc`
-    $min_first_obj_string=${min_first_obj/\./p}
+    rounded_min_first_objective=`echo $min_first_objective + $to_be_added | bc`
+    min_first_objective_string=${rounded_min_first_objective/\./p}
 else
-    $min_first_obj_string=$min_first_obj
+    rounded_min_first_objective=$min_first_objective
+    min_first_objective_string=$min_first_objective
 fi
 
 # minimize the second objective
-cplex_input_file=${input_base}-$second_obj.lp
-cplex_output_file=${input_base}-$second_obj.out
-sgf_output_file=${input_base}-$second_obj.sgf
+cplex_input_file=${input_base}-$second_objective.lp
+cplex_output_file=${input_base}-$second_objective.out
+sgf_output_file=${input_base}-$second_objective.sgf
 if [ -e $cplex_input_file ]; then
     echo "__ $cplex_input_file already exists, not creating"
 else
-    echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
-    if [ "$second_obj" = "t" ]; then
-        $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
-    elif [ "$second_obj" = "b" ]; then
-        $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
-    elif [ "$second_obj" = "s" ]; then
-        $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+    echo "creating ILP, objective is $second_objective, input file is $input_sgf_file"
+    if [ "$second_objective" = "t" ]; then
+        $script_dir/sgf2ilp.py -2 -1 -1 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$second_objective" = "b" ]; then
+        $script_dir/sgf2ilp.py -1 -2 -1 -1 < $input_sgf_file > $cplex_input_file
+    elif [ "$second_objective" = "s" ]; then
+        $script_dir/sgf2ilp.py -1 -1 -2 -1 < $input_sgf_file > $cplex_input_file
     else
-        echo "bad second objective: $second_obj"
+        echo "bad second objective: $second_objective"
         exit
     fi
 fi
@@ -123,52 +124,52 @@ else
     $script_dir/sol2sgf.py < $cplex_output_file > $sgf_output_file
 fi
 # get the minimum value for the second objective (for comparison purposes)
-min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "minimum value for $second_obj is $min_second_obj"
-if [[ $min_second_obj =~ '^[0-9]+[.][0-9]+$' ]]; then
+min_second_objective=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "minimum value for $second_objective is $min_second_objective"
+if [[ $min_second_objective != ${min_second_objective%.[0-9]*} ]]; then
     # floating point number - need to round up just in case
-    after_point=${min_second_obj##*\.} # digits after decimal point
+    after_point=${min_second_objective##*\.} # digits after decimal point
     number_after_point=${#after_point}
     # create a string of number_after_point - 1 0's followed by a 1 and turn
     # it into a decimal number to be added
     number_of_zeros=$(( $number_after_point - 1 ))
-    zeros=`seq -f "0" -s '' $number_of_zeros`
+    zeros=`head -c $number_of_zeros < /dev/zero | tr '\0' '0'`
     to_be_added=0.${zeros}1
-    $min_second_obj = `echo $min_second_obj + $to_be_added | bc`
-    $min_second_obj_string=${min_second_obj/\./p}
+    rounded_min_second_objective=`echo $min_second_objective + $to_be_added | bc`
+    min_second_objective_string=${rounded_min_second_objective/\./p}
 else
-    $min_second_obj_string=$min_second_obj
+    rounded_min_second_objective=$min_second_objective
+    min_second_objective_string=$min_second_objective
 fi
 
-echo "minimum value for $second_obj is $min_second_obj"
-
 # minimize second objective given minimum first objective as a constraint
-cplex_input_file=${input_base}-${first_obj}${min_first_obj_string}$_second_obj.lp
-cplex_output_file=${input_base}-${first_obj}${min_first_obj_string}$_second_obj.out
-sgf_output_file=${input_base}-${first_obj}${min_first_obj_string}_$second_obj.sgf
+suffix=${first_objective}${min_first_objective_string}$_second_objective
+cplex_input_file=${input_base}-$suffix.lp
+cplex_output_file=${input_base}-$suffix.out
+sgf_output_file=${input_base}-$suffix.sgf
 if [ -e $cplex_input_file ]; then
     echo "__ $cplex_input_file already exists, not creating"
 else
-    echo "creating ILP, objective is $second_obj, input file is $input_sgf_file"
+    echo "creating ILP, objective is $second_objective, input file is $input_sgf_file"
 # give default values to the three command-line args
     arg1=-1
     arg2=-1
     arg3=-1
-    if [ "$first_obj" = "t" ]; then
-        arg1=$min_first_obj
-    elif [ "$first_obj" = "b" ]; then
-        arg2=$min_first_obj
-    elif [ "$first_obj" = "s" ]; then
-        arg3=$min_first_obj
+    if [ "$first_objective" = "t" ]; then
+        arg1=$min_first_objective
+    elif [ "$first_objective" = "b" ]; then
+        arg2=$min_first_objective
+    elif [ "$first_objective" = "s" ]; then
+        arg3=$rounded_min_first_objective
     fi
-    if [ "$second_obj" = "t" ]; then
+    if [ "$second_objective" = "t" ]; then
         arg1=-2
-    elif [ "$second_obj" = "b" ]; then
+    elif [ "$second_objective" = "b" ]; then
         arg2=-2
-    elif [ "$second_obj" = "s" ]; then
+    elif [ "$second_objective" = "s" ]; then
         arg3=-2
     fi
-    echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
+    echo "creating ILP, objective is $second_objective, using $first_objective = $rounded_min_first_objective"
     $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 -1 < $input_sgf_file > $cplex_input_file
 fi
 if [ -e $cplex_output_file ]; then
@@ -184,14 +185,14 @@ else
 fi
 # get the minimum value for the conditional second objective (for comparison
 # purposes)
-conditional_min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
-echo "minimum value for $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj"
+conditional_min_second_objective=`fgrep Objective $cplex_output_file | cut -f 2`
+echo "minimum value for $second_objective given $first_objective = $rounded_min_first_objective is $conditional_min_second_objective"
 
 # compare these as strings because bash does not handle floats
-if [ "$min_second_obj" != "$conditional_min_second_obj" ]; then
-    echo "*+*+* $input_base: objectives differ: $second_obj is $min_second_obj, $second_obj given $first_obj = $min_first_obj is $conditional_min_second_obj *+*+*"
+if [ "$min_second_objective" != "$conditional_min_second_objective" ]; then
+    echo "*+*+* $input_base: objectives differ: $second_objective is $min_second_objective, $second_objective given $first_objective = $min_first_objective is $conditional_min_second_objective *+*+*"
 fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 05 16 at 16:14:00 GMT]
+#  [Last modified: 2016 05 16 at 21:22:32 GMT]
