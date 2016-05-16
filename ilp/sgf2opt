@@ -3,9 +3,15 @@
 # sgf2opt - starts with an sgf file and finds orderings that minimize two
 # distinct objectives; three different optimizations are done: first
 # objective alone, second objective alone, and second given the optimum value
-# of first as a constraint.
+# of first as a constraint. This version works with python 2.x and the
+# corresponding sgf2ilp.py version.
+#
+# @todo update to sgf2ilp.py for python 2.7 and later (with argparse)
+# @todo use argparse and add option to make one of the objectives bottleneck strea
 
 # assumes sgf2ilp.py and sol2sgf.py are in this directory
+
+TIME_LIMIT=1200                 # number of seconds until timeout
 
 if [ $# -ne 2 ]; then
     echo "Usage: $0 (-tb | -ts | -bt | -bs | -st | -sb ) FILE.sgf"
@@ -42,11 +48,11 @@ if [ -e $cplex_input_file ]; then
 else
     echo "creating ILP, objective is $first_obj, input file is $input_sgf_file"
     if [ "$first_obj" = "t" ]; then
-        $script_dir/sgf2ilp.py -2 -1 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py -2 -1 -1 -1 < $input_sgf_file > $cplex_input_file
     elif [ "$first_obj" = "b" ]; then
-        $script_dir/sgf2ilp.py -1 -2 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py -1 -2 -1 -1 < $input_sgf_file > $cplex_input_file
     elif [ "$first_obj" = "s" ]; then
-        $script_dir/sgf2ilp.py -1 -1 -2 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py -1 -1 -2 -1 < $input_sgf_file > $cplex_input_file
     else
         echo "bad first objective: $first_obj"
         exit
@@ -57,7 +63,7 @@ if [ -e $cplex_output_file ]; then
 else
     echo -n "solving $cplex_input_file,      "
     date -u
-    cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
+    cplex_ilp -time=$TIME_LIMIT -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
 fi
@@ -110,7 +116,7 @@ if [ -e $cplex_output_file ]; then
 else
     echo -n "solving $cplex_input_file,      "
     date -u
-    cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
+    cplex_ilp -time=$TIME_LIMIT -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
     echo "converting solution to sgf for optimal order"
@@ -119,11 +125,27 @@ fi
 # get the minimum value for the second objective (for comparison purposes)
 min_second_obj=`fgrep Objective $cplex_output_file | cut -f 2`
 echo "minimum value for $second_obj is $min_second_obj"
+if [[ $min_second_obj =~ '^[0-9]+[.][0-9]+$' ]]; then
+    # floating point number - need to round up just in case
+    after_point=${min_second_obj##*\.} # digits after decimal point
+    number_after_point=${#after_point}
+    # create a string of number_after_point - 1 0's followed by a 1 and turn
+    # it into a decimal number to be added
+    number_of_zeros=$(( $number_after_point - 1 ))
+    zeros=`seq -f "0" -s '' $number_of_zeros`
+    to_be_added=0.${zeros}1
+    $min_second_obj = `echo $min_second_obj + $to_be_added | bc`
+    $min_second_obj_string=${min_second_obj/\./p}
+else
+    $min_second_obj_string=$min_second_obj
+fi
+
+echo "minimum value for $second_obj is $min_second_obj"
 
 # minimize second objective given minimum first objective as a constraint
-cplex_input_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.lp
-cplex_output_file=${input_base}-${first_obj}${min_first_obj}$_second_obj.out
-sgf_output_file=${input_base}-${first_obj}${min_first_obj}_$second_obj.sgf
+cplex_input_file=${input_base}-${first_obj}${min_first_obj_string}$_second_obj.lp
+cplex_output_file=${input_base}-${first_obj}${min_first_obj_string}$_second_obj.out
+sgf_output_file=${input_base}-${first_obj}${min_first_obj_string}_$second_obj.sgf
 if [ -e $cplex_input_file ]; then
     echo "__ $cplex_input_file already exists, not creating"
 else
@@ -147,14 +169,14 @@ else
         arg3=-2
     fi
     echo "creating ILP, objective is $second_obj, using $first_obj = $min_first_obj"
-    $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 < $input_sgf_file > $cplex_input_file
+    $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 -1 < $input_sgf_file > $cplex_input_file
 fi
 if [ -e $cplex_output_file ]; then
     echo "__ already run CPLEX on $cplex_input_file, not repeating"
 else
     echo -n "solving $cplex_input_file,      "
     date -u
-    cplex_ilp -time=600 -solution $cplex_input_file > $cplex_output_file
+    cplex_ilp -time=$TIME_LIMIT -solution $cplex_input_file > $cplex_output_file
     echo -n "done solving $cplex_input_file, "
     date -u
     echo "converting solution to sgf for optimal order"
@@ -172,4 +194,4 @@ fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 05 13 at 19:47:53 GMT]
+#  [Last modified: 2016 05 16 at 16:14:00 GMT]
