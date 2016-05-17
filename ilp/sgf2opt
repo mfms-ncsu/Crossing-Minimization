@@ -18,7 +18,7 @@ if [ $# -ne 2 ]; then
     echo " produces files of the form, in the same directory as the input"
     echo "  FILE-TAG.lp (ILP for the appropriate problem)"
     echo "  FILE-TAG.out (the cplex output when the ILP is solved)"
-    echo "  FILE-opt_TAG.sgf, (the sgf file with the optimum order)"
+    echo "  FILE-TAG.sgf, (the sgf file with the optimum order)"
     echo " -xy means minimize x then y and then y given the minimum x"
     echo " TAG is one of t, b, s, tk_b, tk_s, bk_t, bk_s, sk_t or sk_b"
     echo "  x (t,b,s) means x is minimized with no constraints"
@@ -195,4 +195,4 @@ fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 05 16 at 21:22:32 GMT]
+#  [Last modified: 2016 05 17 at 14:05:48 GMT]
