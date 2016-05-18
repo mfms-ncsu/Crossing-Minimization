@@ -110,7 +110,7 @@ static void trace_printer( int layer, const char * message )
   double current_total_stretch = totalStretch();
   char * tag = layer < 0 ? "+" : "";
   printf( "%siteration %6d | layer %2d | crossings %5d | best %5d"
-          " | bottleneck %3d | best %3d | stretch %7.2f | best %5d"
+          " | bottleneck %3d | best %3d | stretch %7.2f | best %7.2f"
           " | time %5.2f"
           " | %s\n",
           tag, iteration, layer, number_of_crossings, total_crossings.best,
@@ -142,18 +142,18 @@ void tracePrint( int layer, const char * message )
 static bool no_improvement( void )
 {
   // avoid shortcut logic to make sure side effects really happen
-  bool better_total_crossings = has_improved( & total_crossings );
-#ifdef MAX_EDGE
-  bool better_max_edge_crossings = has_improved( & max_edge_crossings );
-#endif
+  bool better_total_crossings = has_improved_int( & total_crossings );
+  bool better_max_edge_crossings = has_improved_int( & max_edge_crossings );
+  bool better_total_stretch = has_improved_double( & total_stretch );
+  bool better_bottleneck_stretch = has_improved_double( & bottleneck_stretch );
 #ifdef FAVORED
   bool better_favored_edge_crossings = has_improved( & favored_edge_crossings );
 #endif
   return
     ! better_total_crossings
-#ifdef MAX_EDGE
     && ! better_max_edge_crossings
-#endif
+    && ! better_total_stretch
+    && ! better_bottleneck_stretch
 #ifdef FAVORED
     && ! better_favored_edge_crossings
 #endif
@@ -1199,4 +1199,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 02 29 at 21:14:05 GMT] */
+/*  [Last modified: 2016 05 18 at 20:17:28 GMT] */

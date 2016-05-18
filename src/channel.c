@@ -73,7 +73,22 @@ double totalChannelStretch(int i) {
 }
 
 /**
- * @return the total strech of all edges
+ * @return the total strech of edges in channel i; assumes the positions of
+ * nodes on the two layers have been updated correctly
+ */
+double maxEdgeStretchInChannel(int i) {
+  double max_stretch = 0.0;
+  for ( int j = 0; j < channels[i]->number_of_edges; j++ ) {
+    double current_stretch = stretch(channels[i]->edges[j]);
+    if ( current_stretch > max_stretch ) {
+      max_stretch = current_stretch;
+    }
+  }
+  return max_stretch;
+}
+
+/**
+ * @return the total stretch of all edges
  */
 double totalStretch() {
 #ifdef DEBUG
@@ -89,4 +104,24 @@ double totalStretch() {
   return total_stretch;
 }
 
-/*  [Last modified: 2016 02 29 at 21:26:28 GMT] */
+/**
+ * @return the maximum stretch among all edges
+ */
+double maxEdgeStretch() {
+#ifdef DEBUG
+  printf("-> maxEdgeStretch, iteration = %d\n", iteration);
+#endif
+  double max_stretch = 0.0;
+  for ( int i = 1; i < number_of_layers; i++ ) {
+    double channel_stretch = maxEdgeStretchInChannel(i);
+    if ( channel_stretch > max_stretch ) {
+      max_stretch = channel_stretch;
+    }
+  }
+#ifdef DEBUG
+  printf("<- maxEdgeStretch, max_stretch = %7.2f\n", max_stretch);
+#endif
+  return max_stretch;
+}
+
+/*  [Last modified: 2016 05 18 at 20:26:33 GMT] */

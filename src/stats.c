@@ -13,6 +13,7 @@
 #include<stdlib.h>
 #include<limits.h>
 #include<math.h>
+#include<float.h>
 
 #include"stats.h"
 #include"defs.h"
@@ -143,18 +144,15 @@ static PARETO_LIST pareto_insert(double objective_one,
   return new_list;
 }
 
-CROSSING_STATS total_crossings;
-CROSSING_STATS max_edge_crossings;
-CROSSING_STATS favored_edge_crossings;
-CROSSING_STATS total_stretch;
+CROSSING_STATS_INT total_crossings;
+CROSSING_STATS_INT max_edge_crossings;
+CROSSING_STATS_INT favored_edge_crossings;
+CROSSING_STATS_DOUBLE total_stretch;
+CROSSING_STATS_DOUBLE bottleneck_stretch;
 Statistics overall_degree;
 
-static int total_stretch_as_integer() {
-  return (int) round(totalStretch());
-}
-
-static void init_specific_crossing_stats( CROSSING_STATS * stats,
-                                          const char * name )
+static void init_specific_crossing_stats_int( CROSSING_STATS_INT * stats,
+                                              const char * name )
 {
   stats->name = name;
   stats->at_beginning = INT_MAX;
@@ -167,13 +165,26 @@ static void init_specific_crossing_stats( CROSSING_STATS * stats,
   stats->post_processing_iteration = -1;
 }
 
+static void init_specific_crossing_stats_double( CROSSING_STATS_DOUBLE * stats,
+                                                 const char * name )
+{
+  stats->name = name;
+  stats->at_beginning = DBL_MAX;
+  stats->after_preprocessing = DBL_MAX;
+  stats->after_heuristic = DBL_MAX;
+  stats->after_post_processing = DBL_MAX;
+  stats->best = DBL_MAX;
+  stats->previous_best = DBL_MAX;
+  stats->best_heuristic_iteration = -1;
+  stats->post_processing_iteration = -1;
+}
+
 void init_crossing_stats( void )
 {
-  init_specific_crossing_stats( & total_crossings, "Crossings" );
-#ifdef MAX_EDGE
-  init_specific_crossing_stats( & max_edge_crossings, "EdgeCrossings" );
-#endif
-  init_specific_crossing_stats( & total_stretch, "Stretch" );
+  init_specific_crossing_stats_int( & total_crossings, "Crossings" );
+  init_specific_crossing_stats_int( & max_edge_crossings, "EdgeCrossings" );
+  init_specific_crossing_stats_double( & total_stretch, "Stretch" );
+  init_specific_crossing_stats_double( & bottleneck_stretch, "BottleneckStretch" );
 #ifdef FAVORED
   init_specific_crossing_stats( & favored_edge_crossings, "FavoredCrossings" );
 #endif
@@ -184,10 +195,9 @@ void init_crossing_stats( void )
 void capture_beginning_stats( void )
 {
   total_crossings.at_beginning = numberOfCrossings();
-#ifdef MAX_EDGE
   max_edge_crossings.at_beginning = maxEdgeCrossings();
-#endif
-  total_stretch.at_beginning = total_stretch_as_integer();
+  total_stretch.at_beginning = totalStretch();
+  bottleneck_stretch.at_beginning = maxEdgeStretch();
 #ifdef FAVORED
   favored_edge_crossings.at_beginning = priorityEdgeCrossings();
 #endif
@@ -196,10 +206,9 @@ void capture_beginning_stats( void )
 void capture_preprocessing_stats( void )
 {
   total_crossings.after_preprocessing = numberOfCrossings();
-#ifdef MAX_EDGE
   max_edge_crossings.after_preprocessing = maxEdgeCrossings();
-#endif
-  total_stretch.after_preprocessing = total_stretch_as_integer();
+  total_stretch.after_preprocessing = totalStretch();
+  bottleneck_stretch.after_preprocessing = maxEdgeStretch();
 #ifdef FAVORED
   favored_edge_crossings.after_preprocessing = priorityEdgeCrossings();
 #endif
@@ -208,10 +217,9 @@ void capture_preprocessing_stats( void )
 void capture_heuristic_stats( void )
 {
   total_crossings.after_heuristic = total_crossings.best;
-#ifdef MAX_EDGE
   max_edge_crossings.after_heuristic = max_edge_crossings.best;
-#endif
-  total_stretch.after_heuristic = total_stretch.best;
+  total_stretch.after_heuristic = totalStretch();
+  bottleneck_stretch.after_heuristic = maxEdgeStretch();
 #ifdef FAVORED
   favored_edge_crossings.after_heuristic = priority_edge_crossings.best;
 #endif
@@ -224,11 +232,9 @@ void capture_post_processing_stats( void )
   // bottleneck crossings or stretch
   total_crossings.after_post_processing = total_crossings.best;
   total_crossings.post_processing_iteration = post_processing_iteration;
-#ifdef MAX_EDGE
-  max_edge_crossings.after_post_processing =
-    max_edge_crossings.best;
-#endif
+  max_edge_crossings.after_post_processing = max_edge_crossings.best;
   total_stretch.after_post_processing = total_stretch.best;
+  bottleneck_stretch.after_post_processing = bottleneck_stretch.best;
 #ifdef FAVORED
   // ditto for favored edge crossings
   favored_edge_crossings.after_post_processing =
@@ -236,12 +242,12 @@ void capture_post_processing_stats( void )
 #endif
 }
 
-void update_best( CROSSING_STATS * stats, Orderptr order,
-                  int (* crossing_retrieval_function) (void) )
+void update_best_int( CROSSING_STATS_INT * stats, Orderptr order,
+                      int (* crossing_retrieval_function) (void) )
 {
 #ifdef DEBUG
-  printf("-> update_best, %s, %d\n", stats->name, stats->best);
-#endif  
+  printf("-> update_best_int, %s, %d\n", stats->name, stats->best);
+#endif
   int current_value = crossing_retrieval_function();
   if( current_value < stats->best )
     {
@@ -250,17 +256,36 @@ void update_best( CROSSING_STATS * stats, Orderptr order,
       save_order( order );
     }
 #ifdef DEBUG
-  printf("<- update_best, %s, %d\n", stats->name, stats->best);
+  printf("<- update_best_int, %s, %d\n", stats->name, stats->best);
+#endif  
+}
+
+void update_best_double( CROSSING_STATS_DOUBLE * stats, Orderptr order,
+                         double (* crossing_retrieval_function) (void) )
+{
+#ifdef DEBUG
+  printf("-> update_best_double, %s, %f\n", stats->name, stats->best);
+#endif
+  int current_value = crossing_retrieval_function();
+  if( current_value < stats->best )
+    {
+      stats->best = current_value;
+      stats->best_heuristic_iteration = iteration;
+      save_order( order );
+    }
+#ifdef DEBUG
+  printf("<- update_best_double, %s, %f\n", stats->name, stats->best);
 #endif  
 }
 
 void update_best_all( void )
 {
-  update_best( & total_crossings, best_crossings_order, numberOfCrossings );
-#ifdef MAX_EDGE
-  update_best( & max_edge_crossings, best_edge_crossings_order, maxEdgeCrossings );
-#endif
-  update_best( & total_stretch, best_total_stretch_order, total_stretch_as_integer );
+  update_best_int( & total_crossings, best_crossings_order, numberOfCrossings );
+  update_best_int( & max_edge_crossings,
+                   best_edge_crossings_order, maxEdgeCrossings );
+  update_best_double( & total_stretch, best_total_stretch_order, totalStretch );
+  update_best_double( & bottleneck_stretch,
+                      best_bottleneck_stretch_order, maxEdgeStretch );
 #ifdef FAVORED
   update_best( & favored_edge_crossings, best_favored_crossings_order, priorityEdgeCrossings );
 #endif
@@ -281,10 +306,10 @@ void update_best_all( void )
                                  pareto_list );
 }
 
-bool has_improved( CROSSING_STATS * stats )
+bool has_improved_int( CROSSING_STATS_INT * stats )
 {
 #ifdef DEBUG
-  printf( "-> has_improved, stats = %s, best = %d, previous = %d\n",
+  printf( "-> has_improved_int, stats = %s, best = %d, previous = %d\n",
           stats->name, stats->best, stats->previous_best );
 #endif
   bool improved = false;
@@ -294,6 +319,24 @@ bool has_improved( CROSSING_STATS * stats )
   }
 #ifdef DEBUG
   printf( "<- has_improved, return %d, best = %d, previous = %d, iteration = %d\n",
+          improved, stats->best, stats->previous_best, iteration );
+#endif
+  return improved;
+}
+
+bool has_improved_double( CROSSING_STATS_DOUBLE * stats )
+{
+#ifdef DEBUG
+  printf( "-> has_improved_double, stats = %s, best = %f, previous = %f\n",
+          stats->name, stats->best, stats->previous_best );
+#endif
+  bool improved = false;
+  if ( stats->best < stats->previous_best ) {
+    improved = true;
+    stats->previous_best = stats->best;
+  }
+#ifdef DEBUG
+  printf( "<- has_improved_double, return %d, best = %f, previous = %f, iteration = %d\n",
           improved, stats->best, stats->previous_best, iteration );
 #endif
   return improved;
@@ -466,13 +509,23 @@ void print_graph_statistics( FILE * output_stream )
   free_statistics( overall_degree );
 }
 
-static void print_crossing_stats( FILE * output_stream, CROSSING_STATS stats )
-{
+static void print_crossing_stats_int(FILE * output_stream,
+                                     CROSSING_STATS_INT stats) {
   fprintf( output_stream, "Start%s,%d\n", stats.name, stats.at_beginning );
   fprintf( output_stream, "Pre%s,%d\n", stats.name, stats.after_preprocessing );
   fprintf( output_stream, "Heuristic%s,%d,iteration,%d\n",
            stats.name, stats.after_heuristic, stats.best_heuristic_iteration );
   fprintf( output_stream, "Final%s,%d,iteration,%d\n",
+           stats.name, stats.after_post_processing, stats.post_processing_iteration );
+}
+
+static void print_crossing_stats_double(FILE * output_stream,
+                                        CROSSING_STATS_DOUBLE stats) {
+  fprintf( output_stream, "Start%s,%f\n", stats.name, stats.at_beginning );
+  fprintf( output_stream, "Pre%s,%f\n", stats.name, stats.after_preprocessing );
+  fprintf( output_stream, "Heuristic%s,%f,iteration,%d\n",
+           stats.name, stats.after_heuristic, stats.best_heuristic_iteration );
+  fprintf( output_stream, "Final%s,%f,iteration,%d\n",
            stats.name, stats.after_post_processing, stats.post_processing_iteration );
 }
 
@@ -482,14 +535,13 @@ void print_run_statistics( FILE * output_stream )
   fprintf( output_stream, "Heuristic,%s\n", heuristic );
   fprintf( output_stream, "Iterations,%d\n", iteration );
   fprintf( output_stream, "Runtime,%2.3f\n", RUNTIME );
-  print_crossing_stats( output_stream, total_crossings );
 
-#ifdef MAX_EDGE
-  print_crossing_stats( output_stream, max_edge_crossings );
-#endif
-  print_crossing_stats( output_stream, total_stretch );
+  print_crossing_stats_int( output_stream, total_crossings );
+  print_crossing_stats_int( output_stream, max_edge_crossings );
+  print_crossing_stats_double( output_stream, total_stretch );
+  print_crossing_stats_double( output_stream, bottleneck_stretch );
 #ifdef FAVORED
-  print_crossing_stats( output_stream, favored_edge_crossings );
+  print_crossing_stats_int( output_stream, favored_edge_crossings );
 #endif
   if ( pareto_objective != NO_PARETO ) {
     fprintf( output_stream, "Pareto,");
@@ -498,4 +550,4 @@ void print_run_statistics( FILE * output_stream )
   }
 }
 
-/*  [Last modified: 2016 04 15 at 13:57:23 GMT] */
+/*  [Last modified: 2016 05 18 at 20:28:02 GMT] */

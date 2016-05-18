@@ -15,7 +15,7 @@
 
 #include"order.h"
 
-typedef struct crossing_stats {
+typedef struct crossing_stats_int {
   int at_beginning;
   int after_preprocessing;
   int after_heuristic;
@@ -25,12 +25,25 @@ typedef struct crossing_stats {
   int best_heuristic_iteration;
   int post_processing_iteration;
   const char * name; 
-} CROSSING_STATS;
+} CROSSING_STATS_INT;
 
-extern CROSSING_STATS total_crossings;
-extern CROSSING_STATS max_edge_crossings;
-extern CROSSING_STATS favored_edge_crossings;
-extern CROSSING_STATS total_stretch;
+typedef struct crossing_stats_double {
+  double at_beginning;
+  double after_preprocessing;
+  double after_heuristic;
+  double after_post_processing;
+  double best;
+  double previous_best;
+  int best_heuristic_iteration;
+  int post_processing_iteration;
+  const char * name; 
+} CROSSING_STATS_DOUBLE;
+
+extern CROSSING_STATS_INT total_crossings;
+extern CROSSING_STATS_INT max_edge_crossings;
+extern CROSSING_STATS_INT favored_edge_crossings;
+extern CROSSING_STATS_DOUBLE total_stretch;
+extern CROSSING_STATS_DOUBLE bottleneck_stretch;
 
 /**
  * Initializes crossing stats structures
@@ -67,8 +80,18 @@ void capture_post_processing_stats( void );
  * @param crossing_retrieval_function function that returns the current
  * value -- to be compared to the best value
  */
-void update_best( CROSSING_STATS * stats, Orderptr order,
-                  int (* crossing_retrieval_function) (void) );
+void update_best_int( CROSSING_STATS_INT * stats, Orderptr order,
+                      int (* crossing_retrieval_function) (void) );
+
+/**
+ * Updates the best value if needed, usually at the end of an iteration
+ * @param stats the stats struct to be updated
+ * @param order the order that needs to be captured when the best is updated
+ * @param crossing_retrieval_function function that returns the current
+ * value -- to be compared to the best value
+ */
+void update_best_double( CROSSING_STATS_DOUBLE * stats, Orderptr order,
+                         double (* crossing_retrieval_function) (void) );
 
 /**
  * Updates the best value of all stats if needed, i.e., calls update_best on
@@ -82,7 +105,15 @@ void update_best_all( void );
  *
  * <em>Side effect</e> stats.previous_best is updated
  */
-bool has_improved( CROSSING_STATS * stats );
+bool has_improved_int( CROSSING_STATS_INT * stats );
+
+/**
+ * @return true if stats.best has improved since the last time this function
+ * was called
+ *
+ * <em>Side effect</e> stats.previous_best is updated
+ */
+bool has_improved_double( CROSSING_STATS_DOUBLE * stats );
 
 /**
  * Print statistics that are intrinsic to the graph, independent of any
@@ -97,4 +128,4 @@ void print_run_statistics( FILE * output_stream );
 
 #endif
 
-/*  [Last modified: 2016 02 15 at 18:16:26 GMT] */
+/*  [Last modified: 2016 05 18 at 19:59:14 GMT] */

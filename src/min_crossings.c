@@ -66,6 +66,7 @@ int trace_freq = -1;
 Orderptr best_crossings_order = NULL;
 Orderptr best_edge_crossings_order = NULL;
 Orderptr best_total_stretch_order = NULL;
+Orderptr best_bottleneck_stretch_order = NULL;
 Orderptr best_favored_crossings_order = NULL;
 
 /** buffer to be used for all output file names */
@@ -450,6 +451,10 @@ int main( int argc, char * argv[] )
     = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
   init_order( best_total_stretch_order );
 
+  best_bottleneck_stretch_order
+    = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
+  init_order( best_bottleneck_stretch_order );
+
   best_favored_crossings_order
     = (Orderptr) calloc( 1, sizeof(struct order_struct) ); 
   init_order( best_favored_crossings_order );
@@ -504,24 +509,27 @@ int main( int argc, char * argv[] )
   printf("best order restored at end, crossings = %d\n", numberOfCrossings() );
 #endif
 
-#ifdef MAX_EDGE
   // write file with best order for edge crossings
-  if ( produce_output )
-    {
+  if ( produce_output ) {
       // write file with best max edge order after overall
       restore_order( best_edge_crossings_order );
       createOrdFileName( output_file_name, "_edge" );
       writeOrd( output_file_name );
-    }
-#endif
+  }
 
-  if ( produce_output )
-    {
+  if ( produce_output ) {
       // write file with best stretch order overall
       restore_order( best_total_stretch_order );
       createOrdFileName( output_file_name, "_stretch" );
       writeOrd( output_file_name );
-    }
+  }
+
+  if ( produce_output ) {
+      // write file with best stretch order overall
+      restore_order( best_bottleneck_stretch_order );
+      createOrdFileName( output_file_name, "_bs" );
+      writeOrd( output_file_name );
+  }
 
 #ifdef FAVORED
   // write file with best order for favored edge crossings
@@ -535,10 +543,12 @@ int main( int argc, char * argv[] )
   // deallocate all order structures
   cleanup_order( best_crossings_order );
   free( best_crossings_order );
-#ifdef MAX_EDGE
   cleanup_order( best_edge_crossings_order );
   free( best_edge_crossings_order );
-#endif
+  cleanup_order( best_total_stretch_order );
+  free( best_total_stretch_order );
+  cleanup_order( best_bottleneck_stretch_order );
+  free( best_bottleneck_stretch_order );
 #ifdef FAVORED
   cleanup_order( best_favored_crossings_order );
   free( best_favored_crossings_order );
@@ -550,7 +560,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2016 04 15 at 13:44:17 GMT] */
+/*  [Last modified: 2016 05 18 at 20:23:40 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */

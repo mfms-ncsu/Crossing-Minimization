@@ -87,6 +87,10 @@ extern Orderptr best_edge_crossings_order;
  */
 extern Orderptr best_total_stretch_order;
 /**
+ * structure to save layer orderings for minimum bottleneck edge stretch so far
+ */
+extern Orderptr best_bottleneck_stretch_order;
+/**
  * structure to save layer orderings for minimum crossings involving favored
  * edges so far
  */
@@ -188,4 +192,4 @@ extern int trace_freq;
 
 #endif
 
-/*  [Last modified: 2016 02 16 at 19:51:28 GMT] */
+/*  [Last modified: 2016 05 18 at 20:18:47 GMT] */
