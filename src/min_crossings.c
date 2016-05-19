@@ -85,14 +85,14 @@ static void printUsage( void )
   printf( "Usage: min_crossings [opts] file.dot file.ord\n" );
   printf( " where opts is one or more of the following\n" );
   printf(
-         "  -h (median | bary | mod_bary | mcn | sifting | mce | mce_s\n"
+         "  -h (median | bary | mod_bary | mcn | sifting | mce | mce_s | mse\n"
          "     | static_bary | alt_bary | up_down_bary | rotate_bary | slab_bary {parallel barycenter versions})\n"
          "     [main heuristic - default none]\n"
          "  -p (bfs | dfs | mds) [preprocessing - default none]\n"
          "  -z if post processing (repeated swaps until no improvement) is desired\n"
          "  -i MAX_ITERATIONS [stop if no improvement]\n"
          "  -R SEED edge list, node list, or sequence of layers will be randomized\n"
-         "     after each pass of mod_bary, mce, mcn, sifting, etc.\n"
+         "     after each pass of mod_bary, mce, mcn, mse, sifting, etc.\n"
          "     to break ties differently when sorting; SEED is an integer seed\n"
          "  -r SECONDS = maximum runtime [stop if no improvement]\n"
          "  -c ITERATION [capture the order after this iteration in a file]\n"
@@ -208,6 +208,9 @@ static void runHeuristic( void )
     sifting();
   else if( strcmp( heuristic, "mce" ) == 0 ) {
     maximumCrossingsEdge();
+  }
+  else if( strcmp( heuristic, "mse" ) == 0 ) {
+    maximumStretchEdge();
   }
   else {
       printf( "Bad heuristic '%s'\n", heuristic );
@@ -560,7 +563,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2016 05 18 at 20:23:40 GMT] */
+/*  [Last modified: 2016 05 19 at 14:58:48 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */

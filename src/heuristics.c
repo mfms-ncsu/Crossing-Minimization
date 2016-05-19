@@ -790,6 +790,32 @@ static bool edge_sift_iteration( Edgeptr edge )
   return false;
 }
 
+static bool total_stretch_sift_iteration( Edgeptr edge ) {
+  // figure out which of the two nodes to sift (none, one, or both)
+  bool sift_up_node = false;
+  bool sift_down_node = false;
+  if ( ! isFixedNode(edge->up_node) ) {
+      sift_node_for_total_stretch(edge->up_node);
+      fixNode(edge->up_node);
+      sprintf(buffer, "$$$ %s, node = %s, position = %d",
+              heuristic, edge->up_node->name, edge->up_node->position);
+      tracePrint(edge->up_node->layer, buffer);
+      if (end_of_iteration())
+        return true;
+    }
+
+  if ( ! isFixedNode(edge->down_node) ) {
+      sift_node_for_total_stretch(edge->down_node);
+      fixNode(edge->down_node);
+      sprintf(buffer, "$$$ %s, node = %s, position = %d",
+              heuristic, edge->down_node->name, edge->down_node->position);
+      tracePrint(edge->down_node->layer, buffer);
+      if ( end_of_iteration() )
+        return true;
+    }
+  return false;
+} // end, total_stretch_sift_iteration()
+
 void maximumCrossingsNode( void )
 {
   tracePrint( -1, "*** start maximum crossings node" );
@@ -880,6 +906,11 @@ void maximumCrossingsEdge( void )
           tracePrint( edge->up_node->layer, buffer );
           if ( end_mce_pass( edge ) ) break;
           bool last_iteration = false;
+          /**
+           * @todo what follows is now incorporated into
+           * maximumCrossingsEdgeWithSifting(); eventually the two could be
+           * merged
+           */
           /* if ( sifting_style == TOTAL ) */
           /*   last_iteration = sift_iteration( node ); */
           /* else */
@@ -890,6 +921,34 @@ void maximumCrossingsEdge( void )
         }
       tracePrint( -1, "--- mce, end pass" );
     }
+}
+
+void maximumStretchEdge( void ) {
+  tracePrint( -1, "*** start maximum strech edge with total stretch sifting" );
+  while( ! terminate() ) {
+      clearFixedNodes();
+      clearFixedEdges();
+      while ( true ) {
+        Edgeptr edge = maxStretchEdge();
+        if ( edge == NULL || allNodesFixed() ) break;
+        sprintf( buffer, "->- mse, edge %s -> %s",
+                 edge->down_node->name, edge->up_node->name );
+        tracePrint( edge->up_node->layer, buffer );
+        bool last_iteration = false;
+        if ( ! isFixedNode( edge->up_node ) ) {
+          last_iteration = total_stretch_sift_iteration( edge->up_node );
+          fixNode( edge->up_node );
+          if ( last_iteration ) return;
+        }
+        if ( ! isFixedNode( edge->down_node ) ) {
+          last_iteration = total_stretch_sift_iteration( edge->down_node );
+          fixNode( edge->down_node );
+          if ( last_iteration ) return;
+        }
+        fixEdge( edge );
+      }
+      tracePrint( -1, "--- mce with sifting, end pass" );
+  }
 }
 
 // the value used in the Matuszewski et al. paper
@@ -1199,4 +1258,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 05 18 at 20:17:28 GMT] */
+/*  [Last modified: 2016 05 19 at 20:30:44 GMT] */

@@ -162,6 +162,16 @@ void maximumCrossingsEdge( void );
  */
 void maximumCrossingsEdgeWithSifting( void );
 
+/**
+ * similar to mce, except that, in each iteration, the edge with maximum
+ * stretch is chosen and the endpoints are moved to positions that minimize
+ * the total stretch of their incident edges
+ *
+ * @todo one could also base the movement on minimizing the maximum stretch
+ * of any edge, similar to mce
+ */
+void maximumStretchEdge( void );
+
 void sifting( void );
 
 // preprocessors
@@ -183,4 +193,4 @@ void swapping( void );
 
 #endif
 
-/*  [Last modified: 2016 02 15 at 19:43:23 GMT] */
+/*  [Last modified: 2016 05 19 at 15:19:35 GMT] */

@@ -8,9 +8,11 @@
 #include<stdio.h>
 #include <stdlib.h>
 #include "graph.h"
+#include "min_crossings.h"
 #include "heuristics.h"
 #include "channel.h"
 #include "stretch.h"
+#include "random.h"
 
 Channelptr * channels;
 
@@ -124,4 +126,24 @@ double maxEdgeStretch() {
   return max_stretch;
 }
 
-/*  [Last modified: 2016 05 18 at 20:26:33 GMT] */
+/**
+ * @return the edge with maximum stretch among edges that have not been fixed
+ */
+Edgeptr maxStretchEdge() {
+  Edgeptr max_stretch_edge = NULL;
+  double max_stretch = -1.0;
+  if ( randomize_order ) {
+    genrand_permute(master_edge_list, number_of_edges, sizeof(Edgeptr));
+  }
+  for ( int i = 0; i < number_of_edges; i++ ) {
+    Edgeptr edge = master_edge_list[i];
+    double current_stretch = stretch(edge);
+    if( current_stretch > max_stretch && ! isFixedEdge( edge ) ) {
+      max_stretch = current_stretch;
+      max_stretch_edge = edge;
+    }
+  }
+  return max_stretch_edge;
+}
+
+/*  [Last modified: 2016 05 19 at 20:49:19 GMT] */

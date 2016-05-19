@@ -30,6 +30,13 @@ void sift( Nodeptr node );
  */
 void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node );
 
+/**
+ * @param node This node is placed into a position that minimizes the total
+ * stretch of edges incident on its layer; ties are broken by moving the node
+ * as far away as possible from its initial position
+ */
+void sift_node_for_total_stretch(Nodeptr node);
+
 #endif
 
-/*  [Last modified: 2011 04 04 at 13:36:04 GMT] */
+/*  [Last modified: 2016 05 19 at 20:15:25 GMT] */

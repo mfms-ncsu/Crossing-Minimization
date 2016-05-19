@@ -59,4 +59,9 @@ double totalStretch();
  */
 double maxEdgeStretch();
 
-/*  [Last modified: 2016 05 18 at 20:04:08 GMT] */
+/**
+ * @return the edge with maximum stretch among edges that have not been fixed
+ */
+Edgeptr maxStretchEdge();
+
+/*  [Last modified: 2016 05 19 at 20:32:43 GMT] */

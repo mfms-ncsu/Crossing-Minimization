@@ -243,4 +243,15 @@ void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node )
   updateCrossingsForLayer( layer );
 }
 
-/*  [Last modified: 2014 03 17 at 11:38:49 GMT] */
+void sift_node_for_total_stretch(Nodeptr node) {
+  int layer = node->layer;
+  int layer_size = layers[layer]->number_of_nodes;
+  Nodeptr * nodes_on_layer = layers[layer]->nodes;
+
+  if ( layer_size == 1 ) return;
+
+  // !!! not done yet !!!
+  
+} // end, sift node for total stretch
+
+/*  [Last modified: 2016 05 19 at 20:18:59 GMT] */

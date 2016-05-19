@@ -86,7 +86,8 @@ Edgeptr maxCrossingsEdge( void );
 
 /**
  * @return A pointer to an edge with the most crossings; ignores the current
- * status of the edge (fixed or not) and has no impact on the state of any heuristic.
+ * status of the edge (fixed or not) and has no impact on the state of any
+ * heuristic.
  */
 Edgeptr maxCrossingsEdgeStatic( void );
 
@@ -97,4 +98,4 @@ void printCrossings( void );
 
 #endif
 
-/*  [Last modified: 2016 03 01 at 01:28:59 GMT] */
+/*  [Last modified: 2016 05 19 at 20:23:37 GMT] */
