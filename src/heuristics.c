@@ -109,9 +109,9 @@ static void trace_printer( int layer, const char * message )
   int bottleneck_crossings = maxEdgeCrossings();
   double current_total_stretch = totalStretch();
   char * tag = layer < 0 ? "+" : "";
-  printf( "%siteration %6d | layer %2d | crossings %5d | best %5d"
-          " | bottleneck %3d | best %3d | stretch %7.2f | best %7.2f"
-          " | time %5.2f"
+  printf( "%siteration %4d | layer %2d | crossings %3d | best %3d"
+          " | bottleneck %2d | best %2d | stretch %5.2f | best %5.2f"
+          " | time %4.2f"
           " | %s\n",
           tag, iteration, layer, number_of_crossings, total_crossings.best,
           bottleneck_crossings, max_edge_crossings.best,
@@ -932,7 +932,7 @@ void maximumStretchEdge( void ) {
         }
         fixEdge( edge );
       }
-      tracePrint( -1, "--- mce with sifting, end pass" );
+      tracePrint( -1, "--- mse with sifting, end pass" );
   }
 }
 
@@ -1243,4 +1243,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 05 20 at 18:48:06 GMT] */
+/*  [Last modified: 2016 05 20 at 21:01:51 GMT] */

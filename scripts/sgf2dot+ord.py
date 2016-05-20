@@ -28,8 +28,8 @@ MAX_NODES_PER_LINE = 15
 
 def usage(program_name):
     print "Usage: " + program_name + " basename"
-    print "    where basename.sgf is the desired input file"
-    print "    produces basename.dot and basename.ord"
+    print "  where basename.sgf is the desired input file"
+    print "  produces basename.dot and basename.ord in the same directory as basename.sgf"
 
 # @return a tuple of the form (name, layers, edges), where name is the name
 # of the graph, layers is a list of lists, each inner list containing pairs
@@ -169,4 +169,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 04 18 at 00:20:03 GMT]
+#  [Last modified: 2016 05 20 at 20:46:42 GMT]

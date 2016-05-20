@@ -169,8 +169,7 @@ static void reposition_node( Nodeptr node, Nodeptr * nodes,
  * downward edges.       
  */
 
-void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node )
-{
+void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node ) {
   assert( node == edge->up_node || node == edge->down_node );
 #ifdef DEBUG
   printf( "-> sift_node_for_edge_crossings: %s -> %s, %s\n",
@@ -187,56 +186,52 @@ void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node )
   int min_edge_crossing_count = edge->crossings;
   int min_position = node->position;
   int max_distance = 0;
+  int current_edge_crossing_count = INT_MAX;
 
   // begin with a sweep to the left of the current node position
-  for ( int i = node->position - 1; i >= 0; i-- )
-    {
-      int current_edge_crossing_count
-        = edge_crossings_after_swap( nodes_on_layer[i], node );
-      if ( current_edge_crossing_count < min_edge_crossing_count
-           || ( current_edge_crossing_count == min_edge_crossing_count
-                && node->position - i > max_distance )
-           )
-        {
-          min_edge_crossing_count = current_edge_crossing_count;
-          min_position = i - 1;
-          max_distance = node->position - i + 1;
-        }
-#ifdef DEBUG
-      printf( " mce left sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
-              i, min_position, current_edge_crossing_count );
-#endif
+  for ( int i = node->position - 1; i >= 0; i-- ) {
+    current_edge_crossing_count
+      = edge_crossings_after_swap( nodes_on_layer[i], node );
+    if ( current_edge_crossing_count < min_edge_crossing_count
+         || ( current_edge_crossing_count == min_edge_crossing_count
+              && node->position - i > max_distance )
+         ) {
+      min_edge_crossing_count = current_edge_crossing_count;
+      min_position = i - 1;
+      max_distance = node->position - i + 1;
     }
+#ifdef DEBUG
+    printf( " mce left sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
+            i, min_position, current_edge_crossing_count );
+#endif
+  }
 
   // Undo the left sweep (no need to check for min)
-  for ( int i = 0; i < node->position; i++ )
-    {
-       edge_crossings_after_swap( node, nodes_on_layer[i] );
+  for ( int i = 0; i < node->position; i++ ) {
+    edge_crossings_after_swap( node, nodes_on_layer[i] );
 #ifdef DEBUG
-      printf( " mce undo sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
-              i, min_position, current_edge_crossing_count );
+    printf( " mce undo sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
+            i, min_position, current_edge_crossing_count );
 #endif
-    }
+  }
 
   // Then sweep all the way to the right
-  for ( int i = node->position + 1; i < layer_size; i++ )
-    {
-      int current_edge_crossing_count
-        = edge_crossings_after_swap( node, nodes_on_layer[i] );
-      if ( current_edge_crossing_count < min_edge_crossing_count
-           || ( current_edge_crossing_count == min_edge_crossing_count
-                && abs(node->position - i) > max_distance )
-           )
-        {
-          min_edge_crossing_count = current_edge_crossing_count;
-          min_position = i;
-          max_distance = abs(node->position - i);
-        }
-#ifdef DEBUG
-      printf( " mce right sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
-              i, min_position, current_edge_crossing_count );
-#endif
+  for ( int i = node->position + 1; i < layer_size; i++ ) {
+    current_edge_crossing_count
+      = edge_crossings_after_swap( node, nodes_on_layer[i] );
+    if ( current_edge_crossing_count < min_edge_crossing_count
+         || ( current_edge_crossing_count == min_edge_crossing_count
+              && abs(node->position - i) > max_distance )
+         ) {
+      min_edge_crossing_count = current_edge_crossing_count;
+      min_position = i;
+      max_distance = abs(node->position - i);
     }
+#ifdef DEBUG
+    printf( " mce right sweep: pos = %2d, min_pos = %2d, edge xings = %d\n",
+            i, min_position, current_edge_crossing_count );
+#endif
+  }
 
   reposition_node( node, nodes_on_layer, min_position ); 
 
@@ -244,10 +239,25 @@ void sift_node_for_edge_crossings( Edgeptr edge, Nodeptr node )
   updateCrossingsForLayer( layer );
 }
 
+/**
+ * swap the nodes in positions i and j on the given layer
+ *
+ * @todo this might be useful elsewhere
+ */
+static void swap_nodes(int layer, int i, int j) {
+  assert(i >= 0 && j >= 0);
+  assert(i < layers[layer]->number_of_nodes && i < layers[layer]->number_of_nodes);
+  Nodeptr * nodes_on_layer = layers[layer]->nodes;
+  Nodeptr tmp = nodes_on_layer[i];
+  nodes_on_layer[i] = nodes_on_layer[j];
+  nodes_on_layer[j] = tmp;
+  nodes_on_layer[i]->position = i;
+  nodes_on_layer[j]->position = j;
+} 
+
 void sift_node_for_total_stretch(Nodeptr node) {
   int layer = node->layer;
   int layer_size = layers[layer]->number_of_nodes;
-  Nodeptr * nodes_on_layer = layers[layer]->nodes;
 
   if ( layer_size == 1 ) return;
 
@@ -257,12 +267,51 @@ void sift_node_for_total_stretch(Nodeptr node) {
   int min_position = node->position;
   int original_position = node->position;
 
-  // begin with a sweep to the left of the current node position
+  // begin with a sweep to the left of the current node position, keeping
+  // track of minimum stretch, or maximum distance as a tie breaker
   for ( int i = original_position - 1; i >= 0; i-- ) {
+    swap_nodes(layer, i, i+1);
+    double current_stretch = totalLayerStretch(layer);
+    if ( current_stretch < min_stretch
+         ||
+         (current_stretch == min_stretch
+          && original_position - i > original_position - min_position) ) {
+      min_stretch = current_stretch;
+      min_position = i;
+    }
+#ifdef DEBUG
+    printf( " mse left sweep: pos = %2d, min_pos = %2d, stretch = %6.1f\n",
+            i, min_position, current_stretch );
+#endif
   }
 
-  // !!! not done yet !!!
-  
+  // sweep right, back to the original position (no need to track stretch)
+  for ( int i = 0; i < original_position; i++ ) {
+    swap_nodes(layer, i, i+1);
+  }
+
+  // sweep to the right of original position, tracking stretch and distance
+  for ( int i = original_position + 1; i < layer_size; i++ ) {
+    swap_nodes(layer, i-1, i);
+    double current_stretch = totalLayerStretch(layer);
+    if ( current_stretch < min_stretch
+         ||
+         (current_stretch == min_stretch
+          && i - original_position > abs(original_position - min_position)) ) {
+      min_stretch = current_stretch;
+      min_position = i;
+    }
+#ifdef DEBUG
+    printf( " mse right sweep: pos = %2d, min_pos = %2d, stretch = %6.1f\n",
+            i, min_position, current_stretch );
+#endif
+  }
+
+  // sweep left to the min position
+  for ( int i = layer_size - 1; i > min_position; i-- ) {
+    swap_nodes(layer, i-1, i);
+  }
+
 } // end, sift node for total stretch
 
-/*  [Last modified: 2016 05 20 at 18:40:05 GMT] */
+/*  [Last modified: 2016 05 20 at 20:53:54 GMT] */

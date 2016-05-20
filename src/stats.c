@@ -77,7 +77,7 @@ static PARETO_LIST pareto_insert(double objective_one,
                                  int iteration,
                                  PARETO_LIST list) {
 #ifdef DEBUG
-  printf("-> pareto_insert: %d, %d, ",
+  printf("-> pareto_insert: %f, %f, %d, ",
          objective_one, objective_two, iteration);
   print_pareto_list(list, stdout);
   printf("\n");
@@ -218,8 +218,8 @@ void capture_heuristic_stats( void )
 {
   total_crossings.after_heuristic = total_crossings.best;
   max_edge_crossings.after_heuristic = max_edge_crossings.best;
-  total_stretch.after_heuristic = totalStretch();
-  bottleneck_stretch.after_heuristic = maxEdgeStretch();
+  total_stretch.after_heuristic = total_stretch.best;
+  bottleneck_stretch.after_heuristic = bottleneck_stretch.best;
 #ifdef FAVORED
   favored_edge_crossings.after_heuristic = priority_edge_crossings.best;
 #endif
@@ -266,7 +266,7 @@ void update_best_double( CROSSING_STATS_DOUBLE * stats, Orderptr order,
 #ifdef DEBUG
   printf("-> update_best_double, %s, %f\n", stats->name, stats->best);
 #endif
-  int current_value = crossing_retrieval_function();
+  double current_value = crossing_retrieval_function();
   if( current_value < stats->best )
     {
       stats->best = current_value;
@@ -550,4 +550,4 @@ void print_run_statistics( FILE * output_stream )
   }
 }
 
-/*  [Last modified: 2016 05 18 at 20:28:02 GMT] */
+/*  [Last modified: 2016 05 20 at 21:28:41 GMT] */
