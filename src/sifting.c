@@ -16,6 +16,7 @@
 #include"sifting.h"
 #include"swap.h"
 #include"sorting.h"
+#include"channel.h"
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -250,8 +251,18 @@ void sift_node_for_total_stretch(Nodeptr node) {
 
   if ( layer_size == 1 ) return;
 
+  // resorting to the (possibly inefficient) naive algorithm here, i.e.,
+  // recomputing stretch after each move
+  double min_stretch = totalLayerStretch(layer);
+  int min_position = node->position;
+  int original_position = node->position;
+
+  // begin with a sweep to the left of the current node position
+  for ( int i = original_position - 1; i >= 0; i-- ) {
+  }
+
   // !!! not done yet !!!
   
 } // end, sift node for total stretch
 
-/*  [Last modified: 2016 05 19 at 20:18:59 GMT] */
+/*  [Last modified: 2016 05 20 at 18:40:05 GMT] */

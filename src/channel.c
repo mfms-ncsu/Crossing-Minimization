@@ -63,7 +63,7 @@ void initChannels(void) {
 }
 
 /**
- * @return the total strech of edges in channel i; assumes the positions of
+ * @return the total stretch of edges in channel i; assumes the positions of
  * nodes on the two layers have been updated correctly
  */
 double totalChannelStretch(int i) {
@@ -75,7 +75,21 @@ double totalChannelStretch(int i) {
 }
 
 /**
- * @return the total strech of edges in channel i; assumes the positions of
+ * @return the total stretch of edges incident on layer i
+ */
+double totalLayerStretch(int i) {
+  double total_stretch = 0.0;
+  if ( i > 0 ) {
+    total_stretch += totalChannelStretch(i);
+  }
+  if ( i < number_of_layers - 1 ) {
+    total_stretch += totalChannelStretch(i + 1);
+  }
+  return total_stretch;
+}
+
+/**
+ * @return the total stretch of edges in channel i; assumes the positions of
  * nodes on the two layers have been updated correctly
  */
 double maxEdgeStretchInChannel(int i) {
@@ -146,4 +160,4 @@ Edgeptr maxStretchEdge() {
   return max_stretch_edge;
 }
 
-/*  [Last modified: 2016 05 19 at 20:49:19 GMT] */
+/*  [Last modified: 2016 05 20 at 18:48:51 GMT] */

@@ -790,31 +790,16 @@ static bool edge_sift_iteration( Edgeptr edge )
   return false;
 }
 
-static bool total_stretch_sift_iteration( Edgeptr edge ) {
-  // figure out which of the two nodes to sift (none, one, or both)
-  bool sift_up_node = false;
-  bool sift_down_node = false;
-  if ( ! isFixedNode(edge->up_node) ) {
-      sift_node_for_total_stretch(edge->up_node);
-      fixNode(edge->up_node);
-      sprintf(buffer, "$$$ %s, node = %s, position = %d",
-              heuristic, edge->up_node->name, edge->up_node->position);
-      tracePrint(edge->up_node->layer, buffer);
-      if (end_of_iteration())
-        return true;
-    }
-
-  if ( ! isFixedNode(edge->down_node) ) {
-      sift_node_for_total_stretch(edge->down_node);
-      fixNode(edge->down_node);
-      sprintf(buffer, "$$$ %s, node = %s, position = %d",
-              heuristic, edge->down_node->name, edge->down_node->position);
-      tracePrint(edge->down_node->layer, buffer);
-      if ( end_of_iteration() )
-        return true;
-    }
+static bool total_stretch_sift_iteration( Nodeptr node ) {
+  sift_node_for_total_stretch(node);
+  fixNode(node);
+  sprintf(buffer, "$$$ %s, node = %s, position = %d",
+          heuristic, node->name, node->position);
+  tracePrint(node->layer, buffer);
+  if (end_of_iteration())
+    return true;
   return false;
-} // end, total_stretch_sift_iteration()
+}
 
 void maximumCrossingsNode( void )
 {
@@ -1258,4 +1243,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 05 19 at 20:30:44 GMT] */
+/*  [Last modified: 2016 05 20 at 18:48:06 GMT] */

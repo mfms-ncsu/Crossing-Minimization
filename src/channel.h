@@ -44,6 +44,11 @@ extern Channelptr * channels;
 double totalChannelStretch(int i);
 
 /**
+ * @return the total stretch of edges incident on layer i
+ */
+double totalLayerStretch(int i);
+
+/**
  * @return the maximum stretch of any edge in channel i; assumes positions of
  * nodes in the two layers have been updated correctly
  */
@@ -64,4 +69,4 @@ double maxEdgeStretch();
  */
 Edgeptr maxStretchEdge();
 
-/*  [Last modified: 2016 05 19 at 20:32:43 GMT] */
+/*  [Last modified: 2016 05 20 at 18:39:03 GMT] */
