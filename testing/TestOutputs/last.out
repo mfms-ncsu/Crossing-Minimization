@@ -1,4 +1,4 @@
-++++++++++ Testing min_crossings Wed May 18 20:29:14 UTC 2016 ++++++++++++
+++++++++++ Testing min_crossings Mon May 23 17:31:17 UTC 2016 ++++++++++++
 ========= running experiments with TestData/c_2000_2100_25_4-rnd-004-scr ================= echo ========= running experiments with TestData/c_2000_2100_25_4-rnd-004-scr =================
 ################################################################
 ########### min_crossings, release 1.0, 2016/03/31 #############
@@ -20,7 +20,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.657
+Runtime,0.666
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3267,iteration,6841
@@ -31,12 +31,12 @@ HeuristicEdgeCrossings,43,iteration,9181
 FinalEdgeCrossings,43,iteration,-1
 StartStretch,733.761140
 PreStretch,220.081152
-HeuristicStretch,186.105895,iteration,4983
-FinalStretch,136.000000,iteration,-1
+HeuristicStretch,136.221342,iteration,5000
+FinalStretch,136.221342,iteration,-1
 StartBottleneckStretch,0.989130
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.871462,iteration,22
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.461219,iteration,6848
+FinalBottleneckStretch,0.461219,iteration,-1
 Pareto,43^4266;44^3770;48^3637;50^3528;52^3267, 9182;6408;9193;4200;6841
 
 ################################################################
@@ -59,7 +59,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.650
+Runtime,0.640
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,4310,iteration,78
@@ -70,12 +70,12 @@ HeuristicEdgeCrossings,48,iteration,1333
 FinalEdgeCrossings,48,iteration,-1
 StartStretch,733.761140
 PreStretch,220.081152
-HeuristicStretch,199.231384,iteration,1284
-FinalStretch,154.000000,iteration,-1
+HeuristicStretch,154.220242,iteration,1284
+FinalStretch,154.220242,iteration,-1
 StartBottleneckStretch,0.989130
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.706654,iteration,22
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.559574,iteration,1327
+FinalBottleneckStretch,0.559574,iteration,-1
 Pareto,48^4728;54^4510;65^4502;66^4455;68^4313;72^4310, 1333;1329;1906;1325;89;78
 
 ################################################################
@@ -94,11 +94,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.359, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.426, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.365
+Runtime,2.430
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3807,iteration,9743
@@ -109,12 +109,12 @@ HeuristicEdgeCrossings,19,iteration,6025
 FinalEdgeCrossings,19,iteration,-1
 StartStretch,733.761140
 PreStretch,220.081152
-HeuristicStretch,157.812780,iteration,7105
-FinalStretch,153.000000,iteration,-1
+HeuristicStretch,153.334339,iteration,7242
+FinalStretch,153.334339,iteration,-1
 StartBottleneckStretch,0.989130
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.434848,iteration,295
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.356669,iteration,6575
+FinalBottleneckStretch,0.356669,iteration,-1
 Pareto,19^4538;20^3991;22^3807, 6025;8008;9743
 
 ################################################################
@@ -133,11 +133,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.706, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.674, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.708
+Runtime,1.677
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,4796,iteration,9650
@@ -148,12 +148,12 @@ HeuristicEdgeCrossings,100,iteration,9956
 FinalEdgeCrossings,100,iteration,-1
 StartStretch,733.761140
 PreStretch,220.081152
-HeuristicStretch,171.091620,iteration,6471
-FinalStretch,168.000000,iteration,-1
+HeuristicStretch,168.535480,iteration,6512
+FinalStretch,168.535480,iteration,-1
 StartBottleneckStretch,0.989130
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.978022,iteration,1112
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.922466,iteration,2141
+FinalBottleneckStretch,0.922466,iteration,-1
 Pareto,100^4796, 9956
 
 ################################################################
@@ -172,11 +172,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.919, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.063, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.924
+Runtime,3.066
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3921,iteration,9766
@@ -187,12 +187,12 @@ HeuristicEdgeCrossings,18,iteration,8019
 FinalEdgeCrossings,18,iteration,-1
 StartStretch,733.761140
 PreStretch,220.081152
-HeuristicStretch,154.847395,iteration,7172
-FinalStretch,154.000000,iteration,-1
+HeuristicStretch,154.296577,iteration,10001
+FinalStretch,154.262822,iteration,-1
 StartBottleneckStretch,0.989130
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.446205,iteration,295
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.369192,iteration,4158
+FinalBottleneckStretch,0.369192,iteration,-1
 Pareto,18^4209;20^3921, 8023;9766
 
 ===================================================
@@ -218,7 +218,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.539
+Runtime,0.547
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1555,iteration,435
@@ -229,8 +229,8 @@ HeuristicEdgeCrossings,48,iteration,288
 FinalEdgeCrossings,48,iteration,-1
 StartStretch,745.313603
 PreStretch,401.405238
-HeuristicStretch,259.320325,iteration,149
-FinalStretch,249.000000,iteration,-1
+HeuristicStretch,249.947163,iteration,149
+FinalStretch,249.947163,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -267,12 +267,12 @@ HeuristicEdgeCrossings,38,iteration,6864
 FinalEdgeCrossings,38,iteration,-1
 StartStretch,745.313603
 PreStretch,401.405238
-HeuristicStretch,238.351386,iteration,6763
-FinalStretch,218.000000,iteration,-1
+HeuristicStretch,218.996313,iteration,6763
+FinalStretch,218.996313,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,1.000000,iteration,1912
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.880000,iteration,2155
+FinalBottleneckStretch,0.880000,iteration,-1
 Pareto,38^2003;45^1794, 6901;2567
 
 ################################################################
@@ -291,11 +291,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.132, graph c_2000_2100_50_8-rnd-019
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.185, graph c_2000_2100_50_8-rnd-019
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.136
+Runtime,2.188
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1471,iteration,8983
@@ -306,8 +306,8 @@ HeuristicEdgeCrossings,14,iteration,6023
 FinalEdgeCrossings,14,iteration,-1
 StartStretch,745.313603
 PreStretch,401.405238
-HeuristicStretch,246.164317,iteration,8864
-FinalStretch,244.000000,iteration,-1
+HeuristicStretch,244.186643,iteration,8896
+FinalStretch,244.186643,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -333,7 +333,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.553
+Runtime,1.578
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1812,iteration,5607
@@ -344,8 +344,8 @@ HeuristicEdgeCrossings,90,iteration,3495
 FinalEdgeCrossings,90,iteration,-1
 StartStretch,745.313603
 PreStretch,401.405238
-HeuristicStretch,297.409496,iteration,4433
-FinalStretch,289.000000,iteration,-1
+HeuristicStretch,289.102423,iteration,4448
+FinalStretch,289.102423,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -368,11 +368,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.727, graph c_2000_2100_50_8-rnd-019
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.721, graph c_2000_2100_50_8-rnd-019
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.729
+Runtime,2.723
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1370,iteration,9050
@@ -383,8 +383,8 @@ HeuristicEdgeCrossings,13,iteration,8003
 FinalEdgeCrossings,13,iteration,-1
 StartStretch,745.313603
 PreStretch,401.405238
-HeuristicStretch,248.380376,iteration,9831
-FinalStretch,245.000000,iteration,-1
+HeuristicStretch,245.353044,iteration,9877
+FinalStretch,245.353044,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -425,8 +425,8 @@ HeuristicEdgeCrossings,43,iteration,3066
 FinalEdgeCrossings,43,iteration,-1
 StartStretch,922.514384
 PreStretch,732.655755
-HeuristicStretch,366.921957,iteration,8226
-FinalStretch,355.000000,iteration,-1
+HeuristicStretch,355.943174,iteration,8226
+FinalStretch,355.943174,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -449,11 +449,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.629, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.615, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.633
+Runtime,0.618
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,5388,iteration,4510
@@ -464,8 +464,8 @@ HeuristicEdgeCrossings,43,iteration,7353
 FinalEdgeCrossings,43,iteration,-1
 StartStretch,922.514384
 PreStretch,732.655755
-HeuristicStretch,381.864780,iteration,4375
-FinalStretch,369.000000,iteration,-1
+HeuristicStretch,369.394436,iteration,4463
+FinalStretch,369.394436,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -488,11 +488,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.581, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.613, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.584
+Runtime,1.616
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,4102,iteration,9478
@@ -503,8 +503,8 @@ HeuristicEdgeCrossings,24,iteration,6010
 FinalEdgeCrossings,24,iteration,-1
 StartStretch,922.514384
 PreStretch,732.655755
-HeuristicStretch,397.350416,iteration,10001
-FinalStretch,394.000000,iteration,-1
+HeuristicStretch,395.352787,iteration,10001
+FinalStretch,394.588621,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -527,11 +527,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.183, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.158, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.187
+Runtime,1.162
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,5199,iteration,8528
@@ -542,8 +542,8 @@ HeuristicEdgeCrossings,63,iteration,9394
 FinalEdgeCrossings,63,iteration,-1
 StartStretch,922.514384
 PreStretch,732.655755
-HeuristicStretch,423.577200,iteration,6641
-FinalStretch,421.000000,iteration,-1
+HeuristicStretch,421.251071,iteration,6690
+FinalStretch,421.251071,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -566,11 +566,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.374, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.354, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.377
+Runtime,2.357
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,4157,iteration,9532
@@ -581,8 +581,8 @@ HeuristicEdgeCrossings,20,iteration,6036
 FinalEdgeCrossings,20,iteration,-1
 StartStretch,922.514384
 PreStretch,732.655755
-HeuristicStretch,401.692508,iteration,10001
-FinalStretch,395.000000,iteration,-1
+HeuristicStretch,396.578000,iteration,10001
+FinalStretch,395.056607,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -623,8 +623,8 @@ HeuristicEdgeCrossings,7,iteration,0
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,4.000000
 PreStretch,3.750000
-HeuristicStretch,3.500000,iteration,0
-FinalStretch,3.000000,iteration,-1
+HeuristicStretch,3.500000,iteration,2
+FinalStretch,3.500000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -651,7 +651,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.010
+Runtime,0.009
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,13,iteration,1
@@ -662,12 +662,12 @@ HeuristicEdgeCrossings,5,iteration,1
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,4.000000
 PreStretch,3.750000
-HeuristicStretch,3.250000,iteration,0
-FinalStretch,3.000000,iteration,-1
+HeuristicStretch,3.250000,iteration,1
+FinalStretch,3.250000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.750000,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^13, 1
 
 ################################################################
@@ -690,7 +690,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.047
+Runtime,0.051
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,4,iteration,15
@@ -701,12 +701,12 @@ HeuristicEdgeCrossings,2,iteration,12
 FinalEdgeCrossings,2,iteration,-1
 StartStretch,4.000000
 PreStretch,3.750000
-HeuristicStretch,2.500000,iteration,8
-FinalStretch,2.000000,iteration,-1
+HeuristicStretch,2.500000,iteration,15
+FinalStretch,2.500000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.500000,iteration,3
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.500000,iteration,12
+FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,2^4, 15
 
 ################################################################
@@ -729,7 +729,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.035
+Runtime,0.036
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,4,iteration,4
@@ -741,11 +741,11 @@ FinalEdgeCrossings,2,iteration,-1
 StartStretch,4.000000
 PreStretch,3.750000
 HeuristicStretch,2.500000,iteration,4
-FinalStretch,2.000000,iteration,-1
+FinalStretch,2.500000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.500000,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.500000,iteration,4
+FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,2^4, 4
 
 ################################################################
@@ -768,7 +768,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.056
+Runtime,0.057
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,10,iteration,11
@@ -779,12 +779,12 @@ HeuristicEdgeCrossings,4,iteration,13
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,4.000000
 PreStretch,3.750000
-HeuristicStretch,3.750000,iteration,0
-FinalStretch,3.000000,iteration,-1
+HeuristicStretch,3.500000,iteration,11
+FinalStretch,3.500000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.750000,iteration,3
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,4^11;5^10, 13;11
 
 ===================================================
@@ -810,7 +810,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.015
+Runtime,0.016
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,31,iteration,10
@@ -821,12 +821,12 @@ HeuristicEdgeCrossings,5,iteration,10
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,15.500000
 PreStretch,11.250000
-HeuristicStretch,9.250000,iteration,10
+HeuristicStretch,9.000000,iteration,12
 FinalStretch,9.000000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,1.000000,iteration,4
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.750000,iteration,4
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^31, 10
 
 ################################################################
@@ -849,7 +849,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.017
+Runtime,0.016
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,28,iteration,52
@@ -860,12 +860,12 @@ HeuristicEdgeCrossings,4,iteration,52
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,15.500000
 PreStretch,11.250000
-HeuristicStretch,9.000000,iteration,2
+HeuristicStretch,9.000000,iteration,55
 FinalStretch,9.000000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.750000,iteration,4
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.500000,iteration,30
+FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,4^28, 52
 
 ################################################################
@@ -888,7 +888,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.094
+Runtime,0.090
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,40,iteration,10
@@ -899,12 +899,12 @@ HeuristicEdgeCrossings,5,iteration,7
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,15.500000
 PreStretch,11.250000
-HeuristicStretch,11.250000,iteration,10001
-FinalStretch,9.000000,iteration,-1
+HeuristicStretch,10.250000,iteration,10001
+FinalStretch,9.500000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,1.000000,iteration,6
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.750000,iteration,6
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^41;7^40, 7;10
 
 ################################################################
@@ -927,7 +927,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.054
+Runtime,0.057
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,31,iteration,17
@@ -939,7 +939,7 @@ FinalEdgeCrossings,6,iteration,-1
 StartStretch,15.500000
 PreStretch,11.250000
 HeuristicStretch,8.750000,iteration,17
-FinalStretch,8.000000,iteration,-1
+FinalStretch,8.750000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -966,7 +966,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.105
+Runtime,0.101
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,29,iteration,121
@@ -977,12 +977,12 @@ HeuristicEdgeCrossings,6,iteration,1
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,15.500000
 PreStretch,11.250000
-HeuristicStretch,9.250000,iteration,23
-FinalStretch,9.000000,iteration,-1
+HeuristicStretch,9.250000,iteration,104
+FinalStretch,9.250000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.750000,iteration,26
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,6^29, 121
 
 ===================================================
@@ -1008,7 +1008,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.200
+Runtime,0.207
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,369,iteration,167
@@ -1019,12 +1019,12 @@ HeuristicEdgeCrossings,32,iteration,16
 FinalEdgeCrossings,32,iteration,-1
 StartStretch,212.571717
 PreStretch,127.043771
-HeuristicStretch,114.369024,iteration,192
-FinalStretch,101.000000,iteration,-1
+HeuristicStretch,101.898990,iteration,192
+FinalStretch,101.898990,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981481
-HeuristicBottleneckStretch,0.962963,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.617172,iteration,118
+FinalBottleneckStretch,0.617172,iteration,-1
 Pareto,32^1568;35^801;36^479;37^435;38^430;39^369, 16;162;249;438;439;167
 
 ################################################################
@@ -1047,7 +1047,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.197
+Runtime,0.194
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,185,iteration,6036
@@ -1058,12 +1058,12 @@ HeuristicEdgeCrossings,14,iteration,4086
 FinalEdgeCrossings,14,iteration,-1
 StartStretch,212.571717
 PreStretch,127.043771
-HeuristicStretch,94.546128,iteration,6724
-FinalStretch,80.000000,iteration,-1
+HeuristicStretch,80.769360,iteration,6724
+FinalStretch,80.769360,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981481
-HeuristicBottleneckStretch,0.687542,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.576768,iteration,8457
+FinalBottleneckStretch,0.576768,iteration,-1
 Pareto,14^226;33^185, 4086;6036
 
 ################################################################
@@ -1086,7 +1086,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.985
+Runtime,1.021
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,343,iteration,6853
@@ -1097,12 +1097,12 @@ HeuristicEdgeCrossings,18,iteration,6601
 FinalEdgeCrossings,18,iteration,-1
 StartStretch,212.571717
 PreStretch,127.043771
-HeuristicStretch,107.999663,iteration,9277
-FinalStretch,102.000000,iteration,-1
+HeuristicStretch,102.398653,iteration,9303
+FinalStretch,102.398653,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981481
-HeuristicBottleneckStretch,0.653199,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.612795,iteration,8732
+FinalBottleneckStretch,0.612795,iteration,-1
 Pareto,18^353;25^352;27^350;28^349;29^348;30^347;31^346;32^343, 7077;6733;6737;6738;6739;6742;6743;6853
 
 ################################################################
@@ -1125,7 +1125,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.682
+Runtime,0.695
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,326,iteration,4064
@@ -1136,12 +1136,12 @@ HeuristicEdgeCrossings,37,iteration,3518
 FinalEdgeCrossings,37,iteration,-1
 StartStretch,212.571717
 PreStretch,127.043771
-HeuristicStretch,113.622896,iteration,373
-FinalStretch,101.000000,iteration,-1
+HeuristicStretch,101.879798,iteration,376
+FinalStretch,101.879798,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981481
-HeuristicBottleneckStretch,0.652525,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.617508,iteration,3657
+FinalBottleneckStretch,0.617508,iteration,-1
 Pareto,37^326, 5833
 
 ################################################################
@@ -1160,11 +1160,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 39, size_of_largest_component = 439
 === Running heuristic mce
-*** standard termination here: iteration 3769 crossings 341 edge_crossings 16 graph g_0500_09_11 ***
+*** standard termination here: iteration 4240 crossings 341 edge_crossings 16 graph g_0500_09_11 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.135
+Runtime,1.153
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,341,iteration,3107
@@ -1175,12 +1175,12 @@ HeuristicEdgeCrossings,16,iteration,1593
 FinalEdgeCrossings,16,iteration,-1
 StartStretch,212.571717
 PreStretch,127.043771
-HeuristicStretch,121.729630,iteration,9592
-FinalStretch,113.000000,iteration,-1
+HeuristicStretch,113.341414,iteration,9595
+FinalStretch,113.341414,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981481
-HeuristicBottleneckStretch,0.635017,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.597980,iteration,6199
+FinalBottleneckStretch,0.597980,iteration,-1
 Pareto,16^351;19^346;21^344;23^341, 3304;3298;3511;3107
 
 ===================================================
@@ -1202,11 +1202,11 @@ MedianDegree,3.5
 --- Running preprocessor dfs
 dfs done, number_of_components = 11, size_of_largest_component = 489
 === Running heuristic bary
-*** standard termination here: iteration 129 crossings 13079 edge_crossings 81 graph g_0500_09_20 ***
+*** standard termination here: iteration 145 crossings 13079 edge_crossings 81 graph g_0500_09_20 ***
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.480
+Runtime,0.482
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,12282,iteration,8417
@@ -1217,12 +1217,12 @@ HeuristicEdgeCrossings,78,iteration,2959
 FinalEdgeCrossings,78,iteration,-1
 StartStretch,332.749158
 PreStretch,277.951515
-HeuristicStretch,165.663300,iteration,768
-FinalStretch,157.000000,iteration,-1
+HeuristicStretch,157.608754,iteration,768
+FinalStretch,157.608754,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.741414,iteration,2
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.615825,iteration,752
+FinalBottleneckStretch,0.615825,iteration,-1
 Pareto,78^13169;80^12602;81^12466;93^12411;95^12347;100^12282, 2960;6273;6305;2305;6161;8417
 
 ################################################################
@@ -1245,7 +1245,7 @@ dfs done, number_of_components = 11, size_of_largest_component = 489
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.457
+Runtime,0.454
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,11799,iteration,9505
@@ -1256,12 +1256,12 @@ HeuristicEdgeCrossings,72,iteration,3423
 FinalEdgeCrossings,72,iteration,-1
 StartStretch,332.749158
 PreStretch,277.951515
-HeuristicStretch,162.108081,iteration,10001
-FinalStretch,148.000000,iteration,-1
+HeuristicStretch,149.289226,iteration,10001
+FinalStretch,148.535690,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.670034,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.613468,iteration,7948
+FinalBottleneckStretch,0.613468,iteration,-1
 Pareto,72^12208;78^12175;80^12166;81^11893;86^11891;93^11799, 3423;8762;7142;5304;7482;9505
 
 ################################################################
@@ -1280,12 +1280,12 @@ MedianDegree,3.5
 --- Running preprocessor dfs
 dfs done, number_of_components = 11, size_of_largest_component = 489
 === Running heuristic mce
-*** standard termination here: iteration 5402 crossings 14280 edge_crossings 71 graph g_0500_09_20 ***
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.479, graph g_0500_09_20
+*** standard termination here: iteration 5893 crossings 14280 edge_crossings 71 graph g_0500_09_20 ***
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.461, graph g_0500_09_20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.480
+Runtime,1.462
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,13639,iteration,9829
@@ -1296,12 +1296,12 @@ HeuristicEdgeCrossings,63,iteration,7421
 FinalEdgeCrossings,63,iteration,-1
 StartStretch,332.749158
 PreStretch,277.951515
-HeuristicStretch,185.025589,iteration,9563
-FinalStretch,181.000000,iteration,-1
+HeuristicStretch,181.593603,iteration,9563
+FinalStretch,181.593603,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.671380,iteration,120
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.575084,iteration,5027
+FinalBottleneckStretch,0.575084,iteration,-1
 Pareto,63^14241;66^14180;67^14010;69^13995;71^13823;72^13813;73^13809;74^13788;75^13689;78^13661;79^13639, 7428;9419;9449;9451;9855;9861;9847;9833;9832;9564;9829
 
 ################################################################
@@ -1320,11 +1320,11 @@ MedianDegree,3.5
 --- Running preprocessor dfs
 dfs done, number_of_components = 11, size_of_largest_component = 489
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.990, graph g_0500_09_20
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.997, graph g_0500_09_20
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.991
+Runtime,0.997
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,10047,iteration,9768
@@ -1335,12 +1335,12 @@ HeuristicEdgeCrossings,95,iteration,1616
 FinalEdgeCrossings,95,iteration,-1
 StartStretch,332.749158
 PreStretch,277.951515
-HeuristicStretch,145.726263,iteration,8505
-FinalStretch,144.000000,iteration,-1
+HeuristicStretch,144.511448,iteration,9002
+FinalStretch,144.511448,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.852862,iteration,9
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.852862,iteration,1457
+FinalBottleneckStretch,0.852862,iteration,-1
 Pareto,95^10941;98^10772;100^10580;101^10047, 1658;1821;2111;9768
 
 ################################################################
@@ -1363,7 +1363,7 @@ dfs done, number_of_components = 11, size_of_largest_component = 489
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.905
+Runtime,1.919
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,13658,iteration,4110
@@ -1374,12 +1374,12 @@ HeuristicEdgeCrossings,61,iteration,6969
 FinalEdgeCrossings,61,iteration,-1
 StartStretch,332.749158
 PreStretch,277.951515
-HeuristicStretch,184.348148,iteration,10001
-FinalStretch,176.000000,iteration,-1
+HeuristicStretch,178.889226,iteration,10001
+FinalStretch,176.693266,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.669697,iteration,121
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.541077,iteration,6972
+FinalBottleneckStretch,0.541077,iteration,-1
 Pareto,61^14252;62^13907;63^13863;64^13783;70^13761;76^13741;88^13658, 6978;8888;8882;8864;8845;8582;4110
 
 ===================================================
@@ -1405,7 +1405,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,1.399
+Runtime,1.379
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,79085,iteration,7195
@@ -1416,12 +1416,12 @@ HeuristicEdgeCrossings,201,iteration,6296
 FinalEdgeCrossings,201,iteration,-1
 StartStretch,678.451515
 PreStretch,630.956902
-HeuristicStretch,467.507071,iteration,1162
-FinalStretch,447.000000,iteration,-1
+HeuristicStretch,447.236027,iteration,1163
+FinalStretch,447.236027,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981818
-HeuristicBottleneckStretch,0.853872,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.796970,iteration,1215
+FinalBottleneckStretch,0.796970,iteration,-1
 Pareto,201^81850;202^80615;204^80272;205^80127;209^79940;210^79262;217^79085, 6296;4330;4344;4312;4341;6762;7195
 
 ################################################################
@@ -1444,7 +1444,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,1.296
+Runtime,1.459
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,77261,iteration,4468
@@ -1455,12 +1455,12 @@ HeuristicEdgeCrossings,199,iteration,3901
 FinalEdgeCrossings,199,iteration,-1
 StartStretch,678.451515
 PreStretch,630.956902
-HeuristicStretch,453.866667,iteration,10001
-FinalStretch,440.000000,iteration,-1
+HeuristicStretch,441.870707,iteration,10001
+FinalStretch,440.114141,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981818
-HeuristicBottleneckStretch,0.872391,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.779461,iteration,9087
+FinalBottleneckStretch,0.779461,iteration,-1
 Pareto,199^78201;208^77950;211^77261, 3901;4386;4468
 
 ################################################################
@@ -1479,11 +1479,11 @@ MedianDegree,8.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 3, size_of_largest_component = 498
 === Running heuristic mce
-*** standard termination here: iteration 1993 crossings 102225 edge_crossings 190 graph g_0500_09_40 ***
+*** standard termination here: iteration 2491 crossings 102225 edge_crossings 190 graph g_0500_09_40 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.908
+Runtime,3.023
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,102225,iteration,1334
@@ -1494,12 +1494,12 @@ HeuristicEdgeCrossings,190,iteration,751
 FinalEdgeCrossings,190,iteration,-1
 StartStretch,678.451515
 PreStretch,630.956902
-HeuristicStretch,641.538384,iteration,3246
-FinalStretch,590.000000,iteration,-1
+HeuristicStretch,590.941077,iteration,3246
+FinalStretch,590.941077,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981818
-HeuristicBottleneckStretch,0.926936,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.817508,iteration,791
+FinalBottleneckStretch,0.817508,iteration,-1
 Pareto,190^105670;192^105567;195^105093;200^104692;202^104475;211^103679;221^103333;223^103250;233^102225, 751;752;677;634;798;6265;3291;1211;1334
 
 ################################################################
@@ -1518,11 +1518,11 @@ MedianDegree,8.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 3, size_of_largest_component = 498
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.956, graph g_0500_09_40
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.945, graph g_0500_09_40
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,1.956
+Runtime,1.946
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,71643,iteration,9758
@@ -1533,12 +1533,12 @@ HeuristicEdgeCrossings,219,iteration,7469
 FinalEdgeCrossings,219,iteration,-1
 StartStretch,678.451515
 PreStretch,630.956902
-HeuristicStretch,415.094949,iteration,8275
-FinalStretch,413.000000,iteration,-1
+HeuristicStretch,413.838047,iteration,8429
+FinalStretch,413.838047,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981818
-HeuristicBottleneckStretch,0.926599,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.890572,iteration,4593
+FinalBottleneckStretch,0.890572,iteration,-1
 Pareto,219^71789;227^71783;230^71781;231^71643, 7522;7565;7628;9758
 
 ################################################################
@@ -1561,7 +1561,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,5.008
+Runtime,5.011
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,101890,iteration,5798
@@ -1572,12 +1572,12 @@ HeuristicEdgeCrossings,196,iteration,5131
 FinalEdgeCrossings,196,iteration,-1
 StartStretch,678.451515
 PreStretch,630.956902
-HeuristicStretch,635.472054,iteration,1321
-FinalStretch,583.000000,iteration,-1
+HeuristicStretch,583.206734,iteration,1322
+FinalStretch,583.206734,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.981818
-HeuristicBottleneckStretch,0.908418,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.816835,iteration,5198
+FinalBottleneckStretch,0.816835,iteration,-1
 Pareto,196^104464;197^102745;218^101890, 5131;5177;5798
 
 ===================================================
@@ -1603,7 +1603,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.060
+Runtime,0.068
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,112,iteration,2192
@@ -1614,8 +1614,8 @@ HeuristicEdgeCrossings,8,iteration,360
 FinalEdgeCrossings,8,iteration,-1
 StartStretch,36.582748
 PreStretch,35.900545
-HeuristicStretch,20.122440,iteration,2480
-FinalStretch,18.000000,iteration,-1
+HeuristicStretch,18.937064,iteration,2480
+FinalStretch,18.937064,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -1638,11 +1638,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 158
 === Running heuristic mod_bary
-*** standard termination here: iteration 589 crossings 129 edge_crossings 9 graph grafo10394 ***
+*** standard termination here: iteration 981 crossings 129 edge_crossings 8 graph grafo10394 ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.062
+Runtime,0.064
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,110,iteration,8486
@@ -1653,8 +1653,8 @@ HeuristicEdgeCrossings,6,iteration,3139
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,36.582748
 PreStretch,35.900545
-HeuristicStretch,23.070577,iteration,6469
-FinalStretch,18.000000,iteration,-1
+HeuristicStretch,18.476640,iteration,6471
+FinalStretch,18.476640,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -1681,7 +1681,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.378
+Runtime,0.380
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,103,iteration,8566
@@ -1692,8 +1692,8 @@ HeuristicEdgeCrossings,4,iteration,6968
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,36.582748
 PreStretch,35.900545
-HeuristicStretch,22.662844,iteration,7640
-FinalStretch,21.000000,iteration,-1
+HeuristicStretch,21.263517,iteration,7819
+FinalStretch,21.263517,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -1716,11 +1716,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 158
 === Running heuristic sifting
-*** standard termination here: iteration 1269 crossings 121 edge_crossings 15 graph grafo10394 ***
+*** standard termination here: iteration 1903 crossings 116 edge_crossings 15 graph grafo10394 ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.269
+Runtime,0.275
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,116,iteration,1530
@@ -1731,8 +1731,8 @@ HeuristicEdgeCrossings,15,iteration,662
 FinalEdgeCrossings,15,iteration,-1
 StartStretch,36.582748
 PreStretch,35.900545
-HeuristicStretch,26.070389,iteration,1393
-FinalStretch,25.000000,iteration,-1
+HeuristicStretch,25.750342,iteration,1434
+FinalStretch,25.750342,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -1770,8 +1770,8 @@ HeuristicEdgeCrossings,4,iteration,4593
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,36.582748
 PreStretch,35.900545
-HeuristicStretch,23.285436,iteration,7743
-FinalStretch,21.000000,iteration,-1
+HeuristicStretch,21.979149,iteration,7743
+FinalStretch,21.979149,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -1801,7 +1801,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.101
+Runtime,0.106
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,531,iteration,6603
@@ -1812,12 +1812,12 @@ HeuristicEdgeCrossings,23,iteration,8858
 FinalEdgeCrossings,23,iteration,-1
 StartStretch,27.239750
 PreStretch,27.854278
-HeuristicStretch,14.540107,iteration,239
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.474599,iteration,1631
+FinalStretch,13.474599,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.397059,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.310160,iteration,7754
+FinalBottleneckStretch,0.310160,iteration,-1
 Pareto,23^658;25^611;26^540;28^536;38^531, 8859;4851;6243;6658;6603
 
 ################################################################
@@ -1840,7 +1840,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.096
+Runtime,0.091
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,510,iteration,4683
@@ -1851,12 +1851,12 @@ HeuristicEdgeCrossings,22,iteration,1379
 FinalEdgeCrossings,22,iteration,-1
 StartStretch,27.239750
 PreStretch,27.854278
-HeuristicStretch,16.775401,iteration,593
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.503565,iteration,594
+FinalStretch,13.503565,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.471480,iteration,5
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.323529,iteration,6193
+FinalBottleneckStretch,0.323529,iteration,-1
 Pareto,22^584;30^582;31^563;33^556;40^510, 1379;5349;1165;3964;4683
 
 ################################################################
@@ -1875,11 +1875,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 115
 === Running heuristic mce
-*** standard termination here: iteration 806 crossings 500 edge_crossings 18 graph grafo10676 ***
+*** standard termination here: iteration 1151 crossings 473 edge_crossings 18 graph grafo10676 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.874
+Runtime,0.833
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,345,iteration,6271
@@ -1890,12 +1890,12 @@ HeuristicEdgeCrossings,10,iteration,9091
 FinalEdgeCrossings,10,iteration,-1
 StartStretch,27.239750
 PreStretch,27.854278
-HeuristicStretch,19.823529,iteration,2361
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.985740,iteration,2361
+FinalStretch,15.985740,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.916667,iteration,88
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.727273,iteration,1802
+FinalBottleneckStretch,0.727273,iteration,-1
 Pareto,10^359;11^345, 9091;8015
 
 ################################################################
@@ -1918,7 +1918,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.592
+Runtime,0.582
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,406,iteration,1543
@@ -1929,12 +1929,12 @@ HeuristicEdgeCrossings,56,iteration,599
 FinalEdgeCrossings,56,iteration,-1
 StartStretch,27.239750
 PreStretch,27.854278
-HeuristicStretch,15.006239,iteration,640
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.967023,iteration,640
+FinalStretch,13.967023,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.977273,iteration,10
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.750000,iteration,1396
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,56^406, 1543
 
 ################################################################
@@ -1957,7 +1957,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.946
+Runtime,0.905
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,485,iteration,5600
@@ -1968,12 +1968,12 @@ HeuristicEdgeCrossings,15,iteration,2768
 FinalEdgeCrossings,15,iteration,-1
 StartStretch,27.239750
 PreStretch,27.854278
-HeuristicStretch,18.321301,iteration,478
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.187166,iteration,8380
+FinalStretch,17.187166,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.886364,iteration,90
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.750000,iteration,7796
+FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,15^512;16^506;17^502;18^501;19^489;29^485, 2768;5996;2761;4901;5981;5600
 
 ===================================================
@@ -2010,12 +2010,12 @@ HeuristicEdgeCrossings,1,iteration,2
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,4.035714
 PreStretch,1.321429
-HeuristicStretch,1.035714,iteration,0
-FinalStretch,1.000000,iteration,-1
+HeuristicStretch,1.035714,iteration,2
+FinalStretch,1.035714,iteration,-1
 StartBottleneckStretch,0.607143
 PreBottleneckStretch,0.500000
-HeuristicBottleneckStretch,0.357143,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.357143,iteration,2
+FinalBottleneckStretch,0.357143,iteration,-1
 Pareto,1^1, 2
 
 ################################################################
@@ -2049,12 +2049,12 @@ HeuristicEdgeCrossings,1,iteration,1
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,4.035714
 PreStretch,1.321429
-HeuristicStretch,1.035714,iteration,0
-FinalStretch,1.000000,iteration,-1
+HeuristicStretch,1.035714,iteration,1
+FinalStretch,1.035714,iteration,-1
 StartBottleneckStretch,0.607143
 PreBottleneckStretch,0.500000
-HeuristicBottleneckStretch,0.357143,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.357143,iteration,1
+FinalBottleneckStretch,0.357143,iteration,-1
 Pareto,1^1, 1
 
 ################################################################
@@ -2073,11 +2073,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 3, size_of_largest_component = 7
 === Running heuristic mce
-*** standard termination here: iteration 27 crossings 1 edge_crossings 1 graph increase ***
+*** standard termination here: iteration 40 crossings 1 edge_crossings 1 graph increase ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.061
+Runtime,0.057
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,3
@@ -2088,12 +2088,12 @@ HeuristicEdgeCrossings,1,iteration,3
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,4.035714
 PreStretch,1.321429
-HeuristicStretch,1.035714,iteration,0
-FinalStretch,1.000000,iteration,-1
+HeuristicStretch,1.035714,iteration,3
+FinalStretch,1.035714,iteration,-1
 StartBottleneckStretch,0.607143
 PreBottleneckStretch,0.500000
-HeuristicBottleneckStretch,0.285714,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.285714,iteration,15
+FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 3
 
 ################################################################
@@ -2116,7 +2116,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 7
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.041
+Runtime,0.045
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,1
@@ -2127,12 +2127,12 @@ HeuristicEdgeCrossings,1,iteration,1
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,4.035714
 PreStretch,1.321429
-HeuristicStretch,1.035714,iteration,0
-FinalStretch,1.000000,iteration,-1
+HeuristicStretch,1.035714,iteration,1
+FinalStretch,1.035714,iteration,-1
 StartBottleneckStretch,0.607143
 PreBottleneckStretch,0.500000
-HeuristicBottleneckStretch,0.285714,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.285714,iteration,1
+FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 1
 
 ################################################################
@@ -2151,11 +2151,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 3, size_of_largest_component = 7
 === Running heuristic mce
-*** standard termination here: iteration 27 crossings 1 edge_crossings 1 graph increase ***
+*** standard termination here: iteration 40 crossings 1 edge_crossings 1 graph increase ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.063
+Runtime,0.064
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,3
@@ -2166,12 +2166,12 @@ HeuristicEdgeCrossings,1,iteration,3
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,4.035714
 PreStretch,1.321429
-HeuristicStretch,1.035714,iteration,0
-FinalStretch,1.000000,iteration,-1
+HeuristicStretch,1.035714,iteration,3
+FinalStretch,1.035714,iteration,-1
 StartBottleneckStretch,0.607143
 PreBottleneckStretch,0.500000
-HeuristicBottleneckStretch,0.285714,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.285714,iteration,15
+FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 3
 
 ===================================================
@@ -2197,7 +2197,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.045
+Runtime,0.048
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,55,iteration,50
@@ -2208,8 +2208,8 @@ HeuristicEdgeCrossings,7,iteration,14
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,49.647388
 PreStretch,20.778134
-HeuristicStretch,15.588278,iteration,14
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.032048,iteration,14
+FinalStretch,14.032048,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2232,11 +2232,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mod_bary
-*** standard termination here: iteration 244 crossings 43 edge_crossings 7 graph north20.50_GKNV ***
+*** standard termination here: iteration 568 crossings 41 edge_crossings 7 graph north20.50_GKNV ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.045
+Runtime,0.049
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,41,iteration,278
@@ -2247,12 +2247,12 @@ HeuristicEdgeCrossings,7,iteration,32
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,49.647388
 PreStretch,20.778134
-HeuristicStretch,13.551758,iteration,395
-FinalStretch,12.000000,iteration,-1
+HeuristicStretch,12.704630,iteration,466
+FinalStretch,12.704630,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,1.000000,iteration,145
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.800000,iteration,145
+FinalBottleneckStretch,0.800000,iteration,-1
 Pareto,7^41, 278
 
 ################################################################
@@ -2275,7 +2275,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.283
+Runtime,0.286
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,69,iteration,5707
@@ -2286,8 +2286,8 @@ HeuristicEdgeCrossings,6,iteration,301
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,49.647388
 PreStretch,20.778134
-HeuristicStretch,17.592051,iteration,2073
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.375606,iteration,5707
+FinalStretch,17.375606,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2314,7 +2314,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.206
+Runtime,0.208
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,52,iteration,693
@@ -2325,8 +2325,8 @@ HeuristicEdgeCrossings,6,iteration,214
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,49.647388
 PreStretch,20.778134
-HeuristicStretch,15.806340,iteration,174
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.298165,iteration,346
+FinalStretch,15.298165,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2353,7 +2353,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.337
+Runtime,0.336
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,68,iteration,3611
@@ -2364,8 +2364,8 @@ HeuristicEdgeCrossings,6,iteration,103
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,49.647388
 PreStretch,20.778134
-HeuristicStretch,18.146726,iteration,1713
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.242677,iteration,4848
+FinalStretch,17.242677,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2395,7 +2395,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.029
+Runtime,0.024
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,49,iteration,14
@@ -2406,12 +2406,12 @@ HeuristicEdgeCrossings,9,iteration,1
 FinalEdgeCrossings,9,iteration,-1
 StartStretch,21.255411
 PreStretch,17.311688
-HeuristicStretch,10.207792,iteration,7
-FinalStretch,10.000000,iteration,-1
+HeuristicStretch,10.207792,iteration,14
+FinalStretch,10.207792,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.857143,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.714286,iteration,1
+FinalBottleneckStretch,0.714286,iteration,-1
 Pareto,9^84;11^49, 1;14
 
 ################################################################
@@ -2434,7 +2434,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.026
+Runtime,0.025
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,46,iteration,21
@@ -2445,12 +2445,12 @@ HeuristicEdgeCrossings,5,iteration,37
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,21.255411
 PreStretch,17.311688
-HeuristicStretch,10.965368,iteration,8
-FinalStretch,10.000000,iteration,-1
+HeuristicStretch,10.255411,iteration,21
+FinalStretch,10.255411,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.571429,iteration,5
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.454545,iteration,37
+FinalBottleneckStretch,0.454545,iteration,-1
 Pareto,5^48;9^46, 37;21
 
 ################################################################
@@ -2484,12 +2484,12 @@ HeuristicEdgeCrossings,3,iteration,260
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,21.255411
 PreStretch,17.311688
-HeuristicStretch,13.419913,iteration,50
-FinalStretch,12.000000,iteration,-1
+HeuristicStretch,12.363636,iteration,219
+FinalStretch,12.363636,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.523810,iteration,2
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.523810,iteration,221
+FinalBottleneckStretch,0.523810,iteration,-1
 Pareto,3^49, 274
 
 ################################################################
@@ -2512,7 +2512,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.104
+Runtime,0.106
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,46,iteration,37
@@ -2523,12 +2523,12 @@ HeuristicEdgeCrossings,5,iteration,35
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,21.255411
 PreStretch,17.311688
-HeuristicStretch,10.303030,iteration,155
-FinalStretch,9.000000,iteration,-1
+HeuristicStretch,9.683983,iteration,155
+FinalStretch,9.683983,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.547619,iteration,31
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.547619,iteration,35
+FinalBottleneckStretch,0.547619,iteration,-1
 Pareto,5^46, 37
 
 ################################################################
@@ -2551,7 +2551,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.176
+Runtime,0.177
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,48,iteration,127
@@ -2562,12 +2562,12 @@ HeuristicEdgeCrossings,3,iteration,127
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,21.255411
 PreStretch,17.311688
-HeuristicStretch,13.515152,iteration,55
-FinalStretch,12.000000,iteration,-1
+HeuristicStretch,12.086580,iteration,738
+FinalStretch,12.086580,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.714286,iteration,2
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.523810,iteration,595
+FinalBottleneckStretch,0.523810,iteration,-1
 Pareto,3^48, 127
 
 ===================================================
@@ -2593,7 +2593,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.048
+Runtime,0.049
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,2,iteration,89
@@ -2604,8 +2604,8 @@ HeuristicEdgeCrossings,1,iteration,89
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,96.150000
 PreStretch,46.045238
-HeuristicStretch,44.526190,iteration,37
-FinalStretch,44.000000,iteration,-1
+HeuristicStretch,44.292857,iteration,38
+FinalStretch,44.292857,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2632,7 +2632,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.047
+Runtime,0.046
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,3,iteration,156
@@ -2643,8 +2643,8 @@ HeuristicEdgeCrossings,1,iteration,128
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,96.150000
 PreStretch,46.045238
-HeuristicStretch,43.478571,iteration,379
-FinalStretch,43.000000,iteration,-1
+HeuristicStretch,43.107143,iteration,540
+FinalStretch,43.107143,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2671,7 +2671,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.116
+Runtime,0.114
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,4,iteration,14
@@ -2682,8 +2682,8 @@ HeuristicEdgeCrossings,1,iteration,6
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,96.150000
 PreStretch,46.045238
-HeuristicStretch,45.276190,iteration,17
-FinalStretch,43.000000,iteration,-1
+HeuristicStretch,43.650000,iteration,17
+FinalStretch,43.650000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2706,11 +2706,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 186
 === Running heuristic sifting
-*** standard termination here: iteration 747 crossings 4 edge_crossings 1 graph north95.0_UPR ***
+*** standard termination here: iteration 1120 crossings 4 edge_crossings 1 graph north95.0_UPR ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.089
+Runtime,0.090
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,4,iteration,261
@@ -2721,8 +2721,8 @@ HeuristicEdgeCrossings,1,iteration,185
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,96.150000
 PreStretch,46.045238
-HeuristicStretch,45.033333,iteration,245
-FinalStretch,43.000000,iteration,-1
+HeuristicStretch,43.750000,iteration,446
+FinalStretch,43.750000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2745,11 +2745,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 186
 === Running heuristic mce
-*** standard termination here: iteration 559 crossings 3 edge_crossings 1 graph north95.0_UPR ***
+*** standard termination here: iteration 745 crossings 3 edge_crossings 1 graph north95.0_UPR ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.173
+Runtime,0.172
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,3,iteration,202
@@ -2760,8 +2760,8 @@ HeuristicEdgeCrossings,1,iteration,6
 FinalEdgeCrossings,1,iteration,-1
 StartStretch,96.150000
 PreStretch,46.045238
-HeuristicStretch,44.535714,iteration,19
-FinalStretch,43.000000,iteration,-1
+HeuristicStretch,43.109524,iteration,934
+FinalStretch,43.109524,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -2791,7 +2791,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.040
+Runtime,0.043
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,58,iteration,47
@@ -2802,12 +2802,12 @@ HeuristicEdgeCrossings,4,iteration,22
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,43.333333
 PreStretch,24.888889
-HeuristicStretch,18.555556,iteration,24
-FinalStretch,16.000000,iteration,-1
+HeuristicStretch,16.777778,iteration,47
+FinalStretch,16.777778,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,5
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.555556,iteration,18
+FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,4^70;5^58, 22;47
 
 ################################################################
@@ -2830,7 +2830,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.045
+Runtime,0.046
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,51,iteration,722
@@ -2841,12 +2841,12 @@ HeuristicEdgeCrossings,3,iteration,613
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,43.333333
 PreStretch,24.888889
-HeuristicStretch,17.111111,iteration,95
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.222222,iteration,1122
+FinalStretch,14.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.555556,iteration,10
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.333333,iteration,252
+FinalBottleneckStretch,0.333333,iteration,-1
 Pareto,3^52;4^51, 1317;1112
 
 ################################################################
@@ -2869,7 +2869,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.187
+Runtime,0.190
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,55,iteration,638
@@ -2880,12 +2880,12 @@ HeuristicEdgeCrossings,3,iteration,1001
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,43.333333
 PreStretch,24.888889
-HeuristicStretch,18.000000,iteration,426
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.333333,iteration,1008
+FinalStretch,17.333333,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.555556,iteration,9
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.555556,iteration,437
+FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,3^59;4^55, 1007;638
 
 ################################################################
@@ -2908,7 +2908,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.132
+Runtime,0.130
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,58,iteration,934
@@ -2919,12 +2919,12 @@ HeuristicEdgeCrossings,6,iteration,570
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,43.333333
 PreStretch,24.888889
-HeuristicStretch,19.333333,iteration,206
-FinalStretch,18.000000,iteration,-1
+HeuristicStretch,18.444444,iteration,952
+FinalStretch,18.444444,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,60
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.666667,iteration,378
+FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,6^58, 934
 
 ################################################################
@@ -2947,7 +2947,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.226
+Runtime,0.232
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,49,iteration,6724
@@ -2958,12 +2958,12 @@ HeuristicEdgeCrossings,3,iteration,408
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,43.333333
 PreStretch,24.888889
-HeuristicStretch,17.777778,iteration,9039
-FinalStretch,16.000000,iteration,-1
+HeuristicStretch,16.888889,iteration,9039
+FinalStretch,16.888889,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.555556,iteration,9
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.444444,iteration,138
+FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^49, 6724
 
 ===================================================
@@ -2989,7 +2989,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.042
+Runtime,0.041
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,71,iteration,26
@@ -3000,12 +3000,12 @@ HeuristicEdgeCrossings,5,iteration,23
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,41.222222
 PreStretch,24.888889
-HeuristicStretch,19.666667,iteration,25
-FinalStretch,16.000000,iteration,-1
+HeuristicStretch,16.888889,iteration,25
+FinalStretch,16.888889,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.555556,iteration,24
+FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,5^71, 26
 
 ################################################################
@@ -3028,7 +3028,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.043
+Runtime,0.045
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,44,iteration,7120
@@ -3039,12 +3039,12 @@ HeuristicEdgeCrossings,3,iteration,9522
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,41.222222
 PreStretch,24.888889
-HeuristicStretch,17.444444,iteration,1521
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.333333,iteration,1528
+FinalStretch,14.333333,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.444444,iteration,4222
+FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^54;4^46;6^44, 9524;2417;7120
 
 ################################################################
@@ -3067,7 +3067,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.181
+Runtime,0.194
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,52,iteration,6911
@@ -3078,12 +3078,12 @@ HeuristicEdgeCrossings,3,iteration,709
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,41.222222
 PreStretch,24.888889
-HeuristicStretch,19.444444,iteration,629
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.111111,iteration,7537
+FinalStretch,17.111111,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.555556,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.444444,iteration,706
+FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^52, 6911
 
 ################################################################
@@ -3102,11 +3102,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic sifting
-*** standard termination here: iteration 805 crossings 63 edge_crossings 7 graph r_100_120_10_0p0_0p0_26 ***
+*** standard termination here: iteration 1006 crossings 63 edge_crossings 7 graph r_100_120_10_0p0_0p0_26 ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.138
+Runtime,0.135
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,63,iteration,587
@@ -3117,12 +3117,12 @@ HeuristicEdgeCrossings,7,iteration,133
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,41.222222
 PreStretch,24.888889
-HeuristicStretch,19.333333,iteration,233
+HeuristicStretch,18.000000,iteration,663
 FinalStretch,18.000000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,2
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.666667,iteration,153
+FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,7^63, 587
 
 ################################################################
@@ -3157,12 +3157,12 @@ HeuristicEdgeCrossings,3,iteration,504
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,41.222222
 PreStretch,24.888889
-HeuristicStretch,18.777778,iteration,9902
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.888889,iteration,9922
+FinalStretch,17.888889,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.444444,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.444444,iteration,9850
+FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^52, 8201
 
 ===================================================
@@ -3188,7 +3188,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.039
+Runtime,0.041
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,45,iteration,25
@@ -3199,12 +3199,12 @@ HeuristicEdgeCrossings,8,iteration,10
 FinalEdgeCrossings,8,iteration,-1
 StartStretch,44.222222
 PreStretch,44.555556
-HeuristicStretch,31.777778,iteration,13
-FinalStretch,30.000000,iteration,-1
+HeuristicStretch,30.222222,iteration,13
+FinalStretch,30.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.777778,iteration,8
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.777778,iteration,9
+FinalBottleneckStretch,0.777778,iteration,-1
 Pareto,8^45, 25
 
 ################################################################
@@ -3223,11 +3223,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mod_bary
-*** standard termination here: iteration 301 crossings 58 edge_crossings 9 graph r_100_120_10_0p0_1p5_17 ***
+*** standard termination here: iteration 401 crossings 58 edge_crossings 9 graph r_100_120_10_0p0_1p5_17 ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.041
+Runtime,0.044
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,58,iteration,158
@@ -3238,8 +3238,8 @@ HeuristicEdgeCrossings,9,iteration,12
 FinalEdgeCrossings,9,iteration,-1
 StartStretch,44.222222
 PreStretch,44.555556
-HeuristicStretch,36.888889,iteration,121
-FinalStretch,34.000000,iteration,-1
+HeuristicStretch,34.111111,iteration,252
+FinalStretch,34.111111,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3266,7 +3266,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.198
+Runtime,0.202
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,55,iteration,430
@@ -3277,12 +3277,12 @@ HeuristicEdgeCrossings,7,iteration,201
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,44.222222
 PreStretch,44.555556
-HeuristicStretch,37.555556,iteration,122
-FinalStretch,31.000000,iteration,-1
+HeuristicStretch,31.222222,iteration,123
+FinalStretch,31.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.888889,iteration,121
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.777778,iteration,123
+FinalBottleneckStretch,0.777778,iteration,-1
 Pareto,7^63;8^56;9^55, 305;406;430
 
 ################################################################
@@ -3305,7 +3305,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.137
+Runtime,0.142
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,48,iteration,120
@@ -3316,12 +3316,12 @@ HeuristicEdgeCrossings,9,iteration,72
 FinalEdgeCrossings,9,iteration,-1
 StartStretch,44.222222
 PreStretch,44.555556
-HeuristicStretch,39.444444,iteration,5
-FinalStretch,36.000000,iteration,-1
+HeuristicStretch,36.222222,iteration,5
+FinalStretch,36.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,1.000000,iteration,103
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.888889,iteration,103
+FinalBottleneckStretch,0.888889,iteration,-1
 Pareto,9^48, 120
 
 ################################################################
@@ -3344,7 +3344,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.230
+Runtime,0.229
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,48,iteration,1510
@@ -3355,12 +3355,12 @@ HeuristicEdgeCrossings,11,iteration,108
 FinalEdgeCrossings,11,iteration,-1
 StartStretch,44.222222
 PreStretch,44.555556
-HeuristicStretch,34.444444,iteration,222
-FinalStretch,31.000000,iteration,-1
+HeuristicStretch,31.222222,iteration,226
+FinalStretch,31.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.888889,iteration,101
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.888889,iteration,-1
 Pareto,11^49;12^48, 701;1510
 
 ===================================================
@@ -3397,8 +3397,8 @@ HeuristicEdgeCrossings,5,iteration,18
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,42.333333
 PreStretch,43.666667
-HeuristicStretch,43.222222,iteration,9
-FinalStretch,39.000000,iteration,-1
+HeuristicStretch,39.111111,iteration,13
+FinalStretch,39.111111,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3425,7 +3425,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.039
+Runtime,0.045
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,29,iteration,41
@@ -3436,8 +3436,8 @@ HeuristicEdgeCrossings,3,iteration,40
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,42.333333
 PreStretch,43.666667
-HeuristicStretch,44.333333,iteration,9
-FinalStretch,38.000000,iteration,-1
+HeuristicStretch,38.111111,iteration,10
+FinalStretch,38.111111,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3464,7 +3464,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.177
+Runtime,0.188
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,50,iteration,214
@@ -3475,8 +3475,8 @@ HeuristicEdgeCrossings,4,iteration,107
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,42.333333
 PreStretch,43.666667
-HeuristicStretch,47.000000,iteration,112
-FinalStretch,42.000000,iteration,-1
+HeuristicStretch,42.333333,iteration,112
+FinalStretch,42.333333,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3503,7 +3503,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.138
+Runtime,0.137
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,69,iteration,132
@@ -3514,8 +3514,8 @@ HeuristicEdgeCrossings,10,iteration,3
 FinalEdgeCrossings,10,iteration,-1
 StartStretch,42.333333
 PreStretch,43.666667
-HeuristicStretch,36.888889,iteration,255
-FinalStretch,36.000000,iteration,-1
+HeuristicStretch,36.222222,iteration,349
+FinalStretch,36.222222,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3542,7 +3542,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.232
+Runtime,0.234
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,42,iteration,1211
@@ -3553,8 +3553,8 @@ HeuristicEdgeCrossings,4,iteration,112
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,42.333333
 PreStretch,43.666667
-HeuristicStretch,43.444444,iteration,1201
-FinalStretch,39.000000,iteration,-1
+HeuristicStretch,39.666667,iteration,1201
+FinalStretch,39.666667,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -3580,7 +3580,7 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic bary
-*** standard termination here: iteration 91 crossings 35 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
+*** standard termination here: iteration 109 crossings 35 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
@@ -3595,12 +3595,12 @@ HeuristicEdgeCrossings,4,iteration,38
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,52.471531
 PreStretch,28.031207
-HeuristicStretch,16.322727,iteration,20
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.634290,iteration,20
+FinalStretch,15.634290,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.916667,iteration,16
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.666667,iteration,88
+FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,4^35, 68
 
 ################################################################
@@ -3634,12 +3634,12 @@ HeuristicEdgeCrossings,4,iteration,326
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,52.471531
 PreStretch,28.031207
-HeuristicStretch,14.790085,iteration,1476
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.309755,iteration,1476
+FinalStretch,14.309755,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.684211,iteration,4
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.500000,iteration,10
+FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,4^36;5^35;6^33, 443;2402;1502
 
 ################################################################
@@ -3658,11 +3658,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mce
-*** standard termination here: iteration 501 crossings 49 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
+*** standard termination here: iteration 701 crossings 49 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.245
+Runtime,0.253
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,49,iteration,301
@@ -3673,12 +3673,12 @@ HeuristicEdgeCrossings,4,iteration,209
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,52.471531
 PreStretch,28.031207
-HeuristicStretch,18.104944,iteration,134
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.230675,iteration,2750
+FinalStretch,17.230675,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.666667,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.583333,iteration,525
+FinalBottleneckStretch,0.583333,iteration,-1
 Pareto,4^51;5^49, 304;301
 
 ################################################################
@@ -3701,7 +3701,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.173
+Runtime,0.176
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,40,iteration,495
@@ -3712,12 +3712,12 @@ HeuristicEdgeCrossings,7,iteration,114
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,52.471531
 PreStretch,28.031207
-HeuristicStretch,17.590085,iteration,114
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.332509,iteration,495
+FinalStretch,17.332509,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.916667,iteration,161
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.916667,iteration,-1
 Pareto,7^40, 495
 
 ################################################################
@@ -3736,11 +3736,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mce
-*** standard termination here: iteration 401 crossings 43 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
+*** standard termination here: iteration 701 crossings 41 edge_crossings 4 graph r_100_120_10_1p5_0p0_10 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.282
+Runtime,0.296
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,33,iteration,1931
@@ -3751,12 +3751,12 @@ HeuristicEdgeCrossings,3,iteration,1908
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,52.471531
 PreStretch,28.031207
-HeuristicStretch,16.373365,iteration,1929
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.697927,iteration,2532
+FinalStretch,15.697927,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.916667,iteration,7
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.833333,iteration,131
+FinalBottleneckStretch,0.833333,iteration,-1
 Pareto,3^38;4^33, 1908;1931
 
 ===================================================
@@ -3778,11 +3778,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic bary
-*** standard termination here: iteration 55 crossings 56 edge_crossings 6 graph r_100_120_10_1p5_0p0_24 ***
+*** standard termination here: iteration 109 crossings 54 edge_crossings 6 graph r_100_120_10_1p5_0p0_24 ***
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.038
+Runtime,0.037
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,53,iteration,163
@@ -3793,12 +3793,12 @@ HeuristicEdgeCrossings,6,iteration,33
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,49.192763
 PreStretch,36.136782
-HeuristicStretch,19.446112,iteration,55
-FinalStretch,17.000000,iteration,-1
+HeuristicStretch,17.905323,iteration,55
+FinalStretch,17.905323,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.700000,iteration,13
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.636364,iteration,69
+FinalBottleneckStretch,0.636364,iteration,-1
 Pareto,6^53, 163
 
 ################################################################
@@ -3817,7 +3817,7 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mod_bary
-*** standard termination here: iteration 401 crossings 61 edge_crossings 6 graph r_100_120_10_1p5_0p0_24 ***
+*** standard termination here: iteration 501 crossings 61 edge_crossings 6 graph r_100_120_10_1p5_0p0_24 ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
@@ -3832,12 +3832,12 @@ HeuristicEdgeCrossings,6,iteration,202
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,49.192763
 PreStretch,36.136782
-HeuristicStretch,19.575718,iteration,104
-FinalStretch,18.000000,iteration,-1
+HeuristicStretch,18.819139,iteration,602
+FinalStretch,18.819139,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.636364,iteration,5
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.590909,iteration,231
+FinalBottleneckStretch,0.590909,iteration,-1
 Pareto,6^61, 202
 
 ################################################################
@@ -3856,11 +3856,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mce
-*** standard termination here: iteration 601 crossings 70 edge_crossings 5 graph r_100_120_10_1p5_0p0_24 ***
+*** standard termination here: iteration 701 crossings 70 edge_crossings 5 graph r_100_120_10_1p5_0p0_24 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.266
+Runtime,0.263
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,70,iteration,401
@@ -3871,12 +3871,12 @@ HeuristicEdgeCrossings,5,iteration,206
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,49.192763
 PreStretch,36.136782
-HeuristicStretch,21.875897,iteration,369
-FinalStretch,21.000000,iteration,-1
+HeuristicStretch,21.613397,iteration,592
+FinalStretch,21.613397,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.772727,iteration,36
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.684211,iteration,206
+FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,5^73;6^72;7^70, 647;702;401
 
 ################################################################
@@ -3899,7 +3899,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.183
+Runtime,0.180
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,23,iteration,282
@@ -3910,12 +3910,12 @@ HeuristicEdgeCrossings,5,iteration,282
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,49.192763
 PreStretch,36.136782
-HeuristicStretch,20.849043,iteration,76
-FinalStretch,19.000000,iteration,-1
+HeuristicStretch,19.484928,iteration,85
+FinalStretch,19.484928,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.842105,iteration,57
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.727273,iteration,68
+FinalBottleneckStretch,0.727273,iteration,-1
 Pareto,5^23, 282
 
 ################################################################
@@ -3938,7 +3938,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.308
+Runtime,0.311
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,64,iteration,3240
@@ -3949,12 +3949,12 @@ HeuristicEdgeCrossings,5,iteration,443
 FinalEdgeCrossings,5,iteration,-1
 StartStretch,49.192763
 PreStretch,36.136782
-HeuristicStretch,22.296172,iteration,940
-FinalStretch,21.000000,iteration,-1
+HeuristicStretch,21.549163,iteration,2870
+FinalStretch,21.549163,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.736842,iteration,113
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.684211,iteration,119
+FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,5^68;6^64, 5624;3240
 
 ===================================================
@@ -3980,7 +3980,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.038
+Runtime,0.039
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,12,iteration,20
@@ -3991,8 +3991,8 @@ HeuristicEdgeCrossings,3,iteration,20
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,48.667659
 PreStretch,52.108730
-HeuristicStretch,49.105357,iteration,7
-FinalStretch,47.000000,iteration,-1
+HeuristicStretch,47.063690,iteration,7
+FinalStretch,47.063690,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4019,7 +4019,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.040
+Runtime,0.041
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,15,iteration,232
@@ -4030,8 +4030,8 @@ HeuristicEdgeCrossings,3,iteration,232
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,48.667659
 PreStretch,52.108730
-HeuristicStretch,46.305754,iteration,404
-FinalStretch,43.000000,iteration,-1
+HeuristicStretch,43.587500,iteration,419
+FinalStretch,43.587500,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4058,7 +4058,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.225
+Runtime,0.227
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,13,iteration,410
@@ -4069,8 +4069,8 @@ HeuristicEdgeCrossings,2,iteration,301
 FinalEdgeCrossings,2,iteration,-1
 StartStretch,48.667659
 PreStretch,52.108730
-HeuristicStretch,46.657341,iteration,18
-FinalStretch,36.000000,iteration,-1
+HeuristicStretch,36.921627,iteration,18
+FinalStretch,36.921627,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4093,11 +4093,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic sifting
-*** standard termination here: iteration 403 crossings 25 edge_crossings 6 graph r_100_120_10_1p5_1p5_16 ***
+*** standard termination here: iteration 604 crossings 25 edge_crossings 6 graph r_100_120_10_1p5_1p5_16 ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.155
+Runtime,0.148
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,25,iteration,129
@@ -4108,8 +4108,8 @@ HeuristicEdgeCrossings,6,iteration,13
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,48.667659
 PreStretch,52.108730
-HeuristicStretch,50.499603,iteration,116
-FinalStretch,45.000000,iteration,-1
+HeuristicStretch,45.492460,iteration,297
+FinalStretch,45.492460,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4136,7 +4136,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.251
+Runtime,0.255
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,11,iteration,3609
@@ -4147,8 +4147,8 @@ HeuristicEdgeCrossings,2,iteration,203
 FinalEdgeCrossings,2,iteration,-1
 StartStretch,48.667659
 PreStretch,52.108730
-HeuristicStretch,49.065873,iteration,18
-FinalStretch,36.000000,iteration,-1
+HeuristicStretch,36.275000,iteration,60
+FinalStretch,36.275000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4178,7 +4178,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.038
+Runtime,0.037
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,107,iteration,18
@@ -4189,8 +4189,8 @@ HeuristicEdgeCrossings,33,iteration,18
 FinalEdgeCrossings,33,iteration,-1
 StartStretch,35.663000
 PreStretch,49.812681
-HeuristicStretch,54.912325,iteration,0
-FinalStretch,49.000000,iteration,-1
+HeuristicStretch,49.812681,iteration,0
+FinalStretch,49.812681,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4217,7 +4217,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.039
+Runtime,0.038
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,105,iteration,112
@@ -4228,8 +4228,8 @@ HeuristicEdgeCrossings,33,iteration,10
 FinalEdgeCrossings,33,iteration,-1
 StartStretch,35.663000
 PreStretch,49.812681
-HeuristicStretch,52.783473,iteration,0
-FinalStretch,49.000000,iteration,-1
+HeuristicStretch,49.812681,iteration,0
+FinalStretch,49.812681,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4256,7 +4256,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.268
+Runtime,0.264
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,177,iteration,126
@@ -4267,8 +4267,8 @@ HeuristicEdgeCrossings,18,iteration,204
 FinalEdgeCrossings,18,iteration,-1
 StartStretch,35.663000
 PreStretch,49.812681
-HeuristicStretch,51.414846,iteration,39
-FinalStretch,36.000000,iteration,-1
+HeuristicStretch,36.507181,iteration,57
+FinalStretch,36.507181,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4295,7 +4295,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.181
+Runtime,0.176
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,166,iteration,130
@@ -4306,8 +4306,8 @@ HeuristicEdgeCrossings,33,iteration,9
 FinalEdgeCrossings,33,iteration,-1
 StartStretch,35.663000
 PreStretch,49.812681
-HeuristicStretch,38.352636,iteration,367
-FinalStretch,37.000000,iteration,-1
+HeuristicStretch,37.705577,iteration,369
+FinalStretch,37.705577,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4345,8 +4345,8 @@ HeuristicEdgeCrossings,16,iteration,1706
 FinalEdgeCrossings,16,iteration,-1
 StartStretch,35.663000
 PreStretch,49.812681
-HeuristicStretch,51.135294,iteration,3608
-FinalStretch,34.000000,iteration,-1
+HeuristicStretch,34.495671,iteration,3612
+FinalStretch,34.495671,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4376,7 +4376,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.044
+Runtime,0.047
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,85,iteration,159
@@ -4387,12 +4387,12 @@ HeuristicEdgeCrossings,8,iteration,21
 FinalEdgeCrossings,8,iteration,-1
 StartStretch,44.096031
 PreStretch,24.053721
-HeuristicStretch,13.626116,iteration,159
-FinalStretch,11.000000,iteration,-1
+HeuristicStretch,11.149143,iteration,1196
+FinalStretch,11.149143,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.947368
-HeuristicBottleneckStretch,0.555024,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.389952,iteration,1270
+FinalBottleneckStretch,0.389952,iteration,-1
 Pareto,8^85, 159
 
 ################################################################
@@ -4415,7 +4415,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.050
+Runtime,0.047
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,83,iteration,2276
@@ -4426,12 +4426,12 @@ HeuristicEdgeCrossings,6,iteration,5210
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,44.096031
 PreStretch,24.053721
-HeuristicStretch,15.024716,iteration,976
-FinalStretch,11.000000,iteration,-1
+HeuristicStretch,11.306106,iteration,5597
+FinalStretch,11.306106,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.947368
-HeuristicBottleneckStretch,0.646245,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.345865,iteration,5525
+FinalBottleneckStretch,0.345865,iteration,-1
 Pareto,6^92;7^88;8^83, 9242;7260;2276
 
 ################################################################
@@ -4454,7 +4454,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.353
+Runtime,0.367
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,75,iteration,3390
@@ -4465,12 +4465,12 @@ HeuristicEdgeCrossings,4,iteration,1468
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,44.096031
 PreStretch,24.053721
-HeuristicStretch,14.015265,iteration,1656
-FinalStretch,12.000000,iteration,-1
+HeuristicStretch,12.607254,iteration,1666
+FinalStretch,12.607254,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.947368
-HeuristicBottleneckStretch,0.428571,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.404306,iteration,915
+FinalBottleneckStretch,0.404306,iteration,-1
 Pareto,4^77;5^75, 3377;3390
 
 ################################################################
@@ -4489,11 +4489,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 91
 === Running heuristic sifting
-*** standard termination here: iteration 916 crossings 102 edge_crossings 21 graph rome8685.74_GKNV ***
+*** standard termination here: iteration 1099 crossings 102 edge_crossings 21 graph rome8685.74_GKNV ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.253
+Runtime,0.252
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,102,iteration,608
@@ -4504,12 +4504,12 @@ HeuristicEdgeCrossings,21,iteration,52
 FinalEdgeCrossings,21,iteration,-1
 StartStretch,44.096031
 PreStretch,24.053721
-HeuristicStretch,16.815953,iteration,197
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.553404,iteration,748
+FinalStretch,15.553404,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.947368
-HeuristicBottleneckStretch,0.586124,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.586124,iteration,105
+FinalBottleneckStretch,0.586124,iteration,-1
 Pareto,21^102, 608
 
 ################################################################
@@ -4528,11 +4528,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 91
 === Running heuristic mce
-*** standard termination here: iteration 365 crossings 122 edge_crossings 6 graph rome8685.74_GKNV ***
+*** standard termination here: iteration 820 crossings 114 edge_crossings 5 graph rome8685.74_GKNV ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.392
+Runtime,0.393
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,76,iteration,6373
@@ -4543,12 +4543,12 @@ HeuristicEdgeCrossings,4,iteration,3461
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,44.096031
 PreStretch,24.053721
-HeuristicStretch,13.018064,iteration,1671
-FinalStretch,11.000000,iteration,-1
+HeuristicStretch,11.730299,iteration,6265
+FinalStretch,11.730299,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,0.947368
-HeuristicBottleneckStretch,0.714286,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.341615,iteration,2705
+FinalBottleneckStretch,0.341615,iteration,-1
 Pareto,4^76, 6373
 
 ===================================================
@@ -4574,7 +4574,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.046
+Runtime,0.044
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,47,iteration,187
@@ -4585,8 +4585,8 @@ HeuristicEdgeCrossings,4,iteration,185
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,48.475744
 PreStretch,25.629781
-HeuristicStretch,16.154005,iteration,325
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.120824,iteration,338
+FinalStretch,14.120824,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4613,7 +4613,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.043
+Runtime,0.047
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,38,iteration,364
@@ -4624,8 +4624,8 @@ HeuristicEdgeCrossings,4,iteration,486
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,48.475744
 PreStretch,25.629781
-HeuristicStretch,14.712085,iteration,329
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.266127,iteration,366
+FinalStretch,13.266127,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4652,7 +4652,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.329
+Runtime,0.323
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,56,iteration,1327
@@ -4663,8 +4663,8 @@ HeuristicEdgeCrossings,4,iteration,544
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,48.475744
 PreStretch,25.629781
-HeuristicStretch,15.187992,iteration,835
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.770600,iteration,1375
+FinalStretch,14.770600,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4687,11 +4687,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 107
 === Running heuristic sifting
-*** standard termination here: iteration 646 crossings 62 edge_crossings 15 graph rome8896.60_GKNV ***
+*** standard termination here: iteration 861 crossings 62 edge_crossings 15 graph rome8896.60_GKNV ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.223
+Runtime,0.243
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,62,iteration,399
@@ -4702,8 +4702,8 @@ HeuristicEdgeCrossings,15,iteration,284
 FinalEdgeCrossings,15,iteration,-1
 StartStretch,48.475744
 PreStretch,25.629781
-HeuristicStretch,15.560521,iteration,172
-FinalStretch,15.000000,iteration,-1
+HeuristicStretch,15.402626,iteration,525
+FinalStretch,15.402626,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4730,7 +4730,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.360
+Runtime,0.389
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,32,iteration,8506
@@ -4741,8 +4741,8 @@ HeuristicEdgeCrossings,3,iteration,972
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,48.475744
 PreStretch,25.629781
-HeuristicStretch,16.504304,iteration,637
-FinalStretch,14.000000,iteration,-1
+HeuristicStretch,14.218454,iteration,8557
+FinalStretch,14.218454,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -4772,7 +4772,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.207
+Runtime,0.202
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,111,iteration,191
@@ -4783,12 +4783,12 @@ HeuristicEdgeCrossings,7,iteration,247
 FinalEdgeCrossings,7,iteration,-1
 StartStretch,175.728947
 PreStretch,22.933135
-HeuristicStretch,13.671342,iteration,56
-FinalStretch,12.000000,iteration,-1
+HeuristicStretch,12.916994,iteration,56
+FinalStretch,12.916994,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.221379,iteration,2
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.127463,iteration,257
+FinalBottleneckStretch,0.127463,iteration,-1
 Pareto,7^148;8^147;9^144;10^111, 391;103;88;191
 
 ################################################################
@@ -4811,7 +4811,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.204
+Runtime,0.205
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,132,iteration,5479
@@ -4822,12 +4822,12 @@ HeuristicEdgeCrossings,6,iteration,2712
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,175.728947
 PreStretch,22.933135
-HeuristicStretch,16.788215,iteration,1034
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.272384,iteration,10001
+FinalStretch,13.152694,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.216749,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.144370,iteration,4898
+FinalBottleneckStretch,0.144370,iteration,-1
 Pareto,6^172;7^165;8^143;9^132, 2716;1177;1170;5479
 
 ################################################################
@@ -4846,11 +4846,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic mce
-*** standard termination here: iteration 3501 crossings 190 edge_crossings 5 graph t_0500_09_01 ***
+*** standard termination here: iteration 6501 crossings 172 edge_crossings 4 graph t_0500_09_01 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.110
+Runtime,1.197
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,159,iteration,8316
@@ -4861,12 +4861,12 @@ HeuristicEdgeCrossings,4,iteration,3507
 FinalEdgeCrossings,4,iteration,-1
 StartStretch,175.728947
 PreStretch,22.933135
-HeuristicStretch,13.772455,iteration,5626
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.671874,iteration,8649
+FinalStretch,13.671874,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.145817,iteration,10
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.109606,iteration,5511
+FinalBottleneckStretch,0.109606,iteration,-1
 Pareto,4^159, 9825
 
 ################################################################
@@ -4885,11 +4885,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic sifting
-*** standard termination here: iteration 6007 crossings 222 edge_crossings 50 graph t_0500_09_01 ***
+*** standard termination here: iteration 7008 crossings 222 edge_crossings 50 graph t_0500_09_01 ***
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.787
+Runtime,0.840
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,222,iteration,4990
@@ -4900,12 +4900,12 @@ HeuristicEdgeCrossings,50,iteration,499
 FinalEdgeCrossings,50,iteration,-1
 StartStretch,175.728947
 PreStretch,22.933135
-HeuristicStretch,16.578289,iteration,678
-FinalStretch,16.000000,iteration,-1
+HeuristicStretch,16.448830,iteration,5931
+FinalStretch,16.448830,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.965517,iteration,328
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.965517,iteration,379
+FinalBottleneckStretch,0.965517,iteration,-1
 Pareto,50^222, 4990
 
 ################################################################
@@ -4924,11 +4924,12 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic mce
-*** standard termination here: iteration 3501 crossings 189 edge_crossings 5 graph t_0500_09_01 ***
+*** standard termination here: iteration 4001 crossings 189 edge_crossings 5 graph t_0500_09_01 ***
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.302, graph t_0500_09_01
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.251
+Runtime,1.303
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,164,iteration,7003
@@ -4939,12 +4940,12 @@ HeuristicEdgeCrossings,3,iteration,7511
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,175.728947
 PreStretch,22.933135
-HeuristicStretch,14.557753,iteration,6286
-FinalStretch,13.000000,iteration,-1
+HeuristicStretch,13.963996,iteration,10001
+FinalStretch,13.958965,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.112069,iteration,10
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.112069,iteration,9603
+FinalBottleneckStretch,0.112069,iteration,-1
 Pareto,3^168;4^164, 9512;7003
 
 ===================================================
@@ -4970,7 +4971,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.149
+Runtime,0.148
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,51,iteration,190
@@ -4981,12 +4982,12 @@ HeuristicEdgeCrossings,6,iteration,70
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,176.006351
 PreStretch,31.308928
-HeuristicStretch,25.592689,iteration,118
-FinalStretch,25.000000,iteration,-1
+HeuristicStretch,25.185146,iteration,359
+FinalStretch,25.185146,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.384615,iteration,1
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.307692,iteration,63
+FinalBottleneckStretch,0.307692,iteration,-1
 Pareto,6^57;7^56;9^55;12^51, 191;188;357;190
 
 ################################################################
@@ -5005,11 +5006,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic mod_bary
-*** standard termination here: iteration 1453 crossings 87 edge_crossings 7 graph t_0500_22_01 ***
+*** standard termination here: iteration 3389 crossings 54 edge_crossings 4 graph t_0500_22_01 ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.150
+Runtime,0.147
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,25,iteration,5957
@@ -5020,12 +5021,12 @@ HeuristicEdgeCrossings,3,iteration,6295
 FinalEdgeCrossings,3,iteration,-1
 StartStretch,176.006351
 PreStretch,31.308928
-HeuristicStretch,29.717729,iteration,639
-FinalStretch,25.000000,iteration,-1
+HeuristicStretch,25.640256,iteration,668
+FinalStretch,25.640256,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.338462,iteration,23
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.261538,iteration,6090
+FinalBottleneckStretch,0.261538,iteration,-1
 Pareto,3^36;4^25, 6369;5957
 
 ################################################################
@@ -5044,11 +5045,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic mce
-*** standard termination here: iteration 2001 crossings 79 edge_crossings 3 graph t_0500_22_01 ***
+*** standard termination here: iteration 4001 crossings 54 edge_crossings 3 graph t_0500_22_01 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.570
+Runtime,0.611
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,47,iteration,5166
@@ -5059,12 +5060,12 @@ HeuristicEdgeCrossings,2,iteration,4506
 FinalEdgeCrossings,2,iteration,-1
 StartStretch,176.006351
 PreStretch,31.308928
-HeuristicStretch,27.900326,iteration,1277
-FinalStretch,26.000000,iteration,-1
+HeuristicStretch,26.739911,iteration,1529
+FinalStretch,26.739911,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.318182,iteration,9
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.310606,iteration,1012
+FinalBottleneckStretch,0.310606,iteration,-1
 Pareto,2^59;3^47, 4508;5166
 
 ################################################################
@@ -5087,7 +5088,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.414
+Runtime,0.428
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,79,iteration,2850
@@ -5098,8 +5099,8 @@ HeuristicEdgeCrossings,21,iteration,420
 FinalEdgeCrossings,21,iteration,-1
 StartStretch,176.006351
 PreStretch,31.308928
-HeuristicStretch,29.119788,iteration,491
-FinalStretch,28.000000,iteration,-1
+HeuristicStretch,28.125180,iteration,1792
+FinalStretch,28.125180,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,1.000000,iteration,0
@@ -5126,7 +5127,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.702
+Runtime,0.720
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,29,iteration,8618
@@ -5137,12 +5138,12 @@ HeuristicEdgeCrossings,2,iteration,6506
 FinalEdgeCrossings,2,iteration,-1
 StartStretch,176.006351
 PreStretch,31.308928
-HeuristicStretch,27.240175,iteration,2162
-FinalStretch,26.000000,iteration,-1
+HeuristicStretch,26.434629,iteration,3866
+FinalStretch,26.434629,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.318182,iteration,10
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.318182,iteration,1007
+FinalBottleneckStretch,0.318182,iteration,-1
 Pareto,2^32;3^29, 9003;8618
 
 ===================================================
@@ -5179,12 +5180,12 @@ HeuristicEdgeCrossings,57,iteration,4
 FinalEdgeCrossings,57,iteration,-1
 StartStretch,65.202020
 PreStretch,11.323232
-HeuristicStretch,8.242424,iteration,3
-FinalStretch,8.000000,iteration,-1
+HeuristicStretch,8.232323,iteration,24
+FinalStretch,8.232323,iteration,-1
 StartBottleneckStretch,0.969697
 PreBottleneckStretch,0.666667
-HeuristicBottleneckStretch,0.323232,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.323232,iteration,21
+FinalBottleneckStretch,0.323232,iteration,-1
 Pareto,57^670;58^566, 6;24
 
 ################################################################
@@ -5207,7 +5208,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.164
+Runtime,0.160
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,588,iteration,48
@@ -5218,12 +5219,12 @@ HeuristicEdgeCrossings,55,iteration,34
 FinalEdgeCrossings,55,iteration,-1
 StartStretch,65.202020
 PreStretch,11.323232
-HeuristicStretch,8.353535,iteration,8
-FinalStretch,8.000000,iteration,-1
+HeuristicStretch,8.343434,iteration,34
+FinalStretch,8.343434,iteration,-1
 StartBottleneckStretch,0.969697
 PreBottleneckStretch,0.666667
-HeuristicBottleneckStretch,0.303030,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.303030,iteration,34
+FinalBottleneckStretch,0.303030,iteration,-1
 Pareto,55^588, 48
 
 ################################################################
@@ -5242,11 +5243,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 200
 === Running heuristic mce
-*** standard termination here: iteration 2001 crossings 592 edge_crossings 22 graph tree_100 ***
+*** standard termination here: iteration 2201 crossings 592 edge_crossings 22 graph tree_100 ***
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.987
+Runtime,1.015
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,522,iteration,8361
@@ -5257,12 +5258,12 @@ HeuristicEdgeCrossings,16,iteration,8007
 FinalEdgeCrossings,16,iteration,-1
 StartStretch,65.202020
 PreStretch,11.323232
-HeuristicStretch,7.080808,iteration,4721
-FinalStretch,6.000000,iteration,-1
+HeuristicStretch,6.525253,iteration,8876
+FinalStretch,6.525253,iteration,-1
 StartBottleneckStretch,0.969697
 PreBottleneckStretch,0.666667
-HeuristicBottleneckStretch,0.131313,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.111111,iteration,9227
+FinalBottleneckStretch,0.111111,iteration,-1
 Pareto,16^537;17^532;19^523;21^522, 9607;9001;8957;8361
 
 ################################################################
@@ -5285,7 +5286,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.692
+Runtime,0.735
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,471,iteration,1353
@@ -5296,12 +5297,12 @@ HeuristicEdgeCrossings,123,iteration,0
 FinalEdgeCrossings,123,iteration,-1
 StartStretch,65.202020
 PreStretch,11.323232
-HeuristicStretch,8.444444,iteration,176
-FinalStretch,8.000000,iteration,-1
+HeuristicStretch,8.212121,iteration,560
+FinalStretch,8.212121,iteration,-1
 StartBottleneckStretch,0.969697
 PreBottleneckStretch,0.666667
 HeuristicBottleneckStretch,0.666667,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,123^471, 1353
 
 ################################################################
@@ -5321,10 +5322,11 @@ MedianDegree,2.0
 dfs done, number_of_components = 1, size_of_largest_component = 200
 === Running heuristic mce
 *** standard termination here: iteration 2001 crossings 630 edge_crossings 23 graph tree_100 ***
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.083, graph tree_100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.056
+Runtime,1.083
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,539,iteration,9379
@@ -5335,12 +5337,12 @@ HeuristicEdgeCrossings,15,iteration,8608
 FinalEdgeCrossings,15,iteration,-1
 StartStretch,65.202020
 PreStretch,11.323232
-HeuristicStretch,6.989899,iteration,8707
-FinalStretch,6.000000,iteration,-1
+HeuristicStretch,6.808081,iteration,9282
+FinalStretch,6.808081,iteration,-1
 StartBottleneckStretch,0.969697
 PreBottleneckStretch,0.666667
-HeuristicBottleneckStretch,0.141414,iteration,0
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.111111,iteration,9804
+FinalBottleneckStretch,0.111111,iteration,-1
 Pareto,15^562;16^552;17^548;18^540;21^539, 9807;9404;9405;9975;9379
 
 ===================================================
@@ -5366,7 +5368,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.505
+Runtime,0.519
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,329,iteration,1648
@@ -5377,12 +5379,12 @@ HeuristicEdgeCrossings,9,iteration,619
 FinalEdgeCrossings,9,iteration,-1
 StartStretch,719.315789
 PreStretch,369.210526
-HeuristicStretch,288.052632,iteration,657
-FinalStretch,281.000000,iteration,-1
+HeuristicStretch,281.315789,iteration,728
+FinalStretch,281.315789,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.736842,iteration,76
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.684211,iteration,678
+FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,9^360;14^329, 740;1648
 
 ################################################################
@@ -5401,11 +5403,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 18, size_of_largest_component = 1972
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.502, graph u_100_20_105_5-rnd-031
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.527, graph u_100_20_105_5-rnd-031
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.505
+Runtime,0.530
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,312,iteration,8381
@@ -5416,12 +5418,12 @@ HeuristicEdgeCrossings,9,iteration,7548
 FinalEdgeCrossings,9,iteration,-1
 StartStretch,719.315789
 PreStretch,369.210526
-HeuristicStretch,279.052632,iteration,9401
-FinalStretch,263.000000,iteration,-1
+HeuristicStretch,263.421053,iteration,9401
+FinalStretch,263.421053,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.789474,iteration,84
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.631579,iteration,9401
+FinalBottleneckStretch,0.631579,iteration,-1
 Pareto,9^365;12^347;14^312, 8148;8448;8381
 
 ################################################################
@@ -5443,7 +5445,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.900
+Runtime,0.956
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,432,iteration,8647
@@ -5454,12 +5456,12 @@ HeuristicEdgeCrossings,8,iteration,2011
 FinalEdgeCrossings,8,iteration,-1
 StartStretch,719.315789
 PreStretch,369.210526
-HeuristicStretch,311.578947,iteration,6361
-FinalStretch,304.000000,iteration,-1
+HeuristicStretch,305.000000,iteration,6361
+FinalStretch,305.000000,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.736842,iteration,82
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.684211,iteration,392
+FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,8^438;9^433;14^432, 9947;9956;8647
 
 ################################################################
@@ -5478,11 +5480,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 18, size_of_largest_component = 1972
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.702, graph u_100_20_105_5-rnd-031
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.734, graph u_100_20_105_5-rnd-031
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.704
+Runtime,0.735
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,474,iteration,9259
@@ -5493,12 +5495,12 @@ HeuristicEdgeCrossings,17,iteration,1005
 FinalEdgeCrossings,17,iteration,-1
 StartStretch,719.315789
 PreStretch,369.210526
-HeuristicStretch,332.631579,iteration,5012
-FinalStretch,319.000000,iteration,-1
+HeuristicStretch,319.947368,iteration,5012
+FinalStretch,319.947368,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.842105,iteration,260
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.789474,iteration,1668
+FinalBottleneckStretch,0.789474,iteration,-1
 Pareto,17^475;18^474, 8324;9259
 
 ################################################################
@@ -5520,7 +5522,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.431
+Runtime,1.491
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,471,iteration,8704
@@ -5531,12 +5533,12 @@ HeuristicEdgeCrossings,6,iteration,4004
 FinalEdgeCrossings,6,iteration,-1
 StartStretch,719.315789
 PreStretch,369.210526
-HeuristicStretch,313.368421,iteration,6053
-FinalStretch,304.000000,iteration,-1
+HeuristicStretch,304.947368,iteration,6053
+FinalStretch,304.947368,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.631579,iteration,78
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.578947,iteration,2046
+FinalBottleneckStretch,0.578947,iteration,-1
 Pareto,6^521;7^471, 5986;9946
 
 ===================================================
@@ -5558,11 +5560,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic bary
-*** standard termination here: iteration 193 crossings 14176 edge_crossings 62 graph u_25_80_125_1-rnd-007 ***
+*** standard termination here: iteration 337 crossings 14176 edge_crossings 62 graph u_25_80_125_1-rnd-007 ***
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.791
+Runtime,0.834
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13699,iteration,7560
@@ -5573,12 +5575,12 @@ HeuristicEdgeCrossings,58,iteration,9528
 FinalEdgeCrossings,58,iteration,-1
 StartStretch,837.164557
 PreStretch,452.974684
-HeuristicStretch,265.632911,iteration,4200
-FinalStretch,216.000000,iteration,-1
+HeuristicStretch,216.759494,iteration,4200
+FinalStretch,216.759494,iteration,-1
 StartBottleneckStretch,0.987342
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.936709,iteration,11
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.556962,iteration,4777
+FinalBottleneckStretch,0.556962,iteration,-1
 Pareto,58^15150;59^14552;62^13699, 9576;2040;7560
 
 ################################################################
@@ -5597,11 +5599,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic mod_bary
-*** standard termination here: iteration 1251 crossings 14187 edge_crossings 58 graph u_25_80_125_1-rnd-007 ***
+*** standard termination here: iteration 2501 crossings 14185 edge_crossings 58 graph u_25_80_125_1-rnd-007 ***
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.767
+Runtime,0.797
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13832,iteration,5779
@@ -5612,12 +5614,12 @@ HeuristicEdgeCrossings,57,iteration,5778
 FinalEdgeCrossings,57,iteration,-1
 StartStretch,837.164557
 PreStretch,452.974684
-HeuristicStretch,283.898734,iteration,6356
-FinalStretch,214.000000,iteration,-1
+HeuristicStretch,214.430380,iteration,6362
+FinalStretch,214.430380,iteration,-1
 StartBottleneckStretch,0.987342
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.708861,iteration,19
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.569620,iteration,3339
+FinalBottleneckStretch,0.569620,iteration,-1
 Pareto,57^13971;59^13832, 5778;5779
 
 ################################################################
@@ -5636,11 +5638,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.114, graph u_25_80_125_1-rnd-007
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.274, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.118
+Runtime,2.278
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,16508,iteration,9934
@@ -5651,12 +5653,12 @@ HeuristicEdgeCrossings,38,iteration,9977
 FinalEdgeCrossings,38,iteration,-1
 StartStretch,837.164557
 PreStretch,452.974684
-HeuristicStretch,281.873418,iteration,10001
-FinalStretch,279.000000,iteration,-1
+HeuristicStretch,280.772152,iteration,10001
+FinalStretch,279.620253,iteration,-1
 StartBottleneckStretch,0.987342
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.430380,iteration,5
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.392405,iteration,8102
+FinalBottleneckStretch,0.392405,iteration,-1
 Pareto,38^16675;40^16618;41^16609;47^16607;49^16538;50^16531;53^16508, 9978;9974;9969;9943;9939;9938;9934
 
 ################################################################
@@ -5675,11 +5677,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.586, graph u_25_80_125_1-rnd-007
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.646, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.588
+Runtime,1.649
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13661,iteration,9877
@@ -5690,12 +5692,12 @@ HeuristicEdgeCrossings,94,iteration,4186
 FinalEdgeCrossings,94,iteration,-1
 StartStretch,837.164557
 PreStretch,452.974684
-HeuristicStretch,267.683544,iteration,9995
-FinalStretch,266.000000,iteration,-1
+HeuristicStretch,266.493671,iteration,9996
+FinalStretch,266.493671,iteration,-1
 StartBottleneckStretch,0.987342
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.962025,iteration,459
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.949367,iteration,1841
+FinalBottleneckStretch,0.949367,iteration,-1
 Pareto,94^13661, 9877
 
 ################################################################
@@ -5714,10 +5716,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic mce
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.004, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.837
+Runtime,3.008
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,16141,iteration,9852
@@ -5728,12 +5731,12 @@ HeuristicEdgeCrossings,41,iteration,4098
 FinalEdgeCrossings,41,iteration,-1
 StartStretch,837.164557
 PreStretch,452.974684
-HeuristicStretch,279.012658,iteration,10001
-FinalStretch,274.000000,iteration,-1
+HeuristicStretch,276.696203,iteration,10001
+FinalStretch,274.759494,iteration,-1
 StartBottleneckStretch,0.987342
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.405063,iteration,3
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.379747,iteration,9988
+FinalBottleneckStretch,0.379747,iteration,-1
 Pareto,41^19424;42^19369;44^16186;45^16171;46^16166;48^16162;50^16161;55^16155;56^16141, 4105;4083;9959;9938;9940;9942;9943;9931;9852
 
 ===================================================
@@ -5759,7 +5762,7 @@ dfs done, number_of_components = 27, size_of_largest_component = 1943
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.524
+Runtime,0.543
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,920,iteration,4261
@@ -5770,12 +5773,12 @@ HeuristicEdgeCrossings,14,iteration,7050
 FinalEdgeCrossings,14,iteration,-1
 StartStretch,710.256410
 PreStretch,205.641026
-HeuristicStretch,135.256410,iteration,8965
-FinalStretch,123.000000,iteration,-1
+HeuristicStretch,123.820513,iteration,8965
+FinalStretch,123.820513,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.461538,iteration,40
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.461538,iteration,2738
+FinalBottleneckStretch,0.461538,iteration,-1
 Pareto,14^1359;16^1132;17^1104;18^1100;19^1098;24^1031;29^958;31^920, 7061;4973;8652;9240;9379;735;1811;4261
 
 ################################################################
@@ -5794,11 +5797,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.548, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.532, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.550
+Runtime,0.534
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1120,iteration,5570
@@ -5809,12 +5812,12 @@ HeuristicEdgeCrossings,17,iteration,9096
 FinalEdgeCrossings,17,iteration,-1
 StartStretch,710.256410
 PreStretch,205.641026
-HeuristicStretch,138.153846,iteration,5557
-FinalStretch,126.000000,iteration,-1
+HeuristicStretch,126.461538,iteration,5557
+FinalStretch,126.461538,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.564103,iteration,26
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.461538,iteration,8054
+FinalBottleneckStretch,0.461538,iteration,-1
 Pareto,17^1569;18^1312;19^1140;21^1120, 9578;768;5605;5570
 
 ################################################################
@@ -5833,11 +5836,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.226, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.245, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.229
+Runtime,1.248
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1776,iteration,9446
@@ -5848,12 +5851,12 @@ HeuristicEdgeCrossings,11,iteration,3987
 FinalEdgeCrossings,11,iteration,-1
 StartStretch,710.256410
 PreStretch,205.641026
-HeuristicStretch,160.282051,iteration,9916
-FinalStretch,159.000000,iteration,-1
+HeuristicStretch,159.307692,iteration,9927
+FinalStretch,159.307692,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.358974,iteration,34
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.358974,iteration,5508
+FinalBottleneckStretch,0.358974,iteration,-1
 Pareto,11^2261;12^1777;15^1776, 3987;9927;9446
 
 ################################################################
@@ -5872,11 +5875,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.928, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.938, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.931
+Runtime,0.940
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1877,iteration,8705
@@ -5887,12 +5890,12 @@ HeuristicEdgeCrossings,34,iteration,1976
 FinalEdgeCrossings,34,iteration,-1
 StartStretch,710.256410
 PreStretch,205.641026
-HeuristicStretch,172.000000,iteration,3989
-FinalStretch,168.000000,iteration,-1
+HeuristicStretch,168.923077,iteration,5984
+FinalStretch,168.923077,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.871795,iteration,1547
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.820513,iteration,6280
+FinalBottleneckStretch,0.820513,iteration,-1
 Pareto,34^2138;35^1877, 2248;8705
 
 ################################################################
@@ -5911,11 +5914,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.779, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.784, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.782
+Runtime,1.786
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1897,iteration,9474
@@ -5926,12 +5929,12 @@ HeuristicEdgeCrossings,10,iteration,7942
 FinalEdgeCrossings,10,iteration,-1
 StartStretch,710.256410
 PreStretch,205.641026
-HeuristicStretch,163.666667,iteration,9983
-FinalStretch,163.000000,iteration,-1
+HeuristicStretch,163.461538,iteration,9994
+FinalStretch,163.461538,iteration,-1
 StartBottleneckStretch,1.000000
 PreBottleneckStretch,1.000000
-HeuristicBottleneckStretch,0.384615,iteration,23
-FinalBottleneckStretch,0.000000,iteration,-1
+HeuristicBottleneckStretch,0.358974,iteration,4055
+FinalBottleneckStretch,0.358974,iteration,-1
 Pareto,10^1923;11^1908;13^1907;15^1897, 9934;9915;9913;9474
 
 ===================================================

@@ -483,27 +483,24 @@ int main( int argc, char * argv[] )
   printf( "after heuristic, runtime = %f\n", RUNTIME );
 #endif
 
-  if ( produce_output )
-    {
-      // write ordering after heuristic, before post-processing
-      restore_order( best_crossings_order );
-      createOrdFileName( output_file_name, "" );
+  if ( produce_output ) {
+    // write ordering after heuristic, before post-processing
+    restore_order( best_crossings_order );
+    createOrdFileName( output_file_name, "" );
+    writeOrd( output_file_name );
+  }
+
+  if ( do_post_processing ) {
+    restore_order( best_crossings_order );
+    updateAllCrossings();
+    swapping();
+
+    if ( produce_output ) {
+      // write file with best total crossings order after post-processing
+      createOrdFileName( output_file_name, "-post" );
       writeOrd( output_file_name );
     }
-
-  if ( do_post_processing )
-    {
-      restore_order( best_crossings_order );
-      updateAllCrossings();
-      swapping();
-
-      if ( produce_output )
-        {
-          // write file with best total crossings order after post-processing
-          createOrdFileName( output_file_name, "-post" );
-          writeOrd( output_file_name );
-        }
-    }
+  }
 
   capture_post_processing_stats();
 
@@ -516,28 +513,28 @@ int main( int argc, char * argv[] )
   if ( produce_output ) {
       // write file with best max edge order after overall
       restore_order( best_edge_crossings_order );
-      createOrdFileName( output_file_name, "_edge" );
+      createOrdFileName( output_file_name, "-edge" );
       writeOrd( output_file_name );
   }
 
   if ( produce_output ) {
       // write file with best stretch order overall
       restore_order( best_total_stretch_order );
-      createOrdFileName( output_file_name, "_stretch" );
+      createOrdFileName( output_file_name, "-stretch" );
       writeOrd( output_file_name );
   }
 
   if ( produce_output ) {
       // write file with best stretch order overall
       restore_order( best_bottleneck_stretch_order );
-      createOrdFileName( output_file_name, "_bs" );
+      createOrdFileName( output_file_name, "-bs" );
       writeOrd( output_file_name );
   }
 
 #ifdef FAVORED
   // write file with best order for favored edge crossings
   restore_order( best_favored_crossings_order );
-  createOrdFileName( output_file_name, "_favored" );
+  createOrdFileName( output_file_name, "-favored" );
   writeOrd( output_file_name );
 #endif
 
@@ -563,7 +560,7 @@ int main( int argc, char * argv[] )
   return EXIT_SUCCESS;
 }
 
-/*  [Last modified: 2016 05 19 at 14:58:48 GMT] */
+/*  [Last modified: 2016 05 23 at 19:29:24 GMT] */
 
 /* the line below is to ensure that this file gets benignly modified via
    'make version' */
