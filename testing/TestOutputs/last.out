@@ -1,7 +1,7 @@
-++++++++++ Testing min_crossings Mon May 23 17:31:17 UTC 2016 ++++++++++++
+++++++++++ Testing min_crossings Tue May 24 14:13:45 UTC 2016 ++++++++++++
 ========= running experiments with TestData/c_2000_2100_25_4-rnd-004-scr ================= echo ========= running experiments with TestData/c_2000_2100_25_4-rnd-004-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_25_4-rnd-004
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -20,7 +20,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.666
+Runtime,0.682
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3267,iteration,6841
@@ -40,7 +40,7 @@ FinalBottleneckStretch,0.461219,iteration,-1
 Pareto,43^4266;44^3770;48^3637;50^3528;52^3267, 9182;6408;9193;4200;6841
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_25_4-rnd-004
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -59,7 +59,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.640
+Runtime,0.649
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,4310,iteration,78
@@ -79,7 +79,7 @@ FinalBottleneckStretch,0.559574,iteration,-1
 Pareto,48^4728;54^4510;65^4502;66^4455;68^4313;72^4310, 1333;1329;1906;1325;89;78
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_25_4-rnd-004
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -94,11 +94,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.426, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.506, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.430
+Runtime,2.510
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3807,iteration,9743
@@ -118,7 +118,7 @@ FinalBottleneckStretch,0.356669,iteration,-1
 Pareto,19^4538;20^3991;22^3807, 6025;8008;9743
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_25_4-rnd-004
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -133,11 +133,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.674, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.721, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.677
+Runtime,1.723
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,4796,iteration,9650
@@ -157,7 +157,46 @@ FinalBottleneckStretch,0.922466,iteration,-1
 Pareto,100^4796, 9956
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2100_25_4-rnd-004
+NumberOfLayers,25
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2100
+EdgeDensity,1.05
+MinDegree,1
+MaxDegree,6
+MeanDegree,2.10
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.106, graph c_2000_2100_25_4-rnd-004
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,3.110
+StartCrossings,50541
+PreCrossings,10641
+HeuristicCrossings,10641,iteration,0
+FinalCrossings,10641,iteration,9
+StartEdgeCrossings,131
+PreEdgeCrossings,133
+HeuristicEdgeCrossings,133,iteration,0
+FinalEdgeCrossings,133,iteration,-1
+StartStretch,733.761140
+PreStretch,220.081152
+HeuristicStretch,106.381603,iteration,9869
+FinalStretch,106.381603,iteration,-1
+StartBottleneckStretch,0.989130
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.987805,iteration,1153
+FinalBottleneckStretch,0.987805,iteration,-1
+Pareto,106.381603^10641, 9869
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_25_4-rnd-004
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -172,11 +211,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.063, graph c_2000_2100_25_4-rnd-004
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.935, graph c_2000_2100_25_4-rnd-004
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,3.066
+Runtime,2.939
 StartCrossings,50541
 PreCrossings,10641
 HeuristicCrossings,3921,iteration,9766
@@ -195,11 +234,50 @@ HeuristicBottleneckStretch,0.369192,iteration,4158
 FinalBottleneckStretch,0.369192,iteration,-1
 Pareto,18^4209;20^3921, 8023;9766
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2100_25_4-rnd-004
+NumberOfLayers,25
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2100
+EdgeDensity,1.05
+MinDegree,1
+MaxDegree,6
+MeanDegree,2.10
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.662, graph c_2000_2100_25_4-rnd-004
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,3.665
+StartCrossings,50541
+PreCrossings,10641
+HeuristicCrossings,10641,iteration,0
+FinalCrossings,10641,iteration,9
+StartEdgeCrossings,131
+PreEdgeCrossings,133
+HeuristicEdgeCrossings,133,iteration,0
+FinalEdgeCrossings,133,iteration,-1
+StartStretch,733.761140
+PreStretch,220.081152
+HeuristicStretch,107.391113,iteration,9619
+FinalStretch,107.391113,iteration,-1
+StartBottleneckStretch,0.989130
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.987805,iteration,1153
+FinalBottleneckStretch,0.987805,iteration,-1
+Pareto,107.391113^10641, 9619
+
 ===================================================
 
 ========= running experiments with TestData/c_2000_2100_50_8-rnd-019-scr ================= echo ========= running experiments with TestData/c_2000_2100_50_8-rnd-019-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_50_8-rnd-019
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -218,7 +296,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.547
+Runtime,0.545
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1555,iteration,435
@@ -238,7 +316,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,48^1858;55^1555, 484;435
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_50_8-rnd-019
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -256,7 +334,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.546
+Runtime,0.530
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1794,iteration,2567
@@ -276,7 +354,7 @@ FinalBottleneckStretch,0.880000,iteration,-1
 Pareto,38^2003;45^1794, 6901;2567
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_50_8-rnd-019
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -291,11 +369,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.185, graph c_2000_2100_50_8-rnd-019
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.157, graph c_2000_2100_50_8-rnd-019
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.188
+Runtime,2.160
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1471,iteration,8983
@@ -315,7 +393,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,14^1661;17^1622;19^1471, 8023;8001;8983
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_50_8-rnd-019
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -333,7 +411,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.578
+Runtime,1.542
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1812,iteration,5607
@@ -353,7 +431,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,90^1812, 5607
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2100_50_8-rnd-019
+NumberOfLayers,50
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2100
+EdgeDensity,1.05
+MinDegree,1
+MaxDegree,10
+MeanDegree,2.10
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.416, graph c_2000_2100_50_8-rnd-019
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.419
+StartCrossings,36615
+PreCrossings,8545
+HeuristicCrossings,8545,iteration,0
+FinalCrossings,8545,iteration,9
+StartEdgeCrossings,153
+PreEdgeCrossings,123
+HeuristicEdgeCrossings,123,iteration,0
+FinalEdgeCrossings,123,iteration,-1
+StartStretch,745.313603
+PreStretch,401.405238
+HeuristicStretch,154.316956,iteration,9198
+FinalStretch,154.316956,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.950000,iteration,2003
+FinalBottleneckStretch,0.950000,iteration,-1
+Pareto,154.316956^8545, 9198
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2100_50_8-rnd-019
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -368,11 +485,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.721, graph c_2000_2100_50_8-rnd-019
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.729, graph c_2000_2100_50_8-rnd-019
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.723
+Runtime,2.731
 StartCrossings,36615
 PreCrossings,8545
 HeuristicCrossings,1370,iteration,9050
@@ -391,11 +508,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,13^1536;17^1445;18^1443;19^1436;20^1370, 8036;8658;8661;8674;9050
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2100_50_8-rnd-019
+NumberOfLayers,50
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2100
+EdgeDensity,1.05
+MinDegree,1
+MaxDegree,10
+MeanDegree,2.10
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.966, graph c_2000_2100_50_8-rnd-019
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.970
+StartCrossings,36615
+PreCrossings,8545
+HeuristicCrossings,8545,iteration,0
+FinalCrossings,8545,iteration,9
+StartEdgeCrossings,153
+PreEdgeCrossings,123
+HeuristicEdgeCrossings,123,iteration,0
+FinalEdgeCrossings,123,iteration,-1
+StartStretch,745.313603
+PreStretch,401.405238
+HeuristicStretch,157.201567,iteration,9253
+FinalStretch,157.201567,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.950000,iteration,2001
+FinalBottleneckStretch,0.950000,iteration,-1
+Pareto,157.201567^8545, 9253
+
 ===================================================
 
 ========= running experiments with TestData/c_2000_2500_100_8-rnd-014-scr ================= echo ========= running experiments with TestData/c_2000_2500_100_8-rnd-014-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2500_100_8-rnd-014
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -414,7 +570,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 2000
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.615
+Runtime,0.628
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,5373,iteration,8820
@@ -434,7 +590,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,43^5429;62^5373, 9989;8820
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2500_100_8-rnd-014
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -449,11 +605,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.615, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.629, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.618
+Runtime,0.634
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,5388,iteration,4510
@@ -473,7 +629,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,43^5547;46^5468;50^5427;52^5388, 7357;9263;4495;4510
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2500_100_8-rnd-014
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -488,11 +644,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.613, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.649, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.616
+Runtime,1.653
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,4102,iteration,9478
@@ -512,7 +668,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,24^4246;28^4102, 8002;9478
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2500_100_8-rnd-014
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -527,11 +683,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.158, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.196, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.162
+Runtime,1.200
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,5199,iteration,8528
@@ -551,7 +707,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,63^5199, 9394
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2500_100_8-rnd-014
+NumberOfLayers,100
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2500
+EdgeDensity,1.25
+MinDegree,1
+MaxDegree,17
+MeanDegree,2.50
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.731, graph c_2000_2500_100_8-rnd-014
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.735
+StartCrossings,29520
+PreCrossings,20773
+HeuristicCrossings,20773,iteration,0
+FinalCrossings,20773,iteration,9
+StartEdgeCrossings,94
+PreEdgeCrossings,103
+HeuristicEdgeCrossings,103,iteration,0
+FinalEdgeCrossings,103,iteration,-1
+StartStretch,922.514384
+PreStretch,732.655755
+HeuristicStretch,334.708617,iteration,8909
+FinalStretch,334.708617,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,334.708617^20773, 8909
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,c_2000_2500_100_8-rnd-014
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -566,11 +761,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 1, size_of_largest_component = 2000
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.354, graph c_2000_2500_100_8-rnd-014
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.404, graph c_2000_2500_100_8-rnd-014
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.357
+Runtime,2.408
 StartCrossings,29520
 PreCrossings,20773
 HeuristicCrossings,4157,iteration,9532
@@ -589,11 +784,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,20^4473;21^4393;22^4327;23^4257;25^4252;27^4157, 8026;8020;8015;8005;7523;9532
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,c_2000_2500_100_8-rnd-014
+NumberOfLayers,100
+NumberOfNodes,2000
+IsolatedNodes,0
+EffectiveNodes,2000
+NumberOfEdges,2500
+EdgeDensity,1.25
+MinDegree,1
+MaxDegree,17
+MeanDegree,2.50
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 2000
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.596, graph c_2000_2500_100_8-rnd-014
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.600
+StartCrossings,29520
+PreCrossings,20773
+HeuristicCrossings,20773,iteration,0
+FinalCrossings,20773,iteration,9
+StartEdgeCrossings,94
+PreEdgeCrossings,103
+HeuristicEdgeCrossings,103,iteration,0
+FinalEdgeCrossings,103,iteration,-1
+StartStretch,922.514384
+PreStretch,732.655755
+HeuristicStretch,330.771565,iteration,9206
+FinalStretch,330.771565,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,330.771565^20773, 9206
+
 ===================================================
 
 ========= running experiments with TestData/ex_10 ================= echo ========= running experiments with TestData/ex_10 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_10
 NumberOfLayers,2
 NumberOfNodes,10
@@ -632,7 +866,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,7^14, 2
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_10
 NumberOfLayers,2
 NumberOfNodes,10
@@ -671,7 +905,7 @@ FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^13, 1
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_10
 NumberOfLayers,2
 NumberOfNodes,10
@@ -690,7 +924,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.051
+Runtime,0.053
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,4,iteration,15
@@ -710,7 +944,7 @@ FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,2^4, 15
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_10
 NumberOfLayers,2
 NumberOfNodes,10
@@ -729,7 +963,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.036
+Runtime,0.032
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,4,iteration,4
@@ -749,7 +983,46 @@ FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,2^4, 4
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,ex_10
+NumberOfLayers,2
+NumberOfNodes,10
+IsolatedNodes,0
+EffectiveNodes,10
+NumberOfEdges,12
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.40
+MedianDegree,2.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 10
+=== Running heuristic mse
+*** standard termination here: iteration 21 crossings 17 edge_crossings 7 graph ex_10 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.015
+StartCrossings,18
+PreCrossings,17
+HeuristicCrossings,17,iteration,0
+FinalCrossings,17,iteration,6
+StartEdgeCrossings,8
+PreEdgeCrossings,7
+HeuristicEdgeCrossings,7,iteration,0
+FinalEdgeCrossings,7,iteration,-1
+StartStretch,4.000000
+PreStretch,3.750000
+HeuristicStretch,2.500000,iteration,6
+FinalStretch,2.500000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.500000,iteration,6
+FinalBottleneckStretch,0.500000,iteration,-1
+Pareto,2.500000^17, 6
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_10
 NumberOfLayers,2
 NumberOfNodes,10
@@ -768,7 +1041,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 10
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.057
+Runtime,0.055
 StartCrossings,18
 PreCrossings,17
 HeuristicCrossings,10,iteration,11
@@ -787,11 +1060,50 @@ HeuristicBottleneckStretch,0.750000,iteration,3
 FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,4^11;5^10, 13;11
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,ex_10
+NumberOfLayers,2
+NumberOfNodes,10
+IsolatedNodes,0
+EffectiveNodes,10
+NumberOfEdges,12
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.40
+MedianDegree,2.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 10
+=== Running heuristic mse
+*** standard termination here: iteration 21 crossings 17 edge_crossings 7 graph ex_10 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.022
+StartCrossings,18
+PreCrossings,17
+HeuristicCrossings,17,iteration,0
+FinalCrossings,17,iteration,6
+StartEdgeCrossings,8
+PreEdgeCrossings,7
+HeuristicEdgeCrossings,7,iteration,0
+FinalEdgeCrossings,7,iteration,-1
+StartStretch,4.000000
+PreStretch,3.750000
+HeuristicStretch,2.500000,iteration,7
+FinalStretch,2.500000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.500000,iteration,7
+FinalBottleneckStretch,0.500000,iteration,-1
+Pareto,2.500000^17, 7
+
 ===================================================
 
 ========= running experiments with TestData/ex_20 ================= echo ========= running experiments with TestData/ex_20 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_20
 NumberOfLayers,4
 NumberOfNodes,20
@@ -830,7 +1142,7 @@ FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^31, 10
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_20
 NumberOfLayers,4
 NumberOfNodes,20
@@ -869,7 +1181,7 @@ FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,4^28, 52
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_20
 NumberOfLayers,4
 NumberOfNodes,20
@@ -888,7 +1200,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.090
+Runtime,0.084
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,40,iteration,10
@@ -908,7 +1220,7 @@ FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,5^41;7^40, 7;10
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_20
 NumberOfLayers,4
 NumberOfNodes,20
@@ -927,7 +1239,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.057
+Runtime,0.055
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,31,iteration,17
@@ -947,7 +1259,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^31, 17
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,ex_20
+NumberOfLayers,4
+NumberOfNodes,20
+IsolatedNodes,0
+EffectiveNodes,20
+NumberOfEdges,36
+EdgeDensity,1.80
+MinDegree,1
+MaxDegree,6
+MeanDegree,3.60
+MedianDegree,3.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 20
+=== Running heuristic mse
+*** standard termination here: iteration 61 crossings 44 edge_crossings 7 graph ex_20 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.030
+StartCrossings,71
+PreCrossings,44
+HeuristicCrossings,44,iteration,0
+FinalCrossings,44,iteration,9
+StartEdgeCrossings,8
+PreEdgeCrossings,7
+HeuristicEdgeCrossings,7,iteration,0
+FinalEdgeCrossings,7,iteration,-1
+StartStretch,15.500000
+PreStretch,11.250000
+HeuristicStretch,9.250000,iteration,33
+FinalStretch,9.250000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.750000,iteration,2
+FinalBottleneckStretch,0.750000,iteration,-1
+Pareto,9.250000^44, 33
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,ex_20
 NumberOfLayers,4
 NumberOfNodes,20
@@ -966,7 +1317,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.101
+Runtime,0.104
 StartCrossings,71
 PreCrossings,44
 HeuristicCrossings,29,iteration,121
@@ -985,11 +1336,50 @@ HeuristicBottleneckStretch,0.750000,iteration,26
 FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,6^29, 121
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,ex_20
+NumberOfLayers,4
+NumberOfNodes,20
+IsolatedNodes,0
+EffectiveNodes,20
+NumberOfEdges,36
+EdgeDensity,1.80
+MinDegree,1
+MaxDegree,6
+MeanDegree,3.60
+MedianDegree,3.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 20
+=== Running heuristic mse
+*** standard termination here: iteration 61 crossings 44 edge_crossings 7 graph ex_20 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.050
+StartCrossings,71
+PreCrossings,44
+HeuristicCrossings,44,iteration,0
+FinalCrossings,44,iteration,9
+StartEdgeCrossings,8
+PreEdgeCrossings,7
+HeuristicEdgeCrossings,7,iteration,0
+FinalEdgeCrossings,7,iteration,-1
+StartStretch,15.500000
+PreStretch,11.250000
+HeuristicStretch,8.750000,iteration,32
+FinalStretch,8.750000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.500000,iteration,22
+FinalBottleneckStretch,0.500000,iteration,-1
+Pareto,8.750000^44, 32
+
 ===================================================
 
 ========= running experiments with TestData/g_0500_09_11 ================= echo ========= running experiments with TestData/g_0500_09_11 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_11
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1008,7 +1398,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.207
+Runtime,0.203
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,369,iteration,167
@@ -1028,7 +1418,7 @@ FinalBottleneckStretch,0.617172,iteration,-1
 Pareto,32^1568;35^801;36^479;37^435;38^430;39^369, 16;162;249;438;439;167
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_11
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1047,7 +1437,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.194
+Runtime,0.198
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,185,iteration,6036
@@ -1067,7 +1457,7 @@ FinalBottleneckStretch,0.576768,iteration,-1
 Pareto,14^226;33^185, 4086;6036
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_11
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1086,7 +1476,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.021
+Runtime,1.016
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,343,iteration,6853
@@ -1106,7 +1496,7 @@ FinalBottleneckStretch,0.612795,iteration,-1
 Pareto,18^353;25^352;27^350;28^349;29^348;30^347;31^346;32^343, 7077;6733;6737;6738;6739;6742;6743;6853
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_11
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1125,7 +1515,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.695
+Runtime,0.694
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,326,iteration,4064
@@ -1145,7 +1535,46 @@ FinalBottleneckStretch,0.617508,iteration,-1
 Pareto,37^326, 5833
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_11
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,29
+EffectiveNodes,471
+NumberOfEdges,503
+EdgeDensity,1.07
+MinDegree,0
+MaxDegree,41
+MeanDegree,2.01
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 39, size_of_largest_component = 439
+=== Running heuristic mse
+*** standard termination here: iteration 7537 crossings 2418 edge_crossings 63 graph g_0500_09_11 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.854
+StartCrossings,5632
+PreCrossings,2418
+HeuristicCrossings,2418,iteration,0
+FinalCrossings,2418,iteration,6
+StartEdgeCrossings,60
+PreEdgeCrossings,63
+HeuristicEdgeCrossings,63,iteration,0
+FinalEdgeCrossings,63,iteration,-1
+StartStretch,212.571717
+PreStretch,127.043771
+HeuristicStretch,61.352525,iteration,6831
+FinalStretch,61.352525,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.981481
+HeuristicBottleneckStretch,0.706397,iteration,12
+FinalBottleneckStretch,0.706397,iteration,-1
+Pareto,61.352525^2418, 6831
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_11
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1164,7 +1593,7 @@ dfs done, number_of_components = 39, size_of_largest_component = 439
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.153
+Runtime,1.158
 StartCrossings,5632
 PreCrossings,2418
 HeuristicCrossings,341,iteration,3107
@@ -1183,11 +1612,50 @@ HeuristicBottleneckStretch,0.597980,iteration,6199
 FinalBottleneckStretch,0.597980,iteration,-1
 Pareto,16^351;19^346;21^344;23^341, 3304;3298;3511;3107
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_11
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,29
+EffectiveNodes,471
+NumberOfEdges,503
+EdgeDensity,1.07
+MinDegree,0
+MaxDegree,41
+MeanDegree,2.01
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 39, size_of_largest_component = 439
+=== Running heuristic mse
+*** standard termination here: iteration 8008 crossings 2418 edge_crossings 63 graph g_0500_09_11 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.996
+StartCrossings,5632
+PreCrossings,2418
+HeuristicCrossings,2418,iteration,0
+FinalCrossings,2418,iteration,6
+StartEdgeCrossings,60
+PreEdgeCrossings,63
+HeuristicEdgeCrossings,63,iteration,0
+FinalEdgeCrossings,63,iteration,-1
+StartStretch,212.571717
+PreStretch,127.043771
+HeuristicStretch,61.192256,iteration,7126
+FinalStretch,61.192256,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.981481
+HeuristicBottleneckStretch,0.706397,iteration,12
+FinalBottleneckStretch,0.706397,iteration,-1
+Pareto,61.192256^2418, 7126
+
 ===================================================
 
 ========= running experiments with TestData/g_0500_09_20 ================= echo ========= running experiments with TestData/g_0500_09_20 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_20
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1206,7 +1674,7 @@ dfs done, number_of_components = 11, size_of_largest_component = 489
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.482
+Runtime,0.487
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,12282,iteration,8417
@@ -1226,7 +1694,7 @@ FinalBottleneckStretch,0.615825,iteration,-1
 Pareto,78^13169;80^12602;81^12466;93^12411;95^12347;100^12282, 2960;6273;6305;2305;6161;8417
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_20
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1245,7 +1713,7 @@ dfs done, number_of_components = 11, size_of_largest_component = 489
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.454
+Runtime,0.458
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,11799,iteration,9505
@@ -1265,7 +1733,7 @@ FinalBottleneckStretch,0.613468,iteration,-1
 Pareto,72^12208;78^12175;80^12166;81^11893;86^11891;93^11799, 3423;8762;7142;5304;7482;9505
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_20
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1281,11 +1749,11 @@ MedianDegree,3.5
 dfs done, number_of_components = 11, size_of_largest_component = 489
 === Running heuristic mce
 *** standard termination here: iteration 5893 crossings 14280 edge_crossings 71 graph g_0500_09_20 ***
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.461, graph g_0500_09_20
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.459, graph g_0500_09_20
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.462
+Runtime,1.461
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,13639,iteration,9829
@@ -1305,7 +1773,7 @@ FinalBottleneckStretch,0.575084,iteration,-1
 Pareto,63^14241;66^14180;67^14010;69^13995;71^13823;72^13813;73^13809;74^13788;75^13689;78^13661;79^13639, 7428;9419;9449;9451;9855;9861;9847;9833;9832;9564;9829
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_20
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1320,11 +1788,11 @@ MedianDegree,3.5
 --- Running preprocessor dfs
 dfs done, number_of_components = 11, size_of_largest_component = 489
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.997, graph g_0500_09_20
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.004, graph g_0500_09_20
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.997
+Runtime,1.005
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,10047,iteration,9768
@@ -1344,7 +1812,46 @@ FinalBottleneckStretch,0.852862,iteration,-1
 Pareto,95^10941;98^10772;100^10580;101^10047, 1658;1821;2111;9768
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_20
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,9
+EffectiveNodes,491
+NumberOfEdges,967
+EdgeDensity,1.97
+MinDegree,0
+MaxDegree,18
+MeanDegree,3.87
+MedianDegree,3.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 11, size_of_largest_component = 489
+=== Running heuristic mse
+*** standard termination here: iteration 8839 crossings 22956 edge_crossings 131 graph g_0500_09_20 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.735
+StartCrossings,27620
+PreCrossings,22956
+HeuristicCrossings,22956,iteration,0
+FinalCrossings,22956,iteration,9
+StartEdgeCrossings,119
+PreEdgeCrossings,131
+HeuristicEdgeCrossings,131,iteration,0
+FinalEdgeCrossings,131,iteration,-1
+StartStretch,332.749158
+PreStretch,277.951515
+HeuristicStretch,129.634007,iteration,8145
+FinalStretch,129.634007,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.817845,iteration,493
+FinalBottleneckStretch,0.817845,iteration,-1
+Pareto,129.634007^22956, 8145
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_20
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1363,7 +1870,7 @@ dfs done, number_of_components = 11, size_of_largest_component = 489
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.919
+Runtime,1.952
 StartCrossings,27620
 PreCrossings,22956
 HeuristicCrossings,13658,iteration,4110
@@ -1382,11 +1889,51 @@ HeuristicBottleneckStretch,0.541077,iteration,6972
 FinalBottleneckStretch,0.541077,iteration,-1
 Pareto,61^14252;62^13907;63^13863;64^13783;70^13761;76^13741;88^13658, 6978;8888;8882;8864;8845;8582;4110
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_20
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,9
+EffectiveNodes,491
+NumberOfEdges,967
+EdgeDensity,1.97
+MinDegree,0
+MaxDegree,18
+MeanDegree,3.87
+MedianDegree,3.5
+--- Running preprocessor dfs
+dfs done, number_of_components = 11, size_of_largest_component = 489
+=== Running heuristic mse
+*** standard termination here: iteration 5402 crossings 22956 edge_crossings 131 graph g_0500_09_20 ***
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.219, graph g_0500_09_20
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.220
+StartCrossings,27620
+PreCrossings,22956
+HeuristicCrossings,22956,iteration,0
+FinalCrossings,22956,iteration,9
+StartEdgeCrossings,119
+PreEdgeCrossings,131
+HeuristicEdgeCrossings,131,iteration,0
+FinalEdgeCrossings,131,iteration,-1
+StartStretch,332.749158
+PreStretch,277.951515
+HeuristicStretch,123.640067,iteration,9981
+FinalStretch,123.640067,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.817508,iteration,1965
+FinalBottleneckStretch,0.817508,iteration,-1
+Pareto,123.640067^22956, 9981
+
 ===================================================
 
 ========= running experiments with TestData/g_0500_09_40 ================= echo ========= running experiments with TestData/g_0500_09_40 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_40
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1405,7 +1952,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,1.379
+Runtime,1.406
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,79085,iteration,7195
@@ -1425,7 +1972,7 @@ FinalBottleneckStretch,0.796970,iteration,-1
 Pareto,201^81850;202^80615;204^80272;205^80127;209^79940;210^79262;217^79085, 6296;4330;4344;4312;4341;6762;7195
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_40
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1444,7 +1991,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,1.459
+Runtime,1.317
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,77261,iteration,4468
@@ -1464,7 +2011,7 @@ FinalBottleneckStretch,0.779461,iteration,-1
 Pareto,199^78201;208^77950;211^77261, 3901;4386;4468
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_40
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1483,7 +2030,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,3.023
+Runtime,2.971
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,102225,iteration,1334
@@ -1503,7 +2050,7 @@ FinalBottleneckStretch,0.817508,iteration,-1
 Pareto,190^105670;192^105567;195^105093;200^104692;202^104475;211^103679;221^103333;223^103250;233^102225, 751;752;677;634;798;6265;3291;1211;1334
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_40
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1518,11 +2065,11 @@ MedianDegree,8.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 3, size_of_largest_component = 498
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.945, graph g_0500_09_40
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.953, graph g_0500_09_40
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,1.946
+Runtime,1.954
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,71643,iteration,9758
@@ -1542,7 +2089,46 @@ FinalBottleneckStretch,0.890572,iteration,-1
 Pareto,219^71789;227^71783;230^71781;231^71643, 7522;7565;7628;9758
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_40
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,2
+EffectiveNodes,498
+NumberOfEdges,2030
+EdgeDensity,4.08
+MinDegree,0
+MaxDegree,18
+MeanDegree,8.12
+MedianDegree,8.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 3, size_of_largest_component = 498
+=== Running heuristic mse
+*** standard termination here: iteration 6475 crossings 116316 edge_crossings 252 graph g_0500_09_40 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,4.195
+StartCrossings,121654
+PreCrossings,116316
+HeuristicCrossings,116316,iteration,0
+FinalCrossings,116316,iteration,9
+StartEdgeCrossings,253
+PreEdgeCrossings,252
+HeuristicEdgeCrossings,252,iteration,0
+FinalEdgeCrossings,252,iteration,-1
+StartStretch,678.451515
+PreStretch,630.956902
+HeuristicStretch,390.838721,iteration,9132
+FinalStretch,390.838721,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.981818
+HeuristicBottleneckStretch,0.944444,iteration,52
+FinalBottleneckStretch,0.944444,iteration,-1
+Pareto,390.838721^116316, 9132
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,g_0500_09_40
 NumberOfLayers,9
 NumberOfNodes,500
@@ -1561,7 +2147,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 498
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,5.011
+Runtime,5.017
 StartCrossings,121654
 PreCrossings,116316
 HeuristicCrossings,101890,iteration,5798
@@ -1580,11 +2166,50 @@ HeuristicBottleneckStretch,0.816835,iteration,5198
 FinalBottleneckStretch,0.816835,iteration,-1
 Pareto,196^104464;197^102745;218^101890, 5131;5177;5798
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,g_0500_09_40
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,2
+EffectiveNodes,498
+NumberOfEdges,2030
+EdgeDensity,4.08
+MinDegree,0
+MaxDegree,18
+MeanDegree,8.12
+MedianDegree,8.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 3, size_of_largest_component = 498
+=== Running heuristic mse
+*** standard termination here: iteration 5479 crossings 116316 edge_crossings 252 graph g_0500_09_40 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,6.282
+StartCrossings,121654
+PreCrossings,116316
+HeuristicCrossings,116316,iteration,0
+FinalCrossings,116316,iteration,9
+StartEdgeCrossings,253
+PreEdgeCrossings,252
+HeuristicEdgeCrossings,252,iteration,0
+FinalEdgeCrossings,252,iteration,-1
+StartStretch,678.451515
+PreStretch,630.956902
+HeuristicStretch,395.099327,iteration,4813
+FinalStretch,395.099327,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.981818
+HeuristicBottleneckStretch,0.908754,iteration,499
+FinalBottleneckStretch,0.908754,iteration,-1
+Pareto,395.099327^116316, 4813
+
 ===================================================
 
 ========= running experiments with TestData/grafo10394 ================= echo ========= running experiments with TestData/grafo10394 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10394
 NumberOfLayers,14
 NumberOfNodes,158
@@ -1603,7 +2228,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.068
+Runtime,0.062
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,112,iteration,2192
@@ -1623,7 +2248,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,8^122;9^112, 2102;2192
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10394
 NumberOfLayers,14
 NumberOfNodes,158
@@ -1642,7 +2267,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.064
+Runtime,0.062
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,110,iteration,8486
@@ -1662,7 +2287,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^117;7^112;8^110, 3145;2962;8486
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10394
 NumberOfLayers,14
 NumberOfNodes,158
@@ -1681,7 +2306,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.380
+Runtime,0.404
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,103,iteration,8566
@@ -1701,7 +2326,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^103, 8566
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10394
 NumberOfLayers,14
 NumberOfNodes,158
@@ -1720,7 +2345,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.275
+Runtime,0.271
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,116,iteration,1530
@@ -1740,7 +2365,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,15^116, 1931
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,grafo10394
+NumberOfLayers,14
+NumberOfNodes,158
+IsolatedNodes,0
+EffectiveNodes,158
+NumberOfEdges,185
+EdgeDensity,1.17
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.34
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 158
+=== Running heuristic mse
+*** standard termination here: iteration 633 crossings 315 edge_crossings 24 graph grafo10394 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.183
+StartCrossings,465
+PreCrossings,315
+HeuristicCrossings,315,iteration,0
+FinalCrossings,315,iteration,6
+StartEdgeCrossings,28
+PreEdgeCrossings,24
+HeuristicEdgeCrossings,24,iteration,0
+FinalEdgeCrossings,24,iteration,-1
+StartStretch,36.582748
+PreStretch,35.900545
+HeuristicStretch,20.446078,iteration,381
+FinalStretch,20.446078,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,20.446078^315, 381
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10394
 NumberOfLayers,14
 NumberOfNodes,158
@@ -1759,7 +2423,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 158
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.448
+Runtime,0.450
 StartCrossings,465
 PreCrossings,315
 HeuristicCrossings,102,iteration,8543
@@ -1778,11 +2442,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^127;5^102, 4593;8543
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,grafo10394
+NumberOfLayers,14
+NumberOfNodes,158
+IsolatedNodes,0
+EffectiveNodes,158
+NumberOfEdges,185
+EdgeDensity,1.17
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.34
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 158
+=== Running heuristic mse
+*** standard termination here: iteration 633 crossings 315 edge_crossings 24 graph grafo10394 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.247
+StartCrossings,465
+PreCrossings,315
+HeuristicCrossings,315,iteration,0
+FinalCrossings,315,iteration,6
+StartEdgeCrossings,28
+PreEdgeCrossings,24
+HeuristicEdgeCrossings,24,iteration,0
+FinalEdgeCrossings,24,iteration,-1
+StartStretch,36.582748
+PreStretch,35.900545
+HeuristicStretch,20.425749,iteration,445
+FinalStretch,20.425749,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,20.425749^315, 445
+
 ===================================================
 
 ========= running experiments with TestData/grafo10676 ================= echo ========= running experiments with TestData/grafo10676 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10676
 NumberOfLayers,5
 NumberOfNodes,115
@@ -1801,7 +2504,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.106
+Runtime,0.102
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,531,iteration,6603
@@ -1821,7 +2524,7 @@ FinalBottleneckStretch,0.310160,iteration,-1
 Pareto,23^658;25^611;26^540;28^536;38^531, 8859;4851;6243;6658;6603
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10676
 NumberOfLayers,5
 NumberOfNodes,115
@@ -1840,7 +2543,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.091
+Runtime,0.093
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,510,iteration,4683
@@ -1860,7 +2563,7 @@ FinalBottleneckStretch,0.323529,iteration,-1
 Pareto,22^584;30^582;31^563;33^556;40^510, 1379;5349;1165;3964;4683
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10676
 NumberOfLayers,5
 NumberOfNodes,115
@@ -1879,7 +2582,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.833
+Runtime,0.855
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,345,iteration,6271
@@ -1899,7 +2602,7 @@ FinalBottleneckStretch,0.727273,iteration,-1
 Pareto,10^359;11^345, 9091;8015
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10676
 NumberOfLayers,5
 NumberOfNodes,115
@@ -1918,7 +2621,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.582
+Runtime,0.586
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,406,iteration,1543
@@ -1938,7 +2641,46 @@ FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,56^406, 1543
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,grafo10676
+NumberOfLayers,5
+NumberOfNodes,115
+IsolatedNodes,0
+EffectiveNodes,115
+NumberOfEdges,151
+EdgeDensity,1.31
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.63
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 115
+=== Running heuristic mse
+*** standard termination here: iteration 576 crossings 1422 edge_crossings 99 graph grafo10676 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.607
+StartCrossings,1217
+PreCrossings,1422
+HeuristicCrossings,1422,iteration,0
+FinalCrossings,1422,iteration,6
+StartEdgeCrossings,94
+PreEdgeCrossings,99
+HeuristicEdgeCrossings,99,iteration,0
+FinalEdgeCrossings,99,iteration,-1
+StartStretch,27.239750
+PreStretch,27.854278
+HeuristicStretch,12.098039,iteration,355
+FinalStretch,12.098039,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.696524,iteration,205
+FinalBottleneckStretch,0.696524,iteration,-1
+Pareto,12.098039^1422, 355
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,grafo10676
 NumberOfLayers,5
 NumberOfNodes,115
@@ -1957,7 +2699,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 115
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.905
+Runtime,0.919
 StartCrossings,1217
 PreCrossings,1422
 HeuristicCrossings,485,iteration,5600
@@ -1976,11 +2718,50 @@ HeuristicBottleneckStretch,0.750000,iteration,7796
 FinalBottleneckStretch,0.750000,iteration,-1
 Pareto,15^512;16^506;17^502;18^501;19^489;29^485, 2768;5996;2761;4901;5981;5600
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,grafo10676
+NumberOfLayers,5
+NumberOfNodes,115
+IsolatedNodes,0
+EffectiveNodes,115
+NumberOfEdges,151
+EdgeDensity,1.31
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.63
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 115
+=== Running heuristic mse
+*** standard termination here: iteration 576 crossings 1422 edge_crossings 99 graph grafo10676 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.651
+StartCrossings,1217
+PreCrossings,1422
+HeuristicCrossings,1422,iteration,0
+FinalCrossings,1422,iteration,6
+StartEdgeCrossings,94
+PreEdgeCrossings,99
+HeuristicEdgeCrossings,99,iteration,0
+FinalEdgeCrossings,99,iteration,-1
+StartStretch,27.239750
+PreStretch,27.854278
+HeuristicStretch,12.098039,iteration,355
+FinalStretch,12.098039,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.696524,iteration,205
+FinalBottleneckStretch,0.696524,iteration,-1
+Pareto,12.098039^1422, 355
+
 ===================================================
 
 ========= running experiments with TestData/increase ================= echo ========= running experiments with TestData/increase =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,increase
 NumberOfLayers,2
 NumberOfNodes,13
@@ -2019,7 +2800,7 @@ FinalBottleneckStretch,0.357143,iteration,-1
 Pareto,1^1, 2
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,increase
 NumberOfLayers,2
 NumberOfNodes,13
@@ -2058,7 +2839,7 @@ FinalBottleneckStretch,0.357143,iteration,-1
 Pareto,1^1, 1
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,increase
 NumberOfLayers,2
 NumberOfNodes,13
@@ -2077,7 +2858,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 7
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.057
+Runtime,0.061
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,3
@@ -2097,7 +2878,7 @@ FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 3
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,increase
 NumberOfLayers,2
 NumberOfNodes,13
@@ -2116,7 +2897,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 7
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.045
+Runtime,0.044
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,1
@@ -2136,7 +2917,46 @@ FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 1
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,increase
+NumberOfLayers,2
+NumberOfNodes,13
+IsolatedNodes,0
+EffectiveNodes,13
+NumberOfEdges,10
+EdgeDensity,0.77
+MinDegree,1
+MaxDegree,3
+MeanDegree,1.54
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 3, size_of_largest_component = 7
+=== Running heuristic mse
+*** standard termination here: iteration 27 crossings 3 edge_crossings 2 graph increase ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.016
+StartCrossings,13
+PreCrossings,3
+HeuristicCrossings,3,iteration,0
+FinalCrossings,3,iteration,6
+StartEdgeCrossings,5
+PreEdgeCrossings,2
+HeuristicEdgeCrossings,2,iteration,0
+FinalEdgeCrossings,2,iteration,-1
+StartStretch,4.035714
+PreStretch,1.321429
+HeuristicStretch,1.035714,iteration,2
+FinalStretch,1.035714,iteration,-1
+StartBottleneckStretch,0.607143
+PreBottleneckStretch,0.500000
+HeuristicBottleneckStretch,0.285714,iteration,2
+FinalBottleneckStretch,0.285714,iteration,-1
+Pareto,1.035714^3, 2
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,increase
 NumberOfLayers,2
 NumberOfNodes,13
@@ -2155,7 +2975,7 @@ dfs done, number_of_components = 3, size_of_largest_component = 7
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.064
+Runtime,0.066
 StartCrossings,13
 PreCrossings,3
 HeuristicCrossings,1,iteration,3
@@ -2174,11 +2994,50 @@ HeuristicBottleneckStretch,0.285714,iteration,15
 FinalBottleneckStretch,0.285714,iteration,-1
 Pareto,1^1, 3
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,increase
+NumberOfLayers,2
+NumberOfNodes,13
+IsolatedNodes,0
+EffectiveNodes,13
+NumberOfEdges,10
+EdgeDensity,0.77
+MinDegree,1
+MaxDegree,3
+MeanDegree,1.54
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 3, size_of_largest_component = 7
+=== Running heuristic mse
+*** standard termination here: iteration 27 crossings 3 edge_crossings 2 graph increase ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.018
+StartCrossings,13
+PreCrossings,3
+HeuristicCrossings,3,iteration,0
+FinalCrossings,3,iteration,6
+StartEdgeCrossings,5
+PreEdgeCrossings,2
+HeuristicEdgeCrossings,2,iteration,0
+FinalEdgeCrossings,2,iteration,-1
+StartStretch,4.035714
+PreStretch,1.321429
+HeuristicStretch,1.035714,iteration,2
+FinalStretch,1.035714,iteration,-1
+StartBottleneckStretch,0.607143
+PreBottleneckStretch,0.500000
+HeuristicBottleneckStretch,0.285714,iteration,2
+FinalBottleneckStretch,0.285714,iteration,-1
+Pareto,1.035714^3, 2
+
 ===================================================
 
 ========= running experiments with TestData/north20.50_GKNV-scr ================= echo ========= running experiments with TestData/north20.50_GKNV-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north20.50_GKNV
 NumberOfLayers,9
 NumberOfNodes,100
@@ -2197,7 +3056,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.048
+Runtime,0.049
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,55,iteration,50
@@ -2217,7 +3076,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,7^55, 50
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north20.50_GKNV
 NumberOfLayers,9
 NumberOfNodes,100
@@ -2236,7 +3095,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.049
+Runtime,0.047
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,41,iteration,278
@@ -2256,7 +3115,7 @@ FinalBottleneckStretch,0.800000,iteration,-1
 Pareto,7^41, 278
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north20.50_GKNV
 NumberOfLayers,9
 NumberOfNodes,100
@@ -2275,7 +3134,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.286
+Runtime,0.289
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,69,iteration,5707
@@ -2295,7 +3154,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^70;7^69, 6503;5707
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north20.50_GKNV
 NumberOfLayers,9
 NumberOfNodes,100
@@ -2314,7 +3173,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.208
+Runtime,0.211
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,52,iteration,693
@@ -2334,7 +3193,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^52, 693
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north20.50_GKNV
+NumberOfLayers,9
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,125
+EdgeDensity,1.25
+MinDegree,1
+MaxDegree,11
+MeanDegree,2.50
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 401 crossings 136 edge_crossings 16 graph north20.50_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.118
+StartCrossings,519
+PreCrossings,136
+HeuristicCrossings,136,iteration,0
+FinalCrossings,136,iteration,9
+StartEdgeCrossings,24
+PreEdgeCrossings,16
+HeuristicEdgeCrossings,16,iteration,0
+FinalEdgeCrossings,16,iteration,-1
+StartStretch,49.647388
+PreStretch,20.778134
+HeuristicStretch,14.236039,iteration,221
+FinalStretch,14.236039,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,14.236039^136, 221
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north20.50_GKNV
 NumberOfLayers,9
 NumberOfNodes,100
@@ -2353,7 +3251,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.336
+Runtime,0.344
 StartCrossings,519
 PreCrossings,136
 HeuristicCrossings,68,iteration,3611
@@ -2372,11 +3270,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^70;7^68, 3601;3611
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north20.50_GKNV
+NumberOfLayers,9
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,125
+EdgeDensity,1.25
+MinDegree,1
+MaxDegree,11
+MeanDegree,2.50
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 401 crossings 136 edge_crossings 16 graph north20.50_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.164
+StartCrossings,519
+PreCrossings,136
+HeuristicCrossings,136,iteration,0
+FinalCrossings,136,iteration,9
+StartEdgeCrossings,24
+PreEdgeCrossings,16
+HeuristicEdgeCrossings,16,iteration,0
+FinalEdgeCrossings,16,iteration,-1
+StartStretch,49.647388
+PreStretch,20.778134
+HeuristicStretch,14.236039,iteration,221
+FinalStretch,14.236039,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,14.236039^136, 221
+
 ===================================================
 
 ========= running experiments with TestData/north42.32_GKNV-scr ================= echo ========= running experiments with TestData/north42.32_GKNV-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north42.32_GKNV
 NumberOfLayers,6
 NumberOfNodes,42
@@ -2395,7 +3332,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.024
+Runtime,0.027
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,49,iteration,14
@@ -2415,7 +3352,7 @@ FinalBottleneckStretch,0.714286,iteration,-1
 Pareto,9^84;11^49, 1;14
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north42.32_GKNV
 NumberOfLayers,6
 NumberOfNodes,42
@@ -2454,7 +3391,7 @@ FinalBottleneckStretch,0.454545,iteration,-1
 Pareto,5^48;9^46, 37;21
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north42.32_GKNV
 NumberOfLayers,6
 NumberOfNodes,42
@@ -2493,7 +3430,7 @@ FinalBottleneckStretch,0.523810,iteration,-1
 Pareto,3^49, 274
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north42.32_GKNV
 NumberOfLayers,6
 NumberOfNodes,42
@@ -2512,7 +3449,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.106
+Runtime,0.104
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,46,iteration,37
@@ -2532,7 +3469,46 @@ FinalBottleneckStretch,0.547619,iteration,-1
 Pareto,5^46, 37
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north42.32_GKNV
+NumberOfLayers,6
+NumberOfNodes,42
+IsolatedNodes,0
+EffectiveNodes,42
+NumberOfEdges,64
+EdgeDensity,1.52
+MinDegree,2
+MaxDegree,4
+MeanDegree,3.05
+MedianDegree,3.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 42
+=== Running heuristic mse
+*** standard termination here: iteration 85 crossings 100 edge_crossings 10 graph north42.32_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.049
+StartCrossings,137
+PreCrossings,100
+HeuristicCrossings,100,iteration,0
+FinalCrossings,100,iteration,6
+StartEdgeCrossings,13
+PreEdgeCrossings,10
+HeuristicEdgeCrossings,10,iteration,0
+FinalEdgeCrossings,10,iteration,-1
+StartStretch,21.255411
+PreStretch,17.311688
+HeuristicStretch,10.225108,iteration,28
+FinalStretch,10.225108,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.714286,iteration,2
+FinalBottleneckStretch,0.714286,iteration,-1
+Pareto,10.225108^100, 28
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north42.32_GKNV
 NumberOfLayers,6
 NumberOfNodes,42
@@ -2551,7 +3527,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 42
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.177
+Runtime,0.176
 StartCrossings,137
 PreCrossings,100
 HeuristicCrossings,48,iteration,127
@@ -2570,11 +3546,50 @@ HeuristicBottleneckStretch,0.523810,iteration,595
 FinalBottleneckStretch,0.523810,iteration,-1
 Pareto,3^48, 127
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north42.32_GKNV
+NumberOfLayers,6
+NumberOfNodes,42
+IsolatedNodes,0
+EffectiveNodes,42
+NumberOfEdges,64
+EdgeDensity,1.52
+MinDegree,2
+MaxDegree,4
+MeanDegree,3.05
+MedianDegree,3.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 42
+=== Running heuristic mse
+*** standard termination here: iteration 85 crossings 100 edge_crossings 10 graph north42.32_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.074
+StartCrossings,137
+PreCrossings,100
+HeuristicCrossings,100,iteration,0
+FinalCrossings,100,iteration,6
+StartEdgeCrossings,13
+PreEdgeCrossings,10
+HeuristicEdgeCrossings,10,iteration,0
+FinalEdgeCrossings,10,iteration,-1
+StartStretch,21.255411
+PreStretch,17.311688
+HeuristicStretch,10.225108,iteration,29
+FinalStretch,10.225108,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.714286,iteration,1
+FinalBottleneckStretch,0.714286,iteration,-1
+Pareto,10.225108^100, 29
+
 ===================================================
 
 ========= running experiments with TestData/north95.0_UPR-scr ================= echo ========= running experiments with TestData/north95.0_UPR-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north95.0_UPR
 NumberOfLayers,63
 NumberOfNodes,186
@@ -2593,7 +3608,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.049
+Runtime,0.048
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,2,iteration,89
@@ -2613,7 +3628,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,1^2, 89
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north95.0_UPR
 NumberOfLayers,63
 NumberOfNodes,186
@@ -2632,7 +3647,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.046
+Runtime,0.050
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,3,iteration,156
@@ -2652,7 +3667,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,1^3, 156
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north95.0_UPR
 NumberOfLayers,63
 NumberOfNodes,186
@@ -2671,7 +3686,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.114
+Runtime,0.119
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,4,iteration,14
@@ -2691,7 +3706,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,1^4, 14
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north95.0_UPR
 NumberOfLayers,63
 NumberOfNodes,186
@@ -2710,7 +3725,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.090
+Runtime,0.092
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,4,iteration,261
@@ -2730,7 +3745,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,1^4, 261
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north95.0_UPR
+NumberOfLayers,63
+NumberOfNodes,186
+IsolatedNodes,0
+EffectiveNodes,186
+NumberOfEdges,213
+EdgeDensity,1.15
+MinDegree,1
+MaxDegree,7
+MeanDegree,2.29
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 186
+=== Running heuristic mse
+*** standard termination here: iteration 373 crossings 11 edge_crossings 3 graph north95.0_UPR ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.090
+StartCrossings,158
+PreCrossings,11
+HeuristicCrossings,11,iteration,0
+FinalCrossings,11,iteration,3
+StartEdgeCrossings,9
+PreEdgeCrossings,3
+HeuristicEdgeCrossings,3,iteration,0
+FinalEdgeCrossings,3,iteration,-1
+StartStretch,96.150000
+PreStretch,46.045238
+HeuristicStretch,43.478571,iteration,79
+FinalStretch,43.478571,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,43.478571^11, 79
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,north95.0_UPR
 NumberOfLayers,63
 NumberOfNodes,186
@@ -2749,7 +3803,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 186
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.172
+Runtime,0.170
 StartCrossings,158
 PreCrossings,11
 HeuristicCrossings,3,iteration,202
@@ -2768,11 +3822,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,1^3, 202
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,north95.0_UPR
+NumberOfLayers,63
+NumberOfNodes,186
+IsolatedNodes,0
+EffectiveNodes,186
+NumberOfEdges,213
+EdgeDensity,1.15
+MinDegree,1
+MaxDegree,7
+MeanDegree,2.29
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 186
+=== Running heuristic mse
+*** standard termination here: iteration 373 crossings 11 edge_crossings 3 graph north95.0_UPR ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.177
+StartCrossings,158
+PreCrossings,11
+HeuristicCrossings,11,iteration,0
+FinalCrossings,11,iteration,3
+StartEdgeCrossings,9
+PreEdgeCrossings,3
+HeuristicEdgeCrossings,3,iteration,0
+FinalEdgeCrossings,3,iteration,-1
+StartStretch,96.150000
+PreStretch,46.045238
+HeuristicStretch,43.478571,iteration,79
+FinalStretch,43.478571,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,43.478571^11, 79
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_0_0-019 ================= echo ========= running experiments with TestData/r_100_120_10_0_0-019 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_19
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2791,7 +3884,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.043
+Runtime,0.040
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,58,iteration,47
@@ -2811,7 +3904,7 @@ FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,4^70;5^58, 22;47
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_19
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2830,7 +3923,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.046
+Runtime,0.044
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,51,iteration,722
@@ -2850,7 +3943,7 @@ FinalBottleneckStretch,0.333333,iteration,-1
 Pareto,3^52;4^51, 1317;1112
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_19
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2869,7 +3962,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.190
+Runtime,0.195
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,55,iteration,638
@@ -2889,7 +3982,7 @@ FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,3^59;4^55, 1007;638
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_19
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2908,7 +4001,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.130
+Runtime,0.132
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,58,iteration,934
@@ -2928,7 +4021,46 @@ FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,6^58, 934
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_0p0_19
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 501 crossings 139 edge_crossings 14 graph r_100_120_10_0p0_0p0_19 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.083
+StartCrossings,335
+PreCrossings,139
+HeuristicCrossings,139,iteration,0
+FinalCrossings,139,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,14
+HeuristicEdgeCrossings,14,iteration,0
+FinalEdgeCrossings,14,iteration,-1
+StartStretch,43.333333
+PreStretch,24.888889
+HeuristicStretch,16.000000,iteration,360
+FinalStretch,16.000000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,10001
+FinalBottleneckStretch,0.888889,iteration,-1
+Pareto,16.000000^139, 360
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_19
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2947,7 +4079,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.232
+Runtime,0.230
 StartCrossings,335
 PreCrossings,139
 HeuristicCrossings,49,iteration,6724
@@ -2966,11 +4098,50 @@ HeuristicBottleneckStretch,0.444444,iteration,138
 FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^49, 6724
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_0p0_19
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 501 crossings 139 edge_crossings 14 graph r_100_120_10_0p0_0p0_19 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.124
+StartCrossings,335
+PreCrossings,139
+HeuristicCrossings,139,iteration,0
+FinalCrossings,139,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,14
+HeuristicEdgeCrossings,14,iteration,0
+FinalEdgeCrossings,14,iteration,-1
+StartStretch,43.333333
+PreStretch,24.888889
+HeuristicStretch,15.888889,iteration,334
+FinalStretch,15.888889,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,10001
+FinalBottleneckStretch,0.888889,iteration,-1
+Pareto,15.888889^139, 334
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_0_0-026 ================= echo ========= running experiments with TestData/r_100_120_10_0_0-026 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_26
 NumberOfLayers,10
 NumberOfNodes,100
@@ -2989,7 +4160,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.041
+Runtime,0.042
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,71,iteration,26
@@ -3009,7 +4180,7 @@ FinalBottleneckStretch,0.555556,iteration,-1
 Pareto,5^71, 26
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_26
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3048,7 +4219,7 @@ FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^54;4^46;6^44, 9524;2417;7120
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_26
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3067,7 +4238,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.194
+Runtime,0.196
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,52,iteration,6911
@@ -3087,7 +4258,7 @@ FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^52, 6911
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_26
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3106,7 +4277,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.135
+Runtime,0.132
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,63,iteration,587
@@ -3126,7 +4297,46 @@ FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,7^63, 587
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_0p0_26
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,9
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 113 edge_crossings 11 graph r_100_120_10_0p0_0p0_26 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.084
+StartCrossings,299
+PreCrossings,113
+HeuristicCrossings,113,iteration,0
+FinalCrossings,113,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,11
+HeuristicEdgeCrossings,11,iteration,0
+FinalEdgeCrossings,11,iteration,-1
+StartStretch,41.222222
+PreStretch,24.888889
+HeuristicStretch,16.888889,iteration,172
+FinalStretch,16.888889,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,16.888889^113, 172
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_0p0_26
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3142,11 +4352,11 @@ MedianDegree,2.0
 dfs done, number_of_components = 1, size_of_largest_component = 100
 === Running heuristic mce
 *** standard termination here: iteration 301 crossings 91 edge_crossings 4 graph r_100_120_10_0p0_0p0_26 ***
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.227, graph r_100_120_10_0p0_0p0_26
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.230, graph r_100_120_10_0p0_0p0_26
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.227
+Runtime,0.231
 StartCrossings,299
 PreCrossings,113
 HeuristicCrossings,52,iteration,8201
@@ -3165,11 +4375,50 @@ HeuristicBottleneckStretch,0.444444,iteration,9850
 FinalBottleneckStretch,0.444444,iteration,-1
 Pareto,3^52, 8201
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_0p0_26
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,9
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 401 crossings 113 edge_crossings 11 graph r_100_120_10_0p0_0p0_26 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.118
+StartCrossings,299
+PreCrossings,113
+HeuristicCrossings,113,iteration,0
+FinalCrossings,113,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,11
+HeuristicEdgeCrossings,11,iteration,0
+FinalEdgeCrossings,11,iteration,-1
+StartStretch,41.222222
+PreStretch,24.888889
+HeuristicStretch,16.000000,iteration,208
+FinalStretch,16.000000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.777778,iteration,101
+FinalBottleneckStretch,0.777778,iteration,-1
+Pareto,16.000000^113, 208
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_0_1p5-017 ================= echo ========= running experiments with TestData/r_100_120_10_0_1p5-017 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_17
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3188,7 +4437,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.041
+Runtime,0.042
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,45,iteration,25
@@ -3208,7 +4457,7 @@ FinalBottleneckStretch,0.777778,iteration,-1
 Pareto,8^45, 25
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_17
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3247,7 +4496,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,9^58, 158
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_17
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3266,7 +4515,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.202
+Runtime,0.204
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,55,iteration,430
@@ -3286,7 +4535,7 @@ FinalBottleneckStretch,0.777778,iteration,-1
 Pareto,7^63;8^56;9^55, 305;406;430
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_17
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3305,7 +4554,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.142
+Runtime,0.131
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,48,iteration,120
@@ -3325,7 +4574,46 @@ FinalBottleneckStretch,0.888889,iteration,-1
 Pareto,9^48, 120
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_1p5_17
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,20
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 401 crossings 233 edge_crossings 16 graph r_100_120_10_0p0_1p5_17 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.085
+StartCrossings,268
+PreCrossings,233
+HeuristicCrossings,233,iteration,0
+FinalCrossings,233,iteration,9
+StartEdgeCrossings,17
+PreEdgeCrossings,16
+HeuristicEdgeCrossings,16,iteration,0
+FinalEdgeCrossings,16,iteration,-1
+StartStretch,44.222222
+PreStretch,44.555556
+HeuristicStretch,24.555556,iteration,430
+FinalStretch,24.555556,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.555556,iteration,104
+FinalBottleneckStretch,0.555556,iteration,-1
+Pareto,24.555556^233, 430
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_17
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3344,7 +4632,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.229
+Runtime,0.233
 StartCrossings,268
 PreCrossings,233
 HeuristicCrossings,48,iteration,1510
@@ -3363,11 +4651,50 @@ HeuristicBottleneckStretch,0.888889,iteration,101
 FinalBottleneckStretch,0.888889,iteration,-1
 Pareto,11^49;12^48, 701;1510
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_1p5_17
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,20
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 601 crossings 233 edge_crossings 16 graph r_100_120_10_0p0_1p5_17 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.125
+StartCrossings,268
+PreCrossings,233
+HeuristicCrossings,233,iteration,0
+FinalCrossings,233,iteration,9
+StartEdgeCrossings,17
+PreEdgeCrossings,16
+HeuristicEdgeCrossings,16,iteration,0
+FinalEdgeCrossings,16,iteration,-1
+StartStretch,44.222222
+PreStretch,44.555556
+HeuristicStretch,23.000000,iteration,1239
+FinalStretch,23.000000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.555556,iteration,13
+FinalBottleneckStretch,0.555556,iteration,-1
+Pareto,23.000000^233, 1239
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_0_1p5-032 ================= echo ========= running experiments with TestData/r_100_120_10_0_1p5-032 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_32
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3386,7 +4713,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.040
+Runtime,0.042
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,28,iteration,19
@@ -3406,7 +4733,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,5^28, 19
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_32
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3425,7 +4752,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.045
+Runtime,0.040
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,29,iteration,41
@@ -3445,7 +4772,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,3^29, 41
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_32
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3464,7 +4791,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.188
+Runtime,0.185
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,50,iteration,214
@@ -3484,7 +4811,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^52;5^50, 208;214
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_32
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3503,7 +4830,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.137
+Runtime,0.132
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,69,iteration,132
@@ -3523,7 +4850,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,10^69, 132
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_1p5_32
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,20
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 501 crossings 278 edge_crossings 12 graph r_100_120_10_0p0_1p5_32 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.085
+StartCrossings,233
+PreCrossings,278
+HeuristicCrossings,278,iteration,0
+FinalCrossings,278,iteration,6
+StartEdgeCrossings,12
+PreEdgeCrossings,12
+HeuristicEdgeCrossings,12,iteration,0
+FinalEdgeCrossings,12,iteration,-1
+StartStretch,42.333333
+PreStretch,43.666667
+HeuristicStretch,23.444444,iteration,354
+FinalStretch,23.444444,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.666667,iteration,14
+FinalBottleneckStretch,0.666667,iteration,-1
+Pareto,23.444444^278, 354
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_0p0_1p5_32
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3542,7 +4908,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.234
+Runtime,0.233
 StartCrossings,233
 PreCrossings,278
 HeuristicCrossings,42,iteration,1211
@@ -3561,11 +4927,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^45;5^42, 1107;1211
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_0p0_1p5_32
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,20
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 601 crossings 278 edge_crossings 12 graph r_100_120_10_0p0_1p5_32 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.126
+StartCrossings,233
+PreCrossings,278
+HeuristicCrossings,278,iteration,0
+FinalCrossings,278,iteration,6
+StartEdgeCrossings,12
+PreEdgeCrossings,12
+HeuristicEdgeCrossings,12,iteration,0
+FinalEdgeCrossings,12,iteration,-1
+StartStretch,42.333333
+PreStretch,43.666667
+HeuristicStretch,23.555556,iteration,1110
+FinalStretch,23.555556,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.666667,iteration,11
+FinalBottleneckStretch,0.666667,iteration,-1
+Pareto,23.555556^278, 1110
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_1p5_0-010 ================= echo ========= running experiments with TestData/r_100_120_10_1p5_0-010 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_10
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3584,7 +4989,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.041
+Runtime,0.042
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,35,iteration,68
@@ -3604,7 +5009,7 @@ FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,4^35, 68
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_10
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3623,7 +5028,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.042
+Runtime,0.043
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,33,iteration,1502
@@ -3643,7 +5048,7 @@ FinalBottleneckStretch,0.500000,iteration,-1
 Pareto,4^36;5^35;6^33, 443;2402;1502
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_10
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3662,7 +5067,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.253
+Runtime,0.243
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,49,iteration,301
@@ -3682,7 +5087,7 @@ FinalBottleneckStretch,0.583333,iteration,-1
 Pareto,4^51;5^49, 304;301
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_10
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3721,7 +5126,46 @@ FinalBottleneckStretch,0.916667,iteration,-1
 Pareto,7^40, 495
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_0p0_10
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 169 edge_crossings 23 graph r_100_120_10_1p5_0p0_10 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.100
+StartCrossings,473
+PreCrossings,169
+HeuristicCrossings,169,iteration,0
+FinalCrossings,169,iteration,9
+StartEdgeCrossings,24
+PreEdgeCrossings,23
+HeuristicEdgeCrossings,23,iteration,0
+FinalEdgeCrossings,23,iteration,-1
+StartStretch,52.471531
+PreStretch,28.031207
+HeuristicStretch,14.694631,iteration,169
+FinalStretch,14.694631,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.750000,iteration,105
+FinalBottleneckStretch,0.750000,iteration,-1
+Pareto,14.694631^169, 169
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_10
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3740,7 +5184,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.296
+Runtime,0.292
 StartCrossings,473
 PreCrossings,169
 HeuristicCrossings,33,iteration,1931
@@ -3759,11 +5203,50 @@ HeuristicBottleneckStretch,0.833333,iteration,131
 FinalBottleneckStretch,0.833333,iteration,-1
 Pareto,3^38;4^33, 1908;1931
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_0p0_10
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 169 edge_crossings 23 graph r_100_120_10_1p5_0p0_10 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.145
+StartCrossings,473
+PreCrossings,169
+HeuristicCrossings,169,iteration,0
+FinalCrossings,169,iteration,9
+StartEdgeCrossings,24
+PreEdgeCrossings,23
+HeuristicEdgeCrossings,23,iteration,0
+FinalEdgeCrossings,23,iteration,-1
+StartStretch,52.471531
+PreStretch,28.031207
+HeuristicStretch,14.286178,iteration,155
+FinalStretch,14.286178,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.833333,iteration,13
+FinalBottleneckStretch,0.833333,iteration,-1
+Pareto,14.286178^169, 155
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_1p5_0-024 ================= echo ========= running experiments with TestData/r_100_120_10_1p5_0-024 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_24
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3782,7 +5265,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.037
+Runtime,0.041
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,53,iteration,163
@@ -3802,7 +5285,7 @@ FinalBottleneckStretch,0.636364,iteration,-1
 Pareto,6^53, 163
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_24
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3841,7 +5324,7 @@ FinalBottleneckStretch,0.590909,iteration,-1
 Pareto,6^61, 202
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_24
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3880,7 +5363,7 @@ FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,5^73;6^72;7^70, 647;702;401
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_24
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3899,7 +5382,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.180
+Runtime,0.183
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,23,iteration,282
@@ -3919,7 +5402,46 @@ FinalBottleneckStretch,0.727273,iteration,-1
 Pareto,5^23, 282
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_0p0_24
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,9
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 186 edge_crossings 21 graph r_100_120_10_1p5_0p0_24 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.100
+StartCrossings,448
+PreCrossings,186
+HeuristicCrossings,186,iteration,0
+FinalCrossings,186,iteration,6
+StartEdgeCrossings,30
+PreEdgeCrossings,21
+HeuristicEdgeCrossings,21,iteration,0
+FinalEdgeCrossings,21,iteration,-1
+StartStretch,49.192763
+PreStretch,36.136782
+HeuristicStretch,18.414414,iteration,160
+FinalStretch,18.414414,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.727273,iteration,32
+FinalBottleneckStretch,0.727273,iteration,-1
+Pareto,18.414414^186, 160
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_0p0_24
 NumberOfLayers,10
 NumberOfNodes,100
@@ -3938,7 +5460,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.311
+Runtime,0.301
 StartCrossings,448
 PreCrossings,186
 HeuristicCrossings,64,iteration,3240
@@ -3957,11 +5479,50 @@ HeuristicBottleneckStretch,0.684211,iteration,119
 FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,5^68;6^64, 5624;3240
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_0p0_24
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,9
+MeanDegree,2.40
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 186 edge_crossings 21 graph r_100_120_10_1p5_0p0_24 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.140
+StartCrossings,448
+PreCrossings,186
+HeuristicCrossings,186,iteration,0
+FinalCrossings,186,iteration,6
+StartEdgeCrossings,30
+PreEdgeCrossings,21
+HeuristicEdgeCrossings,21,iteration,0
+FinalEdgeCrossings,21,iteration,-1
+StartStretch,49.192763
+PreStretch,36.136782
+HeuristicStretch,18.414414,iteration,368
+FinalStretch,18.414414,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.727273,iteration,55
+FinalBottleneckStretch,0.727273,iteration,-1
+Pareto,18.414414^186, 368
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_1p5_1p5-016 ================= echo ========= running experiments with TestData/r_100_120_10_1p5_1p5-016 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_16
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4000,7 +5561,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,3^12, 20
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_16
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4019,7 +5580,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.041
+Runtime,0.040
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,15,iteration,232
@@ -4039,7 +5600,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,3^15, 232
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_16
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4058,7 +5619,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.227
+Runtime,0.229
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,13,iteration,410
@@ -4078,7 +5639,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,2^13, 410
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_16
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4097,7 +5658,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.148
+Runtime,0.143
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,25,iteration,129
@@ -4117,7 +5678,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,6^25, 129
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_1p5_16
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,36
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 196 edge_crossings 18 graph r_100_120_10_1p5_1p5_16 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.080
+StartCrossings,164
+PreCrossings,196
+HeuristicCrossings,196,iteration,0
+FinalCrossings,196,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,18
+HeuristicEdgeCrossings,18,iteration,0
+FinalEdgeCrossings,18,iteration,-1
+StartStretch,48.667659
+PreStretch,52.108730
+HeuristicStretch,25.949603,iteration,140
+FinalStretch,25.949603,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.625000,iteration,17
+FinalBottleneckStretch,0.625000,iteration,-1
+Pareto,25.949603^196, 140
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_16
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4136,7 +5736,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.255
+Runtime,0.259
 StartCrossings,164
 PreCrossings,196
 HeuristicCrossings,11,iteration,3609
@@ -4155,11 +5755,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,2^11, 3609
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_1p5_16
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,36
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 196 edge_crossings 18 graph r_100_120_10_1p5_1p5_16 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.121
+StartCrossings,164
+PreCrossings,196
+HeuristicCrossings,196,iteration,0
+FinalCrossings,196,iteration,6
+StartEdgeCrossings,14
+PreEdgeCrossings,18
+HeuristicEdgeCrossings,18,iteration,0
+FinalEdgeCrossings,18,iteration,-1
+StartStretch,48.667659
+PreStretch,52.108730
+HeuristicStretch,25.949603,iteration,139
+FinalStretch,25.949603,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.625000,iteration,17
+FinalBottleneckStretch,0.625000,iteration,-1
+Pareto,25.949603^196, 139
+
 ===================================================
 
 ========= running experiments with TestData/r_100_120_10_1p5_1p5-023 ================= echo ========= running experiments with TestData/r_100_120_10_1p5_1p5-023 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_23
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4178,7 +5817,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.037
+Runtime,0.038
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,107,iteration,18
@@ -4198,7 +5837,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,33^107, 18
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_23
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4217,7 +5856,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.038
+Runtime,0.040
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,105,iteration,112
@@ -4237,7 +5876,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,33^105, 112
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_23
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4256,7 +5895,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.264
+Runtime,0.266
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,177,iteration,126
@@ -4276,7 +5915,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,18^270;22^192;24^181;31^178;34^177, 204;202;201;124;126
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_23
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4295,7 +5934,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.176
+Runtime,0.177
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,166,iteration,130
@@ -4315,7 +5954,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,33^166, 130
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_1p5_23
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,29
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 401 crossings 934 edge_crossings 42 graph r_100_120_10_1p5_1p5_23 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.134
+StartCrossings,472
+PreCrossings,934
+HeuristicCrossings,934,iteration,0
+FinalCrossings,934,iteration,6
+StartEdgeCrossings,38
+PreEdgeCrossings,42
+HeuristicEdgeCrossings,42,iteration,0
+FinalEdgeCrossings,42,iteration,-1
+StartStretch,35.663000
+PreStretch,49.812681
+HeuristicStretch,26.571887,iteration,1039
+FinalStretch,26.571887,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.600000,iteration,403
+FinalBottleneckStretch,0.600000,iteration,-1
+Pareto,26.571887^934, 1039
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,r_100_120_10_1p5_1p5_23
 NumberOfLayers,10
 NumberOfNodes,100
@@ -4334,7 +6012,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.303
+Runtime,0.297
 StartCrossings,472
 PreCrossings,934
 HeuristicCrossings,148,iteration,1628
@@ -4353,11 +6031,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,16^261;17^256;18^250;19^236;20^217;21^191;22^160;29^148, 4311;4312;9812;4616;4419;4421;4232;1628
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,r_100_120_10_1p5_1p5_23
+NumberOfLayers,10
+NumberOfNodes,100
+IsolatedNodes,0
+EffectiveNodes,100
+NumberOfEdges,120
+EdgeDensity,1.20
+MinDegree,1
+MaxDegree,29
+MeanDegree,2.40
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 100
+=== Running heuristic mse
+*** standard termination here: iteration 301 crossings 934 edge_crossings 42 graph r_100_120_10_1p5_1p5_23 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.173
+StartCrossings,472
+PreCrossings,934
+HeuristicCrossings,934,iteration,0
+FinalCrossings,934,iteration,6
+StartEdgeCrossings,38
+PreEdgeCrossings,42
+HeuristicEdgeCrossings,42,iteration,0
+FinalEdgeCrossings,42,iteration,-1
+StartStretch,35.663000
+PreStretch,49.812681
+HeuristicStretch,26.571887,iteration,3591
+FinalStretch,26.571887,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.600000,iteration,403
+FinalBottleneckStretch,0.600000,iteration,-1
+Pareto,26.571887^934, 3591
+
 ===================================================
 
 ========= running experiments with TestData/rome8685.74_GKNV-scr ================= echo ========= running experiments with TestData/rome8685.74_GKNV-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8685.74_GKNV
 NumberOfLayers,9
 NumberOfNodes,91
@@ -4376,7 +6093,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.047
+Runtime,0.045
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,85,iteration,159
@@ -4396,7 +6113,7 @@ FinalBottleneckStretch,0.389952,iteration,-1
 Pareto,8^85, 159
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8685.74_GKNV
 NumberOfLayers,9
 NumberOfNodes,91
@@ -4415,7 +6132,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.047
+Runtime,0.048
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,83,iteration,2276
@@ -4435,7 +6152,7 @@ FinalBottleneckStretch,0.345865,iteration,-1
 Pareto,6^92;7^88;8^83, 9242;7260;2276
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8685.74_GKNV
 NumberOfLayers,9
 NumberOfNodes,91
@@ -4454,7 +6171,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.367
+Runtime,0.365
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,75,iteration,3390
@@ -4474,7 +6191,7 @@ FinalBottleneckStretch,0.404306,iteration,-1
 Pareto,4^77;5^75, 3377;3390
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8685.74_GKNV
 NumberOfLayers,9
 NumberOfNodes,91
@@ -4493,7 +6210,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.252
+Runtime,0.251
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,102,iteration,608
@@ -4513,7 +6230,46 @@ FinalBottleneckStretch,0.586124,iteration,-1
 Pareto,21^102, 608
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,rome8685.74_GKNV
+NumberOfLayers,9
+NumberOfNodes,91
+IsolatedNodes,0
+EffectiveNodes,91
+NumberOfEdges,111
+EdgeDensity,1.22
+MinDegree,1
+MaxDegree,6
+MeanDegree,2.44
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 91
+=== Running heuristic mse
+*** standard termination here: iteration 456 crossings 281 edge_crossings 26 graph rome8685.74_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.166
+StartCrossings,688
+PreCrossings,281
+HeuristicCrossings,281,iteration,0
+FinalCrossings,281,iteration,6
+StartEdgeCrossings,30
+PreEdgeCrossings,26
+HeuristicEdgeCrossings,26,iteration,0
+FinalEdgeCrossings,26,iteration,-1
+StartStretch,44.096031
+PreStretch,24.053721
+HeuristicStretch,10.118240,iteration,335
+FinalStretch,10.118240,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.947368
+HeuristicBottleneckStretch,0.789474,iteration,7
+FinalBottleneckStretch,0.789474,iteration,-1
+Pareto,10.118240^281, 335
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8685.74_GKNV
 NumberOfLayers,9
 NumberOfNodes,91
@@ -4532,7 +6288,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 91
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.393
+Runtime,0.406
 StartCrossings,688
 PreCrossings,281
 HeuristicCrossings,76,iteration,6373
@@ -4551,11 +6307,50 @@ HeuristicBottleneckStretch,0.341615,iteration,2705
 FinalBottleneckStretch,0.341615,iteration,-1
 Pareto,4^76, 6373
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,rome8685.74_GKNV
+NumberOfLayers,9
+NumberOfNodes,91
+IsolatedNodes,0
+EffectiveNodes,91
+NumberOfEdges,111
+EdgeDensity,1.22
+MinDegree,1
+MaxDegree,6
+MeanDegree,2.44
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 91
+=== Running heuristic mse
+*** standard termination here: iteration 456 crossings 281 edge_crossings 26 graph rome8685.74_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.187
+StartCrossings,688
+PreCrossings,281
+HeuristicCrossings,281,iteration,0
+FinalCrossings,281,iteration,6
+StartEdgeCrossings,30
+PreEdgeCrossings,26
+HeuristicEdgeCrossings,26,iteration,0
+FinalEdgeCrossings,26,iteration,-1
+StartStretch,44.096031
+PreStretch,24.053721
+HeuristicStretch,10.118240,iteration,335
+FinalStretch,10.118240,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,0.947368
+HeuristicBottleneckStretch,0.789474,iteration,7
+FinalBottleneckStretch,0.789474,iteration,-1
+Pareto,10.118240^281, 335
+
 ===================================================
 
 ========= running experiments with TestData/rome8896.60_GKNV-scr ================= echo ========= running experiments with TestData/rome8896.60_GKNV-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8896.60_GKNV
 NumberOfLayers,11
 NumberOfNodes,107
@@ -4574,7 +6369,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.044
+Runtime,0.046
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,47,iteration,187
@@ -4594,7 +6389,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^47, 187
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8896.60_GKNV
 NumberOfLayers,11
 NumberOfNodes,107
@@ -4613,7 +6408,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.047
+Runtime,0.049
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,38,iteration,364
@@ -4633,7 +6428,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^48;6^47;7^40;9^38, 494;329;365;364
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8896.60_GKNV
 NumberOfLayers,11
 NumberOfNodes,107
@@ -4652,7 +6447,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.323
+Runtime,0.336
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,56,iteration,1327
@@ -4672,7 +6467,7 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,4^56, 1327
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8896.60_GKNV
 NumberOfLayers,11
 NumberOfNodes,107
@@ -4691,7 +6486,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.243
+Runtime,0.233
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,62,iteration,399
@@ -4711,7 +6506,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,15^62, 399
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,rome8896.60_GKNV
+NumberOfLayers,11
+NumberOfNodes,107
+IsolatedNodes,0
+EffectiveNodes,107
+NumberOfEdges,126
+EdgeDensity,1.18
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.36
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 107
+=== Running heuristic mse
+*** standard termination here: iteration 429 crossings 226 edge_crossings 22 graph rome8896.60_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.136
+StartCrossings,608
+PreCrossings,226
+HeuristicCrossings,226,iteration,0
+FinalCrossings,226,iteration,6
+StartEdgeCrossings,26
+PreEdgeCrossings,22
+HeuristicEdgeCrossings,22,iteration,0
+FinalEdgeCrossings,22,iteration,-1
+StartStretch,48.475744
+PreStretch,25.629781
+HeuristicStretch,15.451231,iteration,265
+FinalStretch,15.451231,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,15.451231^226, 265
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,rome8896.60_GKNV
 NumberOfLayers,11
 NumberOfNodes,107
@@ -4730,7 +6564,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 107
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.389
+Runtime,0.374
 StartCrossings,608
 PreCrossings,226
 HeuristicCrossings,32,iteration,8506
@@ -4749,11 +6583,50 @@ HeuristicBottleneckStretch,1.000000,iteration,0
 FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,3^34;4^32, 6100;8506
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,rome8896.60_GKNV
+NumberOfLayers,11
+NumberOfNodes,107
+IsolatedNodes,0
+EffectiveNodes,107
+NumberOfEdges,126
+EdgeDensity,1.18
+MinDegree,1
+MaxDegree,8
+MeanDegree,2.36
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 107
+=== Running heuristic mse
+*** standard termination here: iteration 429 crossings 226 edge_crossings 22 graph rome8896.60_GKNV ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.179
+StartCrossings,608
+PreCrossings,226
+HeuristicCrossings,226,iteration,0
+FinalCrossings,226,iteration,6
+StartEdgeCrossings,26
+PreEdgeCrossings,22
+HeuristicEdgeCrossings,22,iteration,0
+FinalEdgeCrossings,22,iteration,-1
+StartStretch,48.475744
+PreStretch,25.629781
+HeuristicStretch,15.451231,iteration,265
+FinalStretch,15.451231,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,15.451231^226, 265
+
 ===================================================
 
 ========= running experiments with TestData/t_0500_09_01 ================= echo ========= running experiments with TestData/t_0500_09_01 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_09_01
 NumberOfLayers,9
 NumberOfNodes,500
@@ -4772,7 +6645,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.202
+Runtime,0.206
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,111,iteration,191
@@ -4792,7 +6665,7 @@ FinalBottleneckStretch,0.127463,iteration,-1
 Pareto,7^148;8^147;9^144;10^111, 391;103;88;191
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_09_01
 NumberOfLayers,9
 NumberOfNodes,500
@@ -4811,7 +6684,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.205
+Runtime,0.199
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,132,iteration,5479
@@ -4831,7 +6704,7 @@ FinalBottleneckStretch,0.144370,iteration,-1
 Pareto,6^172;7^165;8^143;9^132, 2716;1177;1170;5479
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_09_01
 NumberOfLayers,9
 NumberOfNodes,500
@@ -4850,7 +6723,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.197
+Runtime,1.152
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,159,iteration,8316
@@ -4870,7 +6743,7 @@ FinalBottleneckStretch,0.109606,iteration,-1
 Pareto,4^159, 9825
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_09_01
 NumberOfLayers,9
 NumberOfNodes,500
@@ -4889,7 +6762,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.840
+Runtime,0.783
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,222,iteration,4990
@@ -4909,7 +6782,46 @@ FinalBottleneckStretch,0.965517,iteration,-1
 Pareto,50^222, 4990
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,t_0500_09_01
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,0
+EffectiveNodes,500
+NumberOfEdges,499
+EdgeDensity,1.00
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.00
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 500
+=== Running heuristic mse
+*** standard termination here: iteration 3001 crossings 686 edge_crossings 61 graph t_0500_09_01 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.929
+StartCrossings,8065
+PreCrossings,686
+HeuristicCrossings,686,iteration,0
+FinalCrossings,686,iteration,6
+StartEdgeCrossings,67
+PreEdgeCrossings,61
+HeuristicEdgeCrossings,61,iteration,0
+FinalEdgeCrossings,61,iteration,-1
+StartStretch,175.728947
+PreStretch,22.933135
+HeuristicStretch,13.062130,iteration,2254
+FinalStretch,13.062130,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.586207,iteration,502
+FinalBottleneckStretch,0.586207,iteration,-1
+Pareto,13.062130^686, 2254
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_09_01
 NumberOfLayers,9
 NumberOfNodes,500
@@ -4925,11 +6837,11 @@ MedianDegree,2.0
 dfs done, number_of_components = 1, size_of_largest_component = 500
 === Running heuristic mce
 *** standard termination here: iteration 4001 crossings 189 edge_crossings 5 graph t_0500_09_01 ***
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.302, graph t_0500_09_01
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.289, graph t_0500_09_01
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.303
+Runtime,1.290
 StartCrossings,8065
 PreCrossings,686
 HeuristicCrossings,164,iteration,7003
@@ -4948,11 +6860,50 @@ HeuristicBottleneckStretch,0.112069,iteration,9603
 FinalBottleneckStretch,0.112069,iteration,-1
 Pareto,3^168;4^164, 9512;7003
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,t_0500_09_01
+NumberOfLayers,9
+NumberOfNodes,500
+IsolatedNodes,0
+EffectiveNodes,500
+NumberOfEdges,499
+EdgeDensity,1.00
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.00
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 500
+=== Running heuristic mse
+*** standard termination here: iteration 3001 crossings 686 edge_crossings 61 graph t_0500_09_01 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.081
+StartCrossings,8065
+PreCrossings,686
+HeuristicCrossings,686,iteration,0
+FinalCrossings,686,iteration,6
+StartEdgeCrossings,67
+PreEdgeCrossings,61
+HeuristicEdgeCrossings,61,iteration,0
+FinalEdgeCrossings,61,iteration,-1
+StartStretch,175.728947
+PreStretch,22.933135
+HeuristicStretch,13.062130,iteration,2254
+FinalStretch,13.062130,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.586207,iteration,502
+FinalBottleneckStretch,0.586207,iteration,-1
+Pareto,13.062130^686, 2254
+
 ===================================================
 
 ========= running experiments with TestData/t_0500_22_01 ================= echo ========= running experiments with TestData/t_0500_22_01 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_22_01
 NumberOfLayers,22
 NumberOfNodes,500
@@ -4971,7 +6922,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.148
+Runtime,0.154
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,51,iteration,190
@@ -4991,7 +6942,7 @@ FinalBottleneckStretch,0.307692,iteration,-1
 Pareto,6^57;7^56;9^55;12^51, 191;188;357;190
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_22_01
 NumberOfLayers,22
 NumberOfNodes,500
@@ -5010,7 +6961,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.147
+Runtime,0.148
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,25,iteration,5957
@@ -5030,7 +6981,7 @@ FinalBottleneckStretch,0.261538,iteration,-1
 Pareto,3^36;4^25, 6369;5957
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_22_01
 NumberOfLayers,22
 NumberOfNodes,500
@@ -5049,7 +7000,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.611
+Runtime,0.586
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,47,iteration,5166
@@ -5069,7 +7020,7 @@ FinalBottleneckStretch,0.310606,iteration,-1
 Pareto,2^59;3^47, 4508;5166
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_22_01
 NumberOfLayers,22
 NumberOfNodes,500
@@ -5088,7 +7039,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.428
+Runtime,0.424
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,79,iteration,2850
@@ -5108,7 +7059,46 @@ FinalBottleneckStretch,1.000000,iteration,-1
 Pareto,21^79, 2850
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,t_0500_22_01
+NumberOfLayers,22
+NumberOfNodes,500
+IsolatedNodes,0
+EffectiveNodes,500
+NumberOfEdges,499
+EdgeDensity,1.00
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.00
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 500
+=== Running heuristic mse
+*** standard termination here: iteration 2001 crossings 179 edge_crossings 26 graph t_0500_22_01 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.372
+StartCrossings,3396
+PreCrossings,179
+HeuristicCrossings,179,iteration,0
+FinalCrossings,179,iteration,6
+StartEdgeCrossings,38
+PreEdgeCrossings,26
+HeuristicEdgeCrossings,26,iteration,0
+FinalEdgeCrossings,26,iteration,-1
+StartStretch,176.006351
+PreStretch,31.308928
+HeuristicStretch,22.010852,iteration,1400
+FinalStretch,22.010852,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,22.010852^179, 1400
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,t_0500_22_01
 NumberOfLayers,22
 NumberOfNodes,500
@@ -5127,7 +7117,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 500
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.720
+Runtime,0.711
 StartCrossings,3396
 PreCrossings,179
 HeuristicCrossings,29,iteration,8618
@@ -5146,11 +7136,50 @@ HeuristicBottleneckStretch,0.318182,iteration,1007
 FinalBottleneckStretch,0.318182,iteration,-1
 Pareto,2^32;3^29, 9003;8618
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,t_0500_22_01
+NumberOfLayers,22
+NumberOfNodes,500
+IsolatedNodes,0
+EffectiveNodes,500
+NumberOfEdges,499
+EdgeDensity,1.00
+MinDegree,1
+MaxDegree,4
+MeanDegree,2.00
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 500
+=== Running heuristic mse
+*** standard termination here: iteration 2001 crossings 179 edge_crossings 26 graph t_0500_22_01 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,0.526
+StartCrossings,3396
+PreCrossings,179
+HeuristicCrossings,179,iteration,0
+FinalCrossings,179,iteration,6
+StartEdgeCrossings,38
+PreEdgeCrossings,26
+HeuristicEdgeCrossings,26,iteration,0
+FinalEdgeCrossings,26,iteration,-1
+StartStretch,176.006351
+PreStretch,31.308928
+HeuristicStretch,22.010852,iteration,1399
+FinalStretch,22.010852,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,1.000000,iteration,0
+FinalBottleneckStretch,1.000000,iteration,-1
+Pareto,22.010852^179, 1399
+
 ===================================================
 
 ========= running experiments with TestData/tree_100 ================= echo ========= running experiments with TestData/tree_100 =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,tree_100
 NumberOfLayers,2
 NumberOfNodes,200
@@ -5169,7 +7198,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.156
+Runtime,0.146
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,566,iteration,24
@@ -5189,7 +7218,7 @@ FinalBottleneckStretch,0.323232,iteration,-1
 Pareto,57^670;58^566, 6;24
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,tree_100
 NumberOfLayers,2
 NumberOfNodes,200
@@ -5208,7 +7237,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.160
+Runtime,0.154
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,588,iteration,48
@@ -5228,7 +7257,7 @@ FinalBottleneckStretch,0.303030,iteration,-1
 Pareto,55^588, 48
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,tree_100
 NumberOfLayers,2
 NumberOfNodes,200
@@ -5247,7 +7276,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.015
+Runtime,1.017
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,522,iteration,8361
@@ -5267,7 +7296,7 @@ FinalBottleneckStretch,0.111111,iteration,-1
 Pareto,16^537;17^532;19^523;21^522, 9607;9001;8957;8361
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,tree_100
 NumberOfLayers,2
 NumberOfNodes,200
@@ -5286,7 +7315,7 @@ dfs done, number_of_components = 1, size_of_largest_component = 200
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10002
-Runtime,0.735
+Runtime,0.722
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,471,iteration,1353
@@ -5306,7 +7335,46 @@ FinalBottleneckStretch,0.666667,iteration,-1
 Pareto,123^471, 1353
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,tree_100
+NumberOfLayers,2
+NumberOfNodes,200
+IsolatedNodes,0
+EffectiveNodes,200
+NumberOfEdges,199
+EdgeDensity,0.99
+MinDegree,1
+MaxDegree,5
+MeanDegree,1.99
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 200
+=== Running heuristic mse
+*** standard termination here: iteration 1201 crossings 933 edge_crossings 123 graph tree_100 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.017
+StartCrossings,9496
+PreCrossings,933
+HeuristicCrossings,933,iteration,0
+FinalCrossings,933,iteration,9
+StartEdgeCrossings,192
+PreEdgeCrossings,123
+HeuristicEdgeCrossings,123,iteration,0
+FinalEdgeCrossings,123,iteration,-1
+StartStretch,65.202020
+PreStretch,11.323232
+HeuristicStretch,6.393939,iteration,1670
+FinalStretch,6.393939,iteration,-1
+StartBottleneckStretch,0.969697
+PreBottleneckStretch,0.666667
+HeuristicBottleneckStretch,0.656566,iteration,3
+FinalBottleneckStretch,0.656566,iteration,-1
+Pareto,6.393939^933, 1670
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,tree_100
 NumberOfLayers,2
 NumberOfNodes,200
@@ -5322,11 +7390,11 @@ MedianDegree,2.0
 dfs done, number_of_components = 1, size_of_largest_component = 200
 === Running heuristic mce
 *** standard termination here: iteration 2001 crossings 630 edge_crossings 23 graph tree_100 ***
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.083, graph tree_100
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.028, graph tree_100
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.083
+Runtime,1.028
 StartCrossings,9496
 PreCrossings,933
 HeuristicCrossings,539,iteration,9379
@@ -5345,11 +7413,50 @@ HeuristicBottleneckStretch,0.111111,iteration,9804
 FinalBottleneckStretch,0.111111,iteration,-1
 Pareto,15^562;16^552;17^548;18^540;21^539, 9807;9404;9405;9975;9379
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,tree_100
+NumberOfLayers,2
+NumberOfNodes,200
+IsolatedNodes,0
+EffectiveNodes,200
+NumberOfEdges,199
+EdgeDensity,0.99
+MinDegree,1
+MaxDegree,5
+MeanDegree,1.99
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 1, size_of_largest_component = 200
+=== Running heuristic mse
+*** standard termination here: iteration 2001 crossings 933 edge_crossings 123 graph tree_100 ***
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.060
+StartCrossings,9496
+PreCrossings,933
+HeuristicCrossings,933,iteration,0
+FinalCrossings,933,iteration,9
+StartEdgeCrossings,192
+PreEdgeCrossings,123
+HeuristicEdgeCrossings,123,iteration,0
+FinalEdgeCrossings,123,iteration,-1
+StartStretch,65.202020
+PreStretch,11.323232
+HeuristicStretch,6.494949,iteration,1648
+FinalStretch,6.494949,iteration,-1
+StartBottleneckStretch,0.969697
+PreBottleneckStretch,0.666667
+HeuristicBottleneckStretch,0.656566,iteration,3
+FinalBottleneckStretch,0.656566,iteration,-1
+Pareto,6.494949^933, 1648
+
 ===================================================
 
 ========= running experiments with TestData/u_100_20_105_5-rnd-031-scr ================= echo ========= running experiments with TestData/u_100_20_105_5-rnd-031-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_100_20_105_5-rnd-031
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -5368,7 +7475,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.519
+Runtime,0.509
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,329,iteration,1648
@@ -5388,7 +7495,7 @@ FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,9^360;14^329, 740;1648
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_100_20_105_5-rnd-031
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -5403,11 +7510,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 18, size_of_largest_component = 1972
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.527, graph u_100_20_105_5-rnd-031
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.510, graph u_100_20_105_5-rnd-031
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.530
+Runtime,0.514
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,312,iteration,8381
@@ -5427,7 +7534,7 @@ FinalBottleneckStretch,0.631579,iteration,-1
 Pareto,9^365;12^347;14^312, 8148;8448;8381
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_100_20_105_5-rnd-031
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -5445,7 +7552,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,0.956
+Runtime,0.903
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,432,iteration,8647
@@ -5465,7 +7572,7 @@ FinalBottleneckStretch,0.684211,iteration,-1
 Pareto,8^438;9^433;14^432, 9947;9956;8647
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_100_20_105_5-rnd-031
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -5480,11 +7587,11 @@ MedianDegree,1.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 18, size_of_largest_component = 1972
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.734, graph u_100_20_105_5-rnd-031
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.703, graph u_100_20_105_5-rnd-031
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.735
+Runtime,0.704
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,474,iteration,9259
@@ -5504,7 +7611,45 @@ FinalBottleneckStretch,0.789474,iteration,-1
 Pareto,17^475;18^474, 8324;9259
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_100_20_105_5-rnd-031
+NumberOfLayers,100
+NumberOfNodes,2000
+IsolatedNodes,12
+EffectiveNodes,1988
+NumberOfEdges,2077
+EdgeDensity,1.04
+MinDegree,0
+MaxDegree,11
+MeanDegree,2.08
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 18, size_of_largest_component = 1972
+=== Running heuristic mse
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.050
+StartCrossings,8899
+PreCrossings,2067
+HeuristicCrossings,2067,iteration,0
+FinalCrossings,2067,iteration,9
+StartEdgeCrossings,20
+PreEdgeCrossings,22
+HeuristicEdgeCrossings,22,iteration,0
+FinalEdgeCrossings,22,iteration,-1
+StartStretch,719.315789
+PreStretch,369.210526
+HeuristicStretch,185.000000,iteration,9491
+FinalStretch,185.000000,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.894737,iteration,69
+FinalBottleneckStretch,0.894737,iteration,-1
+Pareto,185.000000^2067, 9491
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_100_20_105_5-rnd-031
 NumberOfLayers,100
 NumberOfNodes,2000
@@ -5522,7 +7667,7 @@ dfs done, number_of_components = 18, size_of_largest_component = 1972
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.491
+Runtime,1.421
 StartCrossings,8899
 PreCrossings,2067
 HeuristicCrossings,471,iteration,8704
@@ -5541,11 +7686,50 @@ HeuristicBottleneckStretch,0.578947,iteration,2046
 FinalBottleneckStretch,0.578947,iteration,-1
 Pareto,6^521;7^471, 5986;9946
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_100_20_105_5-rnd-031
+NumberOfLayers,100
+NumberOfNodes,2000
+IsolatedNodes,12
+EffectiveNodes,1988
+NumberOfEdges,2077
+EdgeDensity,1.04
+MinDegree,0
+MaxDegree,11
+MeanDegree,2.08
+MedianDegree,1.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 18, size_of_largest_component = 1972
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.619, graph u_100_20_105_5-rnd-031
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.622
+StartCrossings,8899
+PreCrossings,2067
+HeuristicCrossings,2067,iteration,0
+FinalCrossings,2067,iteration,9
+StartEdgeCrossings,20
+PreEdgeCrossings,22
+HeuristicEdgeCrossings,22,iteration,0
+FinalEdgeCrossings,22,iteration,-1
+StartStretch,719.315789
+PreStretch,369.210526
+HeuristicStretch,184.052632,iteration,9967
+FinalStretch,184.052632,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.894737,iteration,54
+FinalBottleneckStretch,0.894737,iteration,-1
+Pareto,184.052632^2067, 9967
+
 ===================================================
 
 ========= running experiments with TestData/u_25_80_125_1-rnd-007-scr ================= echo ========= running experiments with TestData/u_25_80_125_1-rnd-007-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_25_80_125_1-rnd-007
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -5564,7 +7748,7 @@ dfs done, number_of_components = 25, size_of_largest_component = 1958
 Preprocessor,dfs
 Heuristic,bary
 Iterations,10001
-Runtime,0.834
+Runtime,0.800
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13699,iteration,7560
@@ -5584,7 +7768,7 @@ FinalBottleneckStretch,0.556962,iteration,-1
 Pareto,58^15150;59^14552;62^13699, 9576;2040;7560
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_25_80_125_1-rnd-007
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -5603,7 +7787,7 @@ dfs done, number_of_components = 25, size_of_largest_component = 1958
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.797
+Runtime,0.778
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13832,iteration,5779
@@ -5623,7 +7807,7 @@ FinalBottleneckStretch,0.569620,iteration,-1
 Pareto,57^13971;59^13832, 5778;5779
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_25_80_125_1-rnd-007
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -5638,11 +7822,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.274, graph u_25_80_125_1-rnd-007
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.151, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,2.278
+Runtime,2.155
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,16508,iteration,9934
@@ -5662,7 +7846,7 @@ FinalBottleneckStretch,0.392405,iteration,-1
 Pareto,38^16675;40^16618;41^16609;47^16607;49^16538;50^16531;53^16508, 9978;9974;9969;9943;9939;9938;9934
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_25_80_125_1-rnd-007
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -5677,11 +7861,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.646, graph u_25_80_125_1-rnd-007
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.543, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,1.649
+Runtime,1.546
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,13661,iteration,9877
@@ -5701,7 +7885,46 @@ FinalBottleneckStretch,0.949367,iteration,-1
 Pareto,94^13661, 9877
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_25_80_125_1-rnd-007
+NumberOfLayers,25
+NumberOfNodes,2000
+IsolatedNodes,14
+EffectiveNodes,1986
+NumberOfEdges,2483
+EdgeDensity,1.25
+MinDegree,0
+MaxDegree,9
+MeanDegree,2.48
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 25, size_of_largest_component = 1958
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.758, graph u_25_80_125_1-rnd-007
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,2.761
+StartCrossings,62083
+PreCrossings,28270
+HeuristicCrossings,28270,iteration,0
+FinalCrossings,28270,iteration,9
+StartEdgeCrossings,105
+PreEdgeCrossings,110
+HeuristicEdgeCrossings,110,iteration,0
+FinalEdgeCrossings,110,iteration,-1
+StartStretch,837.164557
+PreStretch,452.974684
+HeuristicStretch,210.531646,iteration,9993
+FinalStretch,210.531646,iteration,-1
+StartBottleneckStretch,0.987342
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.987342,iteration,3
+FinalBottleneckStretch,0.987342,iteration,-1
+Pareto,210.531646^28270, 9993
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_25_80_125_1-rnd-007
 NumberOfLayers,25
 NumberOfNodes,2000
@@ -5716,11 +7939,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 25, size_of_largest_component = 1958
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.004, graph u_25_80_125_1-rnd-007
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 2.950, graph u_25_80_125_1-rnd-007
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,3.008
+Runtime,2.954
 StartCrossings,62083
 PreCrossings,28270
 HeuristicCrossings,16141,iteration,9852
@@ -5739,11 +7962,50 @@ HeuristicBottleneckStretch,0.379747,iteration,9988
 FinalBottleneckStretch,0.379747,iteration,-1
 Pareto,41^19424;42^19369;44^16186;45^16171;46^16166;48^16162;50^16161;55^16155;56^16141, 4105;4083;9959;9938;9940;9942;9943;9931;9852
 
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_25_80_125_1-rnd-007
+NumberOfLayers,25
+NumberOfNodes,2000
+IsolatedNodes,14
+EffectiveNodes,1986
+NumberOfEdges,2483
+EdgeDensity,1.25
+MinDegree,0
+MaxDegree,9
+MeanDegree,2.48
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 25, size_of_largest_component = 1958
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 3.562, graph u_25_80_125_1-rnd-007
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,3.566
+StartCrossings,62083
+PreCrossings,28270
+HeuristicCrossings,28270,iteration,0
+FinalCrossings,28270,iteration,9
+StartEdgeCrossings,105
+PreEdgeCrossings,110
+HeuristicEdgeCrossings,110,iteration,0
+FinalEdgeCrossings,110,iteration,-1
+StartStretch,837.164557
+PreStretch,452.974684
+HeuristicStretch,206.405063,iteration,9967
+FinalStretch,206.405063,iteration,-1
+StartBottleneckStretch,0.987342
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.987342,iteration,3
+FinalBottleneckStretch,0.987342,iteration,-1
+Pareto,206.405063^28270, 9967
+
 ===================================================
 
 ========= running experiments with TestData/u_50_40_105_1-rnd-009-scr ================= echo ========= running experiments with TestData/u_50_40_105_1-rnd-009-scr =================
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_50_40_105_1-rnd-009
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -5782,7 +8044,7 @@ FinalBottleneckStretch,0.461538,iteration,-1
 Pareto,14^1359;16^1132;17^1104;18^1100;19^1098;24^1031;29^958;31^920, 7061;4973;8652;9240;9379;735;1811;4261
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_50_40_105_1-rnd-009
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -5797,11 +8059,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mod_bary
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.532, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.524, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mod_bary
 Iterations,10001
-Runtime,0.534
+Runtime,0.526
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1120,iteration,5570
@@ -5821,7 +8083,7 @@ FinalBottleneckStretch,0.461538,iteration,-1
 Pareto,17^1569;18^1312;19^1140;21^1120, 9578;768;5605;5570
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_50_40_105_1-rnd-009
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -5836,11 +8098,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.245, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.270, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.248
+Runtime,1.273
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1776,iteration,9446
@@ -5860,7 +8122,7 @@ FinalBottleneckStretch,0.358974,iteration,-1
 Pareto,11^2261;12^1777;15^1776, 3987;9927;9446
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_50_40_105_1-rnd-009
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -5875,11 +8137,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic sifting
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.938, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 0.927, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,sifting
 Iterations,10001
-Runtime,0.940
+Runtime,0.929
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1877,iteration,8705
@@ -5899,7 +8161,46 @@ FinalBottleneckStretch,0.820513,iteration,-1
 Pareto,34^2138;35^1877, 2248;8705
 
 ################################################################
-########### min_crossings, release 1.0, 2016/03/31 #############
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_50_40_105_1-rnd-009
+NumberOfLayers,50
+NumberOfNodes,2000
+IsolatedNodes,18
+EffectiveNodes,1982
+NumberOfEdges,2064
+EdgeDensity,1.04
+MinDegree,0
+MaxDegree,6
+MeanDegree,2.06
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 27, size_of_largest_component = 1943
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.268, graph u_50_40_105_1-rnd-009
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.272
+StartCrossings,21144
+PreCrossings,3690
+HeuristicCrossings,3690,iteration,0
+FinalCrossings,3690,iteration,9
+StartEdgeCrossings,42
+PreEdgeCrossings,41
+HeuristicEdgeCrossings,41,iteration,0
+FinalEdgeCrossings,41,iteration,-1
+StartStretch,710.256410
+PreStretch,205.641026
+HeuristicStretch,110.897436,iteration,9998
+FinalStretch,110.897436,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.923077,iteration,1984
+FinalBottleneckStretch,0.923077,iteration,-1
+Pareto,110.897436^3690, 9998
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
 GraphName,u_50_40_105_1-rnd-009
 NumberOfLayers,50
 NumberOfNodes,2000
@@ -5914,11 +8215,11 @@ MedianDegree,2.0
 --- Running preprocessor dfs
 dfs done, number_of_components = 27, size_of_largest_component = 1943
 === Running heuristic mce
-*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.784, graph u_50_40_105_1-rnd-009
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.780, graph u_50_40_105_1-rnd-009
 Preprocessor,dfs
 Heuristic,mce
 Iterations,10001
-Runtime,1.786
+Runtime,1.783
 StartCrossings,21144
 PreCrossings,3690
 HeuristicCrossings,1897,iteration,9474
@@ -5936,6 +8237,45 @@ PreBottleneckStretch,1.000000
 HeuristicBottleneckStretch,0.358974,iteration,4055
 FinalBottleneckStretch,0.358974,iteration,-1
 Pareto,10^1923;11^1908;13^1907;15^1897, 9934;9915;9913;9474
+
+################################################################
+########### min_crossings, release 1.1, 2016/05/23 #############
+GraphName,u_50_40_105_1-rnd-009
+NumberOfLayers,50
+NumberOfNodes,2000
+IsolatedNodes,18
+EffectiveNodes,1982
+NumberOfEdges,2064
+EdgeDensity,1.04
+MinDegree,0
+MaxDegree,6
+MeanDegree,2.06
+MedianDegree,2.0
+--- Running preprocessor dfs
+dfs done, number_of_components = 27, size_of_largest_component = 1943
+=== Running heuristic mse
+*** still improving but max iterations or runtime reached: iteration 10000, runtime 1.865, graph u_50_40_105_1-rnd-009
+Preprocessor,dfs
+Heuristic,mse
+Iterations,10001
+Runtime,1.869
+StartCrossings,21144
+PreCrossings,3690
+HeuristicCrossings,3690,iteration,0
+FinalCrossings,3690,iteration,9
+StartEdgeCrossings,42
+PreEdgeCrossings,41
+HeuristicEdgeCrossings,41,iteration,0
+FinalEdgeCrossings,41,iteration,-1
+StartStretch,710.256410
+PreStretch,205.641026
+HeuristicStretch,111.153846,iteration,9912
+FinalStretch,111.153846,iteration,-1
+StartBottleneckStretch,1.000000
+PreBottleneckStretch,1.000000
+HeuristicBottleneckStretch,0.923077,iteration,1984
+FinalBottleneckStretch,0.923077,iteration,-1
+Pareto,111.153846^3690, 9912
 
 ===================================================
 
