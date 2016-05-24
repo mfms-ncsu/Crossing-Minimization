@@ -5,11 +5,11 @@
 # specific experiments and can be changed by editing the first few lines of
 # the script
 
-FIRST_HEURISTIC_OPTIONS="-p bfs -z"
+FIRST_HEURISTIC_OPTIONS="-p dfs -z -P s_t"
 FIRST_HEURISTIC_ITERATIONS=40000
-PREFIX="bfs+"
+PREFIX="dfs+"
 FIRST_HEURISTIC_SUFFIX=_
-SECOND_HEURISTIC_OPTIONS="-z"
+SECOND_HEURISTIC_OPTIONS="-z -P s_t"
 SECOND_HEURISTIC_ITERATIONS=40000
 SECOND_HEURISTIC_SUFFIX=R
 OBJECTIVE="stretch"
@@ -95,4 +95,4 @@ popd
 
 rm -rf $new_class
 
-#  [Last modified: 2016 05 23 at 20:15:53 GMT]
+#  [Last modified: 2016 05 24 at 00:55:31 GMT]
