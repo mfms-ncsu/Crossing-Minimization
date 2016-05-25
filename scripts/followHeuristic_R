@@ -40,13 +40,15 @@ heuristic_1=$1
 shift
 other_heuristics="$@"
 
-# need an absolute paths
+# need absolute paths; caution: the script assumes that the given paths are relative
 result_dir=$PWD/$result_dir
 class=$PWD/$class
-# need to strip off the / first
-new_class=${class%/}-$PREFIX$heuristic_1${FIRST_HEURISTIC_SUFFIX}-$OBJECTIVE
+
 # create a class for storing the outputs of the first heuristic and run the
 # heuristic with the output option set to use the basename of the dot files
+# need to strip off the / first; the new class will be in the same directory
+# as the original
+new_class=${class%/}-$PREFIX$heuristic_1${FIRST_HEURISTIC_SUFFIX}-$OBJECTIVE
 
 if [ ! -d $new_class ]; then
     if [ ! -f $new_class ]; then
@@ -63,8 +65,8 @@ pushd $new_class
 rm -f *.dot *.ord
 $script_directory/runHeuristic $class $result_dir $PREFIX$heuristic_1$FIRST_HEURISTIC_SUFFIX -h $heuristic_1 $FIRST_HEURISTIC_OPTIONS -i $FIRST_HEURISTIC_ITERATIONS -z -o _
 
-# create dot files to go with the -post ord files and run the second
-# heuristic on the -post output of the first
+# create dot files to go with the created ord files and run each second
+# heuristic on the output, i.e., the ordering produced, of the first
 cp $class/*.dot .
 $script_directory/mvsed -s "s/\.dot/-$PREFIX${heuristic_1}-$OBJECTIVE\.dot/" *.dot
 
@@ -74,15 +76,14 @@ done
 
 # Now rerun using best bottleneck solution from first heuristic
 
-# get rid of the previous .dot files since they determine runHeuristicR's
-# scope;
+# get rid of the previous .dot files; needed so that the runHeuristicR for
+# the second objective does not also use those created for the first
+# objective.
 rm -f $new_class/*.dot
 
 # create dot files to go with the second objective ord files and run the second
 # heuristic starting with the best result for the second objective after first heuristic 
-echo "Second objective = :$SECOND_OBJECTIVE:"
 if [ -n "$SECOND_OBJECTIVE" ]; then
-    echo "Hello"
     cp $class/*.dot .
     $script_directory/mvsed -s "s/\.dot/-$PREFIX${heuristic_1}-$SECOND_OBJECTIVE\.dot/" *.dot
 
@@ -93,6 +94,7 @@ fi
 
 popd
 
-rm -rf $new_class
+# cleanup (may not be desirable if we want to keep intermediate results)
+# rm -rf $new_class
 
-#  [Last modified: 2016 05 24 at 00:55:31 GMT]
+#  [Last modified: 2016 05 25 at 19:20:31 GMT]
