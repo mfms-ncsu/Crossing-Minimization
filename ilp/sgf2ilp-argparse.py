@@ -82,11 +82,12 @@ def read_nonblank( input ):
 
 # @return greatest common divisor of a and b
 def gcd(a, b):
-    if a == b:
-        return a
-    if a < b:
-        return gcd(a, b - a)
-    return gcd(b, a - b)
+    while a != b:
+        if a < b:
+            b = b - a
+        else:
+            a = a - b
+    return a
 
 # @return least common factor of a and b
 def lcf(a, b):
