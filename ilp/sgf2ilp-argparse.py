@@ -2,6 +2,9 @@
 
 # Converts a graph in .sgf format to a linear integer program
 # This program translate from standard input to standard output.
+#
+# 2016/5/26 - turned stretch related variables into integer variables,
+# dividing by the greatest common divisor at the end.
 
 import sys
 import os
@@ -76,6 +79,50 @@ def read_nonblank( input ):
     while ( line and line.strip() == "" ):
         line = input.readline()
     return line
+
+# @return greatest common divisor of a and b
+def gcd(a, b):
+    if a == b:
+        return a
+    if a < b:
+        return gcd(a, b - a)
+    return gcd(b, a - b)
+
+# @return least common factor of a and b
+def lcf(a, b):
+    return a * b / gcd(a, b)
+
+# computes the global array _layer_factor so that _layer_factor[i] gives the
+# multiplier on a position variable in layer i when stretch is computed;
+# where the original ilp has 1/(L-1), where L is the layer size, the new
+# (integer) factor will be lcf/(L-1), where lcf is the least common
+# factor of all the layer denominators.
+def compute_layer_factors():
+    global _layer_factor
+    global _least_common_factor
+    # first compute number of layers and the size of each 
+    number_of_layers = 1 + max(_node_list,key=lambda item:item[1])[1]
+    layer_size = [0] * number_of_layers
+    for node in _node_list:
+        layer_size[node[1]] += 1
+    # then the appropriate denominator for each layer
+    denominator = [0] * number_of_layers
+    for layer in range(number_of_layers):
+        this_layer_size = layer_size[layer]
+        if this_layer_size < 1:
+            sys.exit("Error: layer " + layer + " has no nodes")
+        denominator[layer] = this_layer_size - 1
+        # layers with only a single node should put that node in the center
+        if denominator[layer] == 0:
+            denominator[layer] = 2
+    # compute the least common factor
+    _least_common_factor = 1
+    for layer in range(number_of_layers):
+        _least_common_factor = lcf(_least_common_factor, denominator[layer])
+    # now we're ready to compute the actual factors
+    _layer_factor = [0] * number_of_layers
+    for layer in range(number_of_layers):
+        _layer_factor[layer] = _least_common_factor / denominator[layer]
 
 # In what follows a constraint is a tuple of the form
 #  (left, relational_operator, right)
@@ -268,18 +315,10 @@ def total_constraint():
     
 # @return a list of stretch constraints
 def stretch_constraints():
-    global _continuous_variables
+    global _integer_variables
     global _stretch_variables
     _stretch_variables = []
     stretch_constraints = []
-
-    # create a list for number of nodes in layers
-    # the size is based on the number of layers
-    num_layer = 1 + max(_node_list,key=lambda item:item[1])[1]
-    nodes_in_layer = [0] * num_layer
-    # record number of nodes in that layer
-    for node in _node_list:
-        nodes_in_layer[node[1]] += 1
  
     # generate stretch constraints
     relop = '>='
@@ -288,37 +327,24 @@ def stretch_constraints():
         source = edge[0]
         target = edge[1]
         stretch_variable = "s_" + source + "_" + target
-        _continuous_variables.append(stretch_variable)
+        _integer_variables.append(stretch_variable)
         _stretch_variables.append(stretch_variable)
         source_layer = _node_list[int(source)][1]
         target_layer = _node_list[int(target)][1]
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
-        source_layer_size = nodes_in_layer[source_layer]
-        target_layer_size = nodes_in_layer[target_layer]
-        if source_layer_size < 1:
-            sys.exit("Error: layer " + source_layer + " has no nodes")
-        if target_layer_size < 1:
-            sys.exit("Error: layer " + target_layer + " has no nodes")
-        source_denominator = source_layer_size - 1
-        target_denominator = target_layer_size - 1
-        # layers with only a single node should put that node in the center
-        if source_denominator == 0:
-            source_denominator = 2
-        if target_denominator == 0:
-            target_denominator = 2
 
         left = ["+" + stretch_variable]
-        left.append("+" + str(1.0 / source_denominator)
+        left.append("+" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
-        left.append("-" + str(1.0 / target_denominator)
+        left.append("-" + str(_layer_factor[target_layer])
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
         left = ["+" + stretch_variable]
-        left.append("-" + str(1.0 / source_denominator)
+        left.append("-" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
-        left.append("+" + str(1.0 / target_denominator)
+        left.append("+" + str(_layer_factor[target_layer])
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
@@ -326,26 +352,46 @@ def stretch_constraints():
     
 # @return a single constraint for total stretch, i.e., stretch >= sum of
 # stretch variables
-def total_stretch_constraint():
+def total_stretch_constraints():
+    global _integer_variables
+    global _continuous_variables
+    total_stretch_constraints = []
     relop = '>='
     right = '0'
-    _continuous_variables.append("stretch")
+    _integer_variables.append("stretch")
     left = ["+stretch"]
     for stretch_variable in _stretch_variables:
         left.append("-" + stretch_variable)
-    return (left, relop, right)
+    total_stretch_constraints.append((left, relop, right))
+    # add a variable so that the real stretch value is reported
+    relop = '='
+    denominator = float(_least_common_factor)
+    left = ['+true_stretch']
+    left.append('-' + str(1.0 / denominator) + ' ' + 'stretch')
+    total_stretch_constraints.append((left, relop, right))
+    _continuous_variables.append('true_stretch')
+    return total_stretch_constraints
+
 
 # @return a list of bottleneck stretch constraints, i.e., bn_stretch is >=
 # each stretch variable.
 def bottleneck_stretch_constraints():
+    global _integer_variables
     global _continuous_variables
     relop = '>='
     right = '0'
-    _continuous_variables.append("bn_stretch")
+    _integer_variables.append("bn_stretch")
     bottleneck_stretch_constraints = []
     for stretch_variable in _stretch_variables:
         left = ["+bn_stretch", "-" + stretch_variable]
         bottleneck_stretch_constraints.append((left, relop, right))
+    # add a variable so that the real bottleneck stretch value is reported
+    relop = '='
+    denominator = float(_least_common_factor)
+    left = ['+true_bn_stretch']
+    left.append('-' + str(1.0 / denominator) + ' ' + 'bn_stretch')
+    bottleneck_stretch_constraints.append((left, relop, right))
+    _continuous_variables.append('true_bn_stretch')
     return bottleneck_stretch_constraints
 
 # permutes the left hand side of each constraint as well as the order of the
@@ -381,7 +427,7 @@ def print_comments():
         print "\\ " + comment
 
 def print_constraint(constraint):
-    (left, relop, right) = constraint
+    left, relop, right = constraint
     print INDENT + split_list(left, MAX_TERMS_IN_LINE), relop, right
 
 def print_constraints(constraints):
@@ -412,13 +458,14 @@ def main():
         constraints.extend(crossing_constraints())
     if args.objective == 'stretch' or args.objective == 'bn_stretch' \
             or args.stretch != None or args.bn_stretch != None:
+        compute_layer_factors()
         constraints.extend(stretch_constraints())
     if args.objective == 'total' or args.total != None:
         constraints.append(total_constraint())
     if args.objective == 'bottleneck' or args.bottleneck != None:
         constraints.extend(bottleneck_constraints())
     if args.objective == 'stretch' or args.stretch != None:
-        constraints.append(total_stretch_constraint())
+        constraints.extend(total_stretch_constraints())
     if args.objective == 'bn_stretch' or args.bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
 
@@ -428,9 +475,9 @@ def main():
     if args.bottleneck != None:
         constraints.append((["+bottleneck"], "<=", str(args.bottleneck)))
     if args.stretch != None:
-        constraints.append((["+stretch"], "<=", str(args.stretch)))
+        constraints.append((["+stretch"], "<=", str(args.stretch * _least_common_factor)))
     if args.bn_stretch != None:
-        constraints.append((["+bn_stretch"], "<=", str(args.bn_stretch)))
+        constraints.append((["+bn_stretch"], "<=", str(args.bn_stretch * least_common_factor)))
 
     if args.seed != None:
         random.seed(args.seed)
@@ -439,6 +486,7 @@ def main():
     print_header()
     print_comments()
 
+    objective_factor = 1
     print "Min"
     print INDENT + args.objective
     print "st"
@@ -448,4 +496,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 25 at 14:51:18 GMT]
+#  [Last modified: 2016 05 26 at 17:24:45 GMT]
