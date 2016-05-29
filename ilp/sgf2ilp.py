@@ -422,7 +422,7 @@ def print_comments():
 
 def print_quadratic_objective():
     quadratic_variables_squared = map(lambda x: "+" + x + "^2", _quadratic_variables)
-    print INDENT + "[ " +  split_list(quadratic_variables_squared, MAX_TERMS_IN_LINE) + " ]"
+    print INDENT + "[ " +  split_list(quadratic_variables_squared, MAX_TERMS_IN_LINE) + " ]/2"
 
 def print_constraint(constraint):
     (left, relop, right) = constraint
@@ -431,6 +431,10 @@ def print_constraint(constraint):
 def print_constraints(constraints):
     for constraint in constraints:
         print_constraint(constraint)
+
+# need to make the lower bound on quadratic variables less than 0; -1 will work
+def print_bounds_on_quadratic_variables():
+    print ""
 
 def print_variables():
     print "Binary"
@@ -496,6 +500,9 @@ def main():
         print INDENT + args.objective
     print "st"
     print_constraints(constraints)
+    if args.objective == 'quadratic':
+        print "Bounds"
+        print_bounds_on_quadratic_variables()
     print_variables()
     print "End"
 
