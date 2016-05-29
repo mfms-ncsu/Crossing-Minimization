@@ -14,7 +14,9 @@ INDENT = "  "
 
 parser = argparse.ArgumentParser(description='Creates an ILP to minimize some quantity based on an sgf representation of a layered graph',
                                  epilog='reads sgf from standard input, prints lp file on standard output')
-parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_stretch'},
+parser.add_argument('--objective', choices={'total','bottleneck',
+                                            'stretch','bn_stretch',
+                                            'quadratic'},
                     default='total',
                     required=True,
                     help='minimize ...'
@@ -70,7 +72,7 @@ def process_edge( line ):
     source = line_fields[1]
     target = line_fields[2]
     return (source, target)
-	
+
 # @return the first non-blank line in the input
 def read_nonblank( input ):
     line = input.readline()
@@ -159,7 +161,7 @@ def triangle_constraints():
     #                        = (1 - x_j_k) - x_k_i - (1 - x_j_i)
     #                        = x_j_i - x_j_k - x_k_i
     return triangle_constraints
-    
+
 # @return a list of position constraints given the node list and edge list
 # the position of a node = the number of nodes before it
 def position_constraints():
@@ -197,7 +199,7 @@ def edges_for_output():
         edges.append((["+" + edge_variable], "=", "0"))
         _binary_variables.append(edge_variable)
     return edges
-    
+
 # @return a list of crossing constraints given node list and edge list the
 # variable d_i_j_k_l = 1 iff edge ij crosses edge kl, where i,k are on one
 # layer and j,l are on the next layer; a crossing occurs if
@@ -225,24 +227,24 @@ def crossing_constraints():
             if channel_1 == channel_2 \
                     and index_1 < index_2 \
                     and source_1 != source_2 and target_1 != target_2:
-                 crossing_variable = "d_" + source_1 + "_" + target_1 \
-                     + "_" + source_2 + "_" + target_2
-                 _binary_variables.append(crossing_variable)
-                 _crossing_variables.append(crossing_variable)
+                crossing_variable = "d_" + source_1 + "_" + target_1 \
+                    + "_" + source_2 + "_" + target_2
+                _binary_variables.append(crossing_variable)
+                _crossing_variables.append(crossing_variable)
 
-                 left = ["+" + crossing_variable]
-                 # wrong order in the first layer
-                 left.append("-x_" + str(source_2) + "_" + str(source_1))
-                 # but correct on second
-                 left.append("-x_" + str(target_1) + "_" + str(target_2))
-                 crossing_constraints.append((left, relop, right))
+                left = ["+" + crossing_variable]
+                # wrong order in the first layer
+                left.append("-x_" + str(source_2) + "_" + str(source_1))
+                # but correct on second
+                left.append("-x_" + str(target_1) + "_" + str(target_2))
+                crossing_constraints.append((left, relop, right))
 
-                 left = ["+" + crossing_variable]
-                 # wrong order in the second layer
-                 left.append("-x_" + str(target_2) + "_" + str(target_1))
-                 # but correct on first
-                 left.append("-x_" + str(source_1) + "_" + str(source_2))
-                 crossing_constraints.append((left, relop, right))
+                left = ["+" + crossing_variable]
+                # wrong order in the second layer
+                left.append("-x_" + str(target_2) + "_" + str(target_1))
+                # but correct on first
+                left.append("-x_" + str(source_1) + "_" + str(source_2))
+                crossing_constraints.append((left, relop, right))
 
     return crossing_constraints
     
@@ -316,9 +318,9 @@ def stretch_constraints():
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
         left = ["+" + stretch_variable]
-        left.append("+" + str(_layer_factor[source_layer)
+        left.append("+" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
-        left.append("-" + str(_layer_factor[target_layer)
+        left.append("-" + str(_layer_factor[target_layer])
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
@@ -329,7 +331,7 @@ def stretch_constraints():
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
-    return stretch_constraints
+        return stretch_constraints
     
 # @return a list of constraints that will define the objective in a quadratic
 # program for minimizing stretch; each constraint says, essentially, that the
@@ -355,9 +357,9 @@ def raw_stretch_constraints():
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
         left = ["+" + quadratic_variable]
-        left.append("+" + str(_layer_factor[source_layer)
+        left.append("+" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
-        left.append("-" + str(_layer_factor[target_layer)
+        left.append("-" + str(_layer_factor[target_layer])
                     + " " + target_position_variable)
         raw_constraints.append((left, relop, right))
     return raw_constraints
@@ -418,6 +420,10 @@ def print_comments():
     for comment in _comments:
         print "\\ " + comment
 
+def print_quadratic_objective():
+    quadratic_variables_squared = map(lambda x: "+" + x + "^2", _quadratic_variables)
+    print INDENT + "[ " +  split_list(quadratic_variables_squared, MAX_TERMS_IN_LINE) + " ]"
+
 def print_constraint(constraint):
     (left, relop, right) = constraint
     print INDENT + split_list(left, MAX_TERMS_IN_LINE), relop, right
@@ -449,6 +455,10 @@ def main():
             or args.total != None or args.bottleneck != None:
         constraints.extend(crossing_constraints())
     if args.objective == 'stretch' or args.objective == 'bn_stretch' \
+            or args.stretch != None or args.bn_stretch != None \
+            or args.objective == 'quadratic':
+        compute_layer_factors()
+    if args.objective == 'stretch' or args.objective == 'bn_stretch' \
             or args.stretch != None or args.bn_stretch != None:
         constraints.extend(stretch_constraints())
     if args.objective == 'total' or args.total != None:
@@ -479,8 +489,11 @@ def main():
     print_header()
     print_comments()
 
-    print "Min"
-    print INDENT + args.objective
+    print "Min";
+    if args.objective == 'quadratic':
+        print_quadratic_objective()
+    else:
+        print INDENT + args.objective
     print "st"
     print_constraints(constraints)
     print_variables()
@@ -488,4 +501,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 29 at 18:45:26 GMT]
+#  [Last modified: 2016 05 29 at 22:15:42 GMT]
