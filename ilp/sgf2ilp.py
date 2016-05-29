@@ -19,7 +19,8 @@ parser.add_argument('--objective', choices={'total','bottleneck','stretch','bn_s
                     required=True,
                     help='minimize ...'
                     + ' total/bottleneck (total/bottleneck crossings)'
-                    + ' stretch/bn_stretch (total/bottleneck edge length)')
+                    + ' stretch/bn_stretch (total/bottleneck edge length)'
+                    + ' quadratic (use quadratic programming to miminze total stretch)')
 parser.add_argument('--total', type=int,
                     help='constraint on the total number of crossings (default: none)')
 parser.add_argument('--bottleneck', type=int,
@@ -76,6 +77,32 @@ def read_nonblank( input ):
     while ( line and line.strip() == "" ):
         line = input.readline()
     return line
+
+# computes the global array _layer_factor so that _layer_factor[i] gives the
+# multiplier on a position variable in layer i when stretch is computed;
+# this will be 1/(L-1), where L is the number of nodes in layer i
+def compute_layer_factors():
+    global _layer_factor
+    # first compute number of layers and the size of each 
+    number_of_layers = 1 + max(_node_list,key=lambda item:item[1])[1]
+    layer_size = [0] * number_of_layers
+    for node in _node_list:
+        layer_size[node[1]] += 1
+    # then the appropriate denominator for each layer
+    denominator = [0] * number_of_layers
+    for layer in range(number_of_layers):
+        this_layer_size = layer_size[layer]
+        if this_layer_size < 1:
+            sys.exit("Error: layer " + layer + " has no nodes")
+        denominator[layer] = this_layer_size - 1
+        # layers with only a single node should put that node in the center
+        if denominator[layer] == 0:
+            denominator[layer] = 2
+    # now we're ready to compute the actual factors
+    _layer_factor = [0] * number_of_layers
+    for layer in range(number_of_layers):
+        _layer_factor[layer] = 1.0 / denominator[layer]
+
 
 # In what follows a constraint is a tuple of the form
 #  (left, relational_operator, right)
@@ -266,21 +293,15 @@ def total_constraint():
         left.append("-" + crossing_variable)
     return (left, relop, right)
     
-# @return a list of stretch constraints
+# @return a list of stretch constraints, each constraint says, essentially,
+# that the s_i_j = abs((1/|V_k|) * p_i_k - (1/|V_{k+1}) * p_j_{k+1}), where ij is an
+# edge and k is the layer of node i
 def stretch_constraints():
     global _continuous_variables
     global _stretch_variables
     _stretch_variables = []
     stretch_constraints = []
 
-    # create a list for number of nodes in layers
-    # the size is based on the number of layers
-    num_layer = 1 + max(_node_list,key=lambda item:item[1])[1]
-    nodes_in_layer = [0] * num_layer
-    # record number of nodes in that layer
-    for node in _node_list:
-        nodes_in_layer[node[1]] += 1
- 
     # generate stretch constraints
     relop = '>='
     right = '0'
@@ -294,35 +315,52 @@ def stretch_constraints():
         target_layer = _node_list[int(target)][1]
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
-        source_layer_size = nodes_in_layer[source_layer]
-        target_layer_size = nodes_in_layer[target_layer]
-        if source_layer_size < 1:
-            sys.exit("Error: layer " + source_layer + " has no nodes")
-        if target_layer_size < 1:
-            sys.exit("Error: layer " + target_layer + " has no nodes")
-        source_denominator = source_layer_size - 1
-        target_denominator = target_layer_size - 1
-        # layers with only a single node should put that node in the center
-        if source_denominator == 0:
-            source_denominator = 2
-        if target_denominator == 0:
-            target_denominator = 2
-
         left = ["+" + stretch_variable]
-        left.append("+" + str(1.0 / source_denominator)
+        left.append("+" + str(_layer_factor[source_layer)
                     + " " + source_position_variable)
-        left.append("-" + str(1.0 / target_denominator)
+        left.append("-" + str(_layer_factor[target_layer)
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
         left = ["+" + stretch_variable]
-        left.append("-" + str(1.0 / source_denominator)
+        left.append("-" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
-        left.append("+" + str(1.0 / target_denominator)
+        left.append("+" + str(_layer_factor[target_layer])
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
     return stretch_constraints
+    
+# @return a list of constraints that will define the objective in a quadratic
+# program for minimizing stretch; each constraint says, essentially, that the
+# z_i_j = abs((1/|V_k|) * p_i_k - (1/|V_{k+1}) * p_j_{k+1}), where ij is an
+# edge and k is the layer of node i
+def raw_stretch_constraints():
+    global _continuous_variables
+    global _quadratic_variables
+    _quadratic_variables = []
+    raw_constraints = []
+
+    # generate raw stretch constraints
+    relop = '='
+    right = '0'
+    for edge in _edge_list:
+        source = edge[0]
+        target = edge[1]
+        quadratic_variable = "z_" + source + "_" + target
+        _continuous_variables.append(quadratic_variable)
+        _quadratic_variables.append(quadratic_variable)
+        source_layer = _node_list[int(source)][1]
+        target_layer = _node_list[int(target)][1]
+        source_position_variable = "p_" + source + "_" + str(source_layer)
+        target_position_variable = "p_" + target + "_" + str(target_layer)
+        left = ["+" + quadratic_variable]
+        left.append("+" + str(_layer_factor[source_layer)
+                    + " " + source_position_variable)
+        left.append("-" + str(_layer_factor[target_layer)
+                    + " " + target_position_variable)
+        raw_constraints.append((left, relop, right))
+    return raw_constraints
     
 # @return a single constraint for total stretch, i.e., stretch >= sum of
 # stretch variables
@@ -421,6 +459,8 @@ def main():
         constraints.append(total_stretch_constraint())
     if args.objective == 'bn_stretch' or args.bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
+    if args.objective == 'quadratic':
+        constraints.extend(raw_stretch_constraints())
 
     # add specific constraints for each objective if appropriate
     if args.total != None:
@@ -448,4 +488,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 25 at 14:51:18 GMT]
+#  [Last modified: 2016 05 29 at 18:45:26 GMT]
