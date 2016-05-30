@@ -434,7 +434,8 @@ def print_constraints(constraints):
 
 # need to make the lower bound on quadratic variables less than 0; -1 will work
 def print_bounds_on_quadratic_variables():
-    print ""
+    for variable in _quadratic_variables:
+        print INDENT + "-1 <= " + variable + " <= 1"
 
 def print_variables():
     print "Binary"
@@ -508,4 +509,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 29 at 22:15:42 GMT]
+#  [Last modified: 2016 05 30 at 13:33:47 GMT]
