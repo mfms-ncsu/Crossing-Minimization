@@ -331,14 +331,13 @@ def stretch_constraints():
                     + " " + target_position_variable)
         stretch_constraints.append((left, relop, right))
 
-        return stretch_constraints
+    return stretch_constraints
     
 # @return a list of constraints that will define the objective in a quadratic
 # program for minimizing stretch; each constraint says, essentially, that the
 # z_i_j = abs((1/|V_k|) * p_i_k - (1/|V_{k+1}) * p_j_{k+1}), where ij is an
 # edge and k is the layer of node i
 def raw_stretch_constraints():
-    global _continuous_variables
     global _quadratic_variables
     _quadratic_variables = []
     raw_constraints = []
@@ -350,7 +349,6 @@ def raw_stretch_constraints():
         source = edge[0]
         target = edge[1]
         quadratic_variable = "z_" + source + "_" + target
-        _continuous_variables.append(quadratic_variable)
         _quadratic_variables.append(quadratic_variable)
         source_layer = _node_list[int(source)][1]
         target_layer = _node_list[int(target)][1]
