@@ -3,6 +3,9 @@
 # Converts solution of a linear integer program to a graph in .sgf format
 # This program translate from standard input to standard output.
 
+# !!! assumes that all positions are integers; this will be true for the
+# !!! latest version of cplex_ilp but we probably should not rely on it
+
 import sys
 
 filename = ""
@@ -80,3 +83,5 @@ def main():
         print 'e ', e[0], e[1]
 
 main()
+
+#  [Last modified: 2016 05 31 at 14:08:23 GMT]
