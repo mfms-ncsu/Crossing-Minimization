@@ -112,9 +112,13 @@ def layer_lists():
 #     channelStats,channel,#upper_nodes,#lower_nodes,#edges,density,layer_ratio,total_density,volume
 def print_statistics():
     number_of_layers = len(_nodes_on_layer)
+    volume_list = []
     for channel in range(1, number_of_layers):
-        print_channel_statistics(channel)
+        volume = print_channel_statistics(channel)
+        volume_list.append(volume)
+    print_basic_statistics('allVolumes', volume_list)
 
+# @return the volume of the current channel
 def print_channel_statistics(channel):
     number_of_layers = len(_nodes_on_layer)
     upper_layer = channel
@@ -144,6 +148,7 @@ def print_channel_statistics(channel):
     print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%4.2f" % \
         (channel, number_of_upper_nodes, number_of_lower_nodes, number_of_edges,
          density, layer_ratio, total_discrepancy, volume)
+    return volume
 
 # takes a list of numbers and prints 
 #   label, min, median, mean, max, stdev, length, discrepancy
@@ -178,4 +183,4 @@ main()
 
 
 
-#  [Last modified: 2016 05 31 at 18:57:10 GMT]
+#  [Last modified: 2016 05 31 at 21:57:38 GMT]
