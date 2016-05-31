@@ -116,7 +116,8 @@ def print_statistics():
     for channel in range(1, number_of_layers):
         volume = print_channel_statistics(channel)
         volume_list.append(volume)
-    print_basic_statistics('allVolumes', volume_list)
+    scaled_volume_list = map(lambda x: x / number_of_layers, volume_list)
+    print_basic_statistics('allVolumes', scaled_volume_list)
 
 # @return the volume of the current channel
 def print_channel_statistics(channel):
@@ -145,7 +146,7 @@ def print_channel_statistics(channel):
     lower_discrepancy = discrepancy(lower_degrees)
     total_discrepancy = upper_discrepancy + lower_discrepancy
     volume = upper_discrepancy * lower_discrepancy
-    print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%4.2f" % \
+    print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%5.2f" % \
         (channel, number_of_upper_nodes, number_of_lower_nodes, number_of_edges,
          density, layer_ratio, total_discrepancy, volume)
     return volume
@@ -168,19 +169,20 @@ def print_basic_statistics(label, list):
         median = float(sorted_list[length / 2 - 1] + sorted_list[length / 2]) \
             / 2.0
     stdev = math.sqrt( float(sum_of_squares) / length - mean * mean )
-    print "%s,%d,%3.1f,%4.2f,%d,%4.2f,%d,%4.2f" % \
+    print "%s,%d,%3.1f,%4.2f,%4.2f,%4.2f,%d,%4.2f" % \
         (label, min(list), median, mean, max(list), stdev,
          length, discrepancy(list))
 
 # @return max / median of the list (in this case is always the lower value
 # for an even length list)
 def discrepancy(list):
-    sorted_list = sorted(list)
-    median = sorted_list[(len(list) - 1)/ 2]
-    return float(max(list)) / float(median)
+    working_list = filter(lambda x: x != 0, list)
+    working_list = sorted(working_list)
+    median = working_list[(len(working_list) - 1)/ 2]
+    return float(max(working_list)) / median
 
 main()
 
 
 
-#  [Last modified: 2016 05 31 at 21:57:38 GMT]
+#  [Last modified: 2016 05 31 at 23:35:38 GMT]
