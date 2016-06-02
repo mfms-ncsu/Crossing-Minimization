@@ -9,6 +9,7 @@ import argparse
 import math
 import random
 
+TOLERANCE = 0.1
 MAX_TERMS_IN_LINE = 100
 INDENT = "  "
 
@@ -307,7 +308,7 @@ def stretch_constraints():
     # generate stretch constraints
     relop = '>='
     for edge in _edge_list:
-        right = '0'
+        right = str(-TOLERANCE)
         source = edge[0]
         target = edge[1]
         stretch_variable = "s_" + source + "_" + target
@@ -336,7 +337,7 @@ def stretch_constraints():
         left = ["-" + raw_variable]
         left.append("-2 " + indicator_variable)
         left.append("-" + stretch_variable)
-        right = "-2"
+        right = str(-2 - TOLERANCE)
         stretch_constraints.append((left, relop, right))
 
     return stretch_constraints
@@ -470,6 +471,8 @@ def main():
             or args.stretch != None or args.bn_stretch != None \
             or args.objective == 'quadratic':
         compute_layer_factors()
+        constraints.extend(raw_stretch_constraints())
+        raw_stretch_constraints_added = True
     if args.objective == 'stretch' or args.objective == 'bn_stretch' \
             or args.stretch != None or args.bn_stretch != None:
         constraints.extend(stretch_constraints())
@@ -481,7 +484,7 @@ def main():
         constraints.append(total_stretch_constraint())
     if args.objective == 'bn_stretch' or args.bn_stretch != None:
         constraints.extend(bottleneck_stretch_constraints())
-    if args.objective == 'quadratic':
+    if args.objective == 'quadratic' and not raw_stretch_constraints_added:
         constraints.extend(raw_stretch_constraints())
 
     # add specific constraints for each objective if appropriate
