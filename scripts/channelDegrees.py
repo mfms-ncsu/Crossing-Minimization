@@ -111,14 +111,23 @@ def layer_lists():
 #     lowerDegrees,channel#,min,med,mean,max,stdev,#nodes_on_channel
 #     channelStats,channel,#upper_nodes,#lower_nodes,#edges,density,layer_ratio,total_density,volume
 def print_statistics():
+    print "degreeStats,%2s,%3s,%4s,%4s,%4s,%3s,%4s,%s" % \
+        ("Ch", "Min", "Med", "Avg", "Max",
+         "Dev", "#", "Dis")
+    print "nodesInChannel,%s,%s,%s,%s,%s,%s,%s,%s" % \
+        ("Ch", "upper", "lower", "edges", "dens", "ratio", "+dis", "*dis")
+    print "scaledVolumes,%s,%s,%s,%s,%s,%s,%s" % \
+        ("min", "median", "mean", "max", "stdev", "#ch", "disc")
+    print "---------------------------------"
     number_of_layers = len(_nodes_on_layer)
     volume_list = []
     for channel in range(1, number_of_layers):
         volume = print_channel_statistics(channel)
         volume_list.append(volume)
-    scaled_volume_list = map(lambda x: x / number_of_layers, volume_list)
+    scaled_volume_list = map(lambda x: float(x) / number_of_layers, volume_list)
     print_basic_statistics('allVolumes', scaled_volume_list)
 
+# prints all statistics for the current channel
 # @return the volume of the current channel
 def print_channel_statistics(channel):
     number_of_layers = len(_nodes_on_layer)
@@ -169,7 +178,7 @@ def print_basic_statistics(label, list):
         median = float(sorted_list[length / 2 - 1] + sorted_list[length / 2]) \
             / 2.0
     stdev = math.sqrt( float(sum_of_squares) / length - mean * mean )
-    print "%s,%d,%3.1f,%4.2f,%4.2f,%4.2f,%d,%4.2f" % \
+    print "%s,%3.1f,%3.1f,%4.2f,%4.2f,%4.2f,%d,%4.2f" % \
         (label, min(list), median, mean, max(list), stdev,
          length, discrepancy(list))
 
@@ -185,4 +194,4 @@ main()
 
 
 
-#  [Last modified: 2016 05 31 at 23:35:38 GMT]
+#  [Last modified: 2016 06 02 at 14:46:07 GMT]

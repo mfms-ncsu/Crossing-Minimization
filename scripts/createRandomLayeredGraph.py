@@ -221,17 +221,19 @@ def layer_stats( expression, node_list ):
     data_list = map( lambda node: eval( expression ), node_list )
     return list_statistics( data_list )
 
-# degree discrepancy in a channel is max_degree / median_degree, use -1 to
-# signal that the median is 0
+# degree discrepancy in a channel is max_degree / median_degree
+# all the 0's are filtered out first to ensure that the discrepancy makes sense
+# if the resulting list is empty, a -1 is reported
 def degree_discrepancy( node_list ):
     k = my_layer[ node_list[0] ]
     out_degrees = map( outdegree, node_list )
     in_degrees = map( indegree, layer[k+1] )
     degree_list = out_degrees + in_degrees
+    degree_list = filter( lambda x: x != 0, degree_list )
     # print "degree_discrepancy, k =", k, ", degree_list =", degree_list
-    median_degree = median( degree_list )
-    if median_degree == 0:
+    if degree_list == 0:
         return -1
+    median_degree = median( degree_list )
     return max( degree_list ) / float( median_degree )
 
 # returns the maximum indegree among nodes on the list
@@ -641,4 +643,4 @@ def get_nodes_in_smallest_components():
 
 main()
 
-#  [Last modified: 2016 01 13 at 16:24:10 GMT]
+#  [Last modified: 2016 06 01 at 12:19:40 GMT]
