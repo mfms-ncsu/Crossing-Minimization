@@ -306,29 +306,37 @@ def stretch_constraints():
 
     # generate stretch constraints
     relop = '>='
-    right = '0'
     for edge in _edge_list:
+        right = '0'
         source = edge[0]
         target = edge[1]
         stretch_variable = "s_" + source + "_" + target
+        raw_variable = "z_" + source + "_" + target
         _continuous_variables.append(stretch_variable)
         _stretch_variables.append(stretch_variable)
-        source_layer = _node_list[int(source)][1]
-        target_layer = _node_list[int(target)][1]
-        source_position_variable = "p_" + source + "_" + str(source_layer)
-        target_position_variable = "p_" + target + "_" + str(target_layer)
+        # standard tricks for absolute value
+        # s_i_j >= z_i_j
         left = ["+" + stretch_variable]
-        left.append("+" + str(_layer_factor[source_layer])
-                    + " " + source_position_variable)
-        left.append("-" + str(_layer_factor[target_layer])
-                    + " " + target_position_variable)
+        left.append("-" + raw_variable)
         stretch_constraints.append((left, relop, right))
-
+        # s_i_j >= -z_i_j
         left = ["+" + stretch_variable]
-        left.append("-" + str(_layer_factor[source_layer])
-                    + " " + source_position_variable)
-        left.append("+" + str(_layer_factor[target_layer])
-                    + " " + target_position_variable)
+        left.append("+" + raw_variable)
+        stretch_constraints.append((left, relop, right))
+        # introduce binary indicator variable: b_i_j = 0 if z_i_j is positive
+        # and 1 if z_i_j is negative
+        indicator_variable = "b_" + source + "_" + target
+        _binary_variables.append(indicator_variable)
+        # ensure s_i_j <= z_i_j if b_i_j = 0
+        left = ["+" + raw_variable]
+        left.append("+2 " + indicator_variable)
+        left.append("-" + stretch_variable)
+        stretch_constraints.append((left, relop, right))
+        # ensure s_i_j <= -z_i_j if b_i_j = 1
+        left = ["-" + raw_variable]
+        left.append("-2 " + indicator_variable)
+        left.append("-" + stretch_variable)
+        right = "-2"
         stretch_constraints.append((left, relop, right))
 
     return stretch_constraints
@@ -336,7 +344,8 @@ def stretch_constraints():
 # @return a list of constraints that will define the objective in a quadratic
 # program for minimizing stretch; each constraint says, essentially, that the
 # z_i_j = abs((1/|V_k|) * p_i_k - (1/|V_{k+1}) * p_j_{k+1}), where ij is an
-# edge and k is the layer of node i
+# edge and k is the layer of node i; these are also used to get absolute
+# value equality constraints for the regular stretch variables
 def raw_stretch_constraints():
     global _quadratic_variables
     _quadratic_variables = []
@@ -507,4 +516,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 30 at 13:33:47 GMT]
+#  [Last modified: 2016 06 02 at 21:10:14 GMT]
