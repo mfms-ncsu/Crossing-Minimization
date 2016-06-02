@@ -5,9 +5,6 @@
 # objective alone, second objective alone, and second given the optimum value
 # of first as a constraint. This version works with python 2.x and the
 # corresponding sgf2ilp.py version.
-#
-# @todo update to sgf2ilp.py for python 2.7 and later (with argparse)
-# @todo use argparse and add option to make one of the objectives bottleneck strea
 
 # assumes sgf2ilp.py and sol2sgf.py are in this directory
 
@@ -48,11 +45,11 @@ if [ -e $cplex_input_file ]; then
 else
     echo "creating ILP, objective is $first_objective, input file is $input_sgf_file"
     if [ "$first_objective" = "t" ]; then
-        $script_dir/sgf2ilp.py -2 -1 -1 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=total < $input_sgf_file > $cplex_input_file
     elif [ "$first_objective" = "b" ]; then
-        $script_dir/sgf2ilp.py -1 -2 -1 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=bottleneck < $input_sgf_file > $cplex_input_file
     elif [ "$first_objective" = "s" ]; then
-        $script_dir/sgf2ilp.py -1 -1 -2 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=stretch < $input_sgf_file > $cplex_input_file
     else
         echo "bad first objective: $first_objective"
         exit
@@ -102,11 +99,11 @@ if [ -e $cplex_input_file ]; then
 else
     echo "creating ILP, objective is $second_objective, input file is $input_sgf_file"
     if [ "$second_objective" = "t" ]; then
-        $script_dir/sgf2ilp.py -2 -1 -1 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=total < $input_sgf_file > $cplex_input_file
     elif [ "$second_objective" = "b" ]; then
-        $script_dir/sgf2ilp.py -1 -2 -1 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=bottleneck < $input_sgf_file > $cplex_input_file
     elif [ "$second_objective" = "s" ]; then
-        $script_dir/sgf2ilp.py -1 -1 -2 -1 < $input_sgf_file > $cplex_input_file
+        $script_dir/sgf2ilp.py --objective=stretch < $input_sgf_file > $cplex_input_file
     else
         echo "bad second objective: $second_objective"
         exit
@@ -152,25 +149,22 @@ if [ -e $cplex_input_file ]; then
 else
     echo "creating ILP, objective is $second_objective, input file is $input_sgf_file"
 # give default values to the three command-line args
-    arg1=-1
-    arg2=-1
-    arg3=-1
     if [ "$first_objective" = "t" ]; then
-        arg1=$min_first_objective
+        bound="--total=$min_first_objective"
     elif [ "$first_objective" = "b" ]; then
-        arg2=$min_first_objective
+        bound="--bottleneck=$min_first_objective"
     elif [ "$first_objective" = "s" ]; then
-        arg3=$rounded_min_first_objective
+        bound="--stretch=$rounded_min_first_objective"
     fi
     if [ "$second_objective" = "t" ]; then
-        arg1=-2
+        objective="total"
     elif [ "$second_objective" = "b" ]; then
-        arg2=-2
+        objective="bottleneck"
     elif [ "$second_objective" = "s" ]; then
-        arg3=-2
+        objective="stretch"
     fi
     echo "creating ILP, objective is $second_objective, using $first_objective = $rounded_min_first_objective"
-    $script_dir/sgf2ilp.py $arg1 $arg2 $arg3 -1 < $input_sgf_file > $cplex_input_file
+    $script_dir/sgf2ilp.py --objective=$objective $bound < $input_sgf_file > $cplex_input_file
 fi
 if [ -e $cplex_output_file ]; then
     echo "__ already run CPLEX on $cplex_input_file, not repeating"
@@ -195,4 +189,4 @@ fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 05 17 at 14:05:48 GMT]
+#  [Last modified: 2016 06 02 at 18:51:12 GMT]

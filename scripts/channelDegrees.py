@@ -114,7 +114,7 @@ def print_statistics():
     print "degreeStats,%2s,%3s,%4s,%4s,%4s,%3s,%4s,%s" % \
         ("Ch", "Min", "Med", "Avg", "Max",
          "Dev", "#", "Dis")
-    print "nodesInChannel,%s,%s,%s,%s,%s,%s,%s,%s" % \
+    print "statsInChannel,%s,%s,%s,%s,%s,%s,%s,%s" % \
         ("Ch", "upper", "lower", "edges", "dens", "ratio", "+dis", "*dis")
     print "scaledVolumes,%s,%s,%s,%s,%s,%s,%s" % \
         ("min", "median", "mean", "max", "stdev", "#ch", "disc")
@@ -124,7 +124,7 @@ def print_statistics():
     for channel in range(1, number_of_layers):
         volume = print_channel_statistics(channel)
         volume_list.append(volume)
-    scaled_volume_list = map(lambda x: float(x) / number_of_layers, volume_list)
+    scaled_volume_list = map(lambda x: float(x) / (number_of_layers - 1), volume_list)
     print_basic_statistics('allVolumes', scaled_volume_list)
 
 # prints all statistics for the current channel
@@ -136,9 +136,11 @@ def print_channel_statistics(channel):
     # get the up degrees of nodes on the lower layer
     lower_degrees = map(lambda node: _node_dictionary[node][1],
                         _nodes_on_layer[lower_layer])
+    lower_degrees = filter(lambda x: x != 0, lower_degrees)
     # get the down degrees of nodes on the upper layer
     upper_degrees = map(lambda node: _node_dictionary[node][2],
                         _nodes_on_layer[upper_layer])
+    upper_degrees = filter(lambda x: x != 0, upper_degrees)
     all_degrees = list(upper_degrees)
     all_degrees.extend(lower_degrees)
     print_basic_statistics('allDegrees,' + str(channel), all_degrees)
@@ -147,6 +149,7 @@ def print_channel_statistics(channel):
     number_of_edges = reduce(lambda x,y: x+y, upper_degrees)
     number_of_upper_nodes = len(upper_degrees)
     number_of_lower_nodes = len(lower_degrees)
+    number_of_nodes = number_of_upper_nodes + number_of_lower_nodes
     density = float(number_of_edges) / \
         (float(number_of_upper_nodes) * float(number_of_lower_nodes))
     layer_ratio = max(float(number_of_upper_nodes) / number_of_lower_nodes,
@@ -154,8 +157,8 @@ def print_channel_statistics(channel):
     upper_discrepancy = discrepancy(upper_degrees)
     lower_discrepancy = discrepancy(lower_degrees)
     total_discrepancy = upper_discrepancy + lower_discrepancy
-    volume = upper_discrepancy * lower_discrepancy
-    print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%5.2f" % \
+    volume = upper_discrepancy * lower_discrepancy # / number_of_nodes
+    print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%7.4f" % \
         (channel, number_of_upper_nodes, number_of_lower_nodes, number_of_edges,
          density, layer_ratio, total_discrepancy, volume)
     return volume
@@ -185,8 +188,7 @@ def print_basic_statistics(label, list):
 # @return max / median of the list (in this case is always the lower value
 # for an even length list)
 def discrepancy(list):
-    working_list = filter(lambda x: x != 0, list)
-    working_list = sorted(working_list)
+    working_list = sorted(list)
     median = working_list[(len(working_list) - 1)/ 2]
     return float(max(working_list)) / median
 
@@ -194,4 +196,4 @@ main()
 
 
 
-#  [Last modified: 2016 06 02 at 14:46:07 GMT]
+#  [Last modified: 2016 06 02 at 18:04:29 GMT]
