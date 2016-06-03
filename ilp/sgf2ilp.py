@@ -37,42 +37,44 @@ parser.add_argument('--seed', type=int,
 
 args = parser.parse_args()
 
-# creates two global lists that describe the graph
-# _node_list: each item is a tuple of the form:
-# 	(id, layer, position)
+# creates two global data structures that describe the graph
+# _node_dictionary: the item whose key is the id of a node is a tuple of the form
+# 	(layer, position)
 # _edge_list: each item is a tuple of the form:
 #       (source, target)
-def read_sgf( input ):
-    global _node_list
-    global _edge_list
+
+_node_dictionary = {}
+_edge_list = []
+_comments = []
+
+def read_sgf(input):
     global _comments
-    _node_list = []
-    _edge_list = []
-    _comments = []
     line = read_nonblank( input )
     while ( line ):
         type = line.split()[0]
         if type == 'n':
-            _node_list.append( process_node( line ) )
+            process_node( line )
         elif type == 'e':
-            _edge_list.append( process_edge( line ) )
+            process_edge( line )
         elif type == 'c':
             _comments.append(line[1:])
             
         line = read_nonblank( input )
 
-def process_node( line ):
+def process_node(line):
+    global _node_dictionary
     line_fields = line.split()
-    id = int(line_fields[1])
+    id = line_fields[1]
     layer = int(line_fields[2])
     position_in_layer = line_fields[3]
-    return (id, layer, position_in_layer)
+    _node_dictionary[id] = (layer, position_in_layer)
 
 def process_edge( line ):
+    global _edge_list
     line_fields = line.split()
     source = line_fields[1]
     target = line_fields[2]
-    return (source, target)
+    _edge_list.append((source, target))
 
 # @return the first non-blank line in the input
 def read_nonblank( input ):
@@ -86,11 +88,17 @@ def read_nonblank( input ):
 # this will be 1/(L-1), where L is the number of nodes in layer i
 def compute_layer_factors():
     global _layer_factor
-    # first compute number of layers and the size of each 
-    number_of_layers = 1 + max(_node_list,key=lambda item:item[1])[1]
+    # first compute number of layers (layer numbers are 0-based) and the size
+    # of each
+    max_layer = 0
+    for node_id in _node_dictionary:
+        layer = _node_dictionary[node_id][0]
+        max_layer = max(layer, max_layer)
+    number_of_layers = max_layer + 1
     layer_size = [0] * number_of_layers
-    for node in _node_list:
-        layer_size[node[1]] += 1
+    for node_id in _node_dictionary:
+        layer = _node_dictionary[node_id][0]
+        layer_size[layer] += 1
     # then the appropriate denominator for each layer
     denominator = [0] * number_of_layers
     for layer in range(number_of_layers):
@@ -119,6 +127,7 @@ def compute_layer_factors():
 _binary_variables = []
 _integer_variables = []
 _continuous_variables = []
+_raw_stretch_variables = []
 
 # @return a list of constraints on relative position variables x_i_j, where
 # x_i_j is 1 if node i precedes node j on their common layer, 0 otherwise
@@ -126,11 +135,14 @@ def triangle_constraints():
     global _binary_variables
     triangle_constraints = []
     # anti-symmetry constraints
-    for idx_i, i in enumerate(_node_list):
-        for idx_j, j in enumerate(_node_list):
-            if idx_i < idx_j and i[1] == j[1]: # two nodes on the same layer
-                x_i_j = "x_" + str(i[0]) + "_" + str(j[0])
-                x_j_i = "x_" + str(j[0]) + "_" + str(i[0])
+    for i in _node_dictionary:
+        i_layer = _node_dictionary[i][0]
+        for j in _node_dictionary:
+            j_layer = _node_dictionary[j][0]
+            # add a constraint if i and j on same layer; only once per pair
+            if i_layer == j_layer and i < j:
+                x_i_j = "x_" + str(i) + "_" + str(j)
+                x_j_i = "x_" + str(j) + "_" + str(i)
                 current_constraint = (["+" + x_i_j, "+" + x_j_i], '=', '1')
                 triangle_constraints.append(current_constraint)
                 _binary_variables.append(x_i_j)
@@ -139,21 +151,26 @@ def triangle_constraints():
     # transitivity constraints
     # x_i_j and x_j_k implies x_i_k
     # or x_i_k - x_i_j - x_j_k >= -1
-    for idx_i, i in enumerate(_node_list):
-        for idx_j, j in enumerate(_node_list):
-            for idx_k, k in enumerate(_node_list):
-                if idx_i < idx_j and idx_j < idx_k and i[1] == j[1] == k[1]:
+    for i in _node_dictionary:
+        i_layer = _node_dictionary[i][0]
+        for j in _node_dictionary:
+            j_layer = _node_dictionary[j][0]
+            for k in _node_dictionary:
+                k_layer = _node_dictionary[k][0]
+                # add two constraints if the three nodes are on the same
+                # layer; only once per triple
+                if i_layer == j_layer == k_layer and i < j and j < k:
                     relop = '>='
                     right = '-1'
 
-                    left = ["+x_" + str(i[0]) + "_" + str(k[0])]
-                    left.append("-x_" + str(i[0]) + "_" + str(j[0]))
-                    left.append("-x_" + str(j[0]) + "_" + str(k[0]))
+                    left = ["+x_" + i + "_" + k]
+                    left.append("-x_" + i + "_" + j)
+                    left.append("-x_" + j + "_" + k)
                     triangle_constraints.append((left, relop, right))
 
-                    left = ["+x_" + str(i[0]) + "_" + str(j[0])]
-                    left.append("-x_" + str(i[0]) + "_" + str(k[0]))
-                    left.append("-x_" + str(k[0]) + "_" + str(j[0]))
+                    left = ["+x_" + i + "_" + j]
+                    left.append("-x_" + i + "_" + k)
+                    left.append("-x_" + k + "_" + j)
                     triangle_constraints.append((left, relop, right))
 
     # the above two variants suffice
@@ -171,17 +188,15 @@ def position_constraints():
     # p_i_j represents the position of node i in layer j
     relop = '='
     right = '0'
-    for node in _node_list:
+    for node_id in _node_dictionary:
         left = []
-        id = str(node[0])
-        layer = str(node[1])
-        position_variable = "p_" + id + "_" + layer
+        layer = _node_dictionary[node_id][0]
+        position_variable = "p_" + node_id + "_" + layer
         _integer_variables.append(position_variable)
         left.append("+" + position_variable)
-        for other_node in _node_list:
-            other_id = str(other_node[0])
-            other_layer = str(other_node[1])
-            if layer == other_layer and id != other_id:
+        for other_node_id in _node_dictionary:
+            other_layer = _node_dictionary[other_node_id][0]
+            if layer == other_layer and node_id != other_node_id:
                 left.append("-x_" + other_id + "_" + id)
         position_constraints.append((left, relop, right))
 
@@ -219,11 +234,11 @@ def crossing_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_list[int(target_1)][1]
+        channel_1 = _node_dictionary[target_1][0]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = _node_list[int(target_2)][1]
+            channel_2 = _node_dictionary[target_2][0]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and index_1 < index_2 \
@@ -262,13 +277,13 @@ def bottleneck_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_list[int(target_1)][1]
+        channel_1 = _node_dictionary[target_1][0]
         # compile the left hand side for edges crossing this one
         left = ["+bottleneck"]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = _node_list[int(target_2)][1]
+            channel_2 = _node_dictionary[target_2][0]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and source_1 != source_2 and target_1 != target_2:
@@ -350,7 +365,6 @@ def stretch_constraints():
 # value equality constraints for the regular stretch variables
 def raw_stretch_constraints():
     global _raw_stretch_variables
-    _raw_stretch_variables = []
     raw_constraints = []
 
     # generate raw stretch constraints
@@ -361,8 +375,8 @@ def raw_stretch_constraints():
         target = edge[1]
         raw_stretch_variable = "z_" + source + "_" + target
         _raw_stretch_variables.append(raw_stretch_variable)
-        source_layer = _node_list[int(source)][1]
-        target_layer = _node_list[int(target)][1]
+        source_layer = _node_dictionary[source][0]
+        target_layer = _node_dictionary[target][0]
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
         left = ["+" + raw_stretch_variable]
@@ -520,4 +534,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 06 02 at 21:10:14 GMT]
+#  [Last modified: 2016 06 03 at 17:13:27 GMT]
