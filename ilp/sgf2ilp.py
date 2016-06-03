@@ -9,7 +9,7 @@ import argparse
 import math
 import random
 
-TOLERANCE = 0.1
+TOLERANCE = 0
 MAX_TERMS_IN_LINE = 100
 INDENT = "  "
 
@@ -342,14 +342,15 @@ def stretch_constraints():
 
     return stretch_constraints
     
-# @return a list of constraints that will define the objective in a quadratic
-# program for minimizing stretch; each constraint says, essentially, that the
+# @return a list of constraints that give value to variables whose absolute
+# values define stretch and whose squares are used in the quadratic
+# objective. Each constraint says, essentially, that
 # z_i_j = abs((1/|V_k|) * p_i_k - (1/|V_{k+1}) * p_j_{k+1}), where ij is an
 # edge and k is the layer of node i; these are also used to get absolute
 # value equality constraints for the regular stretch variables
 def raw_stretch_constraints():
-    global _quadratic_variables
-    _quadratic_variables = []
+    global _raw_stretch_variables
+    _raw_stretch_variables = []
     raw_constraints = []
 
     # generate raw stretch constraints
@@ -358,13 +359,13 @@ def raw_stretch_constraints():
     for edge in _edge_list:
         source = edge[0]
         target = edge[1]
-        quadratic_variable = "z_" + source + "_" + target
-        _quadratic_variables.append(quadratic_variable)
+        raw_stretch_variable = "z_" + source + "_" + target
+        _raw_stretch_variables.append(raw_stretch_variable)
         source_layer = _node_list[int(source)][1]
         target_layer = _node_list[int(target)][1]
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
-        left = ["+" + quadratic_variable]
+        left = ["+" + raw_stretch_variable]
         left.append("+" + str(_layer_factor[source_layer])
                     + " " + source_position_variable)
         left.append("-" + str(_layer_factor[target_layer])
@@ -429,7 +430,7 @@ def print_comments():
         print "\\ " + comment
 
 def print_quadratic_objective():
-    quadratic_variables_squared = map(lambda x: "+" + x + "^2", _quadratic_variables)
+    quadratic_variables_squared = map(lambda x: "+" + x + "^2", _raw_stretch_variables)
     print INDENT + "[ " +  split_list(quadratic_variables_squared, MAX_TERMS_IN_LINE) + " ]/2"
 
 def print_constraint(constraint):
@@ -440,9 +441,9 @@ def print_constraints(constraints):
     for constraint in constraints:
         print_constraint(constraint)
 
-# need to make the lower bound on quadratic variables less than 0; -1 will work
-def print_bounds_on_quadratic_variables():
-    for variable in _quadratic_variables:
+# need to make the lower bound on raw_stretch variables less than 0; -1 will work
+def print_bounds_on_raw_stretch_variables():
+    for variable in _raw_stretch_variables:
         print INDENT + "-1 <= " + variable + " <= 1"
 
 def print_variables():
@@ -511,9 +512,9 @@ def main():
         print INDENT + args.objective
     print "st"
     print_constraints(constraints)
-    if args.objective == 'quadratic':
+    if _raw_stretch_variables != []:
         print "Bounds"
-        print_bounds_on_quadratic_variables()
+        print_bounds_on_raw_stretch_variables()
     print_variables()
     print "End"
 
