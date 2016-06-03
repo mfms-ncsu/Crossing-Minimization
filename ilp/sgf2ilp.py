@@ -53,21 +53,21 @@ def read_sgf(input):
     while ( line ):
         type = line.split()[0]
         if type == 'n':
-            process_node( line )
+            process_node(line)
         elif type == 'e':
-            process_edge( line )
+            process_edge(line)
         elif type == 'c':
             _comments.append(line[1:])
             
-        line = read_nonblank( input )
+        line = read_nonblank(input)
 
+# adds a _node_dictionary entry to map a node id to its layer
 def process_node(line):
     global _node_dictionary
     line_fields = line.split()
     id = line_fields[1]
-    layer = int(line_fields[2])
-    position_in_layer = line_fields[3]
-    _node_dictionary[id] = (layer, position_in_layer)
+    layer = line_fields[2]
+    _node_dictionary[id] = layer
 
 def process_edge( line ):
     global _edge_list
@@ -92,12 +92,12 @@ def compute_layer_factors():
     # of each
     max_layer = 0
     for node_id in _node_dictionary:
-        layer = _node_dictionary[node_id][0]
+        layer = int(_node_dictionary[node_id][0])
         max_layer = max(layer, max_layer)
     number_of_layers = max_layer + 1
     layer_size = [0] * number_of_layers
     for node_id in _node_dictionary:
-        layer = _node_dictionary[node_id][0]
+        layer = int(_node_dictionary[node_id][0])
         layer_size[layer] += 1
     # then the appropriate denominator for each layer
     denominator = [0] * number_of_layers
@@ -197,7 +197,7 @@ def position_constraints():
         for other_node_id in _node_dictionary:
             other_layer = _node_dictionary[other_node_id][0]
             if layer == other_layer and node_id != other_node_id:
-                left.append("-x_" + other_id + "_" + id)
+                left.append("-x_" + other_node_id + "_" + node_id)
         position_constraints.append((left, relop, right))
 
     return position_constraints
@@ -375,8 +375,8 @@ def raw_stretch_constraints():
         target = edge[1]
         raw_stretch_variable = "z_" + source + "_" + target
         _raw_stretch_variables.append(raw_stretch_variable)
-        source_layer = _node_dictionary[source][0]
-        target_layer = _node_dictionary[target][0]
+        source_layer = int(_node_dictionary[source][0])
+        target_layer = int(_node_dictionary[target][0])
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
         left = ["+" + raw_stretch_variable]
@@ -534,4 +534,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 06 03 at 17:13:27 GMT]
+#  [Last modified: 2016 06 03 at 18:05:28 GMT]
