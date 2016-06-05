@@ -125,6 +125,8 @@ min_second_objective=`fgrep Objective $cplex_output_file | cut -f 2`
 echo "minimum value for $second_objective is $min_second_objective"
 if [[ $min_second_objective != ${min_second_objective%.[0-9]*} ]]; then
     # floating point number - need to round up just in case
+    # but only if there are at least six digits (fix this later)
+    # @todo may not need to round
     after_point=${min_second_objective##*\.} # digits after decimal point
     number_after_point=${#after_point}
     # create a string of number_after_point - 1 0's followed by a 1 and turn
@@ -140,7 +142,7 @@ else
 fi
 
 # minimize second objective given minimum first objective as a constraint
-suffix=${first_objective}${min_first_objective_string}$_second_objective
+suffix=${first_objective}${min_first_objective_string}_$second_objective
 cplex_input_file=${input_base}-$suffix.lp
 cplex_output_file=${input_base}-$suffix.out
 sgf_output_file=${input_base}-$suffix.sgf
@@ -189,4 +191,4 @@ fi
 echo "%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%"
 echo
 
-#  [Last modified: 2016 06 02 at 18:51:12 GMT]
+#  [Last modified: 2016 06 05 at 00:20:12 GMT]

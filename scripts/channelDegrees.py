@@ -115,8 +115,8 @@ def print_statistics():
         ("Ch", "Min", "Med", "Avg", "Max",
          "Dev", "#", "Dis")
     print "statsInChannel,%s,%s,%s,%s,%s,%s,%s,%s" % \
-        ("Ch", "upper", "lower", "edges", "dens", "ratio", "+dis", "*dis")
-    print "scaledVolumes,%s,%s,%s,%s,%s,%s,%s" % \
+        ("Ch", "upper", "lower", "edges", "dens", "ratio", "*dis", "*max")
+    print "finalStats,%s,%s,%s,%s,%s,%s,%s" % \
         ("min", "median", "mean", "max", "stdev", "#ch", "disc")
     print "---------------------------------"
     number_of_layers = len(_nodes_on_layer)
@@ -124,11 +124,23 @@ def print_statistics():
     for channel in range(1, number_of_layers):
         volume = print_channel_statistics(channel)
         volume_list.append(volume)
-    scaled_volume_list = map(lambda x: float(x) / (number_of_layers - 1), volume_list)
-    print_basic_statistics('allVolumes', scaled_volume_list)
+    print_basic_statistics('allVolumes', volume_list)
+    print "productOfTopTwoAdjacent,%d" % (top_two_adjacent(volume_list))
+
+# @return the largest product of two adjacent numbers in the list
+def top_two_adjacent(list):
+    if len(list) == 0:
+        return 1
+    if len(list) == 1:
+        return list[0]
+    top_two = 0
+    for i in range(len(list) - 1):
+        top_two = max(top_two, list[i] * list[i+1])
+    return top_two
 
 # prints all statistics for the current channel
 # @return the volume of the current channel
+#   (now defined to be product of max degrees)
 def print_channel_statistics(channel):
     number_of_layers = len(_nodes_on_layer)
     upper_layer = channel
@@ -156,11 +168,11 @@ def print_channel_statistics(channel):
                       float(number_of_lower_nodes) / number_of_upper_nodes)
     upper_discrepancy = discrepancy(upper_degrees)
     lower_discrepancy = discrepancy(lower_degrees)
-    total_discrepancy = upper_discrepancy + lower_discrepancy
-    volume = upper_discrepancy * lower_discrepancy # / number_of_nodes
+    product_discrepancy = upper_discrepancy * lower_discrepancy
+    volume = max(upper_degrees) * max(lower_degrees)
     print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%7.4f" % \
         (channel, number_of_upper_nodes, number_of_lower_nodes, number_of_edges,
-         density, layer_ratio, total_discrepancy, volume)
+         density, layer_ratio, product_discrepancy, volume)
     return volume
 
 # takes a list of numbers and prints 
@@ -196,4 +208,4 @@ main()
 
 
 
-#  [Last modified: 2016 06 02 at 18:04:29 GMT]
+#  [Last modified: 2016 06 04 at 23:54:55 GMT]
