@@ -140,7 +140,7 @@ def top_two_adjacent(list):
 
 # prints all statistics for the current channel
 # @return the volume of the current channel
-#   (now defined to be product of max degrees)
+#   (now defined to be product of max degrees times number of nodes)
 def print_channel_statistics(channel):
     number_of_layers = len(_nodes_on_layer)
     upper_layer = channel
@@ -169,7 +169,7 @@ def print_channel_statistics(channel):
     upper_discrepancy = discrepancy(upper_degrees)
     lower_discrepancy = discrepancy(lower_degrees)
     product_discrepancy = upper_discrepancy * lower_discrepancy
-    volume = max(upper_degrees) * max(lower_degrees)
+    volume = max(upper_degrees) * max(lower_degrees) * number_of_nodes
     print "channelStats,%d,%d,%d,%d,%4.3f,%4.2f,%4.2f,%7.4f" % \
         (channel, number_of_upper_nodes, number_of_lower_nodes, number_of_edges,
          density, layer_ratio, product_discrepancy, volume)
@@ -208,4 +208,4 @@ main()
 
 
 
-#  [Last modified: 2016 06 04 at 23:54:55 GMT]
+#  [Last modified: 2016 06 05 at 01:50:57 GMT]
