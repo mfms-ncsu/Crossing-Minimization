@@ -38,8 +38,9 @@ parser.add_argument('--seed', type=int,
 args = parser.parse_args()
 
 # creates two global data structures that describe the graph
-# _node_dictionary: the item whose key is the id of a node is a tuple of the form
-# 	(layer, position)
+# _node_dictionary: the item whose key is the id of a node and whose value is
+# the layer of the node
+#
 # _edge_list: each item is a tuple of the form:
 #       (source, target)
 
@@ -92,12 +93,12 @@ def compute_layer_factors():
     # of each
     max_layer = 0
     for node_id in _node_dictionary:
-        layer = int(_node_dictionary[node_id][0])
+        layer = int(_node_dictionary[node_id])
         max_layer = max(layer, max_layer)
     number_of_layers = max_layer + 1
     layer_size = [0] * number_of_layers
     for node_id in _node_dictionary:
-        layer = int(_node_dictionary[node_id][0])
+        layer = int(_node_dictionary[node_id])
         layer_size[layer] += 1
     # then the appropriate denominator for each layer
     denominator = [0] * number_of_layers
@@ -136,9 +137,9 @@ def triangle_constraints():
     triangle_constraints = []
     # anti-symmetry constraints
     for i in _node_dictionary:
-        i_layer = _node_dictionary[i][0]
+        i_layer = _node_dictionary[i]
         for j in _node_dictionary:
-            j_layer = _node_dictionary[j][0]
+            j_layer = _node_dictionary[j]
             # add a constraint if i and j on same layer; only once per pair
             if i_layer == j_layer and i < j:
                 x_i_j = "x_" + str(i) + "_" + str(j)
@@ -152,11 +153,11 @@ def triangle_constraints():
     # x_i_j and x_j_k implies x_i_k
     # or x_i_k - x_i_j - x_j_k >= -1
     for i in _node_dictionary:
-        i_layer = _node_dictionary[i][0]
+        i_layer = _node_dictionary[i]
         for j in _node_dictionary:
-            j_layer = _node_dictionary[j][0]
+            j_layer = _node_dictionary[j]
             for k in _node_dictionary:
-                k_layer = _node_dictionary[k][0]
+                k_layer = _node_dictionary[k]
                 # add two constraints if the three nodes are on the same
                 # layer; only once per triple
                 if i_layer == j_layer == k_layer and i < j and j < k:
@@ -190,12 +191,12 @@ def position_constraints():
     right = '0'
     for node_id in _node_dictionary:
         left = []
-        layer = _node_dictionary[node_id][0]
+        layer = _node_dictionary[node_id]
         position_variable = "p_" + node_id + "_" + layer
         _integer_variables.append(position_variable)
         left.append("+" + position_variable)
         for other_node_id in _node_dictionary:
-            other_layer = _node_dictionary[other_node_id][0]
+            other_layer = _node_dictionary[other_node_id]
             if layer == other_layer and node_id != other_node_id:
                 left.append("-x_" + other_node_id + "_" + node_id)
         position_constraints.append((left, relop, right))
@@ -234,11 +235,11 @@ def crossing_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_dictionary[target_1][0]
+        channel_1 = _node_dictionary[target_1]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = _node_dictionary[target_2][0]
+            channel_2 = _node_dictionary[target_2]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and index_1 < index_2 \
@@ -277,13 +278,13 @@ def bottleneck_constraints():
     for index_1, edge_1 in enumerate(_edge_list):
         source_1 = edge_1[0]
         target_1 = edge_1[1]
-        channel_1 = _node_dictionary[target_1][0]
+        channel_1 = _node_dictionary[target_1]
         # compile the left hand side for edges crossing this one
         left = ["+bottleneck"]
         for index_2, edge_2 in enumerate(_edge_list):
             source_2 = edge_2[0]
             target_2 = edge_2[1]
-            channel_2 = _node_dictionary[target_2][0]
+            channel_2 = _node_dictionary[target_2]
             # check if two edges in the same channel without common node
             if channel_1 == channel_2 \
                     and source_1 != source_2 and target_1 != target_2:
@@ -375,8 +376,8 @@ def raw_stretch_constraints():
         target = edge[1]
         raw_stretch_variable = "z_" + source + "_" + target
         _raw_stretch_variables.append(raw_stretch_variable)
-        source_layer = int(_node_dictionary[source][0])
-        target_layer = int(_node_dictionary[target][0])
+        source_layer = int(_node_dictionary[source])
+        target_layer = int(_node_dictionary[target])
         source_position_variable = "p_" + source + "_" + str(source_layer)
         target_position_variable = "p_" + target + "_" + str(target_layer)
         left = ["+" + raw_stretch_variable]
@@ -534,4 +535,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 06 03 at 18:05:28 GMT]
+#  [Last modified: 2016 06 07 at 19:19:00 GMT]
