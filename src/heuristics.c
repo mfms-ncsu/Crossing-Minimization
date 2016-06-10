@@ -793,6 +793,7 @@ static bool edge_sift_iteration( Edgeptr edge )
 static bool total_stretch_sift_iteration( Nodeptr node ) {
   sift_node_for_total_stretch(node);
   fixNode(node);
+  updateAllCrossings();
   sprintf(buffer, "$$$ %s, node = %s, position = %d",
           heuristic, node->name, node->position);
   tracePrint(node->layer, buffer);
@@ -1243,4 +1244,4 @@ void swapping( void )
 
 #endif // ! defined(TEST)
 
-/*  [Last modified: 2016 05 20 at 21:01:51 GMT] */
+/*  [Last modified: 2016 06 10 at 13:11:47 GMT] */

@@ -36,8 +36,8 @@ def process_line(pareto_input):
 # @param point_list a list of the form [(x1,y1), (x2,y2), ...]
 
 # @return point_list with points that are dominated by others removed; a
-# point (y,z) is dominated if there exists another point (w,x) such that w < y
-# and x < z
+# point (y,z) is dominated if there exists another point (w,x) such that w <= y
+# and x <= z
 #
 # @todo something is wrong here - not all dominated points are properly
 # eliminated; it's either a problem with dominates() or with list management;
@@ -45,24 +45,20 @@ def process_line(pareto_input):
 def gather_pareto_points(point_list):
     undominated_list = []
     for point in point_list:
-        undominated_list.append(point)
         for undominated_point in undominated_list:
             if dominates(undominated_point, point):
                 undominated_list.remove(point)
                 break
             elif dominates(point, undominated_point):
                 undominated_list.remove(undominated_point)
-            # point is appended as long as it is not dominated
+        # point is appended as long as it is not dominated
+        undominated_list.append(point)
     return undominated_list
                 
 
 # @return true if first_point dominates second_point
 def dominates(first_point, second_point):
-    if first_point[0] < second_point[0] and first_point[1] < second_point[1]:
-        return True
-    if first_point[0] == second_point[0] and first_point[1] < second_point[1]:
-        return True
-    if first_point[0] < second_point[0] and first_point[1] == second_point[1]:
+    if first_point[0] <= second_point[0] and first_point[1] <= second_point[1]:
         return True
     return False
 
@@ -73,4 +69,4 @@ def print_points(output_stream, pareto_list):
 
 main()
 
-#  [Last modified: 2016 06 08 at 19:38:42 GMT]
+#  [Last modified: 2016 06 09 at 12:02:49 GMT]
