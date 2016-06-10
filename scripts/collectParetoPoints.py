@@ -8,6 +8,7 @@
 # output has one Pareto point per line - format is tab separated
 
 import sys
+import copy
 
 def main():
     pareto_list = read_points(sys.stdin)
@@ -38,21 +39,19 @@ def process_line(pareto_input):
 # @return point_list with points that are dominated by others removed; a
 # point (y,z) is dominated if there exists another point (w,x) such that w <= y
 # and x <= z
-#
-# @todo something is wrong here - not all dominated points are properly
-# eliminated; it's either a problem with dominates() or with list management;
-# right approach may be to sort and use idea in stats.c
 def gather_pareto_points(point_list):
     undominated_list = []
     for point in point_list:
-        for undominated_point in undominated_list:
+        dominated = False
+        # deep copy may not be necessay but doesn't hurt
+        for undominated_point in copy.deepcopy(undominated_list):
             if dominates(undominated_point, point):
-                undominated_list.remove(point)
+                dominated = True
                 break
             elif dominates(point, undominated_point):
                 undominated_list.remove(undominated_point)
-        # point is appended as long as it is not dominated
-        undominated_list.append(point)
+        if not dominated:
+            undominated_list.append(point)
     return undominated_list
                 
 
@@ -69,4 +68,4 @@ def print_points(output_stream, pareto_list):
 
 main()
 
-#  [Last modified: 2016 06 09 at 12:02:49 GMT]
+#  [Last modified: 2016 06 10 at 14:25:47 GMT]
