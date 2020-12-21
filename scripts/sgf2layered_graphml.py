@@ -1,9 +1,11 @@
 #! /usr/bin/env python
 
-## sgf2layered_graphml.py - translates from sgf format, described below, to the
-# graphml format used by Galant. This program is a simple filter, translating
-# from standard input to standard output.
-#
+"""
+ translates from sgf format, described in the script, to the graphml format
+ used by Galant. This program is a simple filter, translating from
+ standard input to standard output.
+"""
+
 # $Id: sgf2layered_graphml.py 110 2015-06-12 12:26:27Z mfms $
 #
 # sfg format is as follows:
@@ -145,4 +147,4 @@ def main():
 
 main()
 
-#  [Last modified: 2015 05 31 at 18:40:40 GMT]
+#  [Last modified: 2020 12 21 at 17:03:23 GMT]

@@ -1,6 +1,6 @@
 #!/bin/sh
-##: mvsed -- rename files according to a pattern substitution (not clear
-##           where this originated)
+#  utility to rename files according to a pattern substitution
+#   (not clear where this originated)
 
 help()
 {
@@ -49,4 +49,4 @@ else
  done
 fi
 
-#  [Last modified: 2008 12 10 at 14:48:13 GMT]
+#  [Last modified: 2020 12 21 at 16:44:30 GMT]

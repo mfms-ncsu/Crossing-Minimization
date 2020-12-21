@@ -1,477 +1,327 @@
 <html> <head>
-<title>Scripts for Layered Graphs</title>
+<title>Scripts for crossing minimization: format translations, runs, statistics</title>
 </head>
 
-<body text=black bgcolor=white>
-<h2>Scripts for Layered Graphs</h2>
+<body>
+<h2 align="center">Scripts for crossing minimization: format translations, runs, statistics</h2>
 
-
-<ul>
-<br><hr>
-<li><b><a href=0_scripts.html>0_scripts.html</a></b> 
-<br><hr>
-<li><b><a href=createConnectedDagClass>createConnectedDagClass</a></b> 
-- a script for creating a class of random dags
-based on a profile that specifies the number of nodes, edges, and layers,<br>
-as well as a skew factor that determines both the maximum degree and the<br>
-variance in number of nodes per layer.<br>
-Note: leaves a file called stats.out in the class directory<br>
-<br>
-IMPORTS:<br>
-- create_random_dag from ../src<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2011/06/05<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=createDag>createDag</a></b> 
-- creates a dag randomly using the scheme devised for the
-InfoVis poster paper. Uses layeredDag.awk and layeredDagOrd.awk<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2009/05/08<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-@todo Construct the basename from the other arguments<br>
-<br>
-<br><hr>
-<li><b><a href=createMSTClass>createMSTClass</a></b> 
-- a script for creating a class of random dags which are
-derived from one of the types used in MST experiments). Number of<br>
-nodes can vary widely within a class, but density and number of layers<br>
-appear to be roughly the same.<br>
-<br>
-IMPORTS:<br>
-- nextgen in MST-Experiments/src-generate, creates a .gph file; it *must*<br>
-be in PATH<br>
-- gph2dot+ord in this directory<br>
-- gph2dot in this directory to convert the gph file into an unlayered dag<br>
-- LayerAssignment in ../java-utilities (and classes used by it); it<br>
-*must* be in the CLASSPATH<br>
-- randomizeClass in this directory [not using this yet; no reason to<br>
-suspect bias]<br>
-- scramble_dot and scramble_ord in ../instance-generation<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2011/06/05<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=createRandomClass>createRandomClass</a></b> 
-- a script for creating a class of random dags for which
-both the variance in layer width and the variance in degree can be<br>
-carefully controlled. The latter may require some experimentation using the<br>
-imported createRandomLayeredGraph.py script.<br>
-<br>
-IMPORTS:<br>
-- createRandomLayeredGraph.py in this directory<br>
-- sgf2dot+ord in this directory<br>
-- sgf2dot.awk in this directory<br>
-- sgf2ord.awk in this directory<br>
-- randomizeClass in this directory [not using this yet; no reason to<br>
-suspect bias]<br>
-- scramble_dot and scramble_ord in ../instance-generation<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2011/06/05<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=createRandomLayeredGraph.py>createRandomLayeredGraph.py</a></b> 
-- offers a mechanism for producing layered
-graphs with different variances with respect to number of nodes per layer<br>
-and degrees of nodes. Output is in sgf format, which can be converted to<br>
-dot or graphml, as desired. Graphs have high probability of being connected<br>
-(and interesting) because minimum degree of a node is 2.<br>
-<br>
-<em>[author: Matthias Stallmann]</em><br>
-@date 2014/1/22<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=createUniformDagClass>createUniformDagClass</a></b> 
-<br>
-- a script for creating a class of random dags based
-on a profile that specifies the number of nodes on<br>
-each layer and on the probability of an edge.<br>
-A settable number (size) of dot/ord file pairs are<br>
-generated.<br>
-<br>
-IMPORTS:<br>
-- createDag: simplifies the use of the awk scripts below<br>
-- layeredDag.awk: to create a .dot file for each random dag<br>
-- layeredDagOrd.awk: to create a .ord file for each dag (these will be<br>
-identical for each dag in the class since nodes are named by their<br>
-layer and the order within their layer<br>
-<br>
-@todo Uses single integer seeds 1, ..., 32 for rand()<br>
-@todo Only works if the full path name of the profile is given<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2008/09/22<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=dot+ord2graphml>dot+ord2graphml</a></b> 
-<br><hr>
-<li><b><a href=dot+ord2sgf>dot+ord2sgf</a></b> 
-<br><hr>
-<li><b><a href=dot2sgf>dot2sgf</a></b> 
-- convert from dot format to a truncated version of
-(s)imple (g)raph (f)ormat described below.<br>
-Usage: dot2sgf base_name<br>
-converts base_name.dot to base_name.sgf<br>
-<br>
-Requires extract-dot-graph.awk and sgfDirect.awk<br>
-<br>
-<em>[author: Matt Stallmann, 2011/06/16]</em><br>
-<br>
-<br><hr>
-<li><b><a href=extract-dot-graph.awk>extract-dot-graph.awk</a></b> 
-- extracts edges from a dot file and converts to the
-'e' lines in an sgf file<br>
-Output format has lines for nodes in the form:<br>
-n node_number -1 -1<br>
-The -1's indicate that neither the layer nor the node's position in it have<br>
-been assigned.<br>
-The edges have the form:<br>
-e source_node_number target_node_number<br>
-at this point there may be cycles.<br>
-<br>
-each edge in the dot file looks like<br>
-source -> target;<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=extract-graphml-graph.awk>extract-graphml-graph.awk</a></b> 
-- extracts graph and ordering information from
-standard graphml formal (see graphml2sgf for description).<br>
-Output format has lines for nodes in the form:<br>
-n n_NUMBER -1 -1<br>
-The -1's indicate that neither the layer nor the node's position in it have<br>
-been assigned.<br>
-The edges have the form:<br>
-e source_node_number target_node_number<br>
-at this point there may be cycles.<br>
-<br>
-@todo now it's possible to extract layer and position information for nodes<br>
-as well; need a python script, probably, to do this right<br>
-<br>
-<br><hr>
-<li><b><a href=extract-layers.awk>extract-layers.awk</a></b> 
-- turns x- and y- coordinates into layers and layer
-orderings, assuming that input format is given by the output format of<br>
-extract-graph.awk. Output (sgf) format is described in ogml2sgf.<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=extract-ogml-graph.awk>extract-ogml-graph.awk</a></b> 
-- extracts graph and ordering information from Sugiyama
-output for Rome graphs.<br>
-Used as a filter by ogml2sgf (input format given by documentation there).<br>
-Output format has lines for nodes in the form:<br>
-n n_NUMBER X-COORD Y-COORD<br>
-and edges of the form:<br>
-e source_node_number target_node_number<br>
-at this point there may be cycles.<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=followHeuristic>followHeuristic</a></b> 
-- run one heuristic followed by one or more other
-heuristics (separately); arguments to min_crossings are hard-wired for<br>
-specific experiments and can be changed by editing the first few lines of<br>
-the script<br>
-<br>
-<br><hr>
-<li><b><a href=followHeuristicRR>followHeuristicRR</a></b> 
-followHeuristic - run one heuristic followed by one or more other<br>
-heuristics (separately); arguments to min_crossings are hard-wired for<br>
-specific experiments and can be changed by editing the first few lines of<br>
-the script<br>
-<br>
-<br><hr>
-<li><b><a href=followHeuristicR_>followHeuristicR_</a></b> 
-followHeuristic - run one heuristic followed by one or more other<br>
-heuristics (separately); arguments to min_crossings are hard-wired for<br>
-specific experiments and can be changed by editing the first few lines of<br>
-the script<br>
-<br>
-<br><hr>
-<li><b><a href=followHeuristic_R>followHeuristic_R</a></b> 
-followHeuristic - run one heuristic followed by one or more other<br>
-heuristics (separately); arguments to min_crossings are hard-wired for<br>
-specific experiments and can be changed by editing the first few lines of<br>
-the script<br>
-<br>
-<br><hr>
-<li><b><a href=forExcel>forExcel</a></b> 
-- a script that creates a csv file based on results of
-experiments on a specified collection of heuristics (as identified by<br>
-suffixes). The script can be edited to include more columns, but currently<br>
-there is a column called Name, which lists the names of graphs on which the<br>
-heuristics have been run and a column for each heuristic, giving the<br>
-minimum number of crossings achieved.<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2011/07/06<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=gph2dot>gph2dot</a></b> 
-<br><hr>
-<li><b><a href=gph2dot+ord>gph2dot+ord</a></b> 
-<br><hr>
-<li><b><a href=gph2graphml>gph2graphml</a></b> 
-<br><hr>
-<li><b><a href=gr2sgf.awk>gr2sgf.awk</a></b> 
-- can be used to convert some graphs to sgf
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=graphml2dot.py>graphml2dot.py</a></b> 
-graphml2dot -- converts a simple dialect of graphml (the one currently<br>
-produced by Galant to the dot notation used for GraphViz).<br>
-<em>[author: Matthias Stallmann, 2013/05/15]</em><br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-input comes from stdin and output goes to stdout so it can be used as a filter<br>
-<br>
-graphml2dot &lt; file.graphml &gt; file.dot and then open file.dot in GraphViz<br>
-will use default layout for GraphViz.<br>
-<br>
-graphml2dot &lt; file.graphml | neato -Tpdf &gt; file.pdf<br>
-to get the graph in pdf format using spring layout; programs other than<br>
-neato for different layouts are described on the GraphViz home page.<br>
-<br>
-if positions should not change from those specified in the graphml file,<br>
-use a -p flag; this will add the right attribute to the dot file; this will<br>
-only work for the fdp and neato programs<br>
-<br>
-<br><hr>
-<li><b><a href=graphml2sgf>graphml2sgf</a></b> 
-- convert from standard graphml
-to the (s)imple (g)raph (f)ormat described below.<br>
-<br>
-Imports extract-graphml-graph.awk and sgfDirect.awk<br>
-<br>
-<em>[author: Matt Stallmann, 2011/05/25]</em><br>
-<br>
-<br><hr>
-<li><b><a href=layeredDag.awk>layeredDag.awk</a></b> 
-
-<br>
-Generates a random dag with pre-specified number of nodes per layer.<br>
-<br>
-Usage: awk -f layeredDags.awk input_file > output_file.dot<br>
-<br>
-FORMAT of input file:<br>
-graph_name edge_prob random_seed<br>
-layer_zero_num_nodes<br>
-layer_one_num_nodes<br>
-...<br>
-layer_(k-1)_num_nodes<br>
-<br>
----<br>
-edge_prob determines the probability that an edge between nodes of two<br>
-adjacent layers is chosen; random_seed is there so that the same dag can be<br>
-recreated if the seed is known<br>
-<br>
-output_file.dot is in dot format with node names of the form<br>
-n_x_y<br>
-where x is the layer and y is the position within the layer.<br>
-<br>
-Since a .ord file does not depend on random choices of edges, it can be<br>
-generated independently using layeredDagsOrd.awk.<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2008/07/10<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=layeredDagOrd.awk>layeredDagOrd.awk</a></b> 
-
-Generates the .ord file for a random dag with pre-specified number of nodes<br>
-per layer using the same input format as layeredDag.awk. Since only the<br>
-edges are random, the first line of input is ignored except to generate the<br>
-name of the dag corresponding to the one generated by layeredDag.awk with<br>
-the same input.<br>
-<br>
-Usage: awk -f layeredDagOrd.awk input_file > output_file.ord<br>
-<br>
-FORMAT of input file:<br>
-name_of_graph edge_prob random_seed<br>
-layer_zero_num_nodes<br>
-layer_one_num_nodes<br>
-...<br>
-layer_(k-1)_num_nodes<br>
-<br>
----<br>
-<br>
-output_file.ord is in .ord format with node names of the form<br>
-n_x_y<br>
-where x is the layer and y is the position within the layer.<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2008/07/10<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=makeIsoClass>makeIsoClass</a></b> 
-- a simple script for creating a class of orderings,
-the original order plus 32 random permutations, of each layer<br>
-from a given .ord file<br>
-<br>
-IMPORTS:<br>
-- randomize_dot: to create each random order of the egdes in the dot file<br>
-- randomize_ord: to create each random permutation of nodes on each layer<br>
-in the ord file<br>
-<br>
-@todo - this is currently hardwired to run randomize_ord from ../instance-generation.<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2008/09/16<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=mlcm2dot+ord>mlcm2dot+ord</a></b> 
-<br><hr>
-<li><b><a href=mlcm2sgf.py>mlcm2sgf.py</a></b> 
-- translates from mlcm format, as documented at
-http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm<br>
-and described below to sgf format, also described below.<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=mvsed>mvsed</a></b> 
--- rename files according to a pattern substitution (not clear
-where this originated)<br>
-<br>
-<br><hr>
-<li><b><a href=pgdExport>pgdExport</a></b> 
-- Export the pgd repository with a given revision number; current
-revision is the default and call the resulting directory pgd-rev, where rev<br>
-is the revision number<br>
-<br>
-<em>[author: Matt Stallmann @date 2011/05/24]</em><br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=randomizeClass>randomizeClass</a></b> 
-- a script that creates a single isomorph (scrambled
-version) of every instance of a given class<br>
-IMPORTS:<br>
-- randomize_dot: to randomly reorder the edges in a dot file<br>
-- randomize_ord: to create each random ordering<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2008/09/16<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=runHeuristic>runHeuristic</a></b> 
-- run the min_crossings program with specific command-line
-arguments on a directory containing .dot and .ord files<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2009/05/08<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=runHeuristicR>runHeuristicR</a></b> 
-runHeuristic - run the min_crossings program with specific command-line<br>
-arguments on a directory containing .dot and .ord files; this version runs<br>
-the heuristics in random mode using a different seed for each instance.<br>
-Caution: the rand_seq program must be in the current path.<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2014/09/11<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=runRandom>runRandom</a></b> 
-- run min_crossings with two heuristics in sequence with
-specific command-line<br>
-arguments for a given number of iterations with different random seeds on a<br>
-specific .dot and .ord file<br>
-<br>
-<em>[author: Matt Stallmann]</em><br>
-@date 2014/10/14<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=sgf2dot+ord>sgf2dot+ord</a></b> 
-<br><hr>
-<li><b><a href=sgf2dot.awk>sgf2dot.awk</a></b> 
-- creates a dot file from an sgf file in the most obvious way.
-<br>
-Usage: awk -f sgf2dot.awk input.sgf > output.dot<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=sgf2graphml.py>sgf2graphml.py</a></b> 
-- translates from sgf format, described below, to the
-graphml format used by Galant. Gaps between layers and between nodes on a<br>
-layer are specified in pixels. This program is a simple filter, translating<br>
-from standard input to standard output.<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-sfg format is as follows:<br>
-<br>
-c comment line 1<br>
-...<br>
-c comment line k<br>
-<br>
-t graph_name<br>
-<br>
-n id_1 layer_1 position_1<br>
-n id_2 layer_2 position_2<br>
-...<br>
-n id_n layer_n position_n<br>
-<br>
-e source_1 target_1<br>
-...<br>
-e source_m target_m<br>
-<br>
-<br><hr>
-<li><b><a href=sgf2ord.awk>sgf2ord.awk</a></b> 
-- gathers layering information from an sgf file to create an
-ord file.<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=sgfDirect.awk>sgfDirect.awk</a></b> 
-- directs edges of an sgf file using node order
-Usage: awk -f sgfDirect.awk input.sgf > output.sgf<br>
-<br>
-$Id: 0_scripts.html 108 2015-04-20 19:01:26Z mfms $<br>
-<br>
-<br><hr>
-<li><b><a href=sugi-gml2sgf>sugi-gml2sgf</a></b> 
-ogml2sgf - convert from graphml used for output of Rome graphs<br>
-to the (s)imple (g)raph (f)ormat described below.<br>
-Usage: ogml2sgf input.gml > output.sgf<br>
-<br>
-Requires extract-ogml-graph.awk and extract-layers.awk<br>
-<br>
-</ul>
-
+<pre>
+</pre>
+<h3>Files in lexicographic order</h3>
 <hr>
-<address>
-<a href="http://people.engr.ncsu.edu/mfms/">
-Matthias F. (Matt) Stallmann
-</a>
+<ul>
+<li>
+<strong><a href="channelDegrees.py">channelDegrees.py</a> --</strong><br>
+<pre>
+channelDegrees.py - takes an sgf file and prints statistics about degrees
+of nodes relative to the upper and lower layers of each channel
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="collectParetoPoints.py">collectParetoPoints.py</a> --</strong><br>
+<pre>
+collectParetoPoints.py - designed to gather multiple Pareto points into a
+  single Pareto list; it's a simple filter (for now)
 
-Created: 
-Mon Apr 6 20:06:18 EDT 2015
+ input is a sequence of lines of the form (Pareto output from min_crossings)
+   x1^y1;x2^y2;...
+ output has one Pareto point per line - format is tab separated
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createConnectedDagClass">createConnectedDagClass</a> --</strong><br>
+<pre>
+based on a profile that specifies the number of nodes, edges, and layers,
+as well as a skew factor that determines both the maximum degree and the
+variance in number of nodes per layer.
+Note: leaves a file called stats.out in the class directory
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createDag">createDag</a> --</strong><br>
+<pre>
+createDag - creates a dag randomly using the scheme devised for the
+ InfoVis poster paper; Uses layeredDag.awk and layeredDagOrd.awk
+These dags are also the "uniform" dags in the 2012 paper
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createMSTClass">createMSTClass</a> --</strong><br>
+<pre>
+createMSTClass - a script for creating a class of random dags which are
+derived from one of the types used in MST experiments). Number of
+nodes can vary widely within a class, but density and number of layers
+appear to be roughly the same.
+The idea is to create a random graph with specific characteristics
+(from MST-Experiments) and do layer assignment for it.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createRandomClass">createRandomClass</a> --</strong><br>
+<pre>
+a script for creating a class of random dags for which
+both the variance in layer width and the variance in degree can be
+carefully controlled. The latter may require some experimentation using the
+imported createRandomLayeredGraph.py script.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createRandomLayeredGraph.py">createRandomLayeredGraph.py</a> --</strong><br>
+<pre>
+createRandomLayeredGraph.py - offers a mechanism for producing layered
+ graphs with different variances with respect to number of nodes per layer
+ and degrees of nodes. Output is in sgf format, which can be converted to
+ dot or graphml, as desired. Graphs have high probability of being connected
+ (and interesting) because minimum degree of a node is 2.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="createUniformDagClass">createUniformDagClass</a> --</strong><br>
+<pre>
+a script for creating a class of random dags based on a profile that
+specifies the number of nodes on each layer and on the probability
+of an edge.  A settable number (size) of dot/ord file pairs are
+generated; uses createDag
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="dot+ord2layered_graphml">dot+ord2layered_graphml</a> --</strong><br>
+<pre>
+dot+ord2layered_graphml - creates a graphml file from a dot and an ord file
+Uses dot_and_ord_to_sgf in ../src
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="dot+ord2sgf">dot+ord2sgf</a> --</strong><br>
+<pre>
+dot+ord2sgf - creates an sgf file from a dot and an ord file
+Uses dot_and_ord_to_sgf in ../src
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="dot2sgf">dot2sgf</a> --</strong><br>
+<pre>
+converts from dot format to a truncated version of
+(s)imple (g)raph (f)ormat described in the script.
+ Usage: dot2sgf base_name
+  converts base_name.dot to base_name.sgf
+Requires extract-dot-graph.awk and sgfDirect.awk
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="followHeuristic">followHeuristic</a> --</strong><br>
+<pre>
+run one heuristic followed by another
+arguments to min_crossings are hard-wired for specific experiments
+and can be changed by editing the first few lines of the script
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="followHeuristicRR">followHeuristicRR</a> --</strong><br>
+<pre>
+a variant of followHeuristic in which both heuristics are randomized
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="followHeuristicR_">followHeuristicR_</a> --</strong><br>
+<pre>
+a variant of followHeuristic that randomizes the first heuristic
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="followHeuristic_R">followHeuristic_R</a> --</strong><br>
+<pre>
+a variant of followHeuristic in which the second heuristic is randomized
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="forExcel">forExcel</a> --</strong><br>
+<pre>
+a script that creates a csv file based on results of experiments on
+a specified collection of heuristics (as identified by
+suffixes). The script can be edited to include more columns, but
+currently there is a column called Name, which lists the names of
+graphs on which the heuristics have been run and a column for each
+heuristic, giving the minimum number of crossings achieved.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="gph2dot">gph2dot</a> --</strong><br>
+<pre>
+ converts a gph file, one arising from the generation mechanism for minimum
+ spanning tree (MST) experiments into a dot file for a generic directed acyclic graph;
+ used by createMSTClass
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="gph2dot+ord">gph2dot+ord</a> --</strong><br>
+<pre>
+gph2dot+ord - converts a gph file (from the MST experiments) to dot and ord
+files for use with crossing minimization programs.
+Scripts and programs that are used as intermediaries are:
+gph2dot (to get a simple dot file with edges directed from lower to higher
+numbered nodes), java LayerAssignment to assign layers and create a dot and
+ord file with dummy nodes (this must be in the current CLASSPATH!).
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="gph2layered_graphml">gph2layered_graphml</a> --</strong><br>
+<pre>
+converts a gph file (from the MST experiments) to a graphml
+file that represents a layered graph; see sgf2layered_graphml for more details.
+Scripts and programs that are used as intermediaries are:
+ - gph2dot (to get a simple dot file with edges directed from lower to higher
+            numbered nodes),
+ - java LayerAssignment to assign layers and create a dot and
+         ord file with dummy nodes (this must be in the current CLASSPATH!), and
+ - dot+ord2graphml, which in turn uses dot_and_ord_to_sgf, an executable in
+         the src directory (compiled from a C program).
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="graphml2dot.py">graphml2dot.py</a> --</strong><br>
+<pre>
+converts a simple dialect of graphml (the one currently produced by Galant)
+ to the dot notation used for GraphViz.
+See https://github.com/mfms-ncsu/galant for more information about
+Galant (Graph Algorithm Animation Tool)
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="graphml2sgf">graphml2sgf</a> --</strong><br>
+<pre>
+converts from standard graphml
+to the (s)imple (g)raph (f)ormat described below.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="makeIsoClass">makeIsoClass</a> --</strong><br>
+<pre>
+makeIsoClass - a simple script for creating a class of orderings,
+                the original order plus 32 random permutations, of each layer
+                from a given .ord file
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="mlcm2dot+ord">mlcm2dot+ord</a> --</strong><br>
+<pre>
+creates both a dot and ord file from an mlcm file
+Uses mlcm2sgf.py, sgf2dot.awk, and sgf2ord.awk
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="mlcm2sgf.py">mlcm2sgf.py</a> --</strong><br>
+<pre>
+  translates from mlcm format, as documented at
+   http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
+  and described in the script, to sgf format, also described below.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="mvsed">mvsed</a> --</strong><br>
+<pre>
+ utility to rename files according to a pattern substitution
+  (not clear where this originated)
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="randomizeClass">randomizeClass</a> --</strong><br>
+<pre>
+a script that creates a single isomorph (scrambled version) of every instance
+ in a given directory
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="randomizeHeuristics">randomizeHeuristics</a> --</strong><br>
+<pre>
+randomizeHeuristics - run one heuristic followed by another heuristic on a
+single instance of a problem; do this in four ways:
+ (i) randomize neither
+ (ii) randomize the first but not the second
+ (iii) randomize the second but not the first
+ (iv) randomize both
+In each case, there will be NUMBER_OF_RUNS runs done, each with different
+random seeds. The results will be stored in four files called
+instance-h1+h2-xy, where instance is the name of the problem instance, h1
+and h2 are the two heuristics, x is whether or not the first heuristic is
+randomized - indicated by _ or R, and y the same for the second.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="runHeuristic">runHeuristic</a> --</strong><br>
+<pre>
+run the min_crossings program with specific command-line arguments
+ on instances a directory containing .dot and .ord files
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="runHeuristicR">runHeuristicR</a> --</strong><br>
+<pre>
+run the min_crossings program with specific command-line arguments
+on instances in a directory containing .dot and .ord files; this version runs
+the heuristics in random mode using a different seed for each instance.
+Caution: the rand_seq program must be in the src directory,
+         do 'make rand_seq' there
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="sgf2dot+ord.py">sgf2dot+ord.py</a> --</strong><br>
+<pre>
+translates from sgf format, described in the script, into a .dot file
+and an .ord file, whose formats are described with the sbg_software at
+http://people.engr.ncsu.edu/mfms/Software/SBG_Software/formats.html
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="sgf2layered_graphml.py">sgf2layered_graphml.py</a> --</strong><br>
+<pre>
+ translates from sgf format, described in the script, to the graphml format
+ used by Galant. This program is a simple filter, translating from
+ standard input to standard output.
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="sugi-gml2sgf">sugi-gml2sgf</a> --</strong><br>
+<pre>
+converts from gml (simpler than graphml) to sgf
+ both formats are described in the script
+</pre>
+</li>
+<hr><br>
+</ul>
+<address>
+<a href="http://people.engr.ncsu.edu/mfms/">Matthias F. (Matt) Stallmann</a><br>
+Created: Mon Dec 21 12:08:20 EST 2020
 </address>
+</body> </html>

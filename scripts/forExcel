@@ -1,11 +1,11 @@
 #! /bin/bash
 
-## forExcel - a script that creates a csv file based on results of
-# experiments on a specified collection of heuristics (as identified by
-# suffixes). The script can be edited to include more columns, but currently
-# there is a column called Name, which lists the names of graphs on which the
-# heuristics have been run and a column for each heuristic, giving the
-# minimum number of crossings achieved.
+# a script that creates a csv file based on results of experiments on
+# a specified collection of heuristics (as identified by
+# suffixes). The script can be edited to include more columns, but
+# currently there is a column called Name, which lists the names of
+# graphs on which the heuristics have been run and a column for each
+# heuristic, giving the minimum number of crossings achieved.
 #
 # @author Matt Stallmann
 # @date 2011/07/06
@@ -66,4 +66,4 @@ cat $previous >> $class.csv
 
 echo "** output is in $class.csv" # " and ${class}_edge.csv **"
 
-#  [Last modified: 2014 07 28 at 15:50:47 GMT]
+#  [Last modified: 2020 12 21 at 16:25:30 GMT]

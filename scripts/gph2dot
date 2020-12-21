@@ -1,6 +1,8 @@
 #! /bin/bash
-# gph2dot - converts a gph file (from the src-generate for the MST
-# experiments) into a dot file for a generic directed acyclic graph;
+#  converts a gph file, one arising from the generation mechanism for minimum
+#  spanning tree (MST) experiments into a dot file for a generic directed acyclic graph;
+#  used by createMSTClass
+#
 # gph format is as follows:
 #
 # a sequence of comment lines beginning with 'c'
@@ -41,4 +43,4 @@ echo "digraph $base {" >> $dotfile
 awk '{printf " n_%d -> n_%d;\n", $1, $2}' $edge_file >> $dotfile
 echo "}" >> $dotfile
 
-#  [Last modified: 2014 07 18 at 14:41:04 GMT]
+#  [Last modified: 2020 12 21 at 16:29:19 GMT]

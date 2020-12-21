@@ -1,7 +1,8 @@
 #!/bin/bash
 
-## createDag - creates a dag randomly using the scheme devised for the
-#  InfoVis poster paper. Uses layeredDag.awk and layeredDagOrd.awk
+# createDag - creates a dag randomly using the scheme devised for the
+#  InfoVis poster paper; Uses layeredDag.awk and layeredDagOrd.awk
+# These dags are also the "uniform" dags in the 2012 paper
 #
 # @author Matt Stallmann
 # @date 2009/05/08
@@ -41,4 +42,4 @@ done
 awk -f $script_directory/layeredDag.awk $temp_file > $output_base.dot
 awk -f $script_directory/layeredDagOrd.awk $temp_file > $output_base.ord
 
-#  [Last modified: 2009 05 27 at 17:55:28 GMT]
+#  [Last modified: 2020 12 21 at 15:59:25 GMT]

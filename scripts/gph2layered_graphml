@@ -1,12 +1,13 @@
 #!/bin/bash
-# gph2layered_graphml - converts a gph file (from the MST experiments) to a graphml
-# file that represents a layered graph.
+# converts a gph file (from the MST experiments) to a graphml
+# file that represents a layered graph; see sgf2layered_graphml for more details.
 # Scripts and programs that are used as intermediaries are:
-# gph2dot (to get a simple dot file with edges directed from lower to higher
-# numbered nodes), java LayerAssignment to assign layers and create a dot and
-# ord file with dummy nodes (this must be in the current CLASSPATH!), and
-# dot+ord2graphml, which in turn uses dot_and_ord_to_sgf, an executable in
-# the src directory (compiled from a C program).
+#  - gph2dot (to get a simple dot file with edges directed from lower to higher
+#             numbered nodes),
+#  - java LayerAssignment to assign layers and create a dot and
+#          ord file with dummy nodes (this must be in the current CLASSPATH!), and
+#  - dot+ord2graphml, which in turn uses dot_and_ord_to_sgf, an executable in
+#          the src directory (compiled from a C program).
 #
 # $Id: gph2layered_graphml 109 2015-05-27 14:34:33Z mfms $
 
@@ -31,4 +32,4 @@ java LayerAssignment $unlayered_dot_file $dot_and_ord_base
 rm $unlayered_dot_file
 $script_directory/dot+ord2graphml $dotfile $ordfile
 
-#  [Last modified: 2015 05 15 at 20:23:23 GMT]
+#  [Last modified: 2020 12 21 at 16:38:59 GMT]

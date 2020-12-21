@@ -1,8 +1,10 @@
 #! /usr/bin/env python
 
-## mlcm2sgf.py - translates from mlcm format, as documented at
-#  http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
-# and described below to sgf format, also described below.
+"""
+  translates from mlcm format, as documented at
+   http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
+  and described in the script, to sgf format, also described below.
+"""
 
 # mlcm (multi-level crossing minimization) was used in the experiments
 # descibed in M. Chimani, P. Hungerlaender, M. Juenger, P. Mutzel. An SDP
@@ -131,4 +133,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 04 17 at 22:06:52 GMT]
+#  [Last modified: 2020 12 21 at 16:43:18 GMT]

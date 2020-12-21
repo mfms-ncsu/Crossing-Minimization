@@ -1,7 +1,9 @@
 #! /usr/bin/env python
 
-## channelDegrees.py - takes an sgf file and prints statistics about degrees
-## of nodes relative to the upper and lower layers of each channel
+"""
+channelDegrees.py - takes an sgf file and prints statistics about degrees
+of nodes relative to the upper and lower layers of each channel
+"""
 
 import sys
 import math
@@ -208,4 +210,4 @@ main()
 
 
 
-#  [Last modified: 2016 06 08 at 00:20:50 GMT]
+#  [Last modified: 2020 12 21 at 15:56:26 GMT]

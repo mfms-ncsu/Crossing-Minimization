@@ -1,15 +1,12 @@
 #! /usr/bin/env python
 
-## createRandomLayeredGraph.py - offers a mechanism for producing layered
-# graphs with different variances with respect to number of nodes per layer
-# and degrees of nodes. Output is in sgf format, which can be converted to
-# dot or graphml, as desired. Graphs have high probability of being connected
-# (and interesting) because minimum degree of a node is 2.
-#
-# @author Matthias Stallmann
-# @date 2014/1/22
-#
-# $Id: createRandomLayeredGraph.py 133 2016-01-13 20:09:11Z mfms $
+"""
+createRandomLayeredGraph.py - offers a mechanism for producing layered
+ graphs with different variances with respect to number of nodes per layer
+ and degrees of nodes. Output is in sgf format, which can be converted to
+ dot or graphml, as desired. Graphs have high probability of being connected
+ (and interesting) because minimum degree of a node is 2.
+"""
 
 import sys
 import os
@@ -643,4 +640,4 @@ def get_nodes_in_smallest_components():
 
 main()
 
-#  [Last modified: 2016 06 01 at 12:19:40 GMT]
+#  [Last modified: 2020 12 21 at 16:06:27 GMT]

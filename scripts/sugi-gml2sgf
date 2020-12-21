@@ -1,11 +1,7 @@
 #! /bin/bash
-# $Id: sugi-gml2sgf 107 2015-04-20 19:00:18Z mfms $
 
-## ogml2sgf - convert from graphml used for output of Rome graphs
-#             to the (s)imple (g)raph (f)ormat described below.
-#  Usage: ogml2sgf input.gml > output.sgf
-#
-# Requires extract-ogml-graph.awk and extract-layers.awk  
+# converts from gml (simpler than graphml) to sgf
+#  both formats are described in the script
 
 # The graphml input is that for files provided by
 #      Hoi-Ming Wong (Hoi-Ming.Wong@TU-Dortmund.de)
@@ -77,4 +73,4 @@ awk -f $script_directory/extract-ogml-graph.awk $1\
  | awk -f $script_directory/extract-layers.awk\
  | awk -f $script_directory/sgfDirect.awk
 
-#  [Last modified: 2011 05 25 at 19:31:11 GMT]
+#  [Last modified: 2020 12 21 at 17:06:36 GMT]

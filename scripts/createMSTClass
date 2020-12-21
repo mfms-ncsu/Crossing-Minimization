@@ -1,9 +1,11 @@
 #! /bin/bash
 
-## createMSTClass - a script for creating a class of random dags which are
+# createMSTClass - a script for creating a class of random dags which are
 # derived from one of the types used in MST experiments). Number of
 # nodes can vary widely within a class, but density and number of layers
 # appear to be roughly the same.
+# The idea is to create a random graph with specific characteristics
+# (from MST-Experiments) and do layer assignment for it.
 #
 # IMPORTS:
 #   - nextgen in MST-Experiments/src-generate, creates a .gph file; it *must*
@@ -149,4 +151,4 @@ for dot_file in *.dot; do
 done
 popd &> /dev/null
 
-#  [Last modified: 2014 07 24 at 17:03:39 GMT]
+#  [Last modified: 2020 12 21 at 16:02:48 GMT]

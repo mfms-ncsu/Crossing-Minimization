@@ -1,12 +1,11 @@
 #! /bin/bash
 
-## randomizeHeuristics - run one heuristic followed by another heuristic on a
+# randomizeHeuristics - run one heuristic followed by another heuristic on a
 # single instance of a problem; do this in four ways:
 #  (i) randomize neither
 #  (ii) randomize the first but not the second
 #  (iii) randomize the second but not the first
 #  (iv) randomize both
-
 # In each case, there will be NUMBER_OF_RUNS runs done, each with different
 # random seeds. The results will be stored in four files called
 # instance-h1+h2-xy, where instance is the name of the problem instance, h1
@@ -249,4 +248,4 @@ done
 
 popd
 
-#  [Last modified: 2016 01 14 at 20:26:20 GMT]
+#  [Last modified: 2020 12 21 at 16:47:07 GMT]

@@ -1,6 +1,6 @@
 #! /bin/bash
 
-## createRandomClass - a script for creating a class of random dags for which
+# a script for creating a class of random dags for which
 # both the variance in layer width and the variance in degree can be
 # carefully controlled. The latter may require some experimentation using the
 # imported createRandomLayeredGraph.py script.
@@ -135,4 +135,4 @@ for dot_file in *.dot; do
 done
 popd &> /dev/null
 
-#  [Last modified: 2014 07 24 at 17:09:47 GMT]
+#  [Last modified: 2020 12 21 at 16:04:52 GMT]

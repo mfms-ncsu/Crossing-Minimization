@@ -1,11 +1,13 @@
 #! /usr/bin/env python
 
-## collectParetoPoints.py - designed to gather multiple Pareto points into a
-#  single Pareto list; it's a simple filter (for now)
-#
-# input is a sequence of lines of the form (Pareto output from min_crossings)
-#   x1^y1;x2^y2;...
-# output has one Pareto point per line - format is tab separated
+"""
+collectParetoPoints.py - designed to gather multiple Pareto points into a
+  single Pareto list; it's a simple filter (for now)
+
+ input is a sequence of lines of the form (Pareto output from min_crossings)
+   x1^y1;x2^y2;...
+ output has one Pareto point per line - format is tab separated
+"""
 
 import sys
 import copy
@@ -68,4 +70,4 @@ def print_points(output_stream, pareto_list):
 
 main()
 
-#  [Last modified: 2016 06 10 at 14:25:47 GMT]
+#  [Last modified: 2020 12 21 at 15:57:36 GMT]

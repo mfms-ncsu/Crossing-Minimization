@@ -1,24 +1,23 @@
 #! /bin/bash
-##
-## createUniformDagClass - a script for creating a class of random dags based
-##                       on a profile that specifies the number of nodes on
-##                       each layer and on the probability of an edge.
-##                       A settable number (size) of dot/ord file pairs are
-##                       generated. 
-##
-## IMPORTS:
-##   - createDag: simplifies the use of the awk scripts below
-##   - layeredDag.awk: to create a .dot file for each random dag
-##   - layeredDagOrd.awk: to create a .ord file for each dag (these will be
-##      identical for each dag in the class since nodes are named by their
-##      layer and the order within their layer 
-##
-## @todo Uses single integer seeds 1, ..., 32 for rand()
-## @todo Only works if the full path name of the profile is given
-##
-## @author Matt Stallmann
-## @date 2008/09/22
-## $Id: createUniformDagClass 107 2015-04-20 19:00:18Z mfms $
+#
+# a script for creating a class of random dags based on a profile that
+# specifies the number of nodes on each layer and on the probability
+# of an edge.  A settable number (size) of dot/ord file pairs are
+# generated; uses createDag
+#
+# IMPORTS:
+#   - createDag: simplifies the use of the awk scripts below
+#   - layeredDag.awk: to create a .dot file for each random dag
+#   - layeredDagOrd.awk: to create a .ord file for each dag (these will be
+#      identical for each dag in the class since nodes are named by their
+#      layer and the order within their layer 
+#
+# @todo Uses single integer seeds 1, ..., 32 for rand()
+# @todo Only works if the full path name of the profile is given
+#
+# @author Matt Stallmann
+# @date 2008/09/22
+# $Id: createUniformDagClass 107 2015-04-20 19:00:18Z mfms $
 
 size=32
 
@@ -106,4 +105,4 @@ while [[ $index -le $size ]]; do
 done
 popd
 
-#  [Last modified: 2011 06 27 at 14:26:46 GMT]
+#  [Last modified: 2020 12 21 at 16:09:02 GMT]

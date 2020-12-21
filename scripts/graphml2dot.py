@@ -1,11 +1,11 @@
 #! /usr/bin/env python
 
-## graphml2dot -- converts a simple dialect of graphml (the one currently
-# produced by Galant to the dot notation used for GraphViz).
-# @author Matthias Stallmann, 2013/05/15
-#
-# $Id: graphml2dot.py 106 2015-04-13 17:01:05Z mfms $
-#
+"""
+converts a simple dialect of graphml (the one currently produced by Galant)
+ to the dot notation used for GraphViz.
+See https://github.com/mfms-ncsu/galant for more information about
+Galant (Graph Algorithm Animation Tool)
+"""
 # input comes from stdin and output goes to stdout so it can be used as a filter
 #
 # graphml2dot &lt; file.graphml &gt; file.dot and then open file.dot in GraphViz
@@ -213,4 +213,4 @@ def main():
 main();
     
 
-#  [Last modified: 2015 04 07 at 00:05:41 GMT]
+#  [Last modified: 2020 12 21 at 16:34:22 GMT]

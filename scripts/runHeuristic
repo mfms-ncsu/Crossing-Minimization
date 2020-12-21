@@ -1,6 +1,6 @@
 #! /bin/bash
-## runHeuristic - run the min_crossings program with specific command-line
-# arguments on a directory containing .dot and .ord files 
+# run the min_crossings program with specific command-line arguments
+#  on instances a directory containing .dot and .ord files
 #
 # @author Matt Stallmann
 # @date 2009/05/08
@@ -105,4 +105,4 @@ for file in $class_dir/*.dot; do
     echo ""
 done
 
-#  [Last modified: 2016 01 20 at 15:38:13 GMT]
+#  [Last modified: 2020 12 21 at 16:48:22 GMT]

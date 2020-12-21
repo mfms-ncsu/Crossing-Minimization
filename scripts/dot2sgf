@@ -1,12 +1,9 @@
 #! /bin/bash
-#
-# $Id: dot2sgf 107 2015-04-20 19:00:18Z mfms $
 
-## dot2sgf - convert from dot format to a truncated version of
-# (s)imple (g)raph (f)ormat described below.
+# converts from dot format to a truncated version of
+# (s)imple (g)raph (f)ormat described in the script.
 #  Usage: dot2sgf base_name
 #   converts base_name.dot to base_name.sgf
-#
 # Requires extract-dot-graph.awk and sgfDirect.awk
 #
 # @author Matt Stallmann, 2011/06/16
@@ -47,4 +44,4 @@ echo "t $base_name"  >> $output_file
 awk -f $script_directory/extract-dot-graph.awk $input_file\
  | awk -f $script_directory/sgfDirect.awk >> $output_file
 
-#  [Last modified: 2011 06 16 at 19:24:14 GMT]
+#  [Last modified: 2020 12 21 at 16:12:17 GMT]

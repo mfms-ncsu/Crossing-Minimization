@@ -1,5 +1,5 @@
 #! /bin/bash
-## makeIsoClass - a simple script for creating a class of orderings,
+# makeIsoClass - a simple script for creating a class of orderings,
 #                 the original order plus 32 random permutations, of each layer
 #                 from a given .ord file 
 #
@@ -96,4 +96,4 @@ while [[ $index -le $size ]]; do
 done
 popd
 
-#  [Last modified: 2016 01 20 at 15:32:48 GMT]
+#  [Last modified: 2020 12 21 at 16:41:15 GMT]

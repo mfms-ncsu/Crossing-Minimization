@@ -1,9 +1,6 @@
 #! /bin/bash
 
-## followHeuristic - run one heuristic followed by one or more other
-# heuristics (separately); arguments to min_crossings are hard-wired for
-# specific experiments and can be changed by editing the first few lines of
-# the script
+# a variant of followHeuristic in which the second heuristic is randomized
 
 FIRST_HEURISTIC_OPTIONS="-p dfs -z -P s_t"
 FIRST_HEURISTIC_ITERATIONS=40000
@@ -97,4 +94,4 @@ popd
 # cleanup (may not be desirable if we want to keep intermediate results)
 # rm -rf $new_class
 
-#  [Last modified: 2016 05 25 at 19:20:31 GMT]
+#  [Last modified: 2020 12 21 at 16:21:47 GMT]

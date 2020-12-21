@@ -1,9 +1,6 @@
 #! /bin/bash
-#
-# $Id: graphml2sgf 71 2014-07-15 14:45:53Z mfms $
-
-## graphml2sgf - convert from standard graphml
-#             to the (s)imple (g)raph (f)ormat described below.
+# converts from standard graphml
+# to the (s)imple (g)raph (f)ormat described below.
 #
 # Imports extract-graphml-graph.awk and sgfDirect.awk
 #
@@ -61,4 +58,4 @@ echo "t $graph_name"  >> $output_file
 awk -f $script_directory/extract-graphml-graph.awk $input_file\
  >> $output_file
 
-#  [Last modified: 2014 06 12 at 19:48:45 GMT]
+#  [Last modified: 2020 12 21 at 16:40:24 GMT]

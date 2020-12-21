@@ -1,6 +1,7 @@
 #! /bin/bash
-## randomizeClass - a script that creates a single isomorph (scrambled
-#                   version) of every instance of a given class
+# a script that creates a single isomorph (scrambled version) of every instance
+#  in a given directory
+
 # IMPORTS:
 #   - randomize_dot: to randomly reorder the edges in a dot file
 #   - randomize_ord: to create each random ordering
@@ -105,4 +106,4 @@ done
 popd &> /dev/null
 rm -rf $tmp_dir
 
-#  [Last modified: 2011 06 23 at 01:39:54 GMT]
+#  [Last modified: 2020 12 21 at 16:46:14 GMT]

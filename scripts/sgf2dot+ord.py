@@ -1,8 +1,10 @@
 #! /usr/bin/env python
 
-## sgf2dot+ord.py - translates from sgf format, described below into a .dot
-# file and an .ord file, whose formats are described with the sbg_software
-# at http://people.engr.ncsu.edu/mfms/Software/SBG_Software/formats.html
+"""
+translates from sgf format, described in the script, into a .dot file
+and an .ord file, whose formats are described with the sbg_software at
+http://people.engr.ncsu.edu/mfms/Software/SBG_Software/formats.html
+"""
 
 # sfg format is as follows:
 #
@@ -169,4 +171,4 @@ def main():
 
 main()
 
-#  [Last modified: 2016 05 20 at 20:46:42 GMT]
+#  [Last modified: 2020 12 21 at 17:01:56 GMT]
