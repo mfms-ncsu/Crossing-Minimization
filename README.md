@@ -1,5 +1,6 @@
 # Crossing-Minimization
 Programs, scripts and other utilities related to minimizing crossings (and other objectives) in layered graphs. Instructions for compilation are in file `INSTALLATION.txt`
+`MinCrossings.html` gives an overview of what's in the repository.
 Currently, all programs use two input files, a `.dot` file whose format is that used by `GraphViz` and a `.ord` file that specifies the order of nodes on each layer. Translations from simpler formats are provided by two scripts in the `scripts` directory.
 - `sgf2dot+ord.py` translates from `sgf` (simple graph format, documented at the beginning of the script) to `dot` and `ord`; requires Python 3 (but may work with Python 2)
 - `mlcm2dot+ord` is a shell script that translates from `mlcm` to `dot` and `ord` by first translating to `sgf` and then using `mlcm2sgf.py`; documentation of the `mlcm` format is at the beginning of the latter
