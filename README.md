@@ -13,4 +13,14 @@ For best results, add the option `-R SEED` to break ties by randomization (using
 To run a sequence of heuristics, as recommended in the 2012 JEA paper, use one of the variations of the `followHeuristic` script. The best combinations are (INPUT_DIR is a directory containg dot and ord files)
 `followHeuristic_R INPUT_DIR OUTPUT_DIR mod_bary sifting` when minimizing total crossings
 `followHeuristic_R INPUT_DIR OUTPUT_DIR mod_bary mce` when minimizing max crossings for any edge
-Edit the scripts so that the number of iterations ot runtime for mod_bary is roughly 10-20% of the total.
+Edit the scripts so that the number of iterations or runtime for mod_bary is roughly 10-20% of the total.
+
+Documentation for the scripts is in
+`scripts/0_scripts.html`
+Developer documentation for the source code can be obtained by running `doxygen` in the `src` directory.
+
+The java utilities are used for layer assignment (breadth-first) when a graph is not already layered. Do `javac *.java` in the `java-utilities` directory to compile all of them.
+
+`java-utilities/00_dag_display_process.txt` describes how to display a large layered graph.
+For displaying smaller graphs, we suggest using Galant after conversion to `graphml` (scripts available in `scripts` directory). See
+`https://github.com/mfms-ncsu/galant`
