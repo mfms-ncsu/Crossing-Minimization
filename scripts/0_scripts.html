@@ -216,6 +216,36 @@ to the (s)imple (g)raph (f)ormat described below.
 </li>
 <hr><br>
 <li>
+<strong><a href="lff2sgf.py">lff2sgf.py</a> --</strong><br>
+<pre>
+ Translates from (l)ayer (f)irst (f)ormat (for lack of a better name),
+ used in recent papers, such as
+ Martí, R., Campos, V., Hoff, A., Peiró, J.,
+  "Heuristics for the min–max arc crossing problem in graphs."
+  in Expert Systems with Applications 109, 100 – 113.
+ and files downloaded from
+ https://grafo.etsii.urjc.es/optsicom/mmacp/mmacpfiles/MinMaxGDPlib.zip
+
+The lff format begins with a line of the form
+  NUMBER_NODES NUMBER_OF_EDGES NUMBER_OF_LAYERS
+The second line lists the number of nodes on each layer, starting with the "bottom"
+(or "left" based on figures in the Martí et al. paper).
+All edges are directed from earlier layers to later ones, not that this matters.
+
+Each subsequent line has two integers, the endpoints of an edge.
+Node numbers for these edges are implicit from the number of nodes on the layers.
+For example, if the second line in the file is.
+ 2 3 4
+then nodes 1 and 2 are on layer 1, nodes 3-5 on layer 2 and nodes 6-9 on layer 3.
+
+sgf format is described in, among others, mlcm2sgf.py
+IMPORTANT: The minimization program in src assumes layers are numbered starting at 0.
+
+Usage: lff2sgf INPUT_FILE > OUTPUT_FILE
+</pre>
+</li>
+<hr><br>
+<li>
 <strong><a href="makeIsoClass">makeIsoClass</a> --</strong><br>
 <pre>
 makeIsoClass - a simple script for creating a class of orderings,

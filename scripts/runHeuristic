@@ -18,7 +18,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
-# The executable is in ../src-heuristics, but this path needs to be absolute
+# The executable is in ../src, but this path needs to be absolute
 # to ensure portability of the script (can be run from anywhere)
 script_directory_parent=${0%/*}
 pushd $script_directory_parent > /dev/null
@@ -105,4 +105,4 @@ for file in $class_dir/*.dot; do
     echo ""
 done
 
-#  [Last modified: 2020 12 21 at 16:48:22 GMT]
+#  [Last modified: 2020 12 22 at 20:51:26 GMT]
