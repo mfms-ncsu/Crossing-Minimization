@@ -28,9 +28,9 @@
 import sys
 
 def usage( program_name ):
-    print "Usage:", program_name, " < INPUT_FILE > OUTPUT_FILE"
-    print "Takes an sgf file from standard input and converts to graphml."
-    print "The graphml file encodes node positions (layer/position in layer) and edges."
+    print("Usage:", program_name, " < INPUT_FILE > OUTPUT_FILE")
+    print("Takes an sgf file from standard input and converts to graphml.")
+    print("The graphml file encodes node positions (layer/position in layer) and edges.")
 
 # @return a tuple of the form (name, graph_list)
 # and graph_list has the form:
@@ -92,19 +92,19 @@ def skip_comments( input ):
     return line
 
 def print_opening():
-    print '<?xml version="1.0" encoding="UTF-8"?>'
-    print '<graphml xmlns="http://graphml.graphdrawing.org/xmlns"'
-    print 'xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"'
-    print 'xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns'
-    print 'http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">'
+    print('<?xml version="1.0" encoding="UTF-8"?>')
+    print('<graphml xmlns="http://graphml.graphdrawing.org/xmlns"')
+    print('xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"')
+    print('xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns')
+    print('http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">')
 
 def print_graph_body( internal_graph ):
     name = internal_graph[0]
-    print '<graph edgedefault="directed" name="'+ name + '"' + ' type="layered">'
+    print('<graph edgedefault="directed" name="'+ name + '"' + ' type="layered">')
     
     for item in internal_graph[1]:
         print_item( item )
-    print '</graph>'
+    print('</graph>')
 
 def print_item( item ):
     # need to put everything on the same line (not clear why), so can't use
@@ -124,13 +124,13 @@ def graphml_attribute( attribute_pair ):
     return '%s="%s"' % attribute_pair
 
 def print_comments():
-    print "<comments>"
+    print("<comments>")
     for comment in _comments:
-        print comment
-    print "</comments>"
+        print(comment)
+    print("</comments>")
 
 def print_closing():
-    print '</graphml>'
+    print('</graphml>')
 
 def print_graphml( internal_graph ):
     print_opening()
