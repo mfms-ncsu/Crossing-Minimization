@@ -267,7 +267,7 @@ Uses mlcm2sgf.py, sgf2dot.awk, and sgf2ord.awk
 <pre>
   translates from mlcm format, as documented at
    http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
-  and described in the script, to sgf format, also described below.
+  and described in the script, to sgf format, also described in the script.
 </pre>
 </li>
 <hr><br>
@@ -277,6 +277,18 @@ Uses mlcm2sgf.py, sgf2dot.awk, and sgf2ord.awk
  utility to rename files according to a pattern substitution
   (not clear where this originated)
 </pre>
+<li>
+<strong><a href="ralay.py">ralay.py</a> --</strong><br>
+<pre>
+ralay.py - offers a mechanism for producing layered graphs with
+different variances with respect to number of nodes per layer, number of
+dummy nodes, degrees of nodes, shapes, etc.. Output is in sgf format, which
+can be converted to dot or graphml, as desired. Graphs are guaranteed to be
+connected (and interesting) because each node has indegree 1 (unless on layer 0)
+and outdegree 1 (unless on the highest layer).
+</pre>
+</li>
+<hr><br>
 </li>
 <hr><br>
 <li>
@@ -320,6 +332,14 @@ on instances in a directory containing .dot and .ord files; this version runs
 the heuristics in random mode using a different seed for each instance.
 Caution: the rand_seq program must be in the src directory,
          do 'make rand_seq' there
+</pre>
+</li>
+<hr><br>
+<li>
+<strong><a href="scrambleSgf.py">scrambleSgf.py</a> --</strong><br>
+<pre>
+Randomly permutes nodes and edges of an sgf file;
+order in which nodes appear and their position in a layer are permuted independently
 </pre>
 </li>
 <hr><br>

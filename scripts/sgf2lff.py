@@ -8,9 +8,9 @@ These formats are described in mlcm2sgf.py and lff2sgf.py, respectively.
 import sys
 
 def usage(program_name):
-    print("Usage:", program_name, "INPUT_FILE > OUTPUT_FILE")
-    print("Takes the lff file INPUT_FILE and converts to sgf,")
-    print("which is printed on standard output.")
+    sys.stderr.write("Usage: {} INPUT_FILE > OUTPUT_FILE\n".format(program_name))
+    sys.stderr.write("Takes the lff file INPUT_FILE and converts to sgf,\n")
+    sys.stderr.write("which is printed on standard output.\n")
 
 """
 Algorithm
@@ -141,4 +141,4 @@ if __name__ == '__main__':
     assign_node_numbers()
     write_lff(sys.stdout)
 
-#  [Last modified: 2020 12 28 at 20:21:53 GMT]
+#  [Last modified: 2020 12 28 at 23:17:46 GMT]

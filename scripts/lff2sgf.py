@@ -31,12 +31,9 @@ import sys
 import os
 
 def usage(program_name):
-    print("Usage:", program_name, "INPUT_FILE > OUTPUT_FILE")
-    print("Takes the lff file INPUT_FILE and converts to sgf,")
-    print("which is printed on standard output.")
-
-import sys
-import os
+    sys.stderr.write("Usage: {} INPUT_FILE > OUTPUT_FILE\n".format(program_name))
+    sys.stderr.write("Takes the lff file INPUT_FILE and converts to sgf,\n")
+    sys.stderr.write("which is printed on standard output.\n")
 
 def date():
     date_pipe = os.popen( 'date -u "+%Y/%m/%d %H:%M"' )
@@ -94,9 +91,8 @@ def write_sgf(file_stream, graph, name):
     edge_list = graph[1]
     file_stream.write("c generated %s\n" % date())
     file_stream.write("c  by lff2sgf.py\n")
-    file_stream.write("c %d nodes %d edges %d layers\n"
-                      % (len(node_list), len(edge_list), _number_of_layers))
-    file_stream.write( "t %s\n" % name )
+    file_stream.write("t %s %d %d %d\n"
+                      .format(name, len(node_list), len(edge_list), _number_of_layers))
     for node in node_list:
         file_stream.write("n %d %d %d\n" % tuple(node))
     for edge in edge_list:
@@ -112,4 +108,4 @@ if __name__ == '__main__':
     internal_graph = read_lff(input_stream)
     write_sgf(sys.stdout, internal_graph, graph_name)
 
-#  [Last modified: 2020 12 22 at 17:43:07 GMT]
+#  [Last modified: 2020 12 29 at 23:23:16 GMT]

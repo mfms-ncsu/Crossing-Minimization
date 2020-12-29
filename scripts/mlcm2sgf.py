@@ -1,49 +1,49 @@
 #! /usr/bin/env python
 
 """
-  translates from mlcm format, as documented at
-   http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
-  and described in the script, to sgf format, also described below.
+ Translates from mlcm format, as documented at
+ http://www-lehre.informatik.uni-osnabrueck.de/theoinf/index/research/mlcm
+ and described below to sgf format, also described below.
+
+mlcm (multi-level crossing minimization) was used in the experiments
+descibed in M. Chimani, P. Hungerlaender, M. Juenger, P. Mutzel. An SDP
+Approach to Multi-level Crossing Minimization. ACM Journal of Experimental
+Algorithmics, Volume 17(3), Article 3.3, 2012. It goes as follows:
+
+Number-of-Levels
+Number-of-Edges-Between-First-and-Second-Level
+Number-of-Edges-Between-Second-and-Third-Level
+...
+Number-of-Nodes-on-First-Level
+Number-of-Nodes-on-Second-Level
+...
+Index-of-Node-on-First-Layer Index-of-Node-on-Second-Level
+Index-of-Node-on-First-Layer Index-of-Node-on-Second-Level
+...
+Index-of-Node-on-Second-Layer Index-of-Node-on-Third-Level
+...
+
+The node indices start at 0 on each level, i.e., each level has a node
+numbered 0, a node numbered 1, etc. Numbers determine the order, which is
+optimal in the files provided at the web site.
+
+sfg format is as follows:
+
+   c comment line 1
+   ...
+   c comment line k
+
+   t graph_name num_nodes num_edges num_layers
+
+   n id_1 layer_1 position_1
+   n id_2 layer_2 position_2
+   ...
+   n id_n layer_n position_n
+
+   e source_1 target_1
+   ...
+   e source_m target_m
 """
-
-# mlcm (multi-level crossing minimization) was used in the experiments
-# descibed in M. Chimani, P. Hungerlaender, M. Juenger, P. Mutzel. An SDP
-# Approach to Multi-level Crossing Minimization. ACM Journal of Experimental
-# Algorithmics, Volume 17(3), Article 3.3, 2012. It goes as follows:
-#
-# <Number-of-Levels>
-# <Number-of-Edges-Between-First-and-Second-Level>
-# <Number-of-Edges-Between-Second-and-Third-Level>
-# ...
-# <Number-of-Nodes-on-First-Level>
-# <Number-of-Nodes-on-Second-Level>
-# ...
-# <Index-of-Node-on-First-Layer> <Index-of-Node-on-Second-Level>
-# <Index-of-Node-on-First-Layer> <Index-of-Node-on-Second-Level>
-# ...
-# <Index-of-Node-on-Second-Layer> <Index-of-Node-on-Third-Level>
-# ...
-#
-# The node indices start at 0 on each level, i.e., each level has a node
-# numbered 0, a node numbered 1, etc. Numbers determine the order, which is
-# optimal in the files provided at the web site.
-
-# sfg format is as follows:
-#
-#    c comment line 1
-#    ...
-#    c comment line k
-#
-#    t graph_name
-#
-#    n id_1 layer_1 position_1
-#    n id_2 layer_2 position_2
-#    ...
-#    n id_n layer_n position_n
-#
-#    e source_1 target_1
-#    ...
-#    e source_m target_m
 
 import sys
 import os
@@ -56,9 +56,9 @@ def version():
     return "$Id: mlcm2sgf.py 106 2015-04-13 17:01:05Z mfms $"
 
 def usage( program_name ):
-    print "Usage:", program_name, "INPUT_FILE > OUTPUT_FILE"
-    print "Takes the mlcm file INPUT_FILE and converts to sgf,"
-    print "which is printed on standard output."
+    print("Usage:", program_name, "INPUT_FILE > OUTPUT_FILE")
+    print("Takes the mlcm file INPUT_FILE and converts to sgf,")
+    print("which is printed on standard output.")
 
 # adds tuples for nodes with id's from start_id to start_id+number_of_nodes-1
 # to the given layer within the node_list
@@ -114,8 +114,8 @@ def print_sgf( file_stream, graph, name ):
     edge_list = graph[1]
     file_stream.write( "c generated %s\n" % date() )
     file_stream.write( "c %s\n" % version() )
-    file_stream.write( "c %d nodes %d edges %d layers\n" % ( len(node_list), len(edge_list), _number_of_layers ) )
-    file_stream.write( "t %s\n" % name )
+    file_stream.write("t %s %d %d %d\n"
+                       % (name, len(node_list), len(edge_list), _number_of_layers))
     for node in node_list:
         file_stream.write( "n %d %d %d\n" % tuple( node ) )
     for edge in edge_list:
@@ -133,4 +133,4 @@ def main():
 
 main()
 
-#  [Last modified: 2020 12 21 at 16:43:18 GMT]
+#  [Last modified: 2020 12 29 at 23:26:48 GMT]

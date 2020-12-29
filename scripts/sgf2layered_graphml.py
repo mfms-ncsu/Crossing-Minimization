@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 """
  translates from sgf format, described in the script, to the graphml format
@@ -6,15 +6,13 @@
  standard input to standard output.
 """
 
-# $Id: sgf2layered_graphml.py 110 2015-06-12 12:26:27Z mfms $
-#
 # sfg format is as follows:
 #
 #    c comment line 1
 #    ...
 #    c comment line k
 #
-#    t graph_name
+#    t graph_name num_nodes num_edges num_layers
 #
 #    n id_1 layer_1 position_1
 #    n id_2 layer_2 position_2
@@ -140,11 +138,11 @@ def print_graphml( internal_graph ):
     
 def main():
     if len( sys.argv ) != 1:
-        usage( sys.argv[0] )
+        usage(sys.argv[0])
         sys.exit()
     internal_graph = read_sgf( sys.stdin )
-    print_graphml( internal_graph )
+    print_graphml(internal_graph)
 
 main()
 
-#  [Last modified: 2020 12 21 at 17:03:23 GMT]
+#  [Last modified: 2020 12 29 at 23:28:06 GMT]
